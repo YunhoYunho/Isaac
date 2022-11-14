@@ -4,6 +4,17 @@
 class CImage;
 class CAnimator;
 
+enum class PlayerState
+{
+	Idle,
+	Move,
+	Shot,
+	Hurt,
+	Dead,
+
+	Size
+};
+
 class CPlayer : public CGameObject
 {
 public:
@@ -11,15 +22,37 @@ public:
 	virtual ~CPlayer();
 
 private:
-	CAnimator* m_pAnimator;
-	CImage* m_pIdleImage;
-	CImage* m_pMoveImage;
+	CAnimator* m_pAnimatorBody;
+	CAnimator* m_pAnimatorHead;
+
+	// 바디
+	CImage* m_pBodyImage;
+
+	// 헤드
+	CImage* m_pHeadImage;
+	CImage* m_pShotImage;
+
+	// 공통
+	CImage* m_pHurtImage;
+	CImage* m_pDeadImage;
+
+	PlayerState m_state;
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
+
 	bool m_bIsMove;
+	bool m_bIsShot;
+	bool m_bIsHurt;
+	bool m_bIsDead;
 
 	float m_fSpeed = 200.0f;
+	float m_fAttack = 0.2f;
+	float m_HP = 3;
+
+	PlayerState m_playerState;
+	wstring stateBody;
+	wstring stateHead;
 
 private:
 	void Init() override;

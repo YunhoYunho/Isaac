@@ -15,6 +15,9 @@
 #include "CButton.h"
 #include "CPanel.h"
 
+#include "CImageObject.h"
+
+
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
@@ -36,6 +39,10 @@ void CSceneStage01::Init()
 
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
+
+	CImageObject* pBackGround = new CImageObject;
+	pBackGround->SetImage(RESOURCE->LoadImg(L"Stage01BackGround", L"Image\\Isaac_Map.png"));
+	AddGameObject(pBackGround);
 }
 
 void CSceneStage01::Enter()
