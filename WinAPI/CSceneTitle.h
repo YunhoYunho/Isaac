@@ -1,5 +1,8 @@
 #pragma once
 #include "CScene.h"
+#include "CTitleImage.h"
+
+class CTitleImage;
 
 class CSceneTitle : public CScene
 {

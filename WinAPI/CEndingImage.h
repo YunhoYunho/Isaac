@@ -1,22 +1,18 @@
 #pragma once
 #include "CGameObject.h"
 
-class CImage;
 class CAnimator;
+class CImage;
 
-class CImageObject : public CGameObject
+class CEndingImage : public CGameObject
 {
 public:
-	CImageObject();
-	virtual ~CImageObject();
+	CEndingImage();
+	virtual ~CEndingImage();
 
 private:
-	CImage* m_pImage;
 	CAnimator* m_pAnimator;
-
-public:
-	CImage* GetIamge();
-	void SetImage(CImage* pImage);
+	CImage* m_pEndingImage;
 
 private:
 	void Init() override;

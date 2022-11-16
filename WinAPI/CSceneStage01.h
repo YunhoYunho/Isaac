@@ -1,7 +1,9 @@
 #pragma once
 #include "CScene.h"
+#include "CGameUI.h"
 
 class CPlayer;
+class CGameUI;
 
 class CSceneStage01 : public CScene
 {

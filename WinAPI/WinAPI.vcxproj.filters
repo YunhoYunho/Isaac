@@ -46,11 +46,23 @@
     <Filter Include="03. GameObject\Common">
       <UniqueIdentifier>{9e45e506-939f-4c97-8f87-6146ebb42d5f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage01">
-      <UniqueIdentifier>{f2ad0501-d505-4b88-af0d-880a4673ef5b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Scene">
       <UniqueIdentifier>{2551544d-2c0b-4899-99f9-a72abda2a9d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Stage">
+      <UniqueIdentifier>{f2ad0501-d505-4b88-af0d-880a4673ef5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Stage\Monster">
+      <UniqueIdentifier>{048dc79a-9013-428a-bfbf-feec12f0f211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Stage\Player">
+      <UniqueIdentifier>{c6288b5b-a839-4f14-9426-f8712af506df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Scene\Image">
+      <UniqueIdentifier>{d56861a3-66a5-4925-af73-f11ab2a7fdcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Scene\GameUI">
+      <UniqueIdentifier>{409cdb50-993f-4fac-bc7b-d2c02dd4a9e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,13 +175,7 @@
       <Filter>03. GameObject\Common</Filter>
     </ClInclude>
     <ClInclude Include="CMissile.h">
-      <Filter>03. GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CMonster.h">
-      <Filter>03. GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>03. GameObject\Stage01</Filter>
+      <Filter>03. GameObject\Stage</Filter>
     </ClInclude>
     <ClInclude Include="CTilePanel.h">
       <Filter>01. Engine\Asset\UI</Filter>
@@ -182,6 +188,33 @@
     </ClInclude>
     <ClInclude Include="CSoundManager.h">
       <Filter>01. Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>03. GameObject\Stage\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CGish.h">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameManager.h">
+      <Filter>01. Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaby.h">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoomfly.h">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CTitleImage.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CEndingImage.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameUI.h">
+      <Filter>04. Scene\GameUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -276,13 +309,7 @@
       <Filter>03. GameObject\Common</Filter>
     </ClCompile>
     <ClCompile Include="CMissile.cpp">
-      <Filter>03. GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CMonster.cpp">
-      <Filter>03. GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlayer.cpp">
-      <Filter>03. GameObject\Stage01</Filter>
+      <Filter>03. GameObject\Stage</Filter>
     </ClCompile>
     <ClCompile Include="CTileButton.cpp">
       <Filter>01. Engine\Asset\UI</Filter>
@@ -295,6 +322,33 @@
     </ClCompile>
     <ClCompile Include="CSoundManager.cpp">
       <Filter>01. Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>03. GameObject\Stage\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CGish.cpp">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameManager.cpp">
+      <Filter>01. Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CBaby.cpp">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoomfly.cpp">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CTitleImage.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CEndingImage.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameUI.cpp">
+      <Filter>04. Scene\GameUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

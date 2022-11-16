@@ -7,6 +7,8 @@
 #include "CEventManager.h"
 #include "CCameraManager.h"
 
+#include "CTitleImage.h"
+
 CSceneTitle::CSceneTitle()
 {
 }
@@ -17,6 +19,9 @@ CSceneTitle::~CSceneTitle()
 
 void CSceneTitle::Init()
 {
+	CTitleImage* pTitle = new CTitleImage;
+	pTitle->SetPos(WINSIZEX / 2, WINSIZEY / 2);
+	AddGameObject(pTitle);
 }
 
 void CSceneTitle::Enter()

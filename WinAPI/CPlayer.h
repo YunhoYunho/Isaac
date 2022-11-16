@@ -47,7 +47,7 @@ private:
 	bool m_bIsDead;
 
 	float m_fSpeed = 200.0f;
-	float m_fAttack = 0.2f;
+	float m_fAttack = 2;
 	float m_HP = 3;
 
 	PlayerState m_playerState;

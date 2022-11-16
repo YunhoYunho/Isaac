@@ -42,6 +42,9 @@ enum class Layer
 {
 	Default,
 	Tile,
+	Ending,
+	Title,
+	HUD,
 	Player,
 	Missile,
 	Monster,

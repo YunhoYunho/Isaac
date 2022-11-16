@@ -44,13 +44,13 @@ CPlayer::~CPlayer()
 
 void CPlayer::Init()
 {
-	m_pBodyImage = RESOURCE->LoadImg(L"PlayerBody", L"Image\\IsaacBody.png");
-
-	m_pHeadImage = RESOURCE->LoadImg(L"PlayerHead", L"Image\\IsaacHead.png");
-	m_pShotImage = RESOURCE->LoadImg(L"PlayerShot", L"Image\\IsaacShot.png");
-
-	m_pHurtImage = RESOURCE->LoadImg(L"PlayerHurt", L"Image\\IsaacHurt.png");
-	m_pDeadImage = RESOURCE->LoadImg(L"PlayerDead", L"Image\\IsaacDead.png");
+	m_pBodyImage = RESOURCE->LoadImg(L"PlayerBody", L"Image\\Unit\\IsaacBody.png");
+															
+	m_pHeadImage = RESOURCE->LoadImg(L"PlayerHead", L"Image\\Unit\\IsaacHead.png");
+	m_pShotImage = RESOURCE->LoadImg(L"PlayerShot", L"Image\\Unit\\IsaacShot.png");
+												
+	m_pHurtImage = RESOURCE->LoadImg(L"PlayerHurt", L"Image\\Unit\\IsaacHurt.png");
+	m_pDeadImage = RESOURCE->LoadImg(L"PlayerDead", L"Image\\Unit\\IsaacDead.png");
 
 
 	m_pAnimatorBody = new CAnimator;
@@ -100,7 +100,7 @@ void CPlayer::Init()
 
 	m_playerState = PlayerState::Idle;
 
-	AddCollider(ColliderType::Rect, Vector(90, 90), Vector(0, 0));
+	AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
 }
 
 void CPlayer::Update()
@@ -289,6 +289,7 @@ void CPlayer::Update()
 	case PlayerState::Hurt:
 		if (BUTTONDOWN('T'))
 		{
+			m_bIsHurt = true;
 			stateHead = L"Hurt";
 		}
 
@@ -341,37 +342,30 @@ void CPlayer::CreateMissile()
 {
 	Logger::Debug(L"미사일 생성");
 
+
+	CMissile* pMissile = new CMissile();
+	pMissile->SetPos(m_vecPos);
+
 	if (BUTTONSTAY(VK_LEFT))
 	{
-		CMissile* pMissile = new CMissile();
-		pMissile->SetPos(m_vecPos);
 		pMissile->SetDir(Vector(-1, 0));
-		ADDOBJECT(pMissile);
 	}
 
 	if (BUTTONSTAY(VK_RIGHT))
 	{
-		CMissile* pMissile = new CMissile();
-		pMissile->SetPos(m_vecPos);
 		pMissile->SetDir(Vector(1, 0));
-		ADDOBJECT(pMissile);
 	}
 
 	if (BUTTONSTAY(VK_UP))
 	{
-		CMissile* pMissile = new CMissile();
-		pMissile->SetPos(m_vecPos);
 		pMissile->SetDir(Vector(0, -1));
-		ADDOBJECT(pMissile);
 	}
 
 	if (BUTTONSTAY(VK_DOWN))
 	{
-		CMissile* pMissile = new CMissile();
-		pMissile->SetPos(m_vecPos);
 		pMissile->SetDir(Vector(0, 1));
-		ADDOBJECT(pMissile);
 	}
+	ADDOBJECT(pMissile);
 }
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
@@ -385,3 +379,4 @@ void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 void CPlayer::OnCollisionExit(CCollider* pOtherCollider)
 {
 }
+
