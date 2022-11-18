@@ -1,39 +1,41 @@
 #pragma once
-#include "CMonster.h"
+#include "CGameObject.h"
 
 class CImage;
 class CAnimator;
 
-enum class BoomflyState
+enum class ExplosionState
 {
-	Move,
-	Dead,
+	None,
+	Explosion,
 
 	Size
 };
 
-class CBoomfly : public CMonster
+class CExplosion : public CGameObject
 {
 public:
-	CBoomfly();
-	virtual ~CBoomfly();
+	CExplosion();
+	virtual ~CExplosion();
 
 private:
 	CAnimator* m_pAnimator;
-	CImage* m_pBoomflyImage;
-	CImage* m_pBoomflyDeadImage;
+	CImage* m_pExplosionImage;
 
-	BoomflyState m_stateBoomfly;
-	BoomflyState m_BoomflyState;
-	wstring stateBoomfly;
+	ExplosionState m_stateEXplosion;
 
-	// TODO: æ∆¿Ã≈€ ∆¯≈∫ ªÛº” ∏Ò«•
-	bool m_bIsExplode;
+	Vector m_vecMoveDir;
+	Vector m_vecLookDir;
 
-	bool up;
-	bool down;
-	bool left;
-	bool right;
+	bool m_bIsExplosion;
+
+	float m_fSpeed = 200.0f;
+	float m_fDamage;
+
+	ExplosionState m_explosionState;
+	wstring stateExplosion;
+
+	bool Boom();
 
 private:
 	void Init() override;

@@ -47,8 +47,10 @@ private:
 	bool m_bIsDead;
 
 	float m_fSpeed = 200.0f;
-	float m_fAttack = 2;
+	float m_fDamage = 2;
 	float m_HP = 3;
+
+	float m_fTimer = 0;
 
 	PlayerState m_playerState;
 	wstring stateBody;
@@ -62,8 +64,12 @@ private:
 
 	void AnimatorUpdate();
 	void CreateMissile();
+	void WhereIsPlayer();
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
+
+private:
+	void ChangeStay();
 };

@@ -20,7 +20,7 @@
 #include "CPanel.h"
 
 #include "CImageObject.h"
-#include "CGameUI.h"
+#include "CHUD.h"
 
 
 CSceneStage01::CSceneStage01()
@@ -58,11 +58,12 @@ void CSceneStage01::Init()
 	AddGameObject(pCamController);
 
 	CImageObject* pBackGround = new CImageObject;
-	pBackGround->SetImage(RESOURCE->LoadImg(L"HUD", L"Image\\Map\\Isaac_Map.png"));
+	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Isaac_Map.png"));
 	AddGameObject(pBackGround);
 
-	/*CImage* pHUD = new CImage;
-	pHUD->Load(SetImage(RESOURCE->LoadImg(L"HUD", L"Image\\Map\\HUD.png"));*/
+	CHUD* pHUD = new CHUD;
+	pHUD->SetPos(WINSIZEX / 2, WINSIZEY / 2);
+	AddGameObject(pHUD);
 }
 
 void CSceneStage01::Enter()

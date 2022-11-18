@@ -54,38 +54,23 @@ void CBaby::Update()
 	{
 	case BabyState::Move:
 	{
+		stateBaby = L"Move";
 
-		if (m_vecTargetDir.x <= 0)
-		{
-			m_vecPos.x -= m_fSpeed * DT;
-			m_bIsMove = true;
-			m_vecMoveDir.x = -1;
-			stateBaby = L"Move";
-		}
+		Vector dir;
+		if (m_vecTargetPos.x < 0)
+			dir.x = -1;
+		else if (m_vecTargetPos.x > 0)
+			dir.x = 1;
+		else dir.x = 0;
 
-		if (m_vecTargetDir.x > 0)
-		{
-			m_vecPos.x += m_fSpeed * DT;
-			m_bIsMove = true;
-			m_vecMoveDir.x = +1;
-			stateBaby = L"Move";
-		}
+		if (m_vecTargetPos.y < 0)
+			dir.y = -1;
+		else if (m_vecTargetPos.y > 0)
+			dir.y = 1;
+		else
+			dir.y = 0;
 
-		if (m_vecTargetDir.y < 0)
-		{
-			m_vecPos.y -= m_fSpeed * DT;
-			m_bIsMove = true;
-			m_vecMoveDir.y = +1;
-			stateBaby = L"Move";
-		}
-
-		if (m_vecTargetDir.y > 0)
-		{
-			m_vecPos.y += m_fSpeed * DT;
-			m_bIsMove = true;
-			m_vecMoveDir.y = -1;
-			stateBaby = L"Move";
-		}
+		Scroll(dir, m_fSpeed);
 
 		if (true == m_bIsShot)
 		{

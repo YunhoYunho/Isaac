@@ -1,6 +1,8 @@
 #include "framework.h"
 #include "CBoomfly.h"
 
+#include "CExplosion.h"
+
 CBoomfly::CBoomfly()
 {
 	m_vecPos = Vector(0, 0);
@@ -19,8 +21,13 @@ CBoomfly::CBoomfly()
 	m_bIsDead = false;
 	m_bIsExplode = false;
 
-	m_fSpeed = 10.0f;
+	m_fSpeed = 100.0f;
 	m_HP = 3;
+	
+	up = true;
+	down = false;
+	left = false;
+	right = true;
 }
 
 CBoomfly::~CBoomfly()
@@ -53,7 +60,37 @@ void CBoomfly::Update()
 	{
 	case BoomflyState::Move:
 	{
+		m_bIsMove = true;
+
 		stateBoomfly = L"Move";
+		if (m_vecPos.x >= WINSIZEX)
+		{
+			left = true;
+			right = false;
+		}
+
+		if (m_vecPos.x <= 0)
+		{
+			left = false;
+			right = true;
+		}
+
+		if (m_vecPos.y >= WINSIZEY)
+		{
+			up = true;
+			down = false;
+		}
+
+		if (m_vecPos.y <= 0)
+		{
+			up = false;
+			down = true;
+		}
+
+		if (up) m_vecPos.y -= m_fSpeed * DT;
+		if (down) m_vecPos.y += m_fSpeed * DT;
+		if (left) m_vecPos.x -= m_fSpeed * DT;
+		if (right) m_vecPos.x += m_fSpeed * DT;
 	}
 
 	if (true == m_bIsDead || BUTTONDOWN('P'))
@@ -63,13 +100,14 @@ void CBoomfly::Update()
 
 	case BoomflyState::Dead:
 	{
-		if (true == m_bIsDead || BUTTONDOWN('P'))
+		if (m_HP <= 0 || BUTTONDOWN('P'))
 		{
+			m_bIsDead = true;
 			stateBoomfly = L"Dead";
 			break;
 		}
 
-		else if (false == m_bIsDead)
+		else if (m_HP > 0)
 		{
 			m_stateBoomfly = BoomflyState::Move;
 		}
@@ -96,9 +134,11 @@ void CBoomfly::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{
 		Logger::Debug(L"몬스터가 플레이어와 충돌진입");
+
 	}
 	else if (pOtherCollider->GetObjName() == L"미사일")
 	{
+		m_Damage -= m_HP;
 		Logger::Debug(L"몬스터가 미사일과 충돌진입");
 	}
 }

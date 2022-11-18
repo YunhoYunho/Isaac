@@ -44,11 +44,13 @@ enum class Layer
 	Tile,
 	Ending,
 	Title,
-	HUD,
+	Obstacle,
+	Door,
 	Player,
 	Missile,
 	Monster,
 
+	HUD,
 	Ui,
 	Size,
 };

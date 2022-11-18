@@ -61,8 +61,14 @@
     <Filter Include="04. Scene\Image">
       <UniqueIdentifier>{d56861a3-66a5-4925-af73-f11ab2a7fdcb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Scene\GameUI">
-      <UniqueIdentifier>{409cdb50-993f-4fac-bc7b-d2c02dd4a9e8}</UniqueIdentifier>
+    <Filter Include="03. GameObject\Stage\Door">
+      <UniqueIdentifier>{5e25ccaf-9a9c-4392-afd5-7b63538655ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Stage\Projectile">
+      <UniqueIdentifier>{f97dd69a-7c4e-4d7b-8427-c680ec459691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Stage\HUD">
+      <UniqueIdentifier>{98e4e084-d65f-4ab0-b658-cec1e3bdaff2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,9 +180,6 @@
     <ClInclude Include="CCameraController.h">
       <Filter>03. GameObject\Common</Filter>
     </ClInclude>
-    <ClInclude Include="CMissile.h">
-      <Filter>03. GameObject\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="CTilePanel.h">
       <Filter>01. Engine\Asset\UI</Filter>
     </ClInclude>
@@ -213,8 +216,26 @@
     <ClInclude Include="CEndingImage.h">
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
-    <ClInclude Include="CGameUI.h">
-      <Filter>04. Scene\GameUI</Filter>
+    <ClInclude Include="CMissile.h">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterMissile.h">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerMissile.h">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoor.h">
+      <Filter>03. GameObject\Stage\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="CExplosion.h">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacle.h">
+      <Filter>01. Engine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CHUD.h">
+      <Filter>03. GameObject\Stage\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +329,6 @@
     <ClCompile Include="CCameraController.cpp">
       <Filter>03. GameObject\Common</Filter>
     </ClCompile>
-    <ClCompile Include="CMissile.cpp">
-      <Filter>03. GameObject\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="CTileButton.cpp">
       <Filter>01. Engine\Asset\UI</Filter>
     </ClCompile>
@@ -347,8 +365,26 @@
     <ClCompile Include="CEndingImage.cpp">
       <Filter>04. Scene\Image</Filter>
     </ClCompile>
-    <ClCompile Include="CGameUI.cpp">
-      <Filter>04. Scene\GameUI</Filter>
+    <ClCompile Include="CMissile.cpp">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterMissile.cpp">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerMissile.cpp">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoor.cpp">
+      <Filter>03. GameObject\Stage\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="CExplosion.cpp">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle.cpp">
+      <Filter>01. Engine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="CHUD.cpp">
+      <Filter>03. GameObject\Stage\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

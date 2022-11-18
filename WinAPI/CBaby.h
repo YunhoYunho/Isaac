@@ -29,6 +29,11 @@ private:
 	BabyState m_BabyState;
 	wstring stateBaby;
 
+	bool up;
+	bool down;
+	bool left;
+	bool right;
+
 private:
 	void Init() override;
 	void Update() override;

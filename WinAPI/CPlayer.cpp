@@ -11,7 +11,7 @@
 #include "CImage.h"
 #include "CAnimator.h"
 
-#include "CMissile.h"
+#include "CPlayerMissile.h"
 
 CPlayer::CPlayer()
 {
@@ -92,6 +92,8 @@ void CPlayer::Init()
 
 	m_pAnimatorHead->CreateAnimation(L"Dead", m_pDeadImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.3f, 5, false);
 
+	m_pAnimatorBody->CreateAnimation(L"None", m_pDeadImage, Vector(0.f, 0.f), Vector(1.f, 1.f), Vector(1.f, 0.f), 0, 1, false);
+
 	m_pAnimatorHead->Play(L"HeadDown");
 	m_pAnimatorBody->Play(L"BodyIdleDown");
 
@@ -105,6 +107,8 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
+	WhereIsPlayer();
+
 	switch (m_playerState)
 	{
 	case PlayerState::Idle:
@@ -222,28 +226,28 @@ void CPlayer::Update()
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotLeft";
-			CreateMissile();
+			ChangeStay();
 		}
 
 		if (BUTTONSTAY(VK_RIGHT))
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotRight";
-			CreateMissile();
+			ChangeStay();
 		}
 
 		if (BUTTONSTAY(VK_UP))
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotUp";
-			CreateMissile();
+			ChangeStay();
 		}
 
 		if (BUTTONSTAY(VK_DOWN))
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotDown";
-			CreateMissile();
+			ChangeStay();
 		}
 
 		if (false == m_bIsMove)
@@ -291,6 +295,7 @@ void CPlayer::Update()
 		{
 			m_bIsHurt = true;
 			stateHead = L"Hurt";
+			stateBody = L"None";
 		}
 
 		if (BUTTONSTAY('A') || BUTTONSTAY('D') || BUTTONSTAY('W') || BUTTONSTAY('S'))
@@ -318,6 +323,7 @@ void CPlayer::Update()
 		if (m_HP < 0 || BUTTONDOWN('Y'))
 		{
 			stateHead = L"Dead";
+			stateBody = L"None";
 		}
 
 		AnimatorUpdate();
@@ -343,7 +349,7 @@ void CPlayer::CreateMissile()
 	Logger::Debug(L"미사일 생성");
 
 
-	CMissile* pMissile = new CMissile();
+	CPlayerMissile* pMissile = new CPlayerMissile();
 	pMissile->SetPos(m_vecPos);
 
 	if (BUTTONSTAY(VK_LEFT))
@@ -368,6 +374,11 @@ void CPlayer::CreateMissile()
 	ADDOBJECT(pMissile);
 }
 
+void CPlayer::WhereIsPlayer()
+{
+	PLAYERPOS = m_vecPos;
+}
+
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 }
@@ -380,3 +391,18 @@ void CPlayer::OnCollisionExit(CCollider* pOtherCollider)
 {
 }
 
+void CPlayer::ChangeStay()
+{
+	if (m_fTimer == 0)
+	{
+		CreateMissile();
+	}
+
+	m_fTimer += DT;
+
+	if (m_fTimer > 0.25f)
+	{
+		m_fTimer = 0;
+	}
+
+}

@@ -21,6 +21,8 @@ CGish::CGish()
 
 	m_fSpeed = 10.0f;
 	m_HP = 3;
+
+	m_vecTargetPos = PLAYERPOS;
 }
 
 CGish::~CGish()
@@ -54,20 +56,18 @@ void CGish::Init()
 
 void CGish::Update()
 {
-	Vector dir;
 	switch (m_GishState)
 	{
-		Trace(dir, m_fSpeed);
 
 	case GishState::Move:
 	{
-		if (dir.x < 0)
+		if (m_vecTargetPos.x < 0)
 		{
 			m_vecPos.x -= m_fSpeed * DT;
 			m_bIsMove = true;
 			stateGish = L"MoveLeft";
 		}
-		else if (dir.x > 0)
+		else if (m_vecTargetPos.x > 0)
 		{
 			m_vecPos.x += m_fSpeed * DT;
 			m_bIsMove = true;
@@ -75,16 +75,16 @@ void CGish::Update()
 		}
 		else
 		{
-			dir.x = 0;
+			m_vecTargetPos.x = 0;
 		}
 
-		if (dir.y < 0)
+		if (m_vecTargetPos.y < 0)
 		{
 			m_vecPos.y -= m_fSpeed * DT;
 			m_bIsMove = true;
 			stateGish = L"MoveLeft";
 		}
-		else if (dir.y > 0)
+		else if (m_vecTargetPos.y > 0)
 		{
 			m_vecPos.y += m_fSpeed * DT;
 			m_bIsMove = true;
@@ -92,7 +92,7 @@ void CGish::Update()
 		}
 		else
 		{
-			dir.y = 0;
+			m_vecTargetPos.y = 0;
 		}
 
 		if (true == m_bIsJump)
