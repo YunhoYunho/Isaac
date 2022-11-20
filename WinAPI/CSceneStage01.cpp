@@ -20,8 +20,7 @@
 #include "CPanel.h"
 
 #include "CImageObject.h"
-#include "CHUD.h"
-
+#include "CPlayerHP.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -38,13 +37,9 @@ void CSceneStage01::Init()
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);
 
-	CMonster* pMonster = new CMonster();
-	pMonster->SetPos(1000, WINSIZEY * 0.5f);
-	AddGameObject(pMonster);
-
-	CGish* pGish = new CGish();
-	pGish->SetPos(500, WINSIZEY * 0.5f);
-	AddGameObject(pGish);
+	//CGish* pGish = new CGish();
+	//pGish->SetPos(500, WINSIZEY * 0.5f);
+	//AddGameObject(pGish);
 
 	CBaby* pBaby = new CBaby();
 	pBaby->SetPos(300, WINSIZEY * 0.5f);
@@ -61,9 +56,9 @@ void CSceneStage01::Init()
 	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Isaac_Map.png"));
 	AddGameObject(pBackGround);
 
-	CHUD* pHUD = new CHUD;
-	pHUD->SetPos(WINSIZEX / 2, WINSIZEY / 2);
-	AddGameObject(pHUD);
+	CPlayerHP* pPlayerHPImage = new CPlayerHP;
+	pPlayerHPImage->SetPos(70, 50);
+	AddGameObject(pPlayerHPImage);
 }
 
 void CSceneStage01::Enter()

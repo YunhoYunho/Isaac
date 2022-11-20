@@ -44,11 +44,14 @@ enum class Layer
 	Tile,
 	Ending,
 	Title,
+	GroundTile,
 	Obstacle,
 	Door,
-	Player,
 	Missile,
+	Player,
+	PlayerMissile,
 	Monster,
+	MonsterMissile,
 
 	HUD,
 	Ui,
@@ -65,6 +68,7 @@ enum class TypeTile
 	Ground,
 	Platform,
 	Wall,
+	door,
 
 	Size,
 };

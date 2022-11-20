@@ -27,6 +27,7 @@ CCore::~CCore()
 void CCore::Init()
 {
 	TIME->Init();
+	GAME->Init();
 	RENDER->Init();
 	INPUT->Init();
 	EVENT->Init();
@@ -46,6 +47,7 @@ void CCore::Update()
 	EVENT->Update();
 
 	TIME->Update();
+	GAME->Update();
 	INPUT->Update();
 	SCENE->Update();
 	CAMERA->Update();
@@ -77,6 +79,7 @@ void CCore::Release()
 	SCENE->Release();
 
 	TIME->Release();
+	GAME->Release();
 	RENDER->Release();
 	INPUT->Release();
 	EVENT->Release();

@@ -67,9 +67,6 @@
     <Filter Include="03. GameObject\Stage\Projectile">
       <UniqueIdentifier>{f97dd69a-7c4e-4d7b-8427-c680ec459691}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\HUD">
-      <UniqueIdentifier>{98e4e084-d65f-4ab0-b658-cec1e3bdaff2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -234,8 +231,11 @@
     <ClInclude Include="CObstacle.h">
       <Filter>01. Engine\Asset</Filter>
     </ClInclude>
-    <ClInclude Include="CHUD.h">
-      <Filter>03. GameObject\Stage\HUD</Filter>
+    <ClInclude Include="CPlayerHP.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoorTile.h">
+      <Filter>01. Engine\Asset\Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -383,8 +383,11 @@
     <ClCompile Include="CObstacle.cpp">
       <Filter>01. Engine\Asset</Filter>
     </ClCompile>
-    <ClCompile Include="CHUD.cpp">
-      <Filter>03. GameObject\Stage\HUD</Filter>
+    <ClCompile Include="CPlayerHP.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoorTile.cpp">
+      <Filter>01. Engine\Asset\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

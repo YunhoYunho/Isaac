@@ -17,10 +17,13 @@ CCollisionManager::~CCollisionManager()
 
 void CCollisionManager::Init()
 {
-	CheckLayer(Layer::Monster, Layer::Missile);
-	CheckLayer(Layer::Tile, Layer::Missile);
+	CheckLayer(Layer::PlayerMissile, Layer::Monster);
+	CheckLayer(Layer::MonsterMissile, Layer::Player);
 	CheckLayer(Layer::Monster, Layer::Player);
+	CheckLayer(Layer::Tile, Layer::PlayerMissile);
+	CheckLayer(Layer::Tile, Layer::MonsterMissile);
 	CheckLayer(Layer::Tile, Layer::Player);
+	CheckLayer(Layer::Tile, Layer::Monster);
 }
 
 void CCollisionManager::Update()
