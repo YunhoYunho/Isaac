@@ -14,9 +14,9 @@ private:
 	void Release();
 
 public:
-	Vector PlayerPos;
+	Vector NowPlayerPos;
 	Vector PrevPlayerPos;
 };
 
 #define GAME		CGameManager::GetInstance()
-#define PLAYERPOS	CGameManager::GetInstance()->PlayerPos
+#define PLAYERPOS	CGameManager::GetInstance()->NowPlayerPos

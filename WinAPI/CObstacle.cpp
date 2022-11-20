@@ -6,7 +6,7 @@
 CObstacle::CObstacle()
 {
 	m_vecScale = Vector(200, 100);
-	m_layer = Layer::Obstacle;
+	m_layer = Layer::Tile;
 	dir = CollisionDir::None;
 	offset = 0.25f;
 }

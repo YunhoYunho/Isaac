@@ -13,6 +13,9 @@ CMissile::CMissile()
 	m_fVelocity = 300;
 	m_layer = Layer::Missile;
 	m_strName = L"πÃªÁ¿œ";
+
+	m_fTimer = 0;
+	m_fCurrentTimer = 0;
 }
 
 CMissile::~CMissile()

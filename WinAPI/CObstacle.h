@@ -10,7 +10,7 @@ public:
 	CObstacle();
 	virtual ~CObstacle();
 
-private:
+public:
 	CollisionDir dir;
 	float		 offset;
 

@@ -23,4 +23,5 @@ public:
 	void SetVelocity(float velocity);
 
 	float m_fTimer = 0;
+	float m_fCurrentTimer = 0;
 };

@@ -50,6 +50,8 @@ private:
 	float m_fDamage = 2;
 	float m_HP = 3;
 
+	float m_bIsWall;
+
 	float m_fTimer = 0;
 
 	PlayerState m_playerState;
@@ -64,12 +66,16 @@ private:
 
 	void AnimatorUpdate();
 	void CreateMissile();
-	void WhereIsPlayer();
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
 
 private:
-	void ChangeStay();
+	void KeyBoardRead();
+	void ShotTime();
+	void NowPlayerPosition();
+	void PrevPlayerPosition();
 };
+
+//https://www.codechosun.com/111

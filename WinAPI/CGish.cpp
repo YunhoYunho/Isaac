@@ -19,10 +19,8 @@ CGish::CGish()
 	m_bIsShot = false;
 	m_bIsDead = false;
 
-	m_fSpeed = 10.0f;
+	m_fSpeed = 100.0f;
 	m_HP = 3;
-
-	m_vecTargetPos = PLAYERPOS;
 }
 
 CGish::~CGish()
@@ -58,59 +56,46 @@ void CGish::Update()
 {
 	switch (m_GishState)
 	{
-
+		m_vecPlayerPosition = PLAYERPOS;
 	case GishState::Move:
 	{
-		if (m_vecTargetPos.x < 0)
+		m_bIsMove = false;
+
+		if (PLAYERPOS.x < m_vecPos.x)
 		{
+			stateGish = L"MoveLeft";
+			m_vecLookDir.x = -1;
 			m_vecPos.x -= m_fSpeed * DT;
-			m_bIsMove = true;
-			stateGish = L"MoveLeft";
 		}
-		else if (m_vecTargetPos.x > 0)
+		else if (PLAYERPOS.x > m_vecPos.x)
 		{
+			stateGish = L"MoveRight";
+			m_vecLookDir.x = +1;
 			m_vecPos.x += m_fSpeed * DT;
-			m_bIsMove = true;
-			stateGish = L"MoveRight";
 		}
 		else
 		{
-			m_vecTargetPos.x = 0;
+			m_vecPos.x = 0;
 		}
 
-		if (m_vecTargetPos.y < 0)
+		if (PLAYERPOS.y < m_vecPos.y)
 		{
+			stateGish = L"MoveRight";
+			m_vecLookDir.y = -1;
 			m_vecPos.y -= m_fSpeed * DT;
-			m_bIsMove = true;
-			stateGish = L"MoveLeft";
 		}
-		else if (m_vecTargetPos.y > 0)
+		else if (PLAYERPOS.y > m_vecPos.y)
 		{
+			stateGish = L"MoveLeft";
+			m_vecLookDir.y = +1;
 			m_vecPos.y += m_fSpeed * DT;
-			m_bIsMove = true;
-			stateGish = L"MoveRight";
 		}
 		else
 		{
-			m_vecTargetPos.y = 0;
+			m_vecPos.y = 0;
 		}
-
-		if (true == m_bIsJump)
-		{
-			m_stateGish = GishState::Jump;
-		}
-
-		if (true == m_bIsShot)
-		{
-			m_stateGish = GishState::Shot;
-		}
-
-		if (true == m_bIsDead || BUTTONDOWN('P'))
-		{
-			m_stateGish = GishState::Dead;
-		}
-		stateGish = L"MoveLeft";
 	}
+		break;
 
 	case GishState::Jump:
 	{
@@ -118,56 +103,41 @@ void CGish::Update()
 	}
 	case GishState::Shot:
 	{
-		//if (m_vecTargetDir.x <= 0)
-		//{
-		//	m_bIsMove = true;
-		//	stateGish = L"ShotLeft";
-		//	CreateMissile();
-		//}
+		m_bIsShot = false;
 
-		//if (m_vecTargetDir.x > 0)
-		//{
-		//	m_bIsMove = true;
-		//	stateGish = L"ShotRight";
-		//	CreateMissile();
+		m_fShotTimer += DT;
 
-		//}
+		if (m_fShotTimer >= m_fShotSpeed - 0.5f)
+		{
+			m_bIsShot = true;
+			if (PLAYERPOS.x < m_vecPos.x)
+			{
+				stateGish = L"ShotLeft";
+			}
+			else
+			{
+				stateGish = L"ShotRight";
+			}
+		}
 
-		//if (m_vecTargetDir.y < 0)
-		//{
-		//	m_bIsMove = true;
-		//	stateGish = L"ShotLeft";
-		//	CreateMissile();
+		if (m_fShotTimer >= m_fShotSpeed)
+		{
+			m_fShotTimer = 0.0f;
+			CreateMissile();
 
-		//}
-
-		//if (m_vecTargetDir.y > 0)
-		//{
-		//	m_bIsMove = true;
-		//	stateGish = L"ShotRight";
-		//	CreateMissile();
-		//}
-
-		//if (false == m_bIsShot)
-		//{
-		//	m_stateGish = GishState::Move;
-		//}
-
-		//if (true == m_bIsJump)
-		//{
-		//	m_stateGish = GishState::Jump;
-		//}
-
-		//if (true == m_bIsShot)
-		//{
-		//	m_stateGish = GishState::Shot;
-		//}
-
-		//if (true == m_bIsDead || BUTTONDOWN('P'))
-		//{
-		//	m_stateGish = GishState::Dead;
-		//}
-	}
+			if (false == m_bIsShot)
+			{
+				if (stateGish == L"ShotLeft")
+				{
+					m_stateGish = GishState::Move;
+				}
+				else
+				{
+					m_stateGish = GishState::Move;
+				}
+			}
+		}
+		break;
 
 	case GishState::Dead:
 	{
@@ -175,25 +145,10 @@ void CGish::Update()
 		{
 			stateGish = L"Dead";
 		}
-
-		else if (false == m_bIsDead)
-		{
-			m_stateGish = GishState::Move;
-		}
-
-		if (true == m_bIsJump)
-		{
-			m_stateGish = GishState::Jump;
-		}
-
-		if (true == m_bIsShot)
-		{
-			m_stateGish = GishState::Shot;
-		}
 	}
-		AnimatorUpdate();
 	}
-
+	AnimatorUpdate();
+	}
 }
 
 void CGish::Render()

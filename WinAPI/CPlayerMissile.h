@@ -20,6 +20,8 @@ private:
 	float m_fVelocity;
 	float m_fDamage;
 
+	float m_fTimer;
+
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pTearsImage;

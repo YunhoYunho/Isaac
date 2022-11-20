@@ -34,6 +34,7 @@ CPlayer::CPlayer()
 	m_bIsShot = false;
 	m_bIsHurt = false;
 	m_bIsDead = false;
+	m_bIsWall = false;
 
 	m_HP = 3;
 }
@@ -107,11 +108,13 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
-	WhereIsPlayer();
+	m_bIsMove = false;
+	NowPlayerPosition();
 
 	switch (m_playerState)
 	{
 	case PlayerState::Idle:
+		m_bIsWall = true;
 		stateHead = L"HeadDown";
 		stateBody = L"BodyIdleDown";
 
@@ -133,26 +136,6 @@ void CPlayer::Update()
 		if (BUTTONUP('S'))
 		{
 			stateBody = L"BodyIdleDown";
-		}
-
-		if (m_bIsMove)
-		{
-			m_playerState = PlayerState::Move;
-		}
-
-		if (m_bIsShot)
-		{
-			m_playerState = PlayerState::Shot;
-		}
-
-		if (BUTTONDOWN('T'))
-		{
-			m_playerState = PlayerState::Hurt;
-		}
-
-		if (BUTTONDOWN('Y'))
-		{
-			m_playerState = PlayerState::Dead;
 		}
 
 	case PlayerState::Move:
@@ -206,48 +189,33 @@ void CPlayer::Update()
 			m_playerState = PlayerState::Idle;
 		}
 
-		if (m_bIsShot)
-		{
-			m_playerState = PlayerState::Shot;
-		}
-
-		if (BUTTONDOWN('T'))
-		{
-			m_playerState = PlayerState::Hurt;
-		}
-
-		if (BUTTONDOWN('Y'))
-		{
-			m_playerState = PlayerState::Dead;
-		}
-
 	case PlayerState::Shot:
 		if (BUTTONSTAY(VK_LEFT))
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotLeft";
-			ChangeStay();
+			ShotTime();
 		}
 
 		if (BUTTONSTAY(VK_RIGHT))
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotRight";
-			ChangeStay();
+			ShotTime();
 		}
 
 		if (BUTTONSTAY(VK_UP))
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotUp";
-			ChangeStay();
+			ShotTime();
 		}
 
 		if (BUTTONSTAY(VK_DOWN))
 		{
 			m_bIsShot = true;
 			stateHead = L"ShotDown";
-			ChangeStay();
+			ShotTime();
 		}
 
 		if (false == m_bIsMove)
@@ -275,25 +243,11 @@ void CPlayer::Update()
 			stateHead = L"HeadDown";
 		}
 
-		if (false == m_bIsMove)
-		{
-			m_playerState = PlayerState::Idle;
-		}
-
-		if (BUTTONDOWN('T'))
-		{
-			m_playerState = PlayerState::Hurt;
-		}
-
-		if (BUTTONDOWN('Y'))
-		{
-			m_playerState = PlayerState::Dead;
-		}
-
 	case PlayerState::Hurt:
 		if (BUTTONDOWN('T'))
 		{
 			m_bIsHurt = true;
+			m_HP--;
 			stateHead = L"Hurt";
 			stateBody = L"None";
 		}
@@ -320,13 +274,20 @@ void CPlayer::Update()
 		}
 
 	case PlayerState::Dead:
-		if (m_HP < 0 || BUTTONDOWN('Y'))
+		if (m_HP <= 0 || BUTTONDOWN('Y'))
 		{
 			stateHead = L"Dead";
 			stateBody = L"None";
 		}
 
 		AnimatorUpdate();
+		PrevPlayerPosition();
+	}
+
+	if (m_HP <= 0)
+	{
+		m_playerState = PlayerState::Dead;
+		m_HP = 0;
 	}
 }
 
@@ -347,7 +308,6 @@ void CPlayer::AnimatorUpdate()
 void CPlayer::CreateMissile()
 {
 	Logger::Debug(L"미사일 생성");
-
 
 	CPlayerMissile* pMissile = new CPlayerMissile();
 	pMissile->SetPos(m_vecPos);
@@ -374,13 +334,31 @@ void CPlayer::CreateMissile()
 	ADDOBJECT(pMissile);
 }
 
-void CPlayer::WhereIsPlayer()
-{
-	PLAYERPOS = m_vecPos;
-}
-
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
+	if (pOtherCollider->GetObjName() == L"Wall")
+	{
+		m_bIsWall = true;
+		m_playerState = PlayerState::Move;
+
+		if (m_vecPos.x <= WINSIZEX)
+		{
+			m_vecPos.x += 0.5f;
+			m_vecPos.y -= 0.5f;
+		}
+
+		else if (m_vecPos.y <= WINSIZEY)
+		{
+			m_vecPos.x -= 0.5f;
+			m_vecPos.y -= 0.5f;
+		}
+	}
+
+	if (pOtherCollider->GetObjName() == L"MonsterMissile")
+	{
+		m_HP--;
+	}
+
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
@@ -391,7 +369,11 @@ void CPlayer::OnCollisionExit(CCollider* pOtherCollider)
 {
 }
 
-void CPlayer::ChangeStay()
+void CPlayer::KeyBoardRead()
+{
+}
+
+void CPlayer::ShotTime()
 {
 	if (m_fTimer == 0)
 	{
@@ -405,4 +387,14 @@ void CPlayer::ChangeStay()
 		m_fTimer = 0;
 	}
 
+}
+
+void CPlayer::NowPlayerPosition()
+{
+	PLAYERPOS = m_vecPos;
+}
+
+void CPlayer::PrevPlayerPosition()
+{
+	GAME->PrevPlayerPos = m_vecPos;
 }
