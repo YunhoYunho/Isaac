@@ -6,7 +6,7 @@ CMonsterMissile::CMonsterMissile()
 	m_vecScale = Vector(10, 10);
 	m_vecDir = Vector(0, 0);
 	m_fVelocity = 300;
-	m_layer = Layer::Missile;
+	m_layer = Layer::MonsterMissile;
 	m_strName = L"MonsterMissile";
 
 	m_pTearsImage = nullptr;

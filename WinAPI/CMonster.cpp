@@ -18,11 +18,6 @@ CMonster::CMonster()
 	m_bIsMove = false;
 	m_bIsShot = false;
 	m_bIsDead = false;
-
-	m_vecLookAt = Vector(0, 0);
-	m_vecTargetPos = Vector(0, 0);
-	m_pTargetObj = nullptr;
-	m_fTimeToTarget = 0;
 }
 
 CMonster::~CMonster()
@@ -36,23 +31,6 @@ void CMonster::Init()
 
 void CMonster::Update()
 {
-	// 추적할 게임오브젝트가 있을 경우
-	if (nullptr != m_pTargetObj)
-	{
-		if (m_pTargetObj->GetReserveDelete())
-		{
-			// 추적할 게임오브젝트가 삭제예정인 경우 추적 해제
-			m_pTargetObj = nullptr;
-		}
-		else
-		{
-			// 추적할 게임오브젝트가 있을 경우 게임오브젝트의 위치를 목표위치로 지정
-			SetTargetPos(m_pTargetObj->GetPos());
-		}
-	}
-
-	// 목표 위치로 이동
-	MoveToTarget();
 }
 
 void CMonster::Render()
@@ -72,13 +50,26 @@ void CMonster::CreateMissile()
 {
 	Logger::Debug(L"적 미사일 생성");
 
-	if (m_bIsShot)
+	CMonsterMissile* pMissile = new CMonsterMissile();
+	pMissile->SetPos(m_vecPos);
+	pMissile->SetDir(m_vecPlayerPosition);
+	ADDOBJECT(pMissile);
+}
+
+void CMonster::ShotTime()
+{
+	if (m_fTimer == 0)
 	{
-		CMonsterMissile* pMissile = new CMonsterMissile();
-		pMissile->SetPos(m_vecPos);
-		pMissile->SetDir(m_vecTargetPos);
-		ADDOBJECT(pMissile);
+		CreateMissile();
 	}
+
+	m_fTimer += DT;
+
+	if (m_fTimer > 0.25f)
+	{
+		m_fTimer = 0;
+	}
+
 }
 
 void CMonster::OnCollisionEnter(CCollider* pOtherCollider)
@@ -106,63 +97,5 @@ void CMonster::OnCollisionExit(CCollider* pOtherCollider)
 	else if (pOtherCollider->GetObjName() == L"미사일")
 	{
 		Logger::Debug(L"몬스터가 미사일과 충돌해제");
-	}
-}
-
-Vector CMonster::GetLookAt()
-{
-	return m_vecLookAt;
-}
-
-Vector CMonster::GetTargetPos()
-{
-	return m_vecTargetPos;
-}
-
-CGameObject* CMonster::GetTargetObj()
-{
-	return m_pTargetObj;
-}
-
-void CMonster::SetTargetPos(Vector targetPos, float timeToTarget)
-{
-	m_vecTargetPos = targetPos;
-	m_fTimeToTarget = timeToTarget;
-}
-
-void CMonster::SetTargetObj(CGameObject* pTargetObj)
-{
-	m_pTargetObj = pTargetObj;
-}
-
-void CMonster::Scroll(Vector dir, float velocity)
-{
-	// 스크롤의 방향 크기가 없는 경우 진행하지 않음
-	if (dir.Magnitude() == 0)
-		return;
-
-	// 스크롤의 목표 위치는 현재위치에서 스크롤 방향으로 떨어진 위치
-	m_vecTargetPos = m_vecLookAt;
-	m_vecTargetPos += dir.Normalized() * velocity * DT;
-	m_fTimeToTarget = 0;	// 스크롤은 시간차를 두지 않은 즉각 이동
-}
-
-void CMonster::MoveToTarget()
-{
-	m_fTimeToTarget -= DT;
-
-	if (m_fTimeToTarget <= 0)
-	{
-		// 목표위치까지 남은 시간이 없을 경우 목적지로 현재위치 고정
-		m_vecLookAt = m_vecTargetPos;
-	}
-	else
-	{
-		// 목표위치까지 남은 시간이 있을 경우
-		// 목적지까지 남은시간만큼의 속도로 이동
-		// 이동거리 = 속력 * 시간
-		// 속력 = (도착지 - 출발지) / 소요시간
-		// 시간 = 프레임단위시간
-		m_vecLookAt += (m_vecTargetPos - m_vecLookAt) / m_fTimeToTarget * DT;
 	}
 }

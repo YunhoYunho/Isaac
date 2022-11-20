@@ -35,6 +35,8 @@ private:
 	bool left;
 	bool right;
 
+	bool m_bIsWall;
+
 private:
 	void Init() override;
 	void Update() override;

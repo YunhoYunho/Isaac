@@ -20,6 +20,7 @@ CBoomfly::CBoomfly()
 	m_bIsShot = false;
 	m_bIsDead = false;
 	m_bIsExplode = false;
+	m_bIsWall = false;
 
 	m_fSpeed = 100.0f;
 	m_HP = 3;
@@ -138,8 +139,16 @@ void CBoomfly::OnCollisionEnter(CCollider* pOtherCollider)
 	}
 	else if (pOtherCollider->GetObjName() == L"미사일")
 	{
-		m_Damage -= m_HP;
+		m_HP -= m_Damage;
 		Logger::Debug(L"몬스터가 미사일과 충돌진입");
+	}
+
+	if (pOtherCollider->GetObjName() == L"Wall")
+	{
+		m_bIsWall = true;
+		m_BoomflyState = BoomflyState::Move;
+		m_vecPos.x += 1;
+		m_vecPos.y += 1;
 	}
 }
 

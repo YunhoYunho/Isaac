@@ -18,8 +18,13 @@ CBaby::CBaby()
 	m_bIsShot = false;
 	m_bIsDead = false;
 
-	m_fSpeed = 10.0f;
+	m_fSpeed = 100.0f;
 	m_HP = 10;
+
+	up = true;
+	down = false;
+	left = false;
+	right = true;
 }
 
 CBaby::~CBaby()
@@ -54,23 +59,40 @@ void CBaby::Update()
 	{
 	case BabyState::Move:
 	{
+		m_bIsMove = true;
 		stateBaby = L"Move";
+		
+		m_vecPlayerPosition = PLAYERPOS;
 
-		Vector dir;
-		if (m_vecTargetPos.x < 0)
-			dir.x = -1;
-		else if (m_vecTargetPos.x > 0)
-			dir.x = 1;
-		else dir.x = 0;
-
-		if (m_vecTargetPos.y < 0)
-			dir.y = -1;
-		else if (m_vecTargetPos.y > 0)
-			dir.y = 1;
+		if (PLAYERPOS.x < m_vecPos.x)
+		{
+			m_vecLookDir.x = -1;
+			m_vecPos.x -= m_fSpeed * DT;
+		}
+		else if (PLAYERPOS.x > m_vecPos.x)
+		{
+			m_vecLookDir.x = +1;
+			m_vecPos.x += m_fSpeed * DT;
+		}
 		else
-			dir.y = 0;
+		{
+			m_vecPos.x = 0;
+		}
 
-		Scroll(dir, m_fSpeed);
+		if (PLAYERPOS.y < m_vecPos.y)
+		{
+			m_vecLookDir.y = -1;
+			m_vecPos.y -= m_fSpeed * DT;
+		}
+		else if (PLAYERPOS.y > m_vecPos.y)
+		{
+			m_vecLookDir.y = +1;
+			m_vecPos.y += m_fSpeed * DT;
+		}
+		else
+		{
+			m_vecPos.y = 0;
+		}
 
 		if (true == m_bIsShot)
 		{
@@ -84,12 +106,8 @@ void CBaby::Update()
 	}
 	case BabyState::Shot:
 	{
-		if (true == m_bIsShot)
-		{
-			m_bIsMove = true;
-			stateBaby = L"Shot";
-			CreateMissile();
-		}
+		stateBaby = L"Shot";
+		/*CreateMissile();*/
 
 		if (false == m_bIsShot)
 		{
