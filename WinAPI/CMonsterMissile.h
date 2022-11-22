@@ -1,14 +1,6 @@
 #pragma once
 #include "CMissile.h"
 
-enum class TearsState
-{
-	None,
-	Hit,
-
-	Size
-};
-
 class CMonsterMissile : public CMissile
 {
 public:
@@ -16,19 +8,8 @@ public:
 	virtual ~CMonsterMissile();
 
 private:
-	Vector m_vecDir;
-	float m_fVelocity;
-
-private:
 	CAnimator* m_pAnimator;
 	CImage* m_pTearsImage;
-
-	TearsState m_state;
-
-	bool m_bIsHit;
-
-	TearsState m_tearsState;
-	wstring stateTears;
 
 private:
 	void Init() override;

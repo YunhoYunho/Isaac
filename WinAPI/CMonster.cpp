@@ -13,7 +13,7 @@ CMonster::CMonster()
 	m_layer = Layer::Monster;
 
 	m_vecMoveDir = Vector(0, 0);
-	m_vecLookDir = Vector(0, -1);
+	m_vecLookDir = Vector(0, 0);
 
 	m_bIsMove = false;
 	m_bIsShot = false;
@@ -49,27 +49,23 @@ void CMonster::Release()
 void CMonster::CreateMissile()
 {
 	Logger::Debug(L"利 固荤老 积己");
+	
+	m_vecPlayerPosition = PLAYERPOS;
 
-	CMonsterMissile* pMissile = new CMonsterMissile();
-	pMissile->SetPos(m_vecPos);
-	pMissile->SetDir(m_vecPlayerPosition);
-	ADDOBJECT(pMissile);
-}
-
-void CMonster::ShotTime()
-{
 	if (m_fTimer == 0)
 	{
-		CreateMissile();
+		CMonsterMissile* pMissile = new CMonsterMissile();
+		pMissile->SetPos(m_vecPos);
+		pMissile->SetDir(m_vecPlayerPosition);
+		ADDOBJECT(pMissile);
 	}
 
 	m_fTimer += DT;
 
-	if (m_fTimer > 0.25f)
+	if (m_fTimer > 1.0f)
 	{
 		m_fTimer = 0;
 	}
-
 }
 
 void CMonster::OnCollisionEnter(CCollider* pOtherCollider)

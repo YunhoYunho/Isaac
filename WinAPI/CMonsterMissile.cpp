@@ -10,7 +10,6 @@ CMonsterMissile::CMonsterMissile()
 	m_strName = L"MonsterMissile";
 
 	m_pTearsImage = nullptr;
-	m_bIsHit = false;
 }
 
 CMonsterMissile::~CMonsterMissile()
@@ -29,8 +28,6 @@ void CMonsterMissile::Init()
 
 	AddComponent(m_pAnimator);
 
-	m_tearsState = TearsState::None;
-
 	AddCollider(ColliderType::Circle, Vector(8, 8), Vector(0, 0));
 }
 
@@ -44,32 +41,10 @@ void CMonsterMissile::Update()
 		m_vecPos.y < 0 ||
 		m_vecPos.y > WINSIZEY)
 		DELETEOBJECT(this);
-
-	switch (m_tearsState)
-	{
-	case TearsState::None:
-		stateTears = L"None";
-
-		if (true == m_bIsHit)
-		{
-			m_tearsState = TearsState::Hit;
-		}
-	case TearsState::Hit:
-		stateTears = L"Hit";
-
-		if (false == m_bIsHit)
-		{
-			m_tearsState = TearsState::None;
-		}
-	}
 }
 
 void CMonsterMissile::Render()
 {
-	RENDER->FrameCircle(
-		m_vecPos.x,
-		m_vecPos.y,
-		m_vecScale.x);
 }
 
 void CMonsterMissile::Release()

@@ -15,7 +15,6 @@ CMissile::CMissile()
 	m_strName = L"πÃªÁ¿œ";
 
 	m_fTimer = 0;
-	m_fCurrentTimer = 0;
 }
 
 CMissile::~CMissile()

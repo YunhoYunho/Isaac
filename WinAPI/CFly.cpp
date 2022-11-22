@@ -1,18 +1,14 @@
 #include "framework.h"
-#include "CBaby.h"
+#include "CFly.h"
 
-CBaby::CBaby()
+CFly::CFly()
 {
 	m_vecPos = Vector(0, 0);
 	m_vecScale = Vector(100, 100);
 	m_layer = Layer::Monster;
-	m_strName = L"Baby";
+	m_strName = L"Fly";
 
-	m_pBabyImage = nullptr;
-	m_pBabyDeadImage = nullptr;
-
-	m_vecMoveDir = Vector(0, 0);
-	m_vecLookDir = Vector(0, 0);
+	m_pFlyImage = nullptr;
 
 	m_bIsMove = false;
 	m_bIsShot = false;
@@ -22,48 +18,44 @@ CBaby::CBaby()
 	m_iHP = 10;
 }
 
-CBaby::~CBaby()
+CFly::~CFly()
 {
 }
 
-void CBaby::Init()
+void CFly::Init()
 {
-	m_pBabyImage = RESOURCE->LoadImg(L"Baby", L"Image\\Unit\\Mon_baby.png");
-	m_pBabyDeadImage = RESOURCE->LoadImg(L"BabyDead", L"Image\\Effect\\Effect_DEAD.png");
+	m_pFlyImage = RESOURCE->LoadImg(L"Fly", L"Image\\Unit\\Mon_Fly.png");
 
 	m_pAnimator = new CAnimator;
 
-	m_pAnimator->CreateAnimation(L"Move", m_pBabyImage, Vector(0.f, 0.f), Vector(120.f, 60.f), Vector(120.f, 0.f), 0, 1);
+	m_pAnimator->CreateAnimation(L"Move", m_pFlyImage, Vector(0.f, 100.f), Vector(80.f, 80.f), Vector(80.f, 0.f), 0.1f, 2);
 
-	m_pAnimator->CreateAnimation(L"Shot", m_pBabyImage, Vector(0.f, 60.f), Vector(120.f, 60.f), Vector(120.f, 0.f), 0, 1, false);
-
-	m_pAnimator->CreateAnimation(L"Dead", m_pBabyDeadImage, Vector(0.f, 0.f), Vector(75.f, 75.f), Vector(75.f, 0.f), 0.1f, 10, false);
+	m_pAnimator->CreateAnimation(L"Dead", m_pFlyImage, Vector(0.f, 0.f), Vector(110.f, 100.f), Vector(100.f, 0.f), 0.1f, 12, false);
 
 	m_pAnimator->Play(L"Move");
 
 	AddComponent(m_pAnimator);
 
-	m_BabyState = BabyState::Move;
+	m_FlyState = FlyState::Move;
 
 	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 }
 
-void CBaby::Update()
+void CFly::Update()
 {
 	if (m_iHP < 1)
 	{
-		stateBaby = L"Dead";
+		stateFly = L"Dead";
 		RemoveCollider();
 	}
-
 	else
 	{
-		switch (m_BabyState)
+		switch (m_FlyState)
 		{
 			m_vecPlayerPosition = PLAYERPOS;
 
-		case BabyState::Move:
-			stateBaby = L"Move";
+		case FlyState::Move:
+			stateFly = L"Move";
 
 			if (PLAYERPOS.x < m_vecPos.x)
 			{
@@ -82,7 +74,6 @@ void CBaby::Update()
 				up = true;
 				down = false;
 			}
-
 			if (PLAYERPOS.y > m_vecPos.y)
 			{
 				up = false;
@@ -94,19 +85,15 @@ void CBaby::Update()
 			if (left) m_vecPos.x -= m_fSpeed * DT;
 			if (right) m_vecPos.x += m_fSpeed * DT;
 
-		case BabyState::Shot:
-			stateBaby = L"Shot";
-			CreateMissile();
-
-		case BabyState::Dead:
+		case FlyState::Dead:
 
 			if (m_iHP < 1)
 			{
-				stateBaby = L"Dead";
+				stateFly = L"Dead";
 			}
 			else
 			{
-				m_BabyState = BabyState::Move;
+				m_FlyState = FlyState::Move;
 			}
 			break;
 		}
@@ -114,20 +101,20 @@ void CBaby::Update()
 	AnimatorUpdate();
 }
 
-void CBaby::Render()
+void CFly::Render()
 {
 }
 
-void CBaby::Release()
+void CFly::Release()
 {
 }
 
-void CBaby::AnimatorUpdate()
+void CFly::AnimatorUpdate()
 {
-	m_pAnimator->Play(stateBaby, false);
+	m_pAnimator->Play(stateFly, false);
 }
 
-void CBaby::OnCollisionEnter(CCollider* pOtherCollider)
+void CFly::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
@@ -136,15 +123,15 @@ void CBaby::OnCollisionEnter(CCollider* pOtherCollider)
 
 	if (m_iHP < 1)
 	{
-		m_BabyState = BabyState::Dead;
+		m_FlyState = FlyState::Dead;
 	}
 }
 
-void CBaby::OnCollisionStay(CCollider* pOtherCollider)
+void CFly::OnCollisionStay(CCollider* pOtherCollider)
 {
 }
 
-void CBaby::OnCollisionExit(CCollider* pOtherCollider)
+void CFly::OnCollisionExit(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{

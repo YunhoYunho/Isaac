@@ -19,11 +19,9 @@ CBoomfly::CBoomfly()
 	m_bIsMove = false;
 	m_bIsShot = false;
 	m_bIsDead = false;
-	m_bIsExplode = false;
-	m_bIsWall = false;
 
 	m_fSpeed = 100.0f;
-	m_HP = 3;
+	m_iHP = 7;
 	
 	up = true;
 	down = false;
@@ -44,7 +42,7 @@ void CBoomfly::Init()
 
 	m_pAnimator->CreateAnimation(L"Move", m_pBoomflyImage, Vector(0.f, 0.f), Vector(75.f, 75.f), Vector(75.f, 0.f), 0.1f, 2);
 
-	m_pAnimator->CreateAnimation(L"Dead", m_pBoomflyDeadImage, Vector(0.f, 0.f), Vector(100.f, 100.f), Vector(100.f, 0.f), 0.1f, 12);
+	m_pAnimator->CreateAnimation(L"Dead", m_pBoomflyDeadImage, Vector(0.f, 0.f), Vector(100.f, 100.f), Vector(100.f, 0.f), 0.1f, 12, false);
 
 	m_pAnimator->Play(L"Move");
 
@@ -57,64 +55,73 @@ void CBoomfly::Init()
 
 void CBoomfly::Update()
 {
-	switch (m_BoomflyState)
+	if (m_iHP < 1)
 	{
-	case BoomflyState::Move:
-	{
-		m_bIsMove = true;
-
-		stateBoomfly = L"Move";
-		if (m_vecPos.x >= WINSIZEX)
-		{
-			left = true;
-			right = false;
-		}
-
-		if (m_vecPos.x <= 0)
-		{
-			left = false;
-			right = true;
-		}
-
-		if (m_vecPos.y >= WINSIZEY)
-		{
-			up = true;
-			down = false;
-		}
-
-		if (m_vecPos.y <= 0)
-		{
-			up = false;
-			down = true;
-		}
-
-		if (up) m_vecPos.y -= m_fSpeed * DT;
-		if (down) m_vecPos.y += m_fSpeed * DT;
-		if (left) m_vecPos.x -= m_fSpeed * DT;
-		if (right) m_vecPos.x += m_fSpeed * DT;
+		stateBoomfly = L"Dead";
+		RemoveCollider();
 	}
 
-	if (true == m_bIsDead || BUTTONDOWN('P'))
+	else
 	{
-		m_stateBoomfly = BoomflyState::Dead;
-	}
-
-	case BoomflyState::Dead:
-	{
-		if (m_HP <= 0 || BUTTONDOWN('P'))
+		switch (m_BoomflyState)
 		{
-			m_bIsDead = true;
-			stateBoomfly = L"Dead";
+		case BoomflyState::Move:
+			stateBoomfly = L"Move";
+
+			if (m_vecPos.x >= WINSIZEX)
+			{
+				left = true;
+				right = false;
+			}
+
+			if (m_vecPos.x <= 0)
+			{
+				left = false;
+				right = true;
+			}
+
+			if (m_vecPos.y >= WINSIZEY - 100)
+			{
+				up = true;
+				down = false;
+			}
+
+			if (m_vecPos.y <= 0)
+			{
+				up = false;
+				down = true;
+			}
+
+			if (up) m_vecPos.y -= m_fSpeed * DT;
+			if (down) m_vecPos.y += m_fSpeed * DT;
+			if (left) m_vecPos.x -= m_fSpeed * DT;
+			if (right) m_vecPos.x += m_fSpeed * DT;
+
+		case BoomflyState::Dead:
+			if (m_iHP < 1)
+			{
+				stateBoomfly = L"Dead";
+
+				if (m_fTimer = 0)
+				{
+					DELETEOBJECT(this);
+				}
+
+				m_fTimer += DT;
+
+				if (m_fTimer > 1.0f)
+				{
+					m_fTimer = 0;
+				}
+			}
+			else
+			{
+				m_BoomflyState = BoomflyState::Move;
+			}
 			break;
-		}
-
-		else if (m_HP > 0)
-		{
-			m_stateBoomfly = BoomflyState::Move;
 		}
 	}
 	AnimatorUpdate();
-	}
 }
 
 void CBoomfly::Render()
@@ -132,23 +139,15 @@ void CBoomfly::AnimatorUpdate()
 
 void CBoomfly::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"플레이어")
+	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		Logger::Debug(L"몬스터가 플레이어와 충돌진입");
-
-	}
-	else if (pOtherCollider->GetObjName() == L"미사일")
-	{
-		m_HP -= m_Damage;
-		Logger::Debug(L"몬스터가 미사일과 충돌진입");
+		m_iHP--;
 	}
 
-	if (pOtherCollider->GetObjName() == L"Wall")
+	if (m_iHP < 1)
 	{
-		m_bIsWall = true;
-		m_BoomflyState = BoomflyState::Move;
-		m_vecPos.x += 1;
-		m_vecPos.y += 1;
+		m_BoomflyState = BoomflyState::Dead;
+		SOUND->Play(pExplosion, 0.8f, false);
 	}
 }
 

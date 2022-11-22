@@ -27,15 +27,7 @@ private:
 	BoomflyState m_BoomflyState;
 	wstring stateBoomfly;
 
-	// TODO: ¾ÆÀÌÅÛ ÆøÅº »ó¼Ó ¸ñÇ¥
-	bool m_bIsExplode;
-
-	bool up;
-	bool down;
-	bool left;
-	bool right;
-
-	bool m_bIsWall;
+	CSound* pExplosion = RESOURCE->LoadSound(L"Boom", L"Sound\\Monster\\explosions.wav");
 
 private:
 	void Init() override;

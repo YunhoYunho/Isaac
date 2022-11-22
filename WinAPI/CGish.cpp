@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "CGish.h"
 
-CGish::CGish()
+ CGish::CGish()
 {
 	m_vecPos = Vector(0, 0);
 	m_vecScale = Vector(100, 100);
@@ -12,15 +12,20 @@ CGish::CGish()
 	m_pGishRightImage = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
-	m_vecLookDir = Vector(0, -1);
+	m_vecLookDir = Vector(0, 0);
 
 	m_bIsMove = false;
 	m_bIsJump = false;
 	m_bIsShot = false;
 	m_bIsDead = false;
 
-	m_fSpeed = 100.0f;
-	m_HP = 3;
+	up = false;
+	down = false;
+	left = false;
+	right = false;
+
+	m_fSpeed = 50.0f;
+	m_iHP = 30;
 }
 
 CGish::~CGish()
@@ -38,8 +43,8 @@ void CGish::Init()
 																																		  
 	m_pAnimator->CreateAnimation(L"MoveRight",		 m_pGishRightImage, Vector(  0.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5);
 																																		  
-	m_pAnimator->CreateAnimation(L"ShotLeft",		 m_pGishLeftImage,  Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, false);
-	m_pAnimator->CreateAnimation(L"ShotRight",		 m_pGishRightImage, Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, false);
+	m_pAnimator->CreateAnimation(L"ShotLeft",		 m_pGishLeftImage,  Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, true);
+	m_pAnimator->CreateAnimation(L"ShotRight",		 m_pGishRightImage, Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, true);
 
 	m_pAnimator->CreateAnimation(L"Dead",			 m_pGishLeftImage,	Vector(560.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0, 1, false);
 
@@ -54,101 +59,86 @@ void CGish::Init()
 
 void CGish::Update()
 {
-	switch (m_GishState)
+	if (m_iHP < 1)
 	{
-		m_vecPlayerPosition = PLAYERPOS;
-	case GishState::Move:
-	{
-		m_bIsMove = false;
-
-		if (PLAYERPOS.x < m_vecPos.x)
-		{
-			stateGish = L"MoveLeft";
-			m_vecLookDir.x = -1;
-			m_vecPos.x -= m_fSpeed * DT;
-		}
-		else if (PLAYERPOS.x > m_vecPos.x)
-		{
-			stateGish = L"MoveRight";
-			m_vecLookDir.x = +1;
-			m_vecPos.x += m_fSpeed * DT;
-		}
-		else
-		{
-			m_vecPos.x = 0;
-		}
-
-		if (PLAYERPOS.y < m_vecPos.y)
-		{
-			stateGish = L"MoveRight";
-			m_vecLookDir.y = -1;
-			m_vecPos.y -= m_fSpeed * DT;
-		}
-		else if (PLAYERPOS.y > m_vecPos.y)
-		{
-			stateGish = L"MoveLeft";
-			m_vecLookDir.y = +1;
-			m_vecPos.y += m_fSpeed * DT;
-		}
-		else
-		{
-			m_vecPos.y = 0;
-		}
+		stateGish = L"Dead";
+		RemoveCollider();
 	}
-		break;
-
-	case GishState::Jump:
+	else
 	{
-		// TODO: 플레이어 위치로 순간이동 구현
-	}
-	case GishState::Shot:
-	{
-		m_bIsShot = false;
-
-		m_fShotTimer += DT;
-
-		if (m_fShotTimer >= m_fShotSpeed - 0.5f)
+		switch (m_GishState)
 		{
-			m_bIsShot = true;
+			m_vecPlayerPosition = PLAYERPOS;
+
+		case GishState::Move:
+			if (PLAYERPOS.x < m_vecPos.x)
+			{
+				stateGish = L"MoveLeft";
+				left = true;
+				right = false;
+			}
+			if (PLAYERPOS.x > m_vecPos.x)
+			{
+				stateGish = L"MoveRight";
+				left = false;
+				right = true;
+			}
+
+			if (PLAYERPOS.y < m_vecPos.y)
+			{
+				stateGish = L"MoveRight";
+				up = true;
+				down = false;
+			}
+			if (PLAYERPOS.y > m_vecPos.y)
+			{
+				stateGish = L"MoveLeft";
+				up = false;
+				down = true;
+			}
+
+			if (up) m_vecPos.y -= m_fSpeed * DT;
+			if (down) m_vecPos.y += m_fSpeed * DT;
+			if (left) m_vecPos.x -= m_fSpeed * DT;
+			if (right) m_vecPos.x += m_fSpeed * DT;
+
+		case GishState::Jump:
+			// TODO: 플레이어 위치로 순간이동 구현
+
+		case GishState::Shot:
 			if (PLAYERPOS.x < m_vecPos.x)
 			{
 				stateGish = L"ShotLeft";
 			}
-			else
+			if (PLAYERPOS.x > m_vecPos.x)
 			{
 				stateGish = L"ShotRight";
 			}
-		}
 
-		if (m_fShotTimer >= m_fShotSpeed)
-		{
-			m_fShotTimer = 0.0f;
 			CreateMissile();
 
-			if (false == m_bIsShot)
+		case GishState::Dead:
+			if (m_iHP < 1)
 			{
-				if (stateGish == L"ShotLeft")
+				stateGish = L"Dead";
+
+				m_fTimer = 3.0f;
+				m_fTimer += DT;
+
+				if (m_fTimer = 0)
 				{
-					m_stateGish = GishState::Move;
-				}
-				else
-				{
-					m_stateGish = GishState::Move;
+					m_fTimer = 0;
+					break;
 				}
 			}
+			else
+			{
+				m_stateGish = GishState::Move;
+			}
+			break;
 		}
-		break;
-
-	case GishState::Dead:
-	{
-		if (true == m_bIsDead || BUTTONDOWN('P'))
-		{
-			stateGish = L"Dead";
-		}
-	}
 	}
 	AnimatorUpdate();
-	}
 }
 
 void CGish::Render()
@@ -166,13 +156,14 @@ void CGish::AnimatorUpdate()
 
 void CGish::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"플레이어")
+	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		Logger::Debug(L"몬스터가 플레이어와 충돌진입");
+		m_iHP--;
 	}
-	else if (pOtherCollider->GetObjName() == L"미사일")
+
+	if (m_iHP < 1)
 	{
-		Logger::Debug(L"몬스터가 미사일과 충돌진입");
+		m_GishState = GishState::Dead;
 	}
 }
 

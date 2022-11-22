@@ -4,30 +4,28 @@
 class CImage;
 class CAnimator;
 
-enum class BabyState
+enum class FlyState
 {
 	Move,
-	Shot,
 	Dead,
 
 	Size
 };
 
-class CBaby : public CMonster
+class CFly : public CMonster
 {
 public:
-	CBaby();
-	virtual ~CBaby();
+	CFly();
+	virtual ~CFly();
 
 private:
 	CAnimator* m_pAnimator;
-	CImage* m_pBabyImage;
-	CImage* m_pBabyDeadImage;
+	CImage* m_pFlyImage;
 
-	BabyState m_stateBaby;
+	FlyState m_stateFly;
 
-	BabyState m_BabyState;
-	wstring stateBaby;
+	FlyState m_FlyState;
+	wstring stateFly;
 
 private:
 	void Init() override;

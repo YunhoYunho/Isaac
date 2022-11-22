@@ -21,6 +21,9 @@ public:
 	CPlayer();
 	virtual ~CPlayer();
 
+public:
+	int m_iHP;
+
 private:
 	CAnimator* m_pAnimatorBody;
 	CAnimator* m_pAnimatorHead;
@@ -40,7 +43,11 @@ private:
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
+	
+	CSound* pHurt = RESOURCE->LoadSound(L"Hurt", L"Sound\\Isaac\\Hurt.wav");
+	CSound* pDead = RESOURCE->LoadSound(L"Dead", L"Sound\\Isaac\\Dies.wav");
 
+public:
 	bool m_bIsMove;
 	bool m_bIsShot;
 	bool m_bIsHurt;
@@ -48,10 +55,6 @@ private:
 
 	float m_fSpeed = 200.0f;
 	float m_fDamage = 2;
-	float m_HP = 3;
-
-	float m_bIsWall;
-
 	float m_fTimer = 0;
 
 	PlayerState m_playerState;
@@ -72,10 +75,7 @@ private:
 	void OnCollisionExit(CCollider* pOtherCollider) override;
 
 private:
-	void KeyBoardRead();
-	void ShotTime();
 	void NowPlayerPosition();
 	void PrevPlayerPosition();
+	void NowPlayerHP();
 };
-
-//https://www.codechosun.com/111

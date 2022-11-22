@@ -10,10 +10,14 @@ public:
 	bool m_bIsShot;
 	bool m_bIsDead;
 
+	bool up;
+	bool down;
+	bool left;
+	bool right;
+
+	int m_iHP;
+
 	float m_fSpeed = 200.0f;
-	float m_fAttack;
-	float m_HP;
-	float m_Damage;
 	float m_fTimer = 0;
 public:
 	Vector m_vecMoveDir;
@@ -22,8 +26,6 @@ public:
 
 protected:
 	void CreateMissile();
-	void ShotTime();
-
 	float m_fShotTimer;
 	float m_fShotSpeed;
 
@@ -37,4 +39,3 @@ private:
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
 };
-

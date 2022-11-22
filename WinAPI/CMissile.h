@@ -6,9 +6,12 @@ public:
 	CMissile();
 	virtual ~CMissile();
 
-private:
+protected:
 	Vector m_vecDir;
 	float m_fVelocity;
+	float m_fDamage;
+
+	float m_fTimer;
 
 private:
 	void Init() override;
@@ -21,7 +24,4 @@ private:
 public:
 	void SetDir(Vector dir);
 	void SetVelocity(float velocity);
-
-	float m_fTimer = 0;
-	float m_fCurrentTimer = 0;
 };

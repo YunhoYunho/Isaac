@@ -4,7 +4,7 @@
 class CAnimator;
 class CImage;
 
-class CPlayerHP : public CPlayer
+class CPlayerHP : public CGameObject
 {
 public:
 	CPlayerHP();
@@ -12,9 +12,10 @@ public:
 
 private:
 	CAnimator* m_pAnimator;
-	CImage* m_pPlayerHP1Image;
-	CImage* m_pPlayerHP2Image;
-	CImage* m_pPlayerHP3Image;
+	CImage* m_pPlayerHPImage;
+
+private:
+	int m_playerHP;
 
 private:
 	void Init() override;

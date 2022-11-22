@@ -10,7 +10,6 @@ CPlayerMissile::CPlayerMissile()
 	m_strName = L"PlayerMissile";
 
 	m_pTearsImage = nullptr;
-	m_bIsHit = false;
 
 	m_fTimer = 1.0f;
 }
@@ -31,32 +30,11 @@ void CPlayerMissile::Init()
 
 	AddComponent(m_pAnimator);
 
-	m_tearsState = TearsState::None;
-
 	AddCollider(ColliderType::Circle, Vector(8, 8), Vector(0, 0));
 }
 
 void CPlayerMissile::Update()
 {
-	switch (m_tearsState)
-	{
-	case TearsState::None:
-		stateTears = L"None";
-
-		if (true == m_bIsHit)
-		{
-			m_tearsState = TearsState::Hit;
-		}
-	case TearsState::Hit:
-		m_bIsHit = true;
-		stateTears = L"Hit";
-
-		if (false == m_bIsHit)
-		{
-			m_tearsState = TearsState::None;
-		}
-	}
-
 	m_vecPos += m_vecDir * m_fVelocity * DT;
 
 	// 화면밖으로 나갈경우 삭제
@@ -82,26 +60,7 @@ void CPlayerMissile::Release()
 void CPlayerMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
-	//DELETEOBJECT(this);
-
-	if (pOtherCollider->GetObjName() == L"Wall")
-	{
-		m_vecPos.x = 0;
-		m_vecPos.y = 0;
-		stateTears = L"Hit";
-	}
-
-	m_fTimer -= DT;
-
-	if (m_fTimer <= 0.0f)
-	{
-		m_tearsState = TearsState::None;
-	}
-
-	if (m_fTimer > 2.0f)
-	{
-		DELETEOBJECT(this);
-	}
+	DELETEOBJECT(this);
 }
 
 void CPlayerMissile::SetDir(Vector dir)
