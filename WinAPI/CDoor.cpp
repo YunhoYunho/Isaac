@@ -21,8 +21,8 @@ CDoor::~CDoor()
 
 void CDoor::Init()
 {
-	m_pBrownDoorImage = RESOURCE->LoadImg(L"BrownDoor", L"Image\\BrownDoor");
-	m_pBossDoorImage = RESOURCE->LoadImg(L"BossDoor", L"Image\\BossDoor");
+	m_pBrownDoorImage = RESOURCE->LoadImg(L"BrownDoor", L"Image\\BrownDoor.png");
+	m_pBossDoorImage = RESOURCE->LoadImg(L"BossDoor", L"Image\\BossDoor.png");
 
 	m_pAnimator = new CAnimator;
 

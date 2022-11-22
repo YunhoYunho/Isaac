@@ -4,15 +4,15 @@
 class CAnimator;
 class CImage;
 
-class CEndingImage : public CGameObject
+class CLoadingImage : public CGameObject
 {
 public:
-	CEndingImage();
-	virtual ~CEndingImage();
+	CLoadingImage();
+	virtual ~CLoadingImage();
 
 private:
 	CAnimator* m_pAnimator;
-	CImage* m_pEndingImage;
+	CImage* m_pLoadingImage;
 
 private:
 	void Init() override;
@@ -20,4 +20,3 @@ private:
 	void Render() override;
 	void Release() override;
 };
-

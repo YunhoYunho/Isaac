@@ -29,6 +29,8 @@ enum class GroupScene
 
 	TileTool,
 
+	Loading,
+
 	Stage01,
 
 	Size,
@@ -43,15 +45,18 @@ enum class Layer
 	Default,
 	Tile,
 	Ending,
+	Loading,
 	Title,
 	GroundTile,
 	Obstacle,
 	Door,
 	Missile,
-	Player,
-	PlayerMissile,
 	Monster,
 	MonsterMissile,
+	Player,
+	PlayerMissile,
+	ItemRock,
+	Item,
 
 	HUD,
 	Ui,

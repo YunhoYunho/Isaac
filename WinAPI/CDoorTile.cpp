@@ -4,7 +4,6 @@
 #include "CResourceManager.h"
 #include "CRenderManager.h"
 #include "CCollider.h"
-#include "CObstacle.h"
 
 #include "CPlayer.h"
 #include "CMonster.h"
@@ -54,10 +53,6 @@ void CDoorTile::OnCollisionEnter(CCollider* pOther)
 void CDoorTile::OnCollisionStay(CCollider* pOther)
 {
 	// 문과 충돌했을 경우 처리
-	if (pOther->GetObjName() == L"플레이어")
-	{
-		CObstacle* OnCollisionStay();
-	}
 }
 
 void CDoorTile::OnCollisionExit(CCollider* pOther)

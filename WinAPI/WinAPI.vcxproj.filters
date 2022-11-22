@@ -61,11 +61,14 @@
     <Filter Include="04. Scene\Image">
       <UniqueIdentifier>{d56861a3-66a5-4925-af73-f11ab2a7fdcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Stage\Projectile">
+      <UniqueIdentifier>{f97dd69a-7c4e-4d7b-8427-c680ec459691}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03. GameObject\Stage\Door">
       <UniqueIdentifier>{5e25ccaf-9a9c-4392-afd5-7b63538655ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\Projectile">
-      <UniqueIdentifier>{f97dd69a-7c4e-4d7b-8427-c680ec459691}</UniqueIdentifier>
+    <Filter Include="03. GameObject\Stage\Item">
+      <UniqueIdentifier>{9a1ec3de-8f50-49a9-9068-83dab1e309a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,9 +213,6 @@
     <ClInclude Include="CTitleImage.h">
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
-    <ClInclude Include="CEndingImage.h">
-      <Filter>04. Scene\Image</Filter>
-    </ClInclude>
     <ClInclude Include="CMissile.h">
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClInclude>
@@ -228,14 +228,26 @@
     <ClInclude Include="CExplosion.h">
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="CObstacle.h">
-      <Filter>01. Engine\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="CPlayerHP.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CDoorTile.h">
       <Filter>01. Engine\Asset\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerHP.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CFly.h">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CTripleShot.h">
+      <Filter>03. GameObject\Stage\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CItemRock.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneLoading.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoadingImage.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +374,6 @@
     <ClCompile Include="CTitleImage.cpp">
       <Filter>04. Scene\Image</Filter>
     </ClCompile>
-    <ClCompile Include="CEndingImage.cpp">
-      <Filter>04. Scene\Image</Filter>
-    </ClCompile>
     <ClCompile Include="CMissile.cpp">
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClCompile>
@@ -380,14 +389,26 @@
     <ClCompile Include="CExplosion.cpp">
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="CObstacle.cpp">
-      <Filter>01. Engine\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlayerHP.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CDoorTile.cpp">
       <Filter>01. Engine\Asset\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerHP.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CFly.cpp">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CTripleShot.cpp">
+      <Filter>03. GameObject\Stage\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CItemRock.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneLoading.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CLoadingImage.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

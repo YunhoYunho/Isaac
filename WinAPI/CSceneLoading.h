@@ -2,15 +2,13 @@
 #include "CScene.h"
 #include "CTitleImage.h"
 
-class CTitleImage;
-
-class CSceneTitle : public CScene
+class CSceneLoading : public CScene
 {
 public:
-	CSceneTitle();
-	virtual ~CSceneTitle();
+	CSceneLoading();
+	virtual ~CSceneLoading();
 
-	CSound* pSound = RESOURCE->LoadSound(L"Title", L"Sound\\Scene\\titleScreenLoop.wav");
+	CSound* pLoading = RESOURCE->LoadSound(L"Loading", L"Sound\\Scene\\Loading.wav");
 
 private:
 	void Init()		override;

@@ -157,11 +157,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CDoorTile.h" />
-    <ClInclude Include="CEndingImage.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CExplosion.h" />
+    <ClInclude Include="CFly.h" />
     <ClInclude Include="CGameManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -170,12 +168,11 @@
     <ClInclude Include="CGroundTile.h" />
     <ClInclude Include="CImageObject.h" />
     <ClInclude Include="CInputManager.h" />
+    <ClInclude Include="CItemRock.h" />
+    <ClInclude Include="CLoadingImage.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonsterMissile.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="CObstacle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CPanel.h" />
@@ -189,6 +186,7 @@
     <ClInclude Include="CResource.h" />
     <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSceneLoading.h" />
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSceneStage01.h" />
     <ClInclude Include="CSceneTileTool.h" />
@@ -201,6 +199,7 @@
     <ClInclude Include="CTilePanel.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="CTitleImage.h" />
+    <ClInclude Include="CTripleShot.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CUIManager.h" />
     <ClInclude Include="framework.h">
@@ -234,11 +233,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CDoorTile.cpp" />
-    <ClCompile Include="CEndingImage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CExplosion.cpp" />
+    <ClCompile Include="CFly.cpp" />
     <ClCompile Include="CGameManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -247,12 +244,11 @@
     <ClCompile Include="CGroundTile.cpp" />
     <ClCompile Include="CImageObject.cpp" />
     <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="CItemRock.cpp" />
+    <ClCompile Include="CLoadingImage.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonsterMissile.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="CObstacle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CPanel.cpp" />
@@ -268,6 +264,7 @@
     <ClCompile Include="CResource.cpp" />
     <ClCompile Include="CResourceManager.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSceneLoading.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSceneStage01.cpp" />
     <ClCompile Include="CSceneTileTool.cpp" />
@@ -280,6 +277,7 @@
     <ClCompile Include="CTilePanel.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="CTitleImage.cpp" />
+    <ClCompile Include="CTripleShot.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CUIManager.cpp" />
     <ClCompile Include="WinAPI.cpp" />

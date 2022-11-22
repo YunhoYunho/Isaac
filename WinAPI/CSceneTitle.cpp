@@ -27,6 +27,8 @@ void CSceneTitle::Init()
 void CSceneTitle::Enter()
 {
 	CAMERA->FadeIn(0.25f);
+
+	SOUND->Play(pSound, 1.0f, false);
 }
 
 void CSceneTitle::Update()
@@ -38,7 +40,7 @@ void CSceneTitle::Update()
 	if (BUTTONDOWN(VK_SPACE))
 	{
 		CAMERA->FadeOut(0.25f);
-		DELAYCHANGESCENE(GroupScene::Stage01, 0.25f);
+		DELAYCHANGESCENE(GroupScene::Loading, 0.25f);
 	}
 }
 
@@ -55,6 +57,7 @@ void CSceneTitle::Render()
 
 void CSceneTitle::Exit()
 {
+	SOUND->Pause(pSound);
 }
 
 void CSceneTitle::Release()

@@ -30,7 +30,7 @@ CTile::~CTile()
 
 void CTile::Init()
 {
-	m_pImage = RESOURCE->LoadImg(L"Tile", L"Image\\Map\\Tile.png");
+	m_pImage = RESOURCE->LoadImg(L"Tile", L"Image\\Door\\BrownDoor.png");
 	m_uiImageXCount = m_pImage->GetWidth() / TILESIZE;
 	m_uiImageYCount = m_pImage->GetHeight() / TILESIZE;
 }

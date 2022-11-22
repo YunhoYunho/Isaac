@@ -3,8 +3,15 @@
 class CGroundTile : public CTile
 {
 public:
+	enum class CollisionDir { Up, Down, Left, Right, None };
+
+public:
 	CGroundTile();
 	virtual ~CGroundTile();
+
+public:
+	CollisionDir dir;
+	float		 offset;
 
 private:
 	void Init() override;
@@ -16,5 +23,8 @@ private:
 	void OnCollisionEnter(CCollider* pOther) override;
 	void OnCollisionStay(CCollider* pOther) override;
 	void OnCollisionExit(CCollider* pOther) override;
+
+public:
+	CollisionDir GetCollisionDir(CCollider* pOther);
 };
 

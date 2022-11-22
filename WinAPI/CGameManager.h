@@ -16,7 +16,11 @@ private:
 public:
 	Vector NowPlayerPos;
 	Vector PrevPlayerPos;
+
+public:
+	int PlayerHP;
 };
 
 #define GAME		CGameManager::GetInstance()
 #define PLAYERPOS	CGameManager::GetInstance()->NowPlayerPos
+#define PLAYERHP	CGameManager::GetInstance()->PlayerHP

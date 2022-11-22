@@ -3,6 +3,7 @@
 #include "CGameUI.h"
 
 class CPlayer;
+class CPlayerHP;
 
 class CSceneStage01 : public CScene
 {
@@ -12,6 +13,7 @@ public:
 
 private:
 	CPlayer* pPlayer;
+	CSound* pSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
 
 private:
 	void Init()		override;
