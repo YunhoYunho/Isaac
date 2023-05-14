@@ -8,24 +8,14 @@
 	m_layer = Layer::Monster;
 	m_strName = L"Gish";
 
+	m_curState = MonsterState::Idle;
+	fStateTimer = 0;
+
 	m_pGishLeftImage = nullptr;
 	m_pGishRightImage = nullptr;
 
-	m_vecMoveDir = Vector(0, 0);
-	m_vecLookDir = Vector(0, 0);
-
-	m_bIsMove = false;
-	m_bIsJump = false;
-	m_bIsShot = false;
-	m_bIsDead = false;
-
-	up = false;
-	down = false;
-	left = false;
-	right = false;
-
 	m_fSpeed = 50.0f;
-	m_iHP = 30;
+	m_HP = 30;
 }
 
 CGish::~CGish()
@@ -52,92 +42,26 @@ void CGish::Init()
 
 	AddComponent(m_pAnimator);
 
-	m_GishState = GishState::Move;
-
 	AddCollider(ColliderType::Rect, Vector(100, 100), Vector(0, 40));
 }
 
 void CGish::Update()
 {
-	if (m_iHP < 1)
+	TargetDist();
+
+	switch (m_curState)
 	{
-		stateGish = L"Dead";
-		RemoveCollider();
+	case MonsterState::Idle:
+			
+	case MonsterState::Move:
+
+	case MonsterState::Jump:
+
+	case MonsterState::Shot:
+			
+	case MonsterState::Dead:
 	}
-	else
-	{
-		switch (m_GishState)
-		{
-			m_vecPlayerPosition = PLAYERPOS;
 
-		case GishState::Move:
-			if (PLAYERPOS.x < m_vecPos.x)
-			{
-				stateGish = L"MoveLeft";
-				left = true;
-				right = false;
-			}
-			if (PLAYERPOS.x > m_vecPos.x)
-			{
-				stateGish = L"MoveRight";
-				left = false;
-				right = true;
-			}
-
-			if (PLAYERPOS.y < m_vecPos.y)
-			{
-				stateGish = L"MoveRight";
-				up = true;
-				down = false;
-			}
-			if (PLAYERPOS.y > m_vecPos.y)
-			{
-				stateGish = L"MoveLeft";
-				up = false;
-				down = true;
-			}
-
-			if (up) m_vecPos.y -= m_fSpeed * DT;
-			if (down) m_vecPos.y += m_fSpeed * DT;
-			if (left) m_vecPos.x -= m_fSpeed * DT;
-			if (right) m_vecPos.x += m_fSpeed * DT;
-
-		case GishState::Jump:
-			// TODO: 플레이어 위치로 순간이동 구현
-
-		case GishState::Shot:
-			if (PLAYERPOS.x < m_vecPos.x)
-			{
-				stateGish = L"ShotLeft";
-			}
-			if (PLAYERPOS.x > m_vecPos.x)
-			{
-				stateGish = L"ShotRight";
-			}
-
-			CreateMissile();
-
-		case GishState::Dead:
-			if (m_iHP < 1)
-			{
-				stateGish = L"Dead";
-
-				m_fTimer = 3.0f;
-				m_fTimer += DT;
-
-				if (m_fTimer = 0)
-				{
-					m_fTimer = 0;
-					break;
-				}
-			}
-			else
-			{
-				m_stateGish = GishState::Move;
-			}
-			break;
-		}
-	}
 	AnimatorUpdate();
 }
 
@@ -158,10 +82,10 @@ void CGish::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		m_iHP--;
+		m_HP--;
 	}
 
-	if (m_iHP < 1)
+	if (m_HP < 1)
 	{
 		m_GishState = GishState::Dead;
 	}

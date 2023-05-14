@@ -4,16 +4,6 @@
 class CImage;
 class CAnimator;
 
-enum class GishState
-{
-	Move,
-	Jump,
-	Shot,
-	Dead,
-
-	Size
-};
-
 class CGish : public CMonster
 {
 public:
@@ -25,15 +15,9 @@ private:
 	CImage* m_pGishLeftImage;
 	CImage* m_pGishRightImage;
 
-	GishState m_stateGish;
-
-	Vector m_vecMoveDir;
-	Vector m_vecLookDir;
-
-	GishState m_GishState;
 	wstring stateGish;
 
-	bool m_bIsJump;
+	float m_fRange = 0;
 
 private:
 	void Init() override;
