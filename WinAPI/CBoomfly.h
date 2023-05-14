@@ -4,14 +4,6 @@
 class CImage;
 class CAnimator;
 
-enum class BoomflyState
-{
-	Move,
-	Dead,
-
-	Size
-};
-
 class CBoomfly : public CMonster
 {
 public:
@@ -23,8 +15,6 @@ private:
 	CImage* m_pBoomflyImage;
 	CImage* m_pBoomflyDeadImage;
 
-	BoomflyState m_stateBoomfly;
-	BoomflyState m_BoomflyState;
 	wstring stateBoomfly;
 
 	CSound* pExplosion = RESOURCE->LoadSound(L"Boom", L"Sound\\Monster\\explosions.wav");

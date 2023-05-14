@@ -13,15 +13,8 @@ CBoomfly::CBoomfly()
 	m_pBoomflyImage = nullptr;
 	m_pBoomflyDeadImage = nullptr;
 
-	m_vecMoveDir = Vector(0, 0);
-	m_vecLookDir = Vector(0, -1);
-
-	m_bIsMove = false;
-	m_bIsShot = false;
-	m_bIsDead = false;
-
 	m_fSpeed = 100.0f;
-	m_iHP = 7;
+	m_HP = 7;
 	
 	up = true;
 	down = false;
@@ -48,79 +41,23 @@ void CBoomfly::Init()
 
 	AddComponent(m_pAnimator);
 
-	m_BoomflyState = BoomflyState::Move;
-
 	AddCollider(ColliderType::Rect, Vector(60, 60), Vector(0, 0));
 }
 
 void CBoomfly::Update()
 {
-	if (m_iHP < 1)
+	if (m_HP <= 0)
 	{
 		stateBoomfly = L"Dead";
-		RemoveCollider();
+		Dead();
 	}
 
 	else
 	{
-		switch (m_BoomflyState)
-		{
-		case BoomflyState::Move:
-			stateBoomfly = L"Move";
-
-			if (m_vecPos.x >= WINSIZEX)
-			{
-				left = true;
-				right = false;
-			}
-
-			if (m_vecPos.x <= 0)
-			{
-				left = false;
-				right = true;
-			}
-
-			if (m_vecPos.y >= WINSIZEY - 100)
-			{
-				up = true;
-				down = false;
-			}
-
-			if (m_vecPos.y <= 0)
-			{
-				up = false;
-				down = true;
-			}
-
-			if (up) m_vecPos.y -= m_fSpeed * DT;
-			if (down) m_vecPos.y += m_fSpeed * DT;
-			if (left) m_vecPos.x -= m_fSpeed * DT;
-			if (right) m_vecPos.x += m_fSpeed * DT;
-
-		case BoomflyState::Dead:
-			if (m_iHP < 1)
-			{
-				stateBoomfly = L"Dead";
-
-				if (m_fTimer = 0)
-				{
-					DELETEOBJECT(this);
-				}
-
-				m_fTimer += DT;
-
-				if (m_fTimer > 1.0f)
-				{
-					m_fTimer = 0;
-				}
-			}
-			else
-			{
-				m_BoomflyState = BoomflyState::Move;
-			}
-			break;
-		}
+		stateBoomfly = L"Move";
+		PingPong();
 	}
+
 	AnimatorUpdate();
 }
 
@@ -141,12 +78,11 @@ void CBoomfly::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		m_iHP--;
+		m_HP--;
 	}
 
-	if (m_iHP < 1)
+	if (m_HP <= 0)
 	{
-		m_BoomflyState = BoomflyState::Dead;
 		SOUND->Play(pExplosion, 0.8f, false);
 	}
 }
