@@ -4,15 +4,6 @@
 class CImage;
 class CAnimator;
 
-enum class BabyState
-{
-	Move,
-	Shot,
-	Dead,
-
-	Size
-};
-
 class CBaby : public CMonster
 {
 public:
@@ -24,10 +15,9 @@ private:
 	CImage* m_pBabyImage;
 	CImage* m_pBabyDeadImage;
 
-	BabyState m_stateBaby;
-
-	BabyState m_BabyState;
 	wstring stateBaby;
+
+	float m_fRange = 0;
 
 private:
 	void Init() override;

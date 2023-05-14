@@ -11,15 +11,10 @@ CBaby::CBaby()
 	m_pBabyImage = nullptr;
 	m_pBabyDeadImage = nullptr;
 
-	m_vecMoveDir = Vector(0, 0);
-	m_vecLookDir = Vector(0, 0);
-
-	m_bIsMove = false;
-	m_bIsShot = false;
-	m_bIsDead = false;
-
+	m_fRange = 500.0f;
 	m_fSpeed = 30.0f;
-	m_iHP = 10;
+	m_HP = 10;
+	m_fTimer = 0;
 }
 
 CBaby::~CBaby()
@@ -43,72 +38,32 @@ void CBaby::Init()
 
 	AddComponent(m_pAnimator);
 
-	m_BabyState = BabyState::Move;
-
 	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 }
 
 void CBaby::Update()
 {
-	if (m_iHP < 1)
+	if (m_HP <= 0)
 	{
 		stateBaby = L"Dead";
-		RemoveCollider();
+		Dead();
 	}
-
 	else
 	{
-		switch (m_BabyState)
+		TargetDist();
+
+		if (targetDist <= m_fRange * m_fRange)
 		{
-			m_vecPlayerPosition = PLAYERPOS;
-
-		case BabyState::Move:
-			stateBaby = L"Move";
-
-			if (PLAYERPOS.x < m_vecPos.x)
-			{
-				left = true;
-				right = false;
-			}
-
-			if (PLAYERPOS.x > m_vecPos.x)
-			{
-				left = false;
-				right = true;
-			}
-
-			if (PLAYERPOS.y < m_vecPos.y)
-			{
-				up = true;
-				down = false;
-			}
-
-			if (PLAYERPOS.y > m_vecPos.y)
-			{
-				up = false;
-				down = true;
-			}
-
-			if (up) m_vecPos.y -= m_fSpeed * DT;
-			if (down) m_vecPos.y += m_fSpeed * DT;
-			if (left) m_vecPos.x -= m_fSpeed * DT;
-			if (right) m_vecPos.x += m_fSpeed * DT;
-
-		case BabyState::Shot:
+			Logger::Debug(L"공격중!");
 			stateBaby = L"Shot";
 			CreateMissile();
+		}
 
-		case BabyState::Dead:
-
-			if (m_iHP < 1)
-			{
-				stateBaby = L"Dead";
-			}
-			else
-			{
-				m_BabyState = BabyState::Move;
-			}
-			break;
+		else
+		{
+			Logger::Debug(L"추격중!");
+			stateBaby = L"Move";
+			Trace();
 		}
 	}
 	AnimatorUpdate();
@@ -131,12 +86,7 @@ void CBaby::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		m_iHP--;
-	}
-
-	if (m_iHP < 1)
-	{
-		m_BabyState = BabyState::Dead;
+		m_HP--;
 	}
 }
 
