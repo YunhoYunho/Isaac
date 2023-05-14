@@ -77,3 +77,29 @@ enum class TypeTile
 
 	Size,
 };
+
+//========================================
+//##				ป๓ลย				##
+//========================================
+
+enum class PlayerState
+{
+	Idle,
+	Move,
+	Shot,
+	TakeHit,
+	Dead,
+
+	Size,
+};
+
+enum class MonsterState
+{
+	Idle,
+	Move,
+	Jump,
+	Shot,
+	Dead,
+
+	Size,
+};

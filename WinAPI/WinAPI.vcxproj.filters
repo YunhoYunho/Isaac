@@ -241,12 +241,15 @@
       <Filter>03. GameObject\Stage\Item</Filter>
     </ClInclude>
     <ClInclude Include="CItemRock.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CSceneLoading.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>03. GameObject\Stage\Item</Filter>
     </ClInclude>
     <ClInclude Include="CLoadingImage.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneLoading.h">
+      <Filter>04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -402,12 +405,15 @@
       <Filter>03. GameObject\Stage\Item</Filter>
     </ClCompile>
     <ClCompile Include="CItemRock.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CSceneLoading.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>03. GameObject\Stage\Item</Filter>
     </ClCompile>
     <ClCompile Include="CLoadingImage.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneLoading.cpp">
+      <Filter>04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
