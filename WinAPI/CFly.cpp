@@ -7,15 +7,11 @@ CFly::CFly()
 	m_vecScale = Vector(100, 100);
 	m_layer = Layer::Monster;
 	m_strName = L"Fly";
-
+	
 	m_pFlyImage = nullptr;
 
-	m_bIsMove = false;
-	m_bIsShot = false;
-	m_bIsDead = false;
-
 	m_fSpeed = 30.0f;
-	m_iHP = 10;
+	m_HP = 10;
 }
 
 CFly::~CFly()
@@ -36,68 +32,24 @@ void CFly::Init()
 
 	AddComponent(m_pAnimator);
 
-	m_FlyState = FlyState::Move;
-
 	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 }
 
 void CFly::Update()
 {
-	if (m_iHP < 1)
+	TargetPos();
+
+	if (m_HP <= 0)
 	{
 		stateFly = L"Dead";
-		RemoveCollider();
+		Dead();
 	}
 	else
 	{
-		switch (m_FlyState)
-		{
-			m_vecPlayerPosition = PLAYERPOS;
-
-		case FlyState::Move:
-			stateFly = L"Move";
-
-			if (PLAYERPOS.x < m_vecPos.x)
-			{
-				left = true;
-				right = false;
-			}
-
-			if (PLAYERPOS.x > m_vecPos.x)
-			{
-				left = false;
-				right = true;
-			}
-
-			if (PLAYERPOS.y < m_vecPos.y)
-			{
-				up = true;
-				down = false;
-			}
-			if (PLAYERPOS.y > m_vecPos.y)
-			{
-				up = false;
-				down = true;
-			}
-
-			if (up) m_vecPos.y -= m_fSpeed * DT;
-			if (down) m_vecPos.y += m_fSpeed * DT;
-			if (left) m_vecPos.x -= m_fSpeed * DT;
-			if (right) m_vecPos.x += m_fSpeed * DT;
-
-		case FlyState::Dead:
-
-			if (m_iHP < 1)
-			{
-				stateFly = L"Dead";
-			}
-			else
-			{
-				m_FlyState = FlyState::Move;
-			}
-			break;
-		}
+		stateFly = L"Move";
+		Trace();
 	}
+
 	AnimatorUpdate();
 }
 
@@ -118,12 +70,7 @@ void CFly::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		m_iHP--;
-	}
-
-	if (m_iHP < 1)
-	{
-		m_FlyState = FlyState::Dead;
+		m_HP--;
 	}
 }
 

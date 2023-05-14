@@ -4,14 +4,6 @@
 class CImage;
 class CAnimator;
 
-enum class FlyState
-{
-	Move,
-	Dead,
-
-	Size
-};
-
 class CFly : public CMonster
 {
 public:
@@ -22,9 +14,6 @@ private:
 	CAnimator* m_pAnimator;
 	CImage* m_pFlyImage;
 
-	FlyState m_stateFly;
-
-	FlyState m_FlyState;
 	wstring stateFly;
 
 private:
