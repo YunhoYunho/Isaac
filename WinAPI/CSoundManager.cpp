@@ -60,7 +60,7 @@ void CSoundManager::Pause(CSound* pSound)
 		return;
 
 	FMOD_RESULT result = pSound->m_pChannel->setPaused(true);
-	assert(FMOD_OK == result && L"SetPaused failed");
+	//assert(FMOD_OK == result && L"SetPaused failed");
 }
 
 void CSoundManager::Resume(CSound* pSound)

@@ -14,13 +14,12 @@ private:
 	void Release();
 
 public:
-	Vector NowPlayerPos;
-	Vector PrevPlayerPos;
+	Vector PlayerPos;
 
 public:
 	int PlayerHP;
 };
 
 #define GAME		CGameManager::GetInstance()
-#define PLAYERPOS	CGameManager::GetInstance()->NowPlayerPos
+#define PLAYERPOS	CGameManager::GetInstance()->PlayerPos
 #define PLAYERHP	CGameManager::GetInstance()->PlayerHP

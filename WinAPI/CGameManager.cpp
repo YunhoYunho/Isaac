@@ -3,7 +3,6 @@
 
 CGameManager::CGameManager()
 {
-	NowPlayerPos = {};
 }
 
 CGameManager::~CGameManager()
