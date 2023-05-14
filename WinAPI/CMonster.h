@@ -15,19 +15,36 @@ public:
 	bool left;
 	bool right;
 
-	int m_iHP;
+	int m_HP;
 
 	float m_fSpeed = 200.0f;
 	float m_fTimer = 0;
+	float fCooltime;
+	float m_fRange = 0;
+
+	float targetDist;
+
 public:
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
-	Vector m_vecPlayerPosition;
+	Vector m_vecPlayerPos;
 
 protected:
+	void Dead();
+	void Trace();
+	void PingPong();
+
+	void TargetDist();
+	void TargetPos();
 	void CreateMissile();
 	float m_fShotTimer;
 	float m_fShotSpeed;
+
+protected:
+	MonsterState m_curState;
+	MonsterState m_preState;
+	void ChangeState(MonsterState state);
+	float fStateTimer;
 
 private:
 	void Init() override;
