@@ -41,9 +41,9 @@ void CSceneStage01::Init()
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);
 
-	CGish* pGish = new CGish();
+	/*CGish* pGish = new CGish();
 	pGish->SetPos(500, WINSIZEY * 0.5f);
-	AddGameObject(pGish);
+	AddGameObject(pGish);*/
 
 	CBaby* pBaby = new CBaby();
 	pBaby->SetPos(300, WINSIZEY * 0.5f);
