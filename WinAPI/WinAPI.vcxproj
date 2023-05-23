@@ -165,7 +165,7 @@
     </ClInclude>
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CGish.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CGroundTile.h" />
     <ClInclude Include="CImageObject.h" />
@@ -190,13 +190,15 @@
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneLoading.h" />
     <ClInclude Include="CSceneManager.h" />
+    <ClInclude Include="CSceneSLoading.h" />
     <ClInclude Include="CSceneStage01.h" />
+    <ClInclude Include="CSceneStageBoss.h" />
     <ClInclude Include="CSceneTileTool.h" />
     <ClInclude Include="CSceneTitle.h" />
     <ClInclude Include="CImage.h" />
+    <ClInclude Include="CSLoadingImage.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CSoundManager.h" />
-    <ClInclude Include="CState.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTileButton.h" />
     <ClInclude Include="CTilePanel.h" />
@@ -244,7 +246,7 @@
     </ClCompile>
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGish.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CGroundTile.cpp" />
     <ClCompile Include="CImageObject.cpp" />
@@ -271,13 +273,15 @@
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneLoading.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
+    <ClCompile Include="CSceneSLoading.cpp" />
     <ClCompile Include="CSceneStage01.cpp" />
+    <ClCompile Include="CSceneStageBoss.cpp" />
     <ClCompile Include="CSceneTileTool.cpp" />
     <ClCompile Include="CSceneTitle.cpp" />
     <ClCompile Include="CImage.cpp" />
+    <ClCompile Include="CSLoadingImage.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
-    <ClCompile Include="CState.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTileButton.cpp" />
     <ClCompile Include="CTilePanel.cpp" />

@@ -70,6 +70,9 @@
     <Filter Include="03. GameObject\Stage\Item">
       <UniqueIdentifier>{9a1ec3de-8f50-49a9-9068-83dab1e309a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Stage\Monster\Boss">
+      <UniqueIdentifier>{453285f8-3058-44cc-b448-ca73a40921d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -198,9 +201,6 @@
     <ClInclude Include="CMonster.h">
       <Filter>03. GameObject\Stage\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="CGish.h">
-      <Filter>03. GameObject\Stage\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="CGameManager.h">
       <Filter>01. Engine\Manager</Filter>
     </ClInclude>
@@ -249,8 +249,17 @@
     <ClInclude Include="CSceneLoading.h">
       <Filter>04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CState.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CGish.h">
+      <Filter>03. GameObject\Stage\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CSLoadingImage.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneSLoading.h">
+      <Filter>04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneStageBoss.h">
+      <Filter>04. Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +371,6 @@
     <ClCompile Include="CMonster.cpp">
       <Filter>03. GameObject\Stage\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="CGish.cpp">
-      <Filter>03. GameObject\Stage\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="CGameManager.cpp">
       <Filter>01. Engine\Manager</Filter>
     </ClCompile>
@@ -413,8 +419,17 @@
     <ClCompile Include="CSceneLoading.cpp">
       <Filter>04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CState.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="CGish.cpp">
+      <Filter>03. GameObject\Stage\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CSLoadingImage.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneSLoading.cpp">
+      <Filter>04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneStageBoss.cpp">
+      <Filter>04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

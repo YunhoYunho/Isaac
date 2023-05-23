@@ -23,15 +23,34 @@ extern HWND hWnd;
 //##			°ÔÀÓ¾À ±×·ì				##
 //========================================
 
+// Title - TileTool - StageLoading - Stage01 - BossLoading - BossStage
+
+//enum class GroupScene
+//{
+//	Title,
+//
+//	TileTool,
+//
+//	Loading,
+//
+//	Stage01,
+//
+//	Size,
+//};
+
 enum class GroupScene
 {
 	Title,
 
 	TileTool,
 
-	Loading,
+	StageLoading,
 
 	Stage01,
+
+	Loading,
+
+	StageBoss,
 
 	Size,
 };
@@ -95,11 +114,9 @@ enum class PlayerState
 
 enum class MonsterState
 {
-	Idle,
+	Ready,
 	Move,
-	Jump,
 	Shot,
-	Dead,
 
 	Size,
 };

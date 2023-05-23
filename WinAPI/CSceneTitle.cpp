@@ -37,10 +37,11 @@ void CSceneTitle::Update()
 	{
 		CHANGESCENE(GroupScene::TileTool);
 	}
+
 	if (BUTTONDOWN(VK_SPACE))
 	{
 		CAMERA->FadeOut(0.25f);
-		DELAYCHANGESCENE(GroupScene::Loading, 0.25f);
+		DELAYCHANGESCENE(GroupScene::StageLoading, 0.25f);
 	}
 }
 

@@ -41,11 +41,11 @@ void CSceneStage01::Init()
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);
 
-	/*CGish* pGish = new CGish();
+	CGish* pGish = new CGish();
 	pGish->SetPos(500, WINSIZEY * 0.5f);
-	AddGameObject(pGish);*/
+	AddGameObject(pGish);
 
-	CBaby* pBaby = new CBaby();
+	/*CBaby* pBaby = new CBaby();
 	pBaby->SetPos(300, WINSIZEY * 0.5f);
 	AddGameObject(pBaby);
 
@@ -59,13 +59,13 @@ void CSceneStage01::Init()
 
 	CFly* pFly2 = new CFly();
 	pFly2->SetPos(800, WINSIZEY * 0.3f);
-	AddGameObject(pFly2);
+	AddGameObject(pFly2);*/
 
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
 	CImageObject* pBackGround = new CImageObject;
-	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Isaac_Map.png"));
+	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Isaac_StageMap.png"));
 	AddGameObject(pBackGround);
 
 	CPlayerHP* pPlayerHPImage = new CPlayerHP;
@@ -84,7 +84,7 @@ void CSceneStage01::Init()
 void CSceneStage01::Enter()
 {
 	CAMERA->FadeIn(0.25f);
-	LoadTile(GETPATH + L"Tile\\Isaac_Map_tile");
+	LoadTile(GETPATH + L"Tile\\Isaac_StageMap_tile");
 
 	SOUND->Play(pSound, 0.6f, false);
 }
@@ -129,7 +129,6 @@ void CSceneStage01::Exit()
 	}
 	// 초기화 후 다시 시작
 	Init();
-
 }
 
 void CSceneStage01::Release()
