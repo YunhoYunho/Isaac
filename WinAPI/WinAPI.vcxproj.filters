@@ -64,9 +64,6 @@
     <Filter Include="03. GameObject\Stage\Projectile">
       <UniqueIdentifier>{f97dd69a-7c4e-4d7b-8427-c680ec459691}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\Door">
-      <UniqueIdentifier>{5e25ccaf-9a9c-4392-afd5-7b63538655ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\Stage\Item">
       <UniqueIdentifier>{9a1ec3de-8f50-49a9-9068-83dab1e309a5}</UniqueIdentifier>
     </Filter>
@@ -222,14 +219,8 @@
     <ClInclude Include="CPlayerMissile.h">
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="CDoor.h">
-      <Filter>03. GameObject\Stage\Door</Filter>
-    </ClInclude>
     <ClInclude Include="CExplosion.h">
       <Filter>03. GameObject\Stage\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="CDoorTile.h">
-      <Filter>01. Engine\Asset\Tile</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerHP.h">
       <Filter>04. Scene\Image</Filter>
@@ -392,14 +383,8 @@
     <ClCompile Include="CPlayerMissile.cpp">
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="CDoor.cpp">
-      <Filter>03. GameObject\Stage\Door</Filter>
-    </ClCompile>
     <ClCompile Include="CExplosion.cpp">
       <Filter>03. GameObject\Stage\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="CDoorTile.cpp">
-      <Filter>01. Engine\Asset\Tile</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerHP.cpp">
       <Filter>04. Scene\Image</Filter>

@@ -25,19 +25,6 @@ extern HWND hWnd;
 
 // Title - TileTool - StageLoading - Stage01 - BossLoading - BossStage
 
-//enum class GroupScene
-//{
-//	Title,
-//
-//	TileTool,
-//
-//	Loading,
-//
-//	Stage01,
-//
-//	Size,
-//};
-
 enum class GroupScene
 {
 	Title,
@@ -68,7 +55,6 @@ enum class Layer
 	Title,
 	GroundTile,
 	Obstacle,
-	Door,
 	Missile,
 	Monster,
 	MonsterMissile,
@@ -92,7 +78,6 @@ enum class TypeTile
 	Ground,
 	Platform,
 	Wall,
-	door,
 
 	Size,
 };
@@ -108,6 +93,7 @@ enum class PlayerState
 	Shot,
 	TakeHit,
 	Dead,
+	GetItem,
 
 	Size,
 };

@@ -5,7 +5,6 @@
 #include "CGameObject.h"
 #include "CTile.h"
 #include "CGroundTile.h"
-#include "CDoorTile.h"
 
 CScene::CScene()
 {
@@ -183,15 +182,6 @@ void CScene::LoadTile(const wstring& strPath)
 		else if (TypeTile::Ground == loadTile.GetType())
 		{
 			CGroundTile* newTile = new CGroundTile;
-			newTile->SetTilePos(loadTile.GetTilePosX(), loadTile.GetTilePosY());
-			newTile->SetTileIndex(loadTile.GetTileIndex());
-
-			AddGameObject(newTile);
-		}
-
-		else if (TypeTile::door == loadTile.GetType())
-		{
-			CDoorTile* newTile = new CDoorTile;
 			newTile->SetTilePos(loadTile.GetTilePosX(), loadTile.GetTilePosY());
 			newTile->SetTileIndex(loadTile.GetTileIndex());
 
