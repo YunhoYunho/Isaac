@@ -13,8 +13,6 @@ CMissile::CMissile()
 	m_fVelocity = 300;
 	m_layer = Layer::Missile;
 	m_strName = L"미사일";
-
-	m_fTimer = 0;
 }
 
 CMissile::~CMissile()
@@ -27,6 +25,10 @@ void CMissile::Init()
 }
 
 void CMissile::Update()
+{
+}
+
+void CMissile::Fire()
 {
 	m_vecPos += m_vecDir * m_fVelocity * DT;
 
@@ -53,7 +55,6 @@ void CMissile::Release()
 void CMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
-	DELETEOBJECT(this);
 }
 
 void CMissile::SetDir(Vector dir)

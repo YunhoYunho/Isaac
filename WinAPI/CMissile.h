@@ -21,6 +21,9 @@ private:
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 
+protected:
+	void Fire();
+
 public:
 	void SetDir(Vector dir);
 	void SetVelocity(float velocity);
