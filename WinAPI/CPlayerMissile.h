@@ -11,15 +11,16 @@ private:
 	CAnimator* m_pAnimator;
 	CImage* m_pTearsImage;
 
+	float m_fCooltime;
+	bool m_bIsHit;
+
 private:
 	void Init() override;
 	void Update() override;
 	void Render() override;
 	void Release() override;
 
-	void OnCollisionEnter(CCollider* pOtherCollider) override;
+	void CheckDestroyMissile();
 
-public:
-	void SetDir(Vector dir);
-	void SetVelocity(float velocity);
+	void OnCollisionEnter(CCollider* pOtherCollider) override;
 };

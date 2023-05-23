@@ -11,7 +11,8 @@ CPlayerMissile::CPlayerMissile()
 
 	m_pTearsImage = nullptr;
 
-	m_fTimer = 1.0f;
+	m_fCooltime = 0;
+	m_bIsHit = false;
 }
 
 CPlayerMissile::~CPlayerMissile()
@@ -25,7 +26,7 @@ void CPlayerMissile::Init()
 	m_pAnimator = new CAnimator;
 
 	m_pAnimator->CreateAnimation(L"None", m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0, 1);
-	m_pAnimator->CreateAnimation(L"Hit",  m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0.1f, 14, false);
+	m_pAnimator->CreateAnimation(L"Hit",  m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0.05f, 14, false);
 	m_pAnimator->Play(L"None");
 
 	AddComponent(m_pAnimator);
@@ -35,40 +36,45 @@ void CPlayerMissile::Init()
 
 void CPlayerMissile::Update()
 {
-	m_vecPos += m_vecDir * m_fVelocity * DT;
-
-	// 화면밖으로 나갈경우 삭제
-	if (m_vecPos.x < 0 ||
-		m_vecPos.x > WINSIZEX ||
-		m_vecPos.y < 0 ||
-		m_vecPos.y > WINSIZEY)
-		DELETEOBJECT(this);
+	Fire();
+	CheckDestroyMissile();
 }
 
 void CPlayerMissile::Render()
 {
-	RENDER->FrameCircle(
-		m_vecPos.x,
-		m_vecPos.y,
-		m_vecScale.x);
 }
 
 void CPlayerMissile::Release()
 {
 }
 
+void CPlayerMissile::CheckDestroyMissile()
+{
+	if (true == m_bIsHit)
+	{
+		m_fCooltime += DT;
+
+		if (m_fCooltime > 0.7f)
+		{
+			DELETEOBJECT(this);
+			Logger::Debug(L"벽에 부딪혀 눈물 삭제");
+		}
+	}
+}
+
 void CPlayerMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
-	DELETEOBJECT(this);
-}
+	if (pOtherCollider->GetObjName() == L"Wall")
+	{
+		m_pAnimator->Play(L"Hit");
+		m_fVelocity = 0;
+		m_bIsHit = true;
+	}
 
-void CPlayerMissile::SetDir(Vector dir)
-{
-	m_vecDir = dir.Normalized();
-}
-
-void CPlayerMissile::SetVelocity(float velocity)
-{
-	m_fVelocity = velocity;
+	if (pOtherCollider->GetObjName() == L"Baby" || pOtherCollider->GetObjName() == L"Boomfly"
+		|| pOtherCollider->GetObjName() == L"Gish" || pOtherCollider->GetObjName() == L"MonsterMissile"
+		|| pOtherCollider->GetObjName() == L"Fly")
+	{
+		DELETEOBJECT(this);
+	}
 }

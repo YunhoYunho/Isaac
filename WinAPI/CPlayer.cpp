@@ -24,19 +24,13 @@ CPlayer::CPlayer()
 	m_playerState = PlayerState::Idle;
 
 	m_pBodyImage = nullptr;
-
 	m_pHeadImage = nullptr;
 	m_pShotImage = nullptr;
-
 	m_pHurtImage = nullptr;
 	m_pDeadImage = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
-	m_bIsMove = false;
-	m_bIsShot = false;
-	m_bIsHurt = false;
-	m_bIsDead = false;
 
 	fCooltime = 0;
 	m_HP = 3;
@@ -55,6 +49,7 @@ void CPlayer::Init()
 												
 	m_pHurtImage = RESOURCE->LoadImg(L"PlayerHurt", L"Image\\Unit\\IsaacHurt.png");
 	m_pDeadImage = RESOURCE->LoadImg(L"PlayerDead", L"Image\\Unit\\IsaacDead.png");
+	m_pGetItemImage = RESOURCE->LoadImg(L"PlayerGetItem", L"Image\\Unit\\IsaacGetItem.png");
 
 	m_pAnimatorBody = new CAnimator;
 	m_pAnimatorHead = new CAnimator;
@@ -79,9 +74,11 @@ void CPlayer::Init()
 	m_pAnimatorHead->CreateAnimation(L"ShotDown", m_pShotImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.2f, 2);
 	m_pAnimatorHead->CreateAnimation(L"ShotLeft", m_pShotImage, Vector(462.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.2f, 2);
 
-	m_pAnimatorHead->CreateAnimation(L"TakeHit", m_pHurtImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0, 1, false);
+	m_pAnimatorHead->CreateAnimation(L"TakeHit", m_pHurtImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.1f, 10, false);
 
 	m_pAnimatorHead->CreateAnimation(L"Dead", m_pDeadImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.2f, 5, false);
+
+	m_pAnimatorHead->CreateAnimation(L"GetItem", m_pGetItemImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0, 1, false);
 
 	m_pAnimatorBody->CreateAnimation(L"None", m_pDeadImage, Vector(0.f, 0.f), Vector(1.f, 1.f), Vector(1.f, 0.f), 0, 1, false);
 
@@ -104,17 +101,17 @@ void CPlayer::IdleUpdate()
 		stateHead = L"HeadLeft";
 		stateBody = L"BodyIdleLeft";
 	}
-	else if (GetLookDir().x == 1)
+	else if (GetLookDir().x == +1)
 	{
 		stateHead = L"HeadRight";
 		stateBody = L"BodyIdleRight";
 	}
-	if (GetLookDir().y == 1)
+	if (GetLookDir().y == -1)
 	{
 		stateHead = L"HeadUp";
 		stateBody = L"BodyIdleUp";
 	}
-	else if (GetLookDir().y == -1)
+	else if (GetLookDir().y == +1)
 	{
 		stateHead = L"HeadDown";
 		stateBody = L"BodyIdleDown";
@@ -128,12 +125,10 @@ void CPlayer::MoveUpdate()
 
 	if (BUTTONSTAY('A'))
 	{
-		m_vecPos.x -= m_fSpeed * DT;
 		m_vecMoveDir.x = -1;
 	}
 	else if (BUTTONSTAY('D'))
 	{
-		m_vecPos.x += m_fSpeed * DT;
 		m_vecMoveDir.x = +1;
 	}
 	else
@@ -143,18 +138,18 @@ void CPlayer::MoveUpdate()
 
 	if (BUTTONSTAY('W'))
 	{
-		m_vecPos.y -= m_fSpeed * DT;
-		m_vecMoveDir.y = +1;
+		m_vecMoveDir.y = -1;
 	}
 	else if (BUTTONSTAY('S'))
 	{
-		m_vecPos.y += m_fSpeed * DT;
-		m_vecMoveDir.y = -1;
+		m_vecMoveDir.y = +1;
 	}
 	else
 	{
 		m_vecMoveDir.y = 0;
 	}
+
+	m_vecPos += m_vecMoveDir.Normalized() * m_fSpeed * DT;
 
 	MoveState();
 }
@@ -164,8 +159,6 @@ void CPlayer::ShotUpdate()
 	if (BUTTONSTAY(VK_LEFT) || BUTTONSTAY(VK_RIGHT) || BUTTONSTAY(VK_UP) || BUTTONSTAY(VK_DOWN))
 	{
 		CreateMissile();
-
-
 	}
 
 	else
@@ -181,9 +174,13 @@ void CPlayer::TakeHitUpdate()
 	stateHead = L"TakeHit";
 	stateBody = L"None";
 
+	RemoveCollider();
+
 	if (fCooltime > 0.5f)
 	{
 		m_playerState = PlayerState::Idle;
+		AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
+		fCooltime = 0;
 	}
 
 	if (BUTTONDOWN('Y'))
@@ -205,102 +202,18 @@ void CPlayer::DeadUpdate()
 	}
 }
 
-void CPlayer::Update()
+void CPlayer::GetItemUpdate()
 {
-	PlayerPos();
-	PlayerHP();
+	fCooltime += DT;
 
-	if (m_HP <= 0)
+	stateHead = L"GetItem";
+	stateBody = L"None";
+
+	if (fCooltime > 1.0f)
 	{
-		stateBody = L"None";
-		stateHead = L"Dead";
-		RemoveCollider();
+		m_playerState = PlayerState::Idle;
+		fCooltime = 0;
 	}
-	
-	else
-	{
-		switch (m_playerState)
-		{
-		case PlayerState::Idle:
-			IdleUpdate();
-		case PlayerState::Move:
-			MoveUpdate();
-		case PlayerState::Shot:
-			ShotUpdate();
-			break;
-		case PlayerState::TakeHit:
-			TakeHitUpdate();
-			break;
-		case PlayerState::Dead:
-			DeadUpdate();
-			break;
-		}
-	}
-
-	AnimatorUpdate();
-}
-
-void CPlayer::Render()
-{
-}
-
-void CPlayer::Release()
-{
-}
-
-void CPlayer::HeadLookDir()
-{
-}
-
-void CPlayer::BodyLookDir()
-{
-}
-
-void CPlayer::AnimatorUpdate()
-{
-	m_pAnimatorBody->Play(stateBody, false);
-	m_pAnimatorHead->Play(stateHead, false);
-}
-
-void CPlayer::CreateMissile()
-{
-	Logger::Debug(L"固荤老 积己");
-
-	if (m_fTimer == 0)
-	{
-		CPlayerMissile* pMissile = new CPlayerMissile();
-		pMissile->SetPos(m_vecPos);
-
-		if (BUTTONSTAY(VK_LEFT))
-		{
-			pMissile->SetDir(Vector(-1, 0));
-		}
-
-		if (BUTTONSTAY(VK_RIGHT))
-		{
-			pMissile->SetDir(Vector(1, 0));
-		}
-
-		if (BUTTONSTAY(VK_UP))
-		{
-			pMissile->SetDir(Vector(0, -1));
-		}
-
-		if (BUTTONSTAY(VK_DOWN))
-		{
-			pMissile->SetDir(Vector(0, 1));
-		}
-		ADDOBJECT(pMissile);
-	}
-
-	m_fTimer += DT;
-
-	if (m_fTimer > 0.25f)
-	{
-		m_fTimer = 0;
-	}
-
-	ShotState();
 }
 
 void CPlayer::MoveState()
@@ -312,7 +225,6 @@ void CPlayer::MoveState()
 	else if (BUTTONSTAY('D'))
 	{
 		stateBody = L"BodyRight";
-
 	}
 
 	if (BUTTONSTAY('W'))
@@ -349,6 +261,108 @@ void CPlayer::ShotState()
 	}
 }
 
+void CPlayer::Update()
+{
+	PlayerPos();
+	PlayerHP();
+
+	if (m_HP <= 0)
+	{
+		stateBody = L"None";
+		stateHead = L"Dead";
+		RemoveCollider();
+	}
+	
+	else
+	{
+		switch (m_playerState)
+		{
+		case PlayerState::Idle:
+			IdleUpdate();
+		case PlayerState::Move:
+			MoveUpdate();
+		case PlayerState::Shot:
+			ShotUpdate();
+			break;
+		case PlayerState::TakeHit:
+			TakeHitUpdate();
+			break;
+		case PlayerState::Dead:
+			DeadUpdate();
+			break;
+		case PlayerState::GetItem:
+			GetItemUpdate();
+			break;
+		}
+	}
+
+	AnimatorUpdate();
+}
+
+void CPlayer::Render()
+{
+}
+
+void CPlayer::Release()
+{
+}
+
+void CPlayer::AnimatorUpdate()
+{
+	m_pAnimatorBody->Play(stateBody, false);
+	m_pAnimatorHead->Play(stateHead, false);
+}
+
+void CPlayer::CreateMissile()
+{
+	Logger::Debug(L"固荤老 积己");
+
+	if (m_fTimer == 0)
+	{
+		NormalShot();
+	}
+
+	m_fTimer += DT;
+
+	if (m_fTimer > 0.25f)
+	{
+		m_fTimer = 0;
+	}
+
+	ShotState();
+}
+
+void CPlayer::NormalShot()
+{
+	CPlayerMissile* pMissile = new CPlayerMissile();
+	pMissile->SetPos(m_vecPos);
+
+	if (BUTTONSTAY(VK_LEFT))
+	{
+		pMissile->SetDir(Vector(-1, 0));
+	}
+
+	if (BUTTONSTAY(VK_RIGHT))
+	{
+		pMissile->SetDir(Vector(1, 0));
+	}
+
+	if (BUTTONSTAY(VK_UP))
+	{
+		pMissile->SetDir(Vector(0, -1));
+	}
+
+	if (BUTTONSTAY(VK_DOWN))
+	{
+		pMissile->SetDir(Vector(0, 1));
+	}
+	ADDOBJECT(pMissile);
+}
+
+void CPlayer::TripleShot()
+{
+}
+
 Vector CPlayer::GetLookDir()
 {
 	return m_vecLookDir;
@@ -364,10 +378,6 @@ void CPlayer::SetMoveDir(Vector vecMoveDir)
 	m_vecMoveDir = vecMoveDir;
 }
 
-void CPlayer::SetStateName(wstring strState)
-{
-}
-
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Baby" || pOtherCollider->GetObjName() == L"Boomfly"
@@ -377,9 +387,26 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		m_HP--;
 		m_playerState = PlayerState::TakeHit;
 
+		m_fTimer += DT;
+
 		if (m_HP > 0)
 		{
 			SOUND->Play(pHurt, 1.0f, false);
+
+
+			if (m_fTimer = 2.0f)
+			{
+				SOUND->Stop(pHurt);
+				m_fTimer = 0;
+			}
+		}
+
+		RemoveCollider();
+
+		if (m_fTimer > 2.0f)
+		{
+			AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
+			m_fTimer = 0;
 		}
 	}
 
@@ -398,6 +425,21 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 
 		if (m_fTimer > 1.0f)
 		{
+			m_fTimer = 0;
+		}
+	}
+
+	if (pOtherCollider->GetObjName() == L"TripleShot")
+	{
+		m_playerState = PlayerState::GetItem;
+
+		//SOUND->Play(pGetItem, 1.0f, false);
+
+		m_fTimer += DT;
+
+		if (m_fTimer = 2.0f)
+		{
+			//SOUND->Stop(pGetItem);
 			m_fTimer = 0;
 		}
 	}
@@ -420,4 +462,3 @@ void CPlayer::PlayerHP()
 {
 	PLAYERHP = m_HP;
 }
-
