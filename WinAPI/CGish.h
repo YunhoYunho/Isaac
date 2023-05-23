@@ -15,9 +15,23 @@ private:
 	CImage* m_pGishLeftImage;
 	CImage* m_pGishRightImage;
 
-	wstring stateGish;
+	wstring state = L"MoveLeft";
+	MonsterState m_gishState;
 
-	float m_fRange = 0;
+private:
+	void ActionUpdate();
+	void ChangeUpdate();
+
+	void ReadyUpdate();
+	void MoveUpdate();
+	void ShotUpdate();
+	void JumpUpdate();
+
+	void MoveState();
+	void ShotState();
+
+	void CheckDir();
+	bool targetDir;
 
 private:
 	void Init() override;

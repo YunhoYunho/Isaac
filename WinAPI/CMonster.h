@@ -6,10 +6,6 @@ public:
 	CMonster();
 	virtual ~CMonster();
 
-	bool m_bIsMove;
-	bool m_bIsShot;
-	bool m_bIsDead;
-
 	bool up;
 	bool down;
 	bool left;
@@ -29,7 +25,7 @@ public:
 	Vector m_vecLookDir;
 	Vector m_vecPlayerPos;
 
-protected:
+public:
 	void Dead();
 	void Trace();
 	void PingPong();
@@ -40,12 +36,11 @@ protected:
 	float m_fShotTimer;
 	float m_fShotSpeed;
 
-protected:
-	MonsterState m_curState;
-	MonsterState m_preState;
-	void ChangeState(MonsterState state);
-	float fStateTimer;
-
+public:
+	Vector GetLookDir();
+	void SetLookDir(Vector vecLookDir);
+	void SetMoveDir(Vector vecMoveDir);
+	
 private:
 	void Init() override;
 	void Update() override;

@@ -15,26 +15,32 @@ CMonster::CMonster()
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, 0);
 
-	m_bIsMove = false;
-	m_bIsShot = false;
-	m_bIsDead = false;
+	left = false;
+	right = false;
+	up = false;
+	down = false;
 
 	fCooltime = 0;
 	m_fRange = 10.0f;
-
-	m_curState = MonsterState::Idle;
-	m_preState = MonsterState::Idle;
 }
 
 CMonster::~CMonster()
 {
 }
 
-void CMonster::ChangeState(MonsterState state)
+Vector CMonster::GetLookDir()
 {
-	m_preState = m_curState;
-	m_curState = state;
-	fStateTimer = 0;
+	return m_vecLookDir;
+}
+
+void CMonster::SetLookDir(Vector vecLookDir)
+{
+	m_vecLookDir = vecLookDir;
+}
+
+void CMonster::SetMoveDir(Vector vecMoveDir)
+{
+	m_vecMoveDir = vecMoveDir;
 }
 
 void CMonster::Init()

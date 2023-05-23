@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CGish.h"
+#include "CMonsterMissile.h"
 
  CGish::CGish()
 {
@@ -8,18 +9,112 @@
 	m_layer = Layer::Monster;
 	m_strName = L"Gish";
 
-	m_curState = MonsterState::Idle;
-	fStateTimer = 0;
+	m_gishState = MonsterState::Move;
 
 	m_pGishLeftImage = nullptr;
 	m_pGishRightImage = nullptr;
 
+	m_vecMoveDir = Vector(0, 0);
+	m_vecLookDir = Vector(0, -1);
+
+	m_fRange = 200.0f;
 	m_fSpeed = 50.0f;
 	m_HP = 30;
+	m_fTimer = 0;
+
 }
 
 CGish::~CGish()
 {
+}
+
+void CGish::ActionUpdate()
+{
+	if (m_HP <= 0)
+	{
+		state = L"Dead";
+		Dead();
+	}
+	else
+	{
+		TargetDist();
+		TargetPos();
+
+		if (targetDist > m_fRange * m_fRange)
+		{
+			m_gishState = MonsterState::Move;
+		}
+
+		else
+		{
+			m_gishState = MonsterState::Shot;
+		}
+	}
+}
+
+void CGish::ChangeUpdate()
+{
+	switch (m_gishState)
+	{
+	case MonsterState::Ready:
+		ReadyUpdate();
+		break;
+	case MonsterState::Move:
+		MoveUpdate();
+		break;
+	case MonsterState::Shot:
+		ShotUpdate();
+		break;
+	}
+}
+
+void CGish::ReadyUpdate()
+{
+	if (GetLookDir().x == -1)
+	{
+		state = L"IdleLeft";
+	}
+	else if (GetLookDir().x == +1)
+	{
+		state = L"IdleRight";
+	}
+}
+
+void CGish::MoveUpdate()
+{
+	Logger::Debug(L"Gish 추격중!");
+	Trace();
+	MoveState();
+}
+
+void CGish::ShotUpdate()
+{
+	Logger::Debug(L"Gish 공격중!");
+	CreateMissile();
+	ShotState();
+}
+
+void CGish::JumpUpdate()
+{
+	Logger::Debug(L"Gish 점프중!");
+
+}
+
+void CGish::MoveState()
+{
+	Logger::Debug(to_wstring(GetLookDir().x));
+
+	state = targetDir ? L"MoveRight" : L"MoveLeft";
+}
+
+void CGish::ShotState()
+{
+	state = targetDir ? L"ShotRight" : L"ShotLeft";
+}
+
+void CGish::CheckDir()
+{
+	targetDir = PLAYERPOS.x - m_vecPos.x > 0 ? true : false;
 }
 
 void CGish::Init()
@@ -29,13 +124,12 @@ void CGish::Init()
 
 	m_pAnimator = new CAnimator;
 
+	m_pAnimator->CreateAnimation(L"IdleLeft",		 m_pGishLeftImage,	Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 1);
+	m_pAnimator->CreateAnimation(L"IdleRight",		 m_pGishRightImage, Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 1);
 	m_pAnimator->CreateAnimation(L"MoveLeft",		 m_pGishLeftImage,	Vector(  0.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5);
-																																		  
 	m_pAnimator->CreateAnimation(L"MoveRight",		 m_pGishRightImage, Vector(  0.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5);
-																																		  
 	m_pAnimator->CreateAnimation(L"ShotLeft",		 m_pGishLeftImage,  Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, true);
 	m_pAnimator->CreateAnimation(L"ShotRight",		 m_pGishRightImage, Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, true);
-
 	m_pAnimator->CreateAnimation(L"Dead",			 m_pGishLeftImage,	Vector(560.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0, 1, false);
 
 	m_pAnimator->Play(L"MoveLeft");
@@ -47,20 +141,9 @@ void CGish::Init()
 
 void CGish::Update()
 {
-	TargetDist();
-
-	switch (m_curState)
-	{
-	case MonsterState::Idle:
-			
-	case MonsterState::Move:
-
-	case MonsterState::Jump:
-
-	case MonsterState::Shot:
-			
-	case MonsterState::Dead:
-	}
+	CheckDir();
+	ActionUpdate();
+	ChangeUpdate();
 
 	AnimatorUpdate();
 }
@@ -75,7 +158,7 @@ void CGish::Release()
 
 void CGish::AnimatorUpdate()
 {
-	m_pAnimator->Play(stateGish, false);
+	m_pAnimator->Play(state, false);
 }
 
 void CGish::OnCollisionEnter(CCollider* pOtherCollider)
@@ -83,11 +166,6 @@ void CGish::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
 		m_HP--;
-	}
-
-	if (m_HP < 1)
-	{
-		m_GishState = GishState::Dead;
 	}
 }
 
