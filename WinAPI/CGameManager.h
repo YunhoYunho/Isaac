@@ -14,7 +14,11 @@ private:
 	void Release();
 
 public:
+	bool GetIsDebugMode();
+
+public:
 	Vector PlayerPos;
+	bool m_bIsDebugMode;
 
 public:
 	int PlayerHP;
