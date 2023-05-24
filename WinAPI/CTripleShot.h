@@ -3,6 +3,7 @@
 
 class CAnimator;
 class CImage;
+class CPlayer;
 
 class CTripleShot : public CGameObject
 {
@@ -13,6 +14,10 @@ public:
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pTripleShotImage;
+	CPlayer* pPlayer;
+	
+	float m_fTimer;
+	bool m_bIsGetItem;
 
 private:
 	void Init() override;

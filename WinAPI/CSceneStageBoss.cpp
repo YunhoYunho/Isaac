@@ -11,6 +11,7 @@
 CSceneStageBoss::CSceneStageBoss()
 {
 	pPlayer = nullptr;
+	pGish = nullptr;
 }
 
 CSceneStageBoss::~CSceneStageBoss()
@@ -23,7 +24,6 @@ void CSceneStageBoss::Init()
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);
 
-	CGish* pGish = new CGish();
 	pGish->SetPos(500, WINSIZEY * 0.5f);
 	AddGameObject(pGish);
 	  
@@ -38,7 +38,7 @@ void CSceneStageBoss::Init()
 void CSceneStageBoss::Enter()
 {
 	CAMERA->FadeIn(0.25f);
-	LoadTile(GETPATH + L"Tile\\Isaac_Map_tile");
+	LoadTile(GETPATH + L"Tile\\BossMap_tile");
 
 	//SOUND->Play(pSound, 0.6f, false);
 }

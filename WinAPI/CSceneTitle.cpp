@@ -51,7 +51,7 @@ void CSceneTitle::Render()
 
 void CSceneTitle::Exit()
 {
-	SOUND->Pause(pSound);
+	SOUND->Stop(pSound);
 }
 
 void CSceneTitle::Release()

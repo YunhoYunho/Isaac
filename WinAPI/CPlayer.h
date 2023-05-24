@@ -25,6 +25,8 @@ private:
 
 	CImage* m_pGetItemImage;
 
+	CImage* m_pAppearItemImage;
+	
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
 	
@@ -39,9 +41,10 @@ private:
 public:
 	int m_HP;
 	float m_fSpeed = 200.0f;
-	float m_fDamage = 2.0f;
+	float m_fDamage = 20.0f;
 	float m_fTimer = 0;
 	float fCooltime = 0;
+	bool m_bIsTripleShot;
 
 public:
 	void IdleUpdate();

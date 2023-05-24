@@ -252,6 +252,9 @@
     <ClInclude Include="CSceneStageBoss.h">
       <Filter>04. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="CBossHPBar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -415,6 +418,9 @@
     </ClCompile>
     <ClCompile Include="CSceneStageBoss.cpp">
       <Filter>04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossHPBar.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

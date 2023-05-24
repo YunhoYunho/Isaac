@@ -40,7 +40,7 @@ void CSceneLoading::Render()
 
 void CSceneLoading::Exit()
 {
-	SOUND->Pause(pLoading);
+	SOUND->Stop(pLoading);
 }
 
 void CSceneLoading::Release()

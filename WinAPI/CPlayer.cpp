@@ -28,12 +28,16 @@ CPlayer::CPlayer()
 	m_pShotImage = nullptr;
 	m_pHurtImage = nullptr;
 	m_pDeadImage = nullptr;
+	m_pGetItemImage = nullptr;
+	m_pAppearItemImage = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
 
 	fCooltime = 0;
 	m_HP = 3;
+
+	m_bIsTripleShot = false;
 }
 
 CPlayer::~CPlayer()
@@ -182,11 +186,6 @@ void CPlayer::TakeHitUpdate()
 		AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
 		fCooltime = 0;
 	}
-
-	if (BUTTONDOWN('Y'))
-	{
-		m_playerState = PlayerState::TakeHit;
-	}
 }
 
 void CPlayer::DeadUpdate()
@@ -209,9 +208,12 @@ void CPlayer::GetItemUpdate()
 	stateHead = L"GetItem";
 	stateBody = L"None";
 
+	RemoveCollider();
+
 	if (fCooltime > 1.0f)
 	{
 		m_playerState = PlayerState::Idle;
+		AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
 		fCooltime = 0;
 	}
 }
@@ -320,6 +322,11 @@ void CPlayer::CreateMissile()
 	if (m_fTimer == 0)
 	{
 		NormalShot();
+
+		if (true == m_bIsTripleShot)
+		{
+			TripleShot();
+		}
 	}
 
 	m_fTimer += DT;
@@ -361,6 +368,36 @@ void CPlayer::NormalShot()
 
 void CPlayer::TripleShot()
 {
+	CPlayerMissile* pMissile2 = new CPlayerMissile();
+	pMissile2->SetPos(m_vecPos);
+	CPlayerMissile* pMissile3 = new CPlayerMissile();
+	pMissile3->SetPos(m_vecPos);
+
+	if (BUTTONSTAY(VK_LEFT))
+	{
+		pMissile2->SetDir(Vector(-1, 1));
+		pMissile3->SetDir(Vector(-1, -1));
+	}
+
+	if (BUTTONSTAY(VK_RIGHT))
+	{
+		pMissile2->SetDir(Vector(1, 1));
+		pMissile3->SetDir(Vector(1, -1));
+	}
+
+	if (BUTTONSTAY(VK_UP))
+	{
+		pMissile2->SetDir(Vector(1, -1));
+		pMissile3->SetDir(Vector(-1, -1));
+	}
+
+	if (BUTTONSTAY(VK_DOWN))
+	{
+		pMissile2->SetDir(Vector(1, 1));
+		pMissile3->SetDir(Vector(-1, 1));
+	}
+	ADDOBJECT(pMissile2);
+	ADDOBJECT(pMissile3);
 }
 
 Vector CPlayer::GetLookDir()
@@ -432,7 +469,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"TripleShot")
 	{
 		m_playerState = PlayerState::GetItem;
-
+		m_bIsTripleShot = true;
 		//SOUND->Play(pGetItem, 1.0f, false);
 
 		m_fTimer += DT;
