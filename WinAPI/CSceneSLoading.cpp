@@ -23,14 +23,14 @@ void CSceneSLoading::Enter()
 {
 	CAMERA->FadeIn(0.25f);
 
-	//SOUND->Play(pLoading, 1.0f, false);
+	SOUND->Play(pLoading, 1.0f, false);
 }
 
 void CSceneSLoading::Update()
 {
 	fCooltime += DT;
 
-	if (fCooltime > 2.0f)
+	if (fCooltime > 4.0f)
 	{
 		CAMERA->FadeOut(0.25f);
 		DELAYCHANGESCENE(GroupScene::Stage01, 0.25f);
@@ -43,7 +43,7 @@ void CSceneSLoading::Render()
 
 void CSceneSLoading::Exit()
 {
-	//SOUND->Pause(pLoading);
+	SOUND->Stop(pLoading);
 }
 
 void CSceneSLoading::Release()
