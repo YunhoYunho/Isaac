@@ -32,7 +32,7 @@ private:
 	
 	CSound* pHurt = RESOURCE->LoadSound(L"Hurt", L"Sound\\Isaac\\Hurt.wav");
 	CSound* pDead = RESOURCE->LoadSound(L"Dead", L"Sound\\Isaac\\Dies.wav");
-	//CSound* pGetItem = RESOURCE->LoadSound(L"GetItem", L"Sound\\Isaac\\GetItem.wav");
+	CSound* pGetItem = RESOURCE->LoadSound(L"GetItem", L"Sound\\Isaac\\GetItem.wav");
 
 	PlayerState m_playerState;
 	wstring stateBody;
@@ -44,6 +44,7 @@ public:
 	float m_fDamage = 20.0f;
 	float m_fTimer = 0;
 	float fCooltime = 0;
+	float m_fSTimer = 0;
 	bool m_bIsTripleShot;
 
 public:

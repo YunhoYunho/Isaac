@@ -253,7 +253,7 @@
       <Filter>04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="CBossHPBar.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>04. Scene\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -420,7 +420,7 @@
       <Filter>04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="CBossHPBar.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>04. Scene\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

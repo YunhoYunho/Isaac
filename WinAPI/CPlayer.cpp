@@ -424,17 +424,16 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		m_HP--;
 		m_playerState = PlayerState::TakeHit;
 
-		m_fTimer += DT;
-
 		if (m_HP > 0)
 		{
 			SOUND->Play(pHurt, 1.0f, false);
 
+			m_fSTimer += DT;
 
-			if (m_fTimer = 2.0f)
+			if (m_fSTimer > 1.0f)
 			{
-				SOUND->Stop(pHurt);
-				m_fTimer = 0;
+				SOUND->Pause(pHurt);
+				m_fSTimer = 0;
 			}
 		}
 
@@ -453,15 +452,11 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		
 		SOUND->Play(pDead, 1.0f, false);
 
-		if (m_fTimer = 0)
-		{
-			SOUND->Pause(pDead);
-		}
-
 		m_fTimer += DT;
 
 		if (m_fTimer > 1.0f)
 		{
+			SOUND->Pause(pDead);
 			m_fTimer = 0;
 		}
 	}
@@ -470,13 +465,14 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		m_playerState = PlayerState::GetItem;
 		m_bIsTripleShot = true;
-		//SOUND->Play(pGetItem, 1.0f, false);
+
+		SOUND->Play(pGetItem, 1.0f, false);
 
 		m_fTimer += DT;
 
-		if (m_fTimer = 2.0f)
+		if (m_fTimer > 1.0f)
 		{
-			//SOUND->Stop(pGetItem);
+			SOUND->Pause(pGetItem);
 			m_fTimer = 0;
 		}
 	}
