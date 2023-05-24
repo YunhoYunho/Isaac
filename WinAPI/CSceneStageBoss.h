@@ -4,6 +4,7 @@
 
 class CPlayer;
 class CPlayerHP;
+class CGish;
 
 class CSceneStageBoss : public CScene
 {
@@ -13,6 +14,8 @@ public:
 
 private:
 	CPlayer* pPlayer;
+	CGish* pGish;
+
 	//CSound* pSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
 
 private:

@@ -19,7 +19,7 @@
 
 	m_fRange = 200.0f;
 	m_fSpeed = 50.0f;
-	m_HP = 30;
+	m_HP = 402;
 	m_fTimer = 0;
 
 }
@@ -82,27 +82,27 @@ void CGish::ReadyUpdate()
 
 void CGish::MoveUpdate()
 {
-	Logger::Debug(L"Gish 추격중!");
+	//Logger::Debug(L"Gish 추격중!");
 	Trace();
 	MoveState();
 }
 
 void CGish::ShotUpdate()
 {
-	Logger::Debug(L"Gish 공격중!");
+	//Logger::Debug(L"Gish 공격중!");
 	CreateMissile();
 	ShotState();
 }
 
 void CGish::JumpUpdate()
 {
-	Logger::Debug(L"Gish 점프중!");
+	//Logger::Debug(L"Gish 점프중!");
 
 }
 
 void CGish::MoveState()
 {
-	Logger::Debug(to_wstring(GetLookDir().x));
+	//Logger::Debug(to_wstring(GetLookDir().x));
 
 	state = targetDir ? L"MoveRight" : L"MoveLeft";
 }
@@ -115,6 +115,11 @@ void CGish::ShotState()
 void CGish::CheckDir()
 {
 	targetDir = PLAYERPOS.x - m_vecPos.x > 0 ? true : false;
+}
+
+float CGish::GetHP()
+{
+	return m_HP;
 }
 
 void CGish::Init()
@@ -165,7 +170,8 @@ void CGish::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		m_HP--;
+		m_HP -= 30;
+		Logger::Debug(L"맞음!");
 	}
 }
 

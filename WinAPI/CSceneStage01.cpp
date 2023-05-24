@@ -25,10 +25,12 @@
 #include "CItemRock.h"
 
 #include "CTripleShot.h"
+#include "CBossHPBar.h"
 
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
+	m_fTimer = 0;
 }
 
 CSceneStage01::~CSceneStage01()
@@ -61,8 +63,8 @@ void CSceneStage01::Init()
 	pFly2->SetPos(800, WINSIZEY * 0.3f);
 	AddGameObject(pFly2);*/
 
-	CCameraController* pCamController = new CCameraController;
-	AddGameObject(pCamController);
+	//CCameraController* pCamController = new CCameraController;
+	//AddGameObject(pCamController);
 
 	CImageObject* pBackGround = new CImageObject;
 	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Isaac_StageMap.png"));
@@ -79,6 +81,10 @@ void CSceneStage01::Init()
 	CItemRock* pItemRock = new CItemRock;
 	pItemRock->SetPos(WINSIZEX * 0.5f + 2, WINSIZEY * 0.5f + 15);
 	AddGameObject(pItemRock);
+
+	CBossHPBar* pBossHPBar = new CBossHPBar();
+	AddGameObject(pBossHPBar);
+	pBossHPBar->GetBossHP(pGish);
 }
 
 void CSceneStage01::Enter()

@@ -15,6 +15,8 @@ private:
 	CPlayer* pPlayer;
 	CSound* pSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
 
+	float m_fTimer;
+
 private:
 	void Init()		override;
 	void Enter()	override;

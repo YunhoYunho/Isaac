@@ -33,6 +33,9 @@ private:
 	void CheckDir();
 	bool targetDir;
 
+public:
+	float GetHP();
+
 private:
 	void Init() override;
 	void Update() override;
