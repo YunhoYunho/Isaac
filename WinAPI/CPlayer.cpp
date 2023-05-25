@@ -14,6 +14,7 @@
 #include "CPlayerHP.h"
 #include "CPlayerMissile.h"
 #include "CMonsterMissile.h"
+#include "CBomb.h"
 
 CPlayer::CPlayer()
 {
@@ -268,6 +269,8 @@ void CPlayer::Update()
 	PlayerPos();
 	PlayerHP();
 
+	CreateBomb();
+
 	if (m_HP <= 0)
 	{
 		stateBody = L"None";
@@ -337,6 +340,18 @@ void CPlayer::CreateMissile()
 	}
 
 	ShotState();
+}
+
+void CPlayer::CreateBomb()
+{
+
+	if (BUTTONDOWN('E'))
+	{
+		Logger::Debug(L"ÆøÅº »ý¼º");
+		CBomb* pBomb = new CBomb();
+		pBomb->SetPos(m_vecPos);
+		ADDOBJECT(pBomb);
+	}
 }
 
 void CPlayer::NormalShot()

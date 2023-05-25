@@ -142,6 +142,7 @@
     <ClInclude Include="CAnimation.h" />
     <ClInclude Include="CAnimator.h" />
     <ClInclude Include="CBaby.h" />
+    <ClInclude Include="CBomb.h" />
     <ClInclude Include="CBoomfly.h" />
     <ClInclude Include="CBossHPBar.h" />
     <ClInclude Include="CButton.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="CAnimation.cpp" />
     <ClCompile Include="CAnimator.cpp" />
     <ClCompile Include="CBaby.cpp" />
+    <ClCompile Include="CBomb.cpp" />
     <ClCompile Include="CBoomfly.cpp" />
     <ClCompile Include="CBossHPBar.cpp" />
     <ClCompile Include="CButton.cpp" />

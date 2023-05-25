@@ -70,6 +70,7 @@ private:
 
 	void AnimatorUpdate();
 	void CreateMissile();
+	void CreateBomb();
 
 	void NormalShot();
 	void TripleShot();

@@ -255,6 +255,9 @@
     <ClInclude Include="CBossHPBar.h">
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
+    <ClInclude Include="CBomb.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="CBossHPBar.cpp">
       <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CBomb.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

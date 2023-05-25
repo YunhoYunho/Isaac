@@ -148,12 +148,12 @@ void CMonster::TargetPos()
 
 void CMonster::CreateMissile()
 {
-	Logger::Debug(L"利 固荤老 积己");
-	
 	TargetPos();
 
 	if (m_fShotTimer == 0)
 	{
+		Logger::Debug(L"利 固荤老 积己");
+
 		CMonsterMissile* pMissile = new CMonsterMissile();
 		pMissile->SetPos(m_vecPos);
 		pMissile->SetDir(m_vecPlayerPos);
