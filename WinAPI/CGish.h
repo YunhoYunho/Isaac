@@ -26,15 +26,18 @@ private:
 	void MoveUpdate();
 	void ShotUpdate();
 	void JumpUpdate();
+	void DeadUpdate();
 
 	void MoveState();
 	void ShotState();
+	void DeadState();
 
 	void CheckDir();
 	bool targetDir;
 
 public:
 	float GetHP();
+	float GetMaxHP();
 
 private:
 	void Init() override;

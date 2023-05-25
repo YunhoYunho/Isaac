@@ -12,6 +12,7 @@ public:
 	bool right;
 
 	int m_HP;
+	int m_MaxHP;
 
 	float m_fSpeed = 200.0f;
 	float m_fTimer = 0;
@@ -26,6 +27,7 @@ public:
 	Vector m_vecPlayerPos;
 
 public:
+	void BossDead();
 	void Dead();
 	void Trace();
 	void PingPong();

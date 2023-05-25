@@ -103,6 +103,8 @@ enum class MonsterState
 	Ready,
 	Move,
 	Shot,
+	Jump,
+	Dead,
 
 	Size,
 };

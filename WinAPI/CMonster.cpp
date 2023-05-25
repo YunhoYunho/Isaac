@@ -65,6 +65,21 @@ void CMonster::Release()
 {
 }
 
+void CMonster::BossDead()
+{
+	if (m_HP <= 0)
+	{
+		fCooltime += DT;
+
+		if (fCooltime > 0.1f)
+		{
+			RemoveCollider();
+			m_fSpeed = 0;
+			fCooltime = 0;
+		}
+	}
+}
+
 void CMonster::Dead()
 {
 	if (m_HP <= 0)

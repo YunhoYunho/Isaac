@@ -19,7 +19,8 @@
 
 	m_fRange = 200.0f;
 	m_fSpeed = 50.0f;
-	m_HP = 402;
+	m_HP = 40;
+	m_MaxHP = m_HP;
 	m_fTimer = 0;
 
 }
@@ -32,8 +33,7 @@ void CGish::ActionUpdate()
 {
 	if (m_HP <= 0)
 	{
-		state = L"Dead";
-		Dead();
+		m_gishState = MonsterState::Dead;
 	}
 	else
 	{
@@ -64,6 +64,9 @@ void CGish::ChangeUpdate()
 		break;
 	case MonsterState::Shot:
 		ShotUpdate();
+		break;
+	case MonsterState::Dead:
+		DeadUpdate();
 		break;
 	}
 }
@@ -100,6 +103,12 @@ void CGish::JumpUpdate()
 
 }
 
+void CGish::DeadUpdate()
+{
+	BossDead();
+	DeadState();
+}
+
 void CGish::MoveState()
 {
 	//Logger::Debug(to_wstring(GetLookDir().x));
@@ -112,6 +121,11 @@ void CGish::ShotState()
 	state = targetDir ? L"ShotRight" : L"ShotLeft";
 }
 
+void CGish::DeadState()
+{
+	state = L"Dead";
+}
+
 void CGish::CheckDir()
 {
 	targetDir = PLAYERPOS.x - m_vecPos.x > 0 ? true : false;
@@ -120,6 +134,11 @@ void CGish::CheckDir()
 float CGish::GetHP()
 {
 	return m_HP;
+}
+
+float CGish::GetMaxHP()
+{
+	return m_MaxHP;
 }
 
 void CGish::Init()
@@ -170,7 +189,7 @@ void CGish::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"PlayerMissile")
 	{
-		m_HP -= 30;
+		m_HP -= 2;
 		Logger::Debug(L"¸ÂÀ½!");
 	}
 }
