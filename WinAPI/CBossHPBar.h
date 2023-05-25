@@ -16,10 +16,7 @@ public:
 	CImage* m_pHPBarGauge;
 
 	float m_fTimer;
-	float HP = 0;
-
 	void GetBossHP(CGish* value);
-	void CalculateHpPercent();
 
 private:
 	void Init()		override;

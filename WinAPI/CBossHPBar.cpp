@@ -20,11 +20,6 @@ void CBossHPBar::GetBossHP(CGish* value)
 	pGish = value;
 }
 
-void CBossHPBar::CalculateHpPercent()
-{
-	HP = 402 - pGish->GetHP();
-}
-
 void CBossHPBar::Init()
 {
 	m_pHPBarFrame = RESOURCE->LoadImg(L"BarFrame", L"Image\\Map\\Frame.png");
@@ -33,13 +28,18 @@ void CBossHPBar::Init()
 
 void CBossHPBar::Update()
 {
-
 }
 
 void CBossHPBar::Render()
 {
 	RENDER->Image(m_pHPBarFrame, 439, 634, 841, 720);
-	RENDER->FrameImage(m_pHPBarGauge, 439, 634, 841 - (402 - pGish->GetHP()), 720, 0, 0, 402, 86);
+
+	float hpWidth = (841 - 439 - 52 - 52) * pGish->GetHP() / pGish->GetMaxHP();
+
+	if (pGish->GetHP() >= 0)
+	{
+		RENDER->FrameImage(m_pHPBarGauge, 439, 634, 439 + hpWidth + 52, 720, 0, 0, hpWidth + 52, 86);
+	}
 }
 
 void CBossHPBar::Release()
