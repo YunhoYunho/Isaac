@@ -1,26 +1,38 @@
 #include "framework.h"
 #include "CExplosion.h"
+#include "CMonster.h"
+#include "CPlayer.h"
 
 CExplosion::CExplosion()
 {
+	m_layer = Layer::Explosion;
+	m_strName = L"Explosion";
+
 	m_pExplosionImage = nullptr;
-	
-	m_bIsExplosion = false;
-	m_fDamage = 2.0f;
+	m_fCooltime = 0;
+	m_fDamage = 10;
 }
 
 CExplosion::~CExplosion()
 {
 }
 
-bool CExplosion::Boom()
+void CExplosion::Boom()
 {
-	return false;
+	m_fCooltime += DT;
+
+	if (m_fCooltime > 1.0f)
+	{
+		m_pAnimator->Stop();
+		m_fCooltime = 0;
+
+		DELETEOBJECT(this);
+	}
 }
 
 void CExplosion::Init()
 {
-	m_pExplosionImage = RESOURCE->LoadImg(L"Explosion", L"Image\\Effect\\Effect_BOOM.png");
+	m_pExplosionImage = RESOURCE->LoadImg(L"Bomb_Explosion", L"Image\\Effect\\Effect_BOOM.png");
 
 	m_pAnimator = new CAnimator;
 	m_pAnimator->CreateAnimation(L"Explosion", m_pExplosionImage, Vector(0.f, 0.f), Vector(100.f, 100.f), Vector(100.f, 0.f), 0.1f, 12, false);
@@ -34,19 +46,7 @@ void CExplosion::Init()
 
 void CExplosion::Update()
 {
-	switch (m_explosionState)
-	{
-	case ExplosionState::None:
-		if (true == m_bIsExplosion)
-		{
-			m_stateEXplosion = ExplosionState::Explosion;
-		}
-	case ExplosionState::Explosion:
-		m_bIsExplosion = true;
-		stateExplosion = L"Explosion";
-
-		AnimatorUpdate();
-	}
+	Boom();
 }
 
 void CExplosion::Render()
@@ -57,19 +57,21 @@ void CExplosion::Release()
 {
 }
 
-void CExplosion::AnimatorUpdate()
-{
-	m_pAnimator->Play(stateExplosion, false);
-}
-
 void CExplosion::OnCollisionEnter(CCollider* pOtherCollider)
 {
-}
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Monster)		
+	{
+		if (GetLayer() == Layer::Monster)
+		{
+			CMonster* pMonster = (CMonster*)(pOtherCollider->GetOwner());
+			pMonster->GetDamaged(m_fDamage);
+		}
 
-void CExplosion::OnCollisionStay(CCollider* pOtherCollider)
-{
-}
+		if (GetLayer() == Layer::Player)
+		{
+			CPlayer* pPlayer = (CPlayer*)(pOtherCollider->GetOwner());
 
-void CExplosion::OnCollisionExit(CCollider* pOtherCollider)
-{
-}
+		}
+		DELETEOBJECT(this);
+	}
+}		

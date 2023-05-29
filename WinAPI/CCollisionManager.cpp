@@ -25,6 +25,8 @@ void CCollisionManager::Init()
 	CheckLayer(Layer::Tile, Layer::Player);
 	CheckLayer(Layer::Tile, Layer::Monster);
 	CheckLayer(Layer::Item, Layer::Player);
+	CheckLayer(Layer::Explosion, Layer::Player);
+	CheckLayer(Layer::Explosion, Layer::Monster);
 }
 
 void CCollisionManager::Update()

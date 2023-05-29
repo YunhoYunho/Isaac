@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "CMonster.h"
 #include "CPlayerMissile.h"
 
 CPlayerMissile::CPlayerMissile()
@@ -13,6 +14,7 @@ CPlayerMissile::CPlayerMissile()
 
 	m_fCooltime = 0;
 	m_bIsHit = false;
+	m_fDamage = 3.0f;
 }
 
 CPlayerMissile::~CPlayerMissile()
@@ -71,10 +73,11 @@ void CPlayerMissile::OnCollisionEnter(CCollider* pOtherCollider)
 		m_bIsHit = true;
 	}
 
-	if (pOtherCollider->GetObjName() == L"Baby" || pOtherCollider->GetObjName() == L"Boomfly"
-		|| pOtherCollider->GetObjName() == L"Gish" || pOtherCollider->GetObjName() == L"MonsterMissile"
-		|| pOtherCollider->GetObjName() == L"Fly")
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Monster)
 	{
+		CMonster* pMonster = (CMonster*)(pOtherCollider->GetOwner());
+		pMonster->GetDamaged(m_fDamage);
+
 		DELETEOBJECT(this);
 	}
 }

@@ -84,10 +84,6 @@ void CBaby::AnimatorUpdate()
 
 void CBaby::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"PlayerMissile")
-	{
-		m_HP--;
-	}
 }
 
 void CBaby::OnCollisionStay(CCollider* pOtherCollider)

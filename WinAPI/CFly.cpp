@@ -68,10 +68,6 @@ void CFly::AnimatorUpdate()
 
 void CFly::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"PlayerMissile")
-	{
-		m_HP--;
-	}
 }
 
 void CFly::OnCollisionStay(CCollider* pOtherCollider)

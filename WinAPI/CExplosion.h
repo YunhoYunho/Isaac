@@ -1,19 +1,11 @@
 #pragma once
 #include "CGameObject.h"
 
-class CImage;
-class CAnimator;
-
-enum class ExplosionState
-{
-	None,
-	Explosion,
-
-	Size
-};
+class CBomb;
 
 class CExplosion : public CGameObject
 {
+	friend CBomb;
 public:
 	CExplosion();
 	virtual ~CExplosion();
@@ -22,20 +14,11 @@ private:
 	CAnimator* m_pAnimator;
 	CImage* m_pExplosionImage;
 
-	ExplosionState m_stateEXplosion;
-
-	Vector m_vecMoveDir;
-	Vector m_vecLookDir;
-
-	bool m_bIsExplosion;
-
-	float m_fSpeed = 200.0f;
+public:
 	float m_fDamage;
+	float m_fCooltime;
 
-	ExplosionState m_explosionState;
-	wstring stateExplosion;
-
-	bool Boom();
+	void Boom();
 
 private:
 	void Init() override;
@@ -43,10 +26,6 @@ private:
 	void Render() override;
 	void Release() override;
 
-	void AnimatorUpdate();
-
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
-	void OnCollisionStay(CCollider* pOtherCollider) override;
-	void OnCollisionExit(CCollider* pOtherCollider) override;
 };
 

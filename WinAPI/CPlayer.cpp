@@ -37,6 +37,7 @@ CPlayer::CPlayer()
 
 	fCooltime = 0;
 	m_HP = 3;
+	m_fDamage = 2.0f;
 
 	m_bIsTripleShot = false;
 }
@@ -179,14 +180,13 @@ void CPlayer::TakeHitUpdate()
 	stateHead = L"TakeHit";
 	stateBody = L"None";
 
-	RemoveCollider();
-
 	if (fCooltime > 0.5f)
 	{
 		m_playerState = PlayerState::Idle;
-		AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
 		fCooltime = 0;
 	}
+
+	Logger::Debug(to_wstring(m_HP));
 }
 
 void CPlayer::DeadUpdate()
@@ -344,12 +344,12 @@ void CPlayer::CreateMissile()
 
 void CPlayer::CreateBomb()
 {
-
 	if (BUTTONDOWN('E'))
 	{
 		Logger::Debug(L"ÆøÅº »ý¼º");
 		CBomb* pBomb = new CBomb();
 		pBomb->SetPos(m_vecPos);
+		pBomb->m_bIsPressE = true;
 		ADDOBJECT(pBomb);
 	}
 }
@@ -433,8 +433,8 @@ void CPlayer::SetMoveDir(Vector vecMoveDir)
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Baby" || pOtherCollider->GetObjName() == L"Boomfly"
-		|| pOtherCollider->GetObjName() == L"Gish" || pOtherCollider->GetObjName() == L"MonsterMissile"
-		|| pOtherCollider->GetObjName() == L"Fly")
+		|| pOtherCollider->GetObjName() == L"Gish" || pOtherCollider->GetObjName() == L"Fly"
+		|| pOtherCollider->GetObjName() == L"MonsterMissile" || pOtherCollider->GetObjName() == L"Explosion")
 	{
 		m_HP--;
 		m_playerState = PlayerState::TakeHit;

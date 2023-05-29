@@ -187,11 +187,6 @@ void CGish::AnimatorUpdate()
 
 void CGish::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"PlayerMissile")
-	{
-		m_HP -= 2;
-		Logger::Debug(L"¸ÂÀ½!");
-	}
 }
 
 void CGish::OnCollisionStay(CCollider* pOtherCollider)

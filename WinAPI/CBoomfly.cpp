@@ -76,11 +76,6 @@ void CBoomfly::AnimatorUpdate()
 
 void CBoomfly::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"PlayerMissile")
-	{
-		m_HP--;
-	}
-
 	if (m_HP <= 0)
 	{
 		SOUND->Play(pExplosion, 0.8f, false);

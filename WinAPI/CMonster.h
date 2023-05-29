@@ -1,5 +1,8 @@
 #pragma once
 #include "CGameObject.h"
+#include "CExplosion.h"
+#include "CPlayerMissile.h"
+
 class CMonster : public CGameObject
 {
 public:
@@ -21,12 +24,16 @@ public:
 
 	float targetDist;
 
+	CExplosion* pExplosion;
+	CPlayerMissile* pPlayerMissile;
+
 public:
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
 	Vector m_vecPlayerPos;
 
 public:
+	void GetDamaged(int value);
 	void BossDead();
 	void Dead();
 	void Trace();

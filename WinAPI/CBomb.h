@@ -14,14 +14,18 @@ private:
 	CImage* m_pSparkImage;
 
 	float m_fCooltime;
+	bool m_bIsTimesUP;
+
+public:
+	void BombTimer();
+	void Boom();
+
+	bool m_bIsPressE;
 
 private:
 	void Init() override;
 	void Update() override;
 	void Render() override;
 	void Release() override;
-
-	void OnCollisionEnter(CCollider* pOtherCollider) override;
-
 };
 

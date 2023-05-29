@@ -14,6 +14,9 @@ private:
 	float m_fCooltime;
 	bool m_bIsHit;
 
+public:
+	float m_fDamage;
+
 private:
 	void Init() override;
 	void Update() override;

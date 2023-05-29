@@ -43,15 +43,15 @@ void CSceneStage01::Init()
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);
 
-	CGish* pGish = new CGish();
+	/*CGish* pGish = new CGish();
 	pGish->SetPos(500, WINSIZEY * 0.5f);
 	AddGameObject(pGish);
 
-	/*CBaby* pBaby = new CBaby();
+	CBaby* pBaby = new CBaby();
 	pBaby->SetPos(300, WINSIZEY * 0.5f);
-	AddGameObject(pBaby);
+	AddGameObject(pBaby);*/
 
-	CBoomfly* pBoomfly = new CBoomfly();
+	/*CBoomfly* pBoomfly = new CBoomfly();
 	pBoomfly->SetPos(700, WINSIZEY * 0.5f);
 	AddGameObject(pBoomfly);
 
@@ -82,9 +82,9 @@ void CSceneStage01::Init()
 	pItemRock->SetPos(WINSIZEX * 0.5f + 2, WINSIZEY * 0.5f + 15);
 	AddGameObject(pItemRock);
 
-	CBossHPBar* pBossHPBar = new CBossHPBar();
+	/*CBossHPBar* pBossHPBar = new CBossHPBar();
 	AddGameObject(pBossHPBar);
-	pBossHPBar->GetBossHP(pGish);
+	pBossHPBar->GetBossHP(pGish);*/
 }
 
 void CSceneStage01::Enter()
@@ -114,6 +114,12 @@ void CSceneStage01::Update()
 		CSound* pDeadSound = RESOURCE->LoadSound(L"Died", L"Sound\\Scene\\Died.wav");
 		//SOUND->Play(pDeadSound);
 	}
+
+	/*if ()
+	{
+		CAMERA->FadeOut(0.25f);
+		DELAYCHANGESCENE(GroupScene::Loading, 0.25f);
+	}*/
 }
 
 void CSceneStage01::Render()

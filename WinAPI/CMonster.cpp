@@ -5,6 +5,7 @@
 #include "CCollider.h"
 
 #include "CMonsterMissile.h"
+#include "CPlayerMissile.h"
 
 CMonster::CMonster()
 {
@@ -63,6 +64,14 @@ void CMonster::Render()
 
 void CMonster::Release()
 {
+}
+
+void CMonster::GetDamaged(int value)
+{
+	m_HP -= value;
+
+	if (m_HP < 0) 
+		m_HP = 0;
 }
 
 void CMonster::BossDead()

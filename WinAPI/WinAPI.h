@@ -63,6 +63,7 @@ enum class Layer
 	ItemRock,
 	Item,
 	Bomb,
+	Explosion,
 
 	HUD,
 	Ui,

@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CBomb.h"
+#include "CExplosion.h"
 
 CBomb::CBomb()
 {
@@ -11,10 +12,41 @@ CBomb::CBomb()
 	m_pSparkImage = nullptr;
 
 	m_fCooltime = 0;
+	m_bIsTimesUP = false;
+	m_bIsPressE = false;
 }
 
 CBomb::~CBomb()
 {
+}
+
+void CBomb::BombTimer()
+{
+	if (true == m_bIsPressE)
+	{
+		m_fCooltime += DT;
+
+		if (m_fCooltime > 3.0f)
+		{
+			m_pBombAnimator->Stop();
+			m_pSparkAnimator->Stop();
+
+			DELETEOBJECT(this);
+			m_fCooltime = 0;
+			m_bIsPressE = false;
+
+			Boom();
+		}
+	}
+}
+
+void CBomb::Boom()
+{
+	Logger::Debug(L"Æø¹ß!");
+	CExplosion* pExplosion = new CExplosion();
+
+	pExplosion->SetPos(m_vecPos);
+	ADDOBJECT(pExplosion);
 }
 
 void CBomb::Init()
@@ -39,13 +71,7 @@ void CBomb::Init()
 
 void CBomb::Update()
 {
-	m_fCooltime += DT;
-
-	if (m_fCooltime > 3.0f)
-	{
-		m_pBombAnimator->Stop();
-		m_pSparkAnimator->Stop();
-	}
+	BombTimer();
 }
 
 void CBomb::Render()
@@ -53,9 +79,5 @@ void CBomb::Render()
 }
 
 void CBomb::Release()
-{
-}
-
-void CBomb::OnCollisionEnter(CCollider* pOtherCollider)
 {
 }
