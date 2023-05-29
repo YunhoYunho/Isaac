@@ -42,9 +42,7 @@ void CBomb::BombTimer()
 
 void CBomb::Boom()
 {
-	Logger::Debug(L"Æø¹ß!");
 	CExplosion* pExplosion = new CExplosion();
-
 	pExplosion->SetPos(m_vecPos);
 	ADDOBJECT(pExplosion);
 }

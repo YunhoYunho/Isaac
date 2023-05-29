@@ -11,10 +11,11 @@ CBoomfly::CBoomfly()
 	m_strName = L"Boomfly";
 
 	m_pBoomflyImage = nullptr;
-	m_pBoomflyDeadImage = nullptr;
 
 	m_fSpeed = 100.0f;
 	m_HP = 7;
+	m_fTimer = 0;
+	m_bIsExplosion = false;
 	
 	up = true;
 	down = false;
@@ -29,13 +30,10 @@ CBoomfly::~CBoomfly()
 void CBoomfly::Init()
 {
 	m_pBoomflyImage = RESOURCE->LoadImg(L"Boomfly", L"Image\\Unit\\Mon_Boomfly.png");
-	m_pBoomflyDeadImage = RESOURCE->LoadImg(L"BoomflyDead", L"Image\\Effect\\Effect_BOOM.png");
 
 	m_pAnimator = new CAnimator;
 
 	m_pAnimator->CreateAnimation(L"Move", m_pBoomflyImage, Vector(0.f, 0.f), Vector(75.f, 75.f), Vector(75.f, 0.f), 0.1f, 2);
-
-	m_pAnimator->CreateAnimation(L"Dead", m_pBoomflyDeadImage, Vector(0.f, 0.f), Vector(100.f, 100.f), Vector(100.f, 0.f), 0.1f, 12, false);
 
 	m_pAnimator->Play(L"Move");
 
@@ -46,10 +44,11 @@ void CBoomfly::Init()
 
 void CBoomfly::Update()
 {
+	BoomTrigger();
+
 	if (m_HP <= 0)
 	{
-		stateBoomfly = L"Dead";
-		Dead();
+		m_bIsExplosion = true;
 	}
 
 	else
@@ -74,11 +73,28 @@ void CBoomfly::AnimatorUpdate()
 	m_pAnimator->Play(stateBoomfly, false);
 }
 
+void CBoomfly::BoomTrigger()
+{
+	if (true == m_bIsExplosion)
+	{
+		DELETEOBJECT(this);
+
+		Boom();
+	}
+}
+
+void CBoomfly::Boom()
+{
+	CExplosion* pExplosion = new CExplosion();
+	pExplosion->SetPos(m_vecPos);
+	ADDOBJECT(pExplosion);
+}
+
 void CBoomfly::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (m_HP <= 0)
 	{
-		SOUND->Play(pExplosion, 0.8f, false);
+		m_bIsExplosion = true;
 	}
 }
 

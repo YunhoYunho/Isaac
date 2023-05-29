@@ -13,11 +13,12 @@ public:
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pBoomflyImage;
-	CImage* m_pBoomflyDeadImage;
+	CExplosion* pExplosion;
 
 	wstring stateBoomfly;
 
-	CSound* pExplosion = RESOURCE->LoadSound(L"Boom", L"Sound\\Monster\\explosions.wav");
+	float m_fTimer;
+	bool m_bIsExplosion;
 
 private:
 	void Init() override;
@@ -26,6 +27,9 @@ private:
 	void Release() override;
 
 	void AnimatorUpdate();
+	
+	void BoomTrigger();
+	void Boom();
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;

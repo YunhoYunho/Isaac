@@ -30,6 +30,19 @@ void CExplosion::Boom()
 	}
 }
 
+void CExplosion::BoomSound()
+{
+	m_fCooltime += DT;
+
+	Logger::Debug(L"Æø¹ß»ç¿îµå!");
+	SOUND->Play(m_pExplosion, 0.5f, false);
+
+	if (m_fCooltime > 1.0f)
+	{
+		SOUND->Pause(m_pExplosion);
+	}
+}
+
 void CExplosion::Init()
 {
 	m_pExplosionImage = RESOURCE->LoadImg(L"Bomb_Explosion", L"Image\\Effect\\Effect_BOOM.png");
@@ -42,6 +55,8 @@ void CExplosion::Init()
 	AddComponent(m_pAnimator);
 
 	AddCollider(ColliderType::Rect, Vector(60, 60), Vector(0, 0));
+
+	BoomSound();
 }
 
 void CExplosion::Update()

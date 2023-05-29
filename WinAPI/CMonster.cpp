@@ -91,20 +91,19 @@ void CMonster::BossDead()
 
 void CMonster::Dead()
 {
-	if (m_HP <= 0)
+	fCooltime += DT;
+
+	if (fCooltime > 0.3f)
 	{
-		fCooltime += DT;
-
-		if (fCooltime > 1.0f)
-		{
-			DELETEOBJECT(this);
-		}
-
-		if (fCooltime > 0.3f)
-		{
-			RemoveCollider();
-		}
+		RemoveCollider();
 	}
+
+	if (fCooltime > 1.0f)
+	{
+		DELETEOBJECT(this);
+		fCooltime = 0;
+	}
+
 }
 
 void CMonster::Trace()
