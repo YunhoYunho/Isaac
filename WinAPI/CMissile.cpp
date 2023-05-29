@@ -54,7 +54,7 @@ void CMissile::Release()
 
 void CMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
+	//Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
 }
 
 void CMissile::SetDir(Vector dir)

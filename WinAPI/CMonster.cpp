@@ -161,7 +161,7 @@ void CMonster::CreateMissile()
 
 	if (m_fShotTimer == 0)
 	{
-		Logger::Debug(L"利 固荤老 积己");
+		//Logger::Debug(L"利 固荤老 积己");
 
 		CMonsterMissile* pMissile = new CMonsterMissile();
 		pMissile->SetPos(m_vecPos);

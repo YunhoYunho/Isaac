@@ -59,19 +59,15 @@ void CExplosion::Release()
 
 void CExplosion::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Monster)		
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Monster)
 	{
-		if (GetLayer() == Layer::Monster)
-		{
-			CMonster* pMonster = (CMonster*)(pOtherCollider->GetOwner());
-			pMonster->GetDamaged(m_fDamage);
-		}
+		CMonster* pMonster = (CMonster*)(pOtherCollider->GetOwner());
+		pMonster->GetDamaged(m_fDamage);
+	}
 
-		if (GetLayer() == Layer::Player)
-		{
-			CPlayer* pPlayer = (CPlayer*)(pOtherCollider->GetOwner());
-
-		}
-		DELETEOBJECT(this);
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Player)
+	{
+		CPlayer* pPlayer = (CPlayer*)(pOtherCollider->GetOwner());
+		pPlayer->HurtState();
 	}
 }		

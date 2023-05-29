@@ -54,14 +54,14 @@ void CBaby::Update()
 
 		if (targetDist <= m_fRange * m_fRange)
 		{
-			Logger::Debug(L"공격중!");
+			//Logger::Debug(L"공격중!");
 			stateBaby = L"Shot";
 			CreateMissile();
 		}
 
 		else
 		{
-			Logger::Debug(L"추격중!");
+			//Logger::Debug(L"추격중!");
 			stateBaby = L"Move";
 			Trace();
 		}

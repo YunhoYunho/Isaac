@@ -94,7 +94,6 @@ enum class PlayerState
 	Move,
 	Shot,
 	TakeHit,
-	Dead,
 	GetItem,
 
 	Size,

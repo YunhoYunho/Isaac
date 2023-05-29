@@ -189,19 +189,6 @@ void CPlayer::TakeHitUpdate()
 	Logger::Debug(to_wstring(m_HP));
 }
 
-void CPlayer::DeadUpdate()
-{
-	if (m_HP < 1)
-	{
-		stateHead = L"Dead";
-		stateBody = L"None";
-	}
-	else
-	{
-		m_playerState = PlayerState::Idle;
-	}
-}
-
 void CPlayer::GetItemUpdate()
 {
 	fCooltime += DT;
@@ -264,12 +251,69 @@ void CPlayer::ShotState()
 	}
 }
 
+void CPlayer::HurtState()
+{
+	m_playerState = PlayerState::TakeHit;
+
+	TakeDamage();
+
+	if (m_HP > 0)
+	{
+		SOUND->Play(pHurt, 1.0f, false);
+
+		m_fSTimer += DT;
+
+		if (m_fSTimer > 1.0f)
+		{
+			SOUND->Pause(pHurt);
+			m_fSTimer = 0;
+		}
+	}
+
+	if (m_HP <= 0)
+	{
+		SOUND->Play(pDead, 1.0f, false);
+
+		m_fTimer += DT;
+
+		if (m_fTimer > 1.0f)
+		{
+			SOUND->Pause(pDead);
+			m_fTimer = 0;
+		}
+	}
+}
+
+void CPlayer::TakeDamage()
+{
+	m_HP -= 1;
+
+	RemoveCollider();
+	m_bIsColliderOff = true;
+}
+
+void CPlayer::CheckCollider()
+{
+	if (true == m_bIsColliderOff)
+	{
+		fCooltime += DT;
+
+		if (fCooltime > 1.0f)
+		{
+			AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
+			fCooltime = 0;
+			m_bIsColliderOff = false;
+		}
+	}
+}
+
 void CPlayer::Update()
 {
 	PlayerPos();
 	PlayerHP();
-
+	
 	CreateBomb();
+	CheckCollider();
 
 	if (m_HP <= 0)
 	{
@@ -291,9 +335,6 @@ void CPlayer::Update()
 			break;
 		case PlayerState::TakeHit:
 			TakeHitUpdate();
-			break;
-		case PlayerState::Dead:
-			DeadUpdate();
 			break;
 		case PlayerState::GetItem:
 			GetItemUpdate();
@@ -434,46 +475,9 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Baby" || pOtherCollider->GetObjName() == L"Boomfly"
 		|| pOtherCollider->GetObjName() == L"Gish" || pOtherCollider->GetObjName() == L"Fly"
-		|| pOtherCollider->GetObjName() == L"MonsterMissile" || pOtherCollider->GetObjName() == L"Explosion")
+		|| pOtherCollider->GetObjName() == L"MonsterMissile")
 	{
-		m_HP--;
-		m_playerState = PlayerState::TakeHit;
-
-		if (m_HP > 0)
-		{
-			SOUND->Play(pHurt, 1.0f, false);
-
-			m_fSTimer += DT;
-
-			if (m_fSTimer > 1.0f)
-			{
-				SOUND->Pause(pHurt);
-				m_fSTimer = 0;
-			}
-		}
-
-		RemoveCollider();
-
-		if (m_fTimer > 2.0f)
-		{
-			AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
-			m_fTimer = 0;
-		}
-	}
-
-	if (m_HP <= 0)
-	{
-		m_playerState = PlayerState::Dead;
-		
-		SOUND->Play(pDead, 1.0f, false);
-
-		m_fTimer += DT;
-
-		if (m_fTimer > 1.0f)
-		{
-			SOUND->Pause(pDead);
-			m_fTimer = 0;
-		}
+		HurtState();
 	}
 
 	if (pOtherCollider->GetObjName() == L"TripleShot")

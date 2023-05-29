@@ -46,17 +46,22 @@ public:
 	float fCooltime = 0;
 	float m_fSTimer = 0;
 	bool m_bIsTripleShot;
+	bool m_bIsHit;
+	bool m_bIsColliderOff;
 
 public:
 	void IdleUpdate();
 	void MoveUpdate();
 	void ShotUpdate();
 	void TakeHitUpdate();
-	void DeadUpdate();
 	void GetItemUpdate();
 
 	void MoveState();
 	void ShotState();
+	void HurtState();
+
+	void TakeDamage();
+	void CheckCollider();
 
 	Vector GetLookDir();
 	void SetLookDir(Vector vecLookDir);
