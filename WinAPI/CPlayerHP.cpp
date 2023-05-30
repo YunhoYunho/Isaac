@@ -5,51 +5,43 @@
 
 CPlayerHP::CPlayerHP()
 {
-	m_layer = Layer::HUD;
-	m_strName = L"HUD";
+	m_layer = Layer::PlayerHP;
+	m_strName = L"PlayerHP";
 
-	m_pPlayerHPImage = nullptr;
+	pPlayer = nullptr;
+	m_pPlayerHPFrame = nullptr;
+	m_pPlayerHPGauge = nullptr;
 }
 
 CPlayerHP::~CPlayerHP()
 {
 }
 
+void CPlayerHP::GetHP(CPlayer* value)
+{
+	pPlayer = value;
+}
+
 void CPlayerHP::Init()
 {
-	m_pPlayerHPImage = RESOURCE->LoadImg(L"PlayerHP,", L"Image\\Map\\3Heart.png");
-
-	m_pAnimator = new CAnimator;
-	m_pAnimator->CreateAnimation(L"PlayerHP0", m_pPlayerHPImage, Vector(0.f, 0.f), Vector(  1.f,  1.f), Vector(  1.f, 0.f), 0, 1);
-	m_pAnimator->CreateAnimation(L"PlayerHP1", m_pPlayerHPImage, Vector(0.f, 0.f), Vector( 45.f, 45.f), Vector( 45.f, 0.f), 0, 1);
-	m_pAnimator->CreateAnimation(L"PlayerHP2", m_pPlayerHPImage, Vector(0.f, 0.f), Vector( 90.f, 45.f), Vector( 90.f, 0.f), 0, 1);
-	m_pAnimator->CreateAnimation(L"PlayerHP3", m_pPlayerHPImage, Vector(0.f, 0.f), Vector(135.f, 45.f), Vector(135.f, 0.f), 0, 1);
-
-	AddComponent(m_pAnimator);
+	m_pPlayerHPFrame = RESOURCE->LoadImg(L"Empty_Heart", L"Image\\Map\\Empty_Heart.png");
+	m_pPlayerHPGauge = RESOURCE->LoadImg(L"Full_Heart", L"Image\\Map\\Full_Heart.png");
 }
 
 void CPlayerHP::Update()
 {
-	m_playerHP = PLAYERHP;
-
-	switch (m_playerHP)
-	{
-	case 3:
-		m_pAnimator->Play(L"PlayerHP3");
-		break;
-	case 2:
-		m_pAnimator->Play(L"PlayerHP2");
-		break;
-	case 1:
-		m_pAnimator->Play(L"PlayerHP1");
-		break;
-	case 0:
-		m_pAnimator->Play(L"PlayerHP0");
-	}
 }
 
 void CPlayerHP::Render()
 {
+	RENDER->Image(m_pPlayerHPFrame, 0, 0, 300, 50);
+
+	float hpWidth = 300 * PLAYERHP / PLAYERMAXHP;
+
+	if (m_playerHP >= 0)
+	{
+		RENDER->FrameImage(m_pPlayerHPGauge, 0, 0, hpWidth, 50, 0, 0, hpWidth, 50);
+	}
 }
 
 void CPlayerHP::Release()

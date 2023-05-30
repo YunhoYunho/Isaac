@@ -259,7 +259,13 @@
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CPickupItem.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>03. GameObject\Stage\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CPickupHeart.h">
+      <Filter>03. GameObject\Stage\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CPickupKey.h">
+      <Filter>03. GameObject\Stage\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -432,7 +438,13 @@
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="CPickupItem.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>03. GameObject\Stage\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CPickupHeart.cpp">
+      <Filter>03. GameObject\Stage\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CPickupKey.cpp">
+      <Filter>03. GameObject\Stage\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

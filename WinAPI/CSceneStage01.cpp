@@ -27,6 +27,8 @@
 #include "CTripleShot.h"
 #include "CBossHPBar.h"
 
+#include "CPickupHeart.h"
+
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
@@ -45,21 +47,21 @@ void CSceneStage01::Init()
 
 	/*CGish* pGish = new CGish();
 	pGish->SetPos(500, WINSIZEY * 0.5f);
-	AddGameObject(pGish);
+	AddGameObject(pGish);*/
 
-	CBaby* pBaby = new CBaby();
+	/*CBaby* pBaby = new CBaby();
 	pBaby->SetPos(300, WINSIZEY * 0.5f);
 	AddGameObject(pBaby);*/
 
-	/*CBoomfly* pBoomfly = new CBoomfly();
+	CBoomfly* pBoomfly = new CBoomfly();
 	pBoomfly->SetPos(700, WINSIZEY * 0.5f);
 	AddGameObject(pBoomfly);
 
-	CFly* pFly1 = new CFly();
+	/*CFly* pFly1 = new CFly();
 	pFly1->SetPos(800, WINSIZEY * 0.5f);
-	AddGameObject(pFly1);
+	AddGameObject(pFly1);*/
 
-	CFly* pFly2 = new CFly();
+	/*CFly* pFly2 = new CFly();
 	pFly2->SetPos(800, WINSIZEY * 0.3f);
 	AddGameObject(pFly2);*/
 
@@ -71,8 +73,8 @@ void CSceneStage01::Init()
 	AddGameObject(pBackGround);
 
 	CPlayerHP* pPlayerHPImage = new CPlayerHP;
-	pPlayerHPImage->SetPos(70, 50);
 	AddGameObject(pPlayerHPImage);
+	pPlayerHPImage->GetHP(pPlayer);
 
 	CTripleShot* pTripleShot = new CTripleShot;
 	pTripleShot->SetPos(WINSIZEX * 0.5f, WINSIZEY * 0.5f);

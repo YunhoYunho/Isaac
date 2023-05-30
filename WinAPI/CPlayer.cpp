@@ -16,12 +16,14 @@
 #include "CMonsterMissile.h"
 #include "CBomb.h"
 
+#include "CPickupHeart.h"
+
 CPlayer::CPlayer()
 {
 	m_vecPos = Vector(0, 0);
 	m_vecScale = Vector(100, 100);
 	m_layer = Layer::Player;
-	m_strName = L"플레이어";
+	m_strName = L"Player";
 	m_playerState = PlayerState::Idle;
 
 	m_pBodyImage = nullptr;
@@ -37,6 +39,7 @@ CPlayer::CPlayer()
 
 	fCooltime = 0;
 	m_HP = 3;
+	m_MaxHP = 5;
 	m_fDamage = 2.0f;
 
 	m_bIsTripleShot = false;
@@ -311,9 +314,12 @@ void CPlayer::Update()
 {
 	PlayerPos();
 	PlayerHP();
+	PlayerMaxHP();
 	
 	CreateBomb();
 	CheckCollider();
+
+	CreateHeart();
 
 	if (m_HP <= 0)
 	{
@@ -395,6 +401,17 @@ void CPlayer::CreateBomb()
 	}
 }
 
+void CPlayer::CreateHeart()
+{
+	if (BUTTONDOWN('K'))
+	{
+		Logger::Debug(L"하트 생성");
+		CPickupHeart* pPickupHeart = new CPickupHeart();
+		pPickupHeart->SetPos(Vector(800, WINSIZEY * 0.3f));
+		ADDOBJECT(pPickupHeart);
+	}
+}
+
 void CPlayer::NormalShot()
 {
 	CPlayerMissile* pMissile = new CPlayerMissile();
@@ -471,6 +488,16 @@ void CPlayer::SetMoveDir(Vector vecMoveDir)
 	m_vecMoveDir = vecMoveDir;
 }
 
+float CPlayer::GetHP()
+{
+	return m_HP;
+}
+
+float CPlayer::GetMaxHP()
+{
+	return m_MaxHP;
+}
+
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Baby" || pOtherCollider->GetObjName() == L"Boomfly"
@@ -495,6 +522,14 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 			m_fTimer = 0;
 		}
 	}
+
+	if (pOtherCollider->GetObjName() == L"Heart")
+	{
+		if (m_HP < m_MaxHP)
+		{
+			m_HP++;
+		}
+	}
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
@@ -513,4 +548,9 @@ void CPlayer::PlayerPos()
 void CPlayer::PlayerHP()
 {
 	PLAYERHP = m_HP;
+}
+
+void CPlayer::PlayerMaxHP()
+{
+	PLAYERMAXHP = m_MaxHP;
 }

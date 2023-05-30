@@ -40,6 +40,7 @@ private:
 
 public:
 	int m_HP;
+	int m_MaxHP;
 	float m_fSpeed = 200.0f;
 	float m_fDamage = 20.0f;
 	float m_fTimer = 0;
@@ -67,6 +68,9 @@ public:
 	void SetLookDir(Vector vecLookDir);
 	void SetMoveDir(Vector vecMoveDir);
 
+	float GetHP();
+	float GetMaxHP();
+
 private:
 	void Init() override;
 	void Update() override;
@@ -76,6 +80,8 @@ private:
 	void AnimatorUpdate();
 	void CreateMissile();
 	void CreateBomb();
+
+	void CreateHeart();
 
 	void NormalShot();
 	void TripleShot();
@@ -87,4 +93,5 @@ private:
 private:
 	void PlayerPos();
 	void PlayerHP();
+	void PlayerMaxHP();
 };

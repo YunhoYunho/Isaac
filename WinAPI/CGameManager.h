@@ -22,8 +22,10 @@ public:
 
 public:
 	int PlayerHP;
+	int PlayerMaxHP;
 };
 
 #define GAME		CGameManager::GetInstance()
 #define PLAYERPOS	CGameManager::GetInstance()->PlayerPos
 #define PLAYERHP	CGameManager::GetInstance()->PlayerHP
+#define PLAYERMAXHP	CGameManager::GetInstance()->PlayerMaxHP

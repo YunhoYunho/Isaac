@@ -1,7 +1,6 @@
 #pragma once
 #include "CPlayer.h"
 
-class CAnimator;
 class CImage;
 
 class CPlayerHP : public CGameObject
@@ -11,11 +10,15 @@ public:
 	virtual ~CPlayerHP();
 
 private:
-	CAnimator* m_pAnimator;
-	CImage* m_pPlayerHPImage;
+	CImage* m_pPlayerHPFrame;
+	CImage* m_pPlayerHPGauge;
+	CPlayer* pPlayer;
 
 private:
 	int m_playerHP;
+
+public:
+	void GetHP(CPlayer* value);
 
 private:
 	void Init() override;
