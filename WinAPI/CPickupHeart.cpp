@@ -55,7 +55,6 @@ void CPickupHeart::OnCollisionEnter(CCollider* pOtherCollider)
 		else
 		{
 			m_bIsContact = true;
-
 		}
 	}
 }

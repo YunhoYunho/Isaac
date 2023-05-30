@@ -17,6 +17,7 @@
 #include "CBomb.h"
 
 #include "CPickupHeart.h"
+#include "CNormalChest.h" 
 
 CPlayer::CPlayer()
 {
@@ -41,6 +42,8 @@ CPlayer::CPlayer()
 	m_HP = 3;
 	m_MaxHP = 5;
 	m_fDamage = 2.0f;
+	m_iKey = 1;
+	m_iBomb = 1;
 
 	m_bIsTripleShot = false;
 }
@@ -319,7 +322,10 @@ void CPlayer::Update()
 	CreateBomb();
 	CheckCollider();
 
+#pragma region 디버깅용
 	CreateHeart();
+	CreateChest();
+#pragma endregion
 
 	if (m_HP <= 0)
 	{
@@ -409,6 +415,17 @@ void CPlayer::CreateHeart()
 		CPickupHeart* pPickupHeart = new CPickupHeart();
 		pPickupHeart->SetPos(Vector(800, WINSIZEY * 0.3f));
 		ADDOBJECT(pPickupHeart);
+	}
+}
+
+void CPlayer::CreateChest()
+{
+	if (BUTTONDOWN('C'))
+	{
+		Logger::Debug(L"상자 생성");
+		CNormalChest* pNormalChest = new CNormalChest();
+		pNormalChest->SetPos(Vector(700, WINSIZEY * 0.3f));
+		ADDOBJECT(pNormalChest);
 	}
 }
 
@@ -529,6 +546,16 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		{
 			m_HP++;
 		}
+	}
+
+	if (pOtherCollider->GetObjName() == L"Key")
+	{
+		m_iKey++;
+	}
+
+	if (pOtherCollider->GetObjName() == L"Bomb")
+	{
+		m_iBomb++;
 	}
 }
 

@@ -41,6 +41,8 @@ private:
 public:
 	int m_HP;
 	int m_MaxHP;
+	int m_iKey;
+	int m_iBomb;
 	float m_fSpeed = 200.0f;
 	float m_fDamage = 20.0f;
 	float m_fTimer = 0;
@@ -82,6 +84,7 @@ private:
 	void CreateBomb();
 
 	void CreateHeart();
+	void CreateChest();
 
 	void NormalShot();
 	void TripleShot();

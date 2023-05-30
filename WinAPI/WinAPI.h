@@ -61,6 +61,7 @@ enum class Layer
 	Player,
 	PlayerMissile,
 	ItemRock,
+	Chest,
 	Item,
 	Bomb,
 	Explosion,
