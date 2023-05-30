@@ -14,8 +14,8 @@ public:
 	bool left;
 	bool right;
 
-	int m_HP;
-	int m_MaxHP;
+	float m_HP;
+	float m_MaxHP;
 
 	float m_fSpeed = 200.0f;
 	float m_fTimer = 0;

@@ -60,7 +60,7 @@ void CTripleShot::Release()
 
 void CTripleShot::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"플레이어")
+	if (pOtherCollider->GetObjName() == L"Player")
 	{
 		m_bIsGetItem = true;
 	}

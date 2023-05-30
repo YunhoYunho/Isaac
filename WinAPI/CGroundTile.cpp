@@ -118,10 +118,10 @@ void CGroundTile::OnCollisionEnter(CCollider* pOther)
 void CGroundTile::OnCollisionStay(CCollider* pOther)
 {
 	// 땅타일과 충돌했을 경우 처리
-	if (pOther->GetObjName() == L"플레이어" || pOther->GetObjName() == L"Baby"
+	if (pOther->GetObjName() == L"Player" || pOther->GetObjName() == L"Baby"
 		|| pOther->GetObjName() == L"Gish" || pOther->GetObjName() == L"Fly")
 	{
-		// 플레이어가 충돌 중일 경우 밀어내기 연산
+		// Player가 충돌 중일 경우 밀어내기 연산
 		CPlayer* pPlayer = static_cast<CPlayer*>(pOther->GetOwner());
 
 		dir = GetCollisionDir(pOther);

@@ -92,9 +92,9 @@ void CBaby::OnCollisionStay(CCollider* pOtherCollider)
 
 void CBaby::OnCollisionExit(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"플레이어")
+	if (pOtherCollider->GetObjName() == L"Player")
 	{
-		Logger::Debug(L"몬스터가 플레이어와 충돌해제");
+		Logger::Debug(L"몬스터가 Player와 충돌해제");
 	}
 	else if (pOtherCollider->GetObjName() == L"미사일")
 	{
