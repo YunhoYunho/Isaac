@@ -23,9 +23,13 @@ public:
 public:
 	int PlayerHP;
 	int PlayerMaxHP;
+	int PlayerBomb;
+	int PlayerKey;
 };
 
 #define GAME		CGameManager::GetInstance()
 #define PLAYERPOS	CGameManager::GetInstance()->PlayerPos
 #define PLAYERHP	CGameManager::GetInstance()->PlayerHP
 #define PLAYERMAXHP	CGameManager::GetInstance()->PlayerMaxHP
+#define PLAYERBOMB	CGameManager::GetInstance()->PlayerBomb
+#define PLAYERKEY	CGameManager::GetInstance()->PlayerKey

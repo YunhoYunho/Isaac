@@ -17,7 +17,9 @@
 #include "CBomb.h"
 
 #include "CPickupHeart.h"
+#include "CChest.h"
 #include "CNormalChest.h" 
+#include "CGoldenChest.h"
 
 CPlayer::CPlayer()
 {
@@ -42,8 +44,8 @@ CPlayer::CPlayer()
 	m_HP = 3;
 	m_MaxHP = 5;
 	m_fDamage = 2.0f;
-	m_iKey = 1;
 	m_iBomb = 1;
+	m_iKey = 1;
 
 	m_bIsTripleShot = false;
 }
@@ -318,6 +320,8 @@ void CPlayer::Update()
 	PlayerPos();
 	PlayerHP();
 	PlayerMaxHP();
+	PlayerBomb();
+	PlayerKey();
 	
 	CreateBomb();
 	CheckCollider();
@@ -427,6 +431,14 @@ void CPlayer::CreateChest()
 		pNormalChest->SetPos(Vector(700, WINSIZEY * 0.3f));
 		ADDOBJECT(pNormalChest);
 	}
+
+	if (BUTTONDOWN('V'))
+	{
+		Logger::Debug(L"황금상자 생성");
+		CGoldenChest* pGoldenChest = new CGoldenChest();
+		pGoldenChest->SetPos(Vector(600, WINSIZEY * 0.3f));
+		ADDOBJECT(pGoldenChest);
+	}
 }
 
 void CPlayer::NormalShot()
@@ -505,14 +517,19 @@ void CPlayer::SetMoveDir(Vector vecMoveDir)
 	m_vecMoveDir = vecMoveDir;
 }
 
-float CPlayer::GetHP()
+int CPlayer::GetHP()
 {
 	return m_HP;
 }
 
-float CPlayer::GetMaxHP()
+int CPlayer::GetMaxHP()
 {
 	return m_MaxHP;
+}
+
+int CPlayer::GetKey()
+{
+	return m_iKey;
 }
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
@@ -557,6 +574,11 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		m_iBomb++;
 	}
+
+	if (pOtherCollider->GetObjName() == L"GoldenChest")
+	{
+		m_iKey--;
+	}
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
@@ -580,4 +602,14 @@ void CPlayer::PlayerHP()
 void CPlayer::PlayerMaxHP()
 {
 	PLAYERMAXHP = m_MaxHP;
+}
+
+void CPlayer::PlayerBomb()
+{
+	PLAYERBOMB = m_iBomb;
+}
+
+void CPlayer::PlayerKey()
+{
+	PLAYERKEY = m_iKey;
 }

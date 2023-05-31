@@ -26,8 +26,7 @@
 
 #include "CTripleShot.h"
 #include "CBossHPBar.h"
-
-#include "CPickupHeart.h"
+#include "CHUD.h"
 
 CSceneStage01::CSceneStage01()
 {
@@ -87,6 +86,9 @@ void CSceneStage01::Init()
 	/*CBossHPBar* pBossHPBar = new CBossHPBar();
 	AddGameObject(pBossHPBar);
 	pBossHPBar->GetBossHP(pGish);*/
+
+	CHUD* pHUD = new CHUD();
+	AddGameObject(pHUD);
 }
 
 void CSceneStage01::Enter()

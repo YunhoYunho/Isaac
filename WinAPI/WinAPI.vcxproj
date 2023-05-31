@@ -148,6 +148,7 @@
     <ClInclude Include="CButton.h" />
     <ClInclude Include="CCameraController.h" />
     <ClInclude Include="CCameraManager.h" />
+    <ClInclude Include="CChest.h" />
     <ClInclude Include="CCollider.h" />
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CComponent.h" />
@@ -164,6 +165,7 @@
     </ClInclude>
     <ClInclude Include="CGoldenChest.h" />
     <ClInclude Include="CGroundTile.h" />
+    <ClInclude Include="CHUD.h" />
     <ClInclude Include="CImageObject.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CItemRock.h" />
@@ -215,6 +217,7 @@
     <ClInclude Include="SingleTon.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="WinAPI.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -229,6 +232,7 @@
     <ClCompile Include="CButton.cpp" />
     <ClCompile Include="CCameraController.cpp" />
     <ClCompile Include="CCameraManager.cpp" />
+    <ClCompile Include="CChest.cpp" />
     <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CComponent.cpp" />
@@ -245,6 +249,7 @@
     </ClCompile>
     <ClCompile Include="CGoldenChest.cpp" />
     <ClCompile Include="CGroundTile.cpp" />
+    <ClCompile Include="CHUD.cpp" />
     <ClCompile Include="CImageObject.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CItemRock.cpp" />

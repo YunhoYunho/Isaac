@@ -67,6 +67,7 @@ enum class Layer
 	Explosion,
 
 	PlayerHP,
+	HUD,
 	Ui,
 	Size,
 };

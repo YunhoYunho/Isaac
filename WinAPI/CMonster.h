@@ -33,7 +33,7 @@ public:
 	Vector m_vecPlayerPos;
 
 public:
-	void GetDamaged(int value);
+	void GetDamaged(float value);
 	void BossDead();
 	void Dead();
 	void Trace();

@@ -66,7 +66,7 @@ void CMonster::Release()
 {
 }
 
-void CMonster::GetDamaged(int value)
+void CMonster::GetDamaged(float value)
 {
 	m_HP -= value;
 

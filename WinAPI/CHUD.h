@@ -11,7 +11,6 @@ public:
 	virtual ~CHUD();
 
 private:
-	CAnimator* m_pAnimator;
 	CImage* m_pHUDImage;
 
 private:
@@ -20,4 +19,3 @@ private:
 	void Render() override;
 	void Release() override;
 };
-

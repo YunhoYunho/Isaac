@@ -41,13 +41,15 @@ private:
 public:
 	int m_HP;
 	int m_MaxHP;
-	int m_iKey;
 	int m_iBomb;
+	int m_iKey;
+
 	float m_fSpeed = 200.0f;
 	float m_fDamage = 20.0f;
 	float m_fTimer = 0;
 	float fCooltime = 0;
 	float m_fSTimer = 0;
+
 	bool m_bIsTripleShot;
 	bool m_bIsHit;
 	bool m_bIsColliderOff;
@@ -70,8 +72,10 @@ public:
 	void SetLookDir(Vector vecLookDir);
 	void SetMoveDir(Vector vecMoveDir);
 
-	float GetHP();
-	float GetMaxHP();
+	int GetHP();
+	int GetMaxHP();
+
+	int GetKey();
 
 private:
 	void Init() override;
@@ -97,4 +101,6 @@ private:
 	void PlayerPos();
 	void PlayerHP();
 	void PlayerMaxHP();
+	void PlayerBomb();
+	void PlayerKey();
 };

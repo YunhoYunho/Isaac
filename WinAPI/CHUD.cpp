@@ -13,12 +13,7 @@ CHUD::~CHUD()
 
 void CHUD::Init()
 {
-	m_pHUDImage = RESOURCE->LoadImg(L"HUD", L"Image\\Map\\HUD.png");
-
-	m_pAnimator = new CAnimator;
-	m_pAnimator->CreateAnimation(L"HUD", m_pHUDImage, Vector(0.f, 0.f), Vector(1280.f, 720.f), Vector(1280.f, 0.f), 0, 1);
-	m_pAnimator->Play(L"HUD");
-	AddComponent(m_pAnimator);
+	m_pHUDImage = RESOURCE->LoadImg(L"HUD", L"Image\\Map\\Icon.png");
 }
 
 void CHUD::Update()
@@ -27,6 +22,18 @@ void CHUD::Update()
 
 void CHUD::Render()
 {
+	RENDER->Image(m_pHUDImage, 80, 80, 130, 180);
+	
+	wstring curBomb;
+	curBomb = Util::WStringFormat(L"%02d", PLAYERBOMB);	
+
+	wstring curKey;
+	curKey = Util::WStringFormat(L"%02d", PLAYERKEY);
+
+	RENDER->Text(curBomb, 230, 160, 50, 50, Color(255, 255, 255, 1), 30.0f);
+	RENDER->Text(curKey, 230, 260, 50, 50, Color(255, 255, 255, 1), 30.0f);
+
+	Logger::Debug(curBomb);
 }
 
 void CHUD::Release()
