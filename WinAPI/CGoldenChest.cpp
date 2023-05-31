@@ -5,7 +5,9 @@ CGoldenChest::CGoldenChest()
 {
 	m_layer = Layer::Chest;
 	m_strName = L"GoldenChest";
+	m_pGoldenChestImage = nullptr;
 	m_bIsOpen = false;
+	m_bIsGolden = false;
 }
 
 CGoldenChest::~CGoldenChest()
@@ -14,7 +16,7 @@ CGoldenChest::~CGoldenChest()
 
 void CGoldenChest::Init()
 {
-	m_pGoldenChestImage = RESOURCE->LoadImg(L"NormalChest", L"Image\\Item\\Golden_Box.png");
+	m_pGoldenChestImage = RESOURCE->LoadImg(L"GoldenChest", L"Image\\Item\\Golden_Box.png");
 
 	m_pAnimator = new CAnimator;
 
@@ -46,7 +48,11 @@ void CGoldenChest::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Player")
 	{
-
+		if (PLAYERKEY > 0)
+		{
+			m_bIsOpen = true;
+			m_bIsGolden = true;
+		}
 	}
 }
 

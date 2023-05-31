@@ -1,15 +1,13 @@
 #pragma once
-#include "CGameObject.h"
-#include "CNormalChest.h"
+#include "CChest.h"
 
-class CGoldenChest : public CNormalChest
+class CGoldenChest : public CChest
 {
 public:
 	CGoldenChest();
 	virtual ~CGoldenChest();
 
 private:
-	CAnimator* m_pAnimator;
 	CImage* m_pGoldenChestImage;
 
 private:

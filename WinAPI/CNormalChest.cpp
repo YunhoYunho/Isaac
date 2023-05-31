@@ -7,36 +7,10 @@ CNormalChest::CNormalChest()
 	m_strName = L"NormalChest";
 	m_pNormalChestImage = nullptr;
 	m_bIsOpen = false;
-	m_fTimer = 0;
 }
 
 CNormalChest::~CNormalChest()
 {
-}
-
-void CNormalChest::Open()
-{
-	if (true == m_bIsOpen)
-	{
-		m_pAnimator->Play(L"Open");
-
-		OpenSound();
-
-		m_bIsOpen = false;
-	}
-}
-
-void CNormalChest::OpenSound()
-{
-	SOUND->Play(pOpenSound, 1);
-
-	m_fTimer += DT;
-
-	if (m_fTimer > 1.0f)
-	{
-		SOUND->Pause(pOpenSound);
-		m_fTimer = 0;
-	}
 }
 
 void CNormalChest::Init()
