@@ -28,6 +28,21 @@
 #include "CBossHPBar.h"
 #include "CHUD.h"
 
+#include "CDoorControl.h"
+#include "CDoorFrame.h"
+
+#define ROOM1P1		Vector(800, 200)
+#define ROOM1P2		Vector(800, 300)
+#define ROOM1P3		Vector(800, 400)
+#define ROOM1P4		Vector(800, 500)
+
+#define ROOM2P1		Vector(800, 200)
+#define ROOM2P2		Vector(800, 300)
+#define ROOM2P3		Vector(800, 400)
+#define ROOM2P4		Vector(800, 500)
+
+#define BOSSROOM	Vector(800, 200)
+
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
@@ -68,7 +83,7 @@ void CSceneStage01::Init()
 	//AddGameObject(pCamController);
 
 	CImageObject* pBackGround = new CImageObject;
-	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Isaac_StageMap.png"));
+	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Stage01_Map.png"));
 	AddGameObject(pBackGround);
 
 	CPlayerHP* pPlayerHPImage = new CPlayerHP;
@@ -89,6 +104,12 @@ void CSceneStage01::Init()
 
 	CHUD* pHUD = new CHUD();
 	AddGameObject(pHUD);
+
+	CDoorControl* pDoorControl = new CDoorControl();
+	AddGameObject(pDoorControl);
+
+	CDoorFrame* pDoorFrame = new CDoorFrame();
+	AddGameObject(pDoorFrame);
 }
 
 void CSceneStage01::Enter()

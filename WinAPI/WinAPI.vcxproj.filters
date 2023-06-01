@@ -273,14 +273,23 @@
     <ClInclude Include="CNormalChest.h">
       <Filter>03. GameObject\Stage\Item</Filter>
     </ClInclude>
-    <ClInclude Include="CChest.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CHUD.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>02. Util</Filter>
+    </ClInclude>
+    <ClInclude Include="CChest.h">
+      <Filter>03. GameObject\Stage\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CHUD.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoorFrame.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoorControl.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoor.h">
+      <Filter>04. Scene\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -468,10 +477,19 @@
       <Filter>03. GameObject\Stage\Item</Filter>
     </ClCompile>
     <ClCompile Include="CChest.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>03. GameObject\Stage\Item</Filter>
     </ClCompile>
     <ClCompile Include="CHUD.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoorFrame.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoorControl.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoor.cpp">
+      <Filter>04. Scene\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

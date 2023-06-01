@@ -26,6 +26,7 @@
 #include <queue>
 #include <stack>
 #include <random>
+#include <algorithm>
 
 using namespace std;
 

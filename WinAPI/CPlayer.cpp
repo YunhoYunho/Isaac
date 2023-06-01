@@ -577,7 +577,10 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 
 	if (pOtherCollider->GetObjName() == L"GoldenChest")
 	{
-		m_iKey--;
+		if (m_iKey > 0)
+		{
+			m_iKey--;
+		}
 	}
 }
 
