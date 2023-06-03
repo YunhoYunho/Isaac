@@ -5,6 +5,10 @@
 CGameManager::CGameManager()
 {
 	m_bIsDebugMode = false;
+	m_bIsRoom1Clear = false;
+	m_bIsRoom2Clear = false;
+	m_bIsRoom3Clear = false;
+	monsterKillCount = 0;
 }
 
 CGameManager::~CGameManager()

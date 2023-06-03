@@ -81,6 +81,20 @@ void CCameraManager::FadeOut(float duration)
 	m_fTimeToBright = duration;
 }
 
+void CCameraManager::LTeleport()
+{
+	m_vecLookAt += Vector(1280, 0);
+
+	SetTargetPos(m_vecLookAt, 0.5f);
+}
+
+void CCameraManager::RTeleport()
+{
+	m_vecLookAt -= Vector(1280, 0);
+
+	SetTargetPos(m_vecLookAt, 0.5f);
+}
+
 void CCameraManager::Init()
 {
 }

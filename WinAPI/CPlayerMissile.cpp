@@ -59,7 +59,7 @@ void CPlayerMissile::CheckDestroyMissile()
 		if (m_fCooltime > 0.7f)
 		{
 			DELETEOBJECT(this);
-			Logger::Debug(L"벽에 부딪혀 눈물 삭제");
+			//Logger::Debug(L"벽에 부딪혀 눈물 삭제");
 		}
 	}
 }

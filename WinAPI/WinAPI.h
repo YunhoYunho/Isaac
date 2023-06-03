@@ -55,6 +55,7 @@ enum class Layer
 	Title,
 	GroundTile,
 	Obstacle,
+	Teleport,
 	DoorControl,
 	DoorFrame,
 	Missile,

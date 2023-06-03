@@ -291,6 +291,12 @@
     <ClInclude Include="CDoor.h">
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
+    <ClInclude Include="CDoorCollider.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoorTeleport.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -490,6 +496,12 @@
     </ClCompile>
     <ClCompile Include="CDoor.cpp">
       <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoorCollider.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoorTeleport.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

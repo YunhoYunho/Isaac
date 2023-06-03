@@ -211,7 +211,7 @@ void CPlayer::GetItemUpdate()
 	if (fCooltime > 1.0f)
 	{
 		m_playerState = PlayerState::Idle;
-		AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
+		AddCollider(ColliderType::Rect, Vector(57, 60), Vector(0, 8));
 		fCooltime = 0;
 	}
 }
@@ -310,7 +310,7 @@ void CPlayer::CheckCollider()
 
 		if (fCooltime > 1.0f)
 		{
-			AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
+			AddCollider(ColliderType::Rect, Vector(57, 60), Vector(0, 8));
 			fCooltime = 0;
 			m_bIsColliderOff = false;
 		}
@@ -534,12 +534,14 @@ void CPlayer::Teleport()
 {
 	if (true == m_bIsLTeleport)
 	{
+		CAMERA->LTeleport();
 		m_vecPos.x += 300.0f;
 		m_bIsLTeleport = false;
 	}
 
 	else if (true == m_bIsRTeleport)
 	{
+		CAMERA->RTeleport();
 		m_vecPos.x -= 300.0f;
 		m_bIsRTeleport = false;
 	}
