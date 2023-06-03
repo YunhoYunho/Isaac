@@ -53,6 +53,8 @@ public:
 	bool m_bIsTripleShot;
 	bool m_bIsHit;
 	bool m_bIsColliderOff;
+	bool m_bIsLTeleport;
+	bool m_bIsRTeleport;
 
 public:
 	void IdleUpdate();
@@ -74,6 +76,8 @@ public:
 
 	int GetHP();
 	int GetMaxHP();
+
+	void Teleport();
 
 	int GetKey();
 

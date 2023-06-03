@@ -48,6 +48,8 @@ CPlayer::CPlayer()
 	m_iKey = 1;
 
 	m_bIsTripleShot = false;
+	m_bIsLTeleport = false;
+	m_bIsRTeleport = false;
 }
 
 CPlayer::~CPlayer()
@@ -102,7 +104,7 @@ void CPlayer::Init()
 	AddComponent(m_pAnimatorBody);
 	AddComponent(m_pAnimatorHead);
 
-	AddCollider(ColliderType::Rect, Vector(57, 66), Vector(0, 8));
+	AddCollider(ColliderType::Rect, Vector(57, 60), Vector(0, 8));
 }
 
 void CPlayer::IdleUpdate()
@@ -325,6 +327,7 @@ void CPlayer::Update()
 	
 	CreateBomb();
 	CheckCollider();
+	Teleport();
 
 #pragma region 디버깅용
 	CreateHeart();
@@ -377,7 +380,7 @@ void CPlayer::AnimatorUpdate()
 
 void CPlayer::CreateMissile()
 {
-	Logger::Debug(L"미사일 생성");
+	//Logger::Debug(L"미사일 생성");
 
 	if (m_fTimer == 0)
 	{
@@ -527,6 +530,21 @@ int CPlayer::GetMaxHP()
 	return m_MaxHP;
 }
 
+void CPlayer::Teleport()
+{
+	if (true == m_bIsLTeleport)
+	{
+		m_vecPos.x += 300.0f;
+		m_bIsLTeleport = false;
+	}
+
+	else if (true == m_bIsRTeleport)
+	{
+		m_vecPos.x -= 300.0f;
+		m_bIsRTeleport = false;
+	}
+}
+
 int CPlayer::GetKey()
 {
 	return m_iKey;
@@ -549,7 +567,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		SOUND->Play(pGetItem, 1.0f, false);
 
 		m_fTimer += DT;
-
+		 
 		if (m_fTimer > 1.0f)
 		{
 			SOUND->Pause(pGetItem);
@@ -580,6 +598,19 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		if (m_iKey > 0)
 		{
 			m_iKey--;
+		}
+	}
+
+	if (pOtherCollider->GetObjName() == L"Teleport")
+	{
+		if (PLAYERPOS.x <= pOtherCollider->GetPos().x)
+		{
+			m_bIsLTeleport = true;
+		}
+
+		else
+		{
+			m_bIsRTeleport = true;
 		}
 	}
 }
