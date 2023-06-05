@@ -16,6 +16,7 @@ CBoomfly::CBoomfly()
 	m_HP = 7;
 	m_fTimer = 0;
 	m_bIsExplosion = false;
+	m_bIsDead = false;
 	
 	up = true;
 	down = false;
@@ -45,10 +46,12 @@ void CBoomfly::Init()
 void CBoomfly::Update()
 {
 	BoomTrigger();
+	DeadCount();
 
 	if (m_HP <= 0)
 	{
 		m_bIsExplosion = true;
+		m_bIsDead = true;
 	}
 
 	else

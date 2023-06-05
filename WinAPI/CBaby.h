@@ -10,6 +10,8 @@ public:
 	CBaby();
 	virtual ~CBaby();
 
+	CMonster* Clone() { return new CBaby(*this); }
+
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pBabyImage;

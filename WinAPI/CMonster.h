@@ -9,11 +9,16 @@ public:
 	CMonster();
 	virtual ~CMonster();
 
+	virtual CMonster* Clone() = 0;
+
 	bool up;
 	bool down;
 	bool left;
 	bool right;
 
+	bool m_bIsDead;
+
+	int deadCount = 0;
 	float m_HP;
 	float m_MaxHP;
 
@@ -36,6 +41,7 @@ public:
 	void GetDamaged(float value);
 	void BossDead();
 	void Dead();
+	void DeadCount();
 	void Trace();
 	void PingPong();
 

@@ -23,6 +23,8 @@ CMonster::CMonster()
 
 	fCooltime = 0;
 	m_fRange = 10.0f;
+
+	m_bIsDead = false;
 }
 
 CMonster::~CMonster()
@@ -85,6 +87,7 @@ void CMonster::BossDead()
 			RemoveCollider();
 			m_fSpeed = 0;
 			fCooltime = 0;
+			m_bIsDead = true;
 		}
 	}
 }
@@ -96,14 +99,25 @@ void CMonster::Dead()
 	if (fCooltime > 0.3f)
 	{
 		RemoveCollider();
+
 	}
 
 	if (fCooltime > 1.0f)
 	{
+		m_bIsDead = true;
+		DeadCount();
 		DELETEOBJECT(this);
 		fCooltime = 0;
 	}
+}
 
+void CMonster::DeadCount()
+{
+	if (true == m_bIsDead)
+	{
+		MONSTERKILLCOUNT++;
+		m_bIsDead = false;
+	}
 }
 
 void CMonster::Trace()

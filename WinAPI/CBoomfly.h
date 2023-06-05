@@ -10,6 +10,8 @@ public:
 	CBoomfly();
 	virtual ~CBoomfly();
 
+	CMonster* Clone() { return new CBoomfly(*this); }
+
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pBoomflyImage;

@@ -10,6 +10,8 @@ public:
 	CGish();
 	virtual ~CGish();
 
+	CMonster* Clone() { return new CGish(*this); }
+
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pGishLeftImage;

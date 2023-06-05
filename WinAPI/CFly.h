@@ -10,6 +10,8 @@ public:
 	CFly();
 	virtual ~CFly();
 
+	CMonster* Clone() { return new CFly(*this); }
+
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pFlyImage;
