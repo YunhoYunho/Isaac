@@ -11,8 +11,8 @@ private:
 	CImage* m_pNLFrameImage;
 	CImage* m_pNRFrameImage;
 
-	CImage* m_pGLFrameImage;
-	CImage* m_pGRFrameImage;
+	CImage* m_pBLFrameImage;
+	CImage* m_pBRFrameImage;
 
 private:
 	void Init() override;

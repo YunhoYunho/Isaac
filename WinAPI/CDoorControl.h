@@ -13,10 +13,12 @@ private:
 	CImage* m_pNRCloseImage;
 	CImage* m_pNROpenImage;
 
-	CImage* m_pGLCloseImage;
-	CImage* m_pGLOpenImage;
-	CImage* m_pGRCloseImage;
-	CImage* m_pGROpenImage;
+	CImage* m_pBLCloseImage;
+	CImage* m_pBLOpenImage;
+	CImage* m_pBRCloseImage;
+	CImage* m_pBROpenImage;
+
+	void RenderController();
 
 private:
 	void Init() override;

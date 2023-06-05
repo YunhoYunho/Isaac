@@ -9,14 +9,53 @@ CDoorControl::CDoorControl()
 	m_pNLOpenImage  = nullptr;
 	m_pNRCloseImage = nullptr;
 	m_pNROpenImage  = nullptr;
-	m_pGLCloseImage = nullptr;
-	m_pGLOpenImage  = nullptr;
-	m_pGRCloseImage = nullptr;
-	m_pGROpenImage  = nullptr;
+	m_pBLCloseImage = nullptr;
+	m_pBLOpenImage  = nullptr;
+	m_pBRCloseImage = nullptr;
+	m_pBROpenImage  = nullptr;
 }
 
 CDoorControl::~CDoorControl()
 {
+}
+
+void CDoorControl::RenderController()
+{
+#pragma region Room1
+	if (true != ROOM1CLEAR)
+	{
+		RENDER->Image(m_pNRCloseImage, 1125, 308, 1195, 412);
+	}
+
+	else
+	{
+		RENDER->Image(m_pNROpenImage, 1125, 308, 1195, 412);
+	}
+#pragma endregion
+#pragma region Room2
+
+	if (true != ROOM2CLEAR)
+	{
+		RENDER->Image(m_pNLCloseImage, 1390, 308, 1460, 412);
+		RENDER->Image(m_pBRCloseImage, 2330, 286, 2483, 434);
+	}
+
+	else
+	{
+		RENDER->Image(m_pNLOpenImage, 1390, 308, 1460, 412);
+		RENDER->Image(m_pBROpenImage, 2330, 286, 2483, 434);
+	}
+#pragma endregion
+#pragma region BossRoom
+	if (true != ROOM3CLEAR)
+	{
+		RENDER->Image(m_pBLCloseImage, 2655, 286, 2808, 434);
+	}
+
+	else
+	{
+		RENDER->Image(m_pBLOpenImage, 2655, 286, 2808, 434);
+	}
 }
 
 void CDoorControl::Init()
@@ -26,10 +65,10 @@ void CDoorControl::Init()
 	m_pNRCloseImage = RESOURCE->LoadImg(L"RDoorClose", L"Image\\Map\\R_Door_Close.png");
 	m_pNROpenImage = RESOURCE->LoadImg(L"RDoorOpen", L"Image\\Map\\R_Door_Open.png");
 
-	m_pGLCloseImage = RESOURCE->LoadImg(L"LBossClose", L"Image\\Map\\L_Boss_Close.png");
-	m_pGLOpenImage = RESOURCE->LoadImg(L"LBossOpen", L"Image\\Map\\L_Boss_Open.png");
-	m_pGRCloseImage = RESOURCE->LoadImg(L"RBossClose", L"Image\\Map\\R_Boss_Close.png");
-	m_pGROpenImage = RESOURCE->LoadImg(L"RBossOpen", L"Image\\Map\\R_Boss_Open.png");
+	m_pBLCloseImage = RESOURCE->LoadImg(L"LBossClose", L"Image\\Map\\L_Boss_Close.png");
+	m_pBLOpenImage = RESOURCE->LoadImg(L"LBossOpen", L"Image\\Map\\L_Boss_Open.png");
+	m_pBRCloseImage = RESOURCE->LoadImg(L"RBossClose", L"Image\\Map\\R_Boss_Close.png");
+	m_pBROpenImage = RESOURCE->LoadImg(L"RBossOpen", L"Image\\Map\\R_Boss_Open.png");
 }
 
 void CDoorControl::Update()
@@ -39,15 +78,7 @@ void CDoorControl::Update()
 void CDoorControl::Render()
 {
 #pragma region Stage01
-	RENDER->Image(m_pNRCloseImage, 1125, 308, 1195, 412);
-	RENDER->Image(m_pNROpenImage, 1125, 308, 1195, 412);
-	RENDER->Image(m_pNLCloseImage, 1390, 308, 1460, 412);
-	RENDER->Image(m_pNLOpenImage, 1390, 308, 1195, 412);
-
-	RENDER->Image(m_pGRCloseImage, 2330, 286, 2483, 434);
-	RENDER->Image(m_pGROpenImage, 2330, 286, 2483, 434);
-	RENDER->Image(m_pGLCloseImage, 2655, 302, 2808, 450);
-	RENDER->Image(m_pGLOpenImage, 2655, 302, 2808, 450);
+	RenderController();
 #pragma endregion
 }
 

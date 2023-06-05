@@ -21,6 +21,61 @@ CGroundTile::~CGroundTile()
 {
 }
 
+void CGroundTile::PushObject(CCollider* pOther)
+{
+	// Player가 충돌 중일 경우 밀어내기 연산
+	CPlayer* pPlayer = static_cast<CPlayer*>(pOther->GetOwner());
+
+	dir = GetCollisionDir(pOther);
+
+	switch (GetCollisionDir(pOther))
+	{
+	case CollisionDir::Up:
+	{
+		pPlayer->SetPos(
+			pPlayer->GetPos().x,
+			GetCollider()->GetPos().y
+			- (GetCollider()->GetScale().y + pOther->GetScale().y) * 0.5f + offset
+			- pOther->GetOffsetPos().y
+		);
+	}
+	break;
+
+	case CollisionDir::Down:
+	{
+		pPlayer->SetPos(
+			pPlayer->GetPos().x,
+			GetCollider()->GetPos().y
+			+ (GetCollider()->GetScale().y + pOther->GetScale().y) * 0.5f - offset
+			- pOther->GetOffsetPos().y
+		);
+	}
+	break;
+
+	case CollisionDir::Left:
+	{
+		pPlayer->SetPos(
+			GetCollider()->GetPos().x
+			- (GetCollider()->GetScale().x + pOther->GetScale().x) * 0.5f + offset
+			- pOther->GetOffsetPos().x,
+			pPlayer->GetPos().y
+		);
+	}
+	break;
+
+	case CollisionDir::Right:
+	{
+		pPlayer->SetPos(
+			GetCollider()->GetPos().x
+			+ (GetCollider()->GetScale().x + pOther->GetScale().x) * 0.5f - offset
+			- pOther->GetOffsetPos().x,
+			pPlayer->GetPos().y
+		);
+	}
+	break;
+	}
+}
+
 void CGroundTile::Init()
 {
 	CTile::Init();
@@ -118,60 +173,10 @@ void CGroundTile::OnCollisionEnter(CCollider* pOther)
 void CGroundTile::OnCollisionStay(CCollider* pOther)
 {
 	// 땅타일과 충돌했을 경우 처리
-	if (pOther->GetObjName() == L"Player" || pOther->GetObjName() == L"Baby"
-		|| pOther->GetObjName() == L"Gish" || pOther->GetObjName() == L"Fly")
+	if (pOther->GetObjName() == L"Player" || pOther->GetObjName() == L"Monster"
+		|| pOther->GetObjName() == L"Gish")
 	{
-		// Player가 충돌 중일 경우 밀어내기 연산
-		CPlayer* pPlayer = static_cast<CPlayer*>(pOther->GetOwner());
-
-		dir = GetCollisionDir(pOther);
-
-		switch (GetCollisionDir(pOther))
-		{
-		case CollisionDir::Up:
-		{
-			pPlayer->SetPos(
-				pPlayer->GetPos().x,
-				GetCollider()->GetPos().y
-				- (GetCollider()->GetScale().y + pOther->GetScale().y) * 0.5f + offset
-				- pOther->GetOffsetPos().y
-			);
-		}
-		break;
-
-		case CollisionDir::Down:
-		{
-			pPlayer->SetPos(
-				pPlayer->GetPos().x,
-				GetCollider()->GetPos().y
-				+ (GetCollider()->GetScale().y + pOther->GetScale().y) * 0.5f - offset
-				- pOther->GetOffsetPos().y
-			);
-		}
-		break;
-
-		case CollisionDir::Left:
-		{
-			pPlayer->SetPos(
-				GetCollider()->GetPos().x
-				- (GetCollider()->GetScale().x + pOther->GetScale().x) * 0.5f + offset
-				- pOther->GetOffsetPos().x,
-				pPlayer->GetPos().y
-			);
-		}
-		break;
-
-		case CollisionDir::Right:
-		{
-			pPlayer->SetPos(
-				GetCollider()->GetPos().x
-				+ (GetCollider()->GetScale().x + pOther->GetScale().x) * 0.5f - offset
-				- pOther->GetOffsetPos().x,
-				pPlayer->GetPos().y
-			);
-		}
-		break;
-		}
+		PushObject(pOther);
 	}
 }
 

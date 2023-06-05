@@ -6,7 +6,7 @@ CBaby::CBaby()
 	m_vecPos = Vector(0, 0);
 	m_vecScale = Vector(100, 100);
 	m_layer = Layer::Monster;
-	m_strName = L"Baby";
+	m_strName = L"Monster";
 
 	m_pBabyImage = nullptr;
 	m_pBabyDeadImage = nullptr;

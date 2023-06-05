@@ -1,6 +1,6 @@
 #include "framework.h"
-#include "CMonster.h"
 #include "CPlayerMissile.h"
+#include "CMonster.h"
 
 CPlayerMissile::CPlayerMissile()
 {
@@ -66,7 +66,8 @@ void CPlayerMissile::CheckDestroyMissile()
 
 void CPlayerMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Wall")
+	if (pOtherCollider->GetObjName() == L"Wall" ||
+		pOtherCollider->GetObjName() == L"DoorCollider")
 	{
 		m_pAnimator->Play(L"Hit");
 		m_fVelocity = 0;

@@ -6,7 +6,7 @@ CFly::CFly()
 	m_vecPos = Vector(0, 0);
 	m_vecScale = Vector(100, 100);
 	m_layer = Layer::Monster;
-	m_strName = L"Fly";
+	m_strName = L"Monster";
 	
 	m_pFlyImage = nullptr;
 

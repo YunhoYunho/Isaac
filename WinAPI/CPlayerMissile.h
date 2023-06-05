@@ -7,10 +7,6 @@ public:
 	CPlayerMissile();
 	virtual ~CPlayerMissile();
 
-private:
-	CAnimator* m_pAnimator;
-	CImage* m_pTearsImage;
-
 	float m_fCooltime;
 	bool m_bIsHit;
 

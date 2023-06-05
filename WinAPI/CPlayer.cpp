@@ -196,7 +196,7 @@ void CPlayer::TakeHitUpdate()
 		fCooltime = 0;
 	}
 
-	Logger::Debug(to_wstring(m_HP));
+	//Logger::Debug(to_wstring(m_HP));
 }
 
 void CPlayer::GetItemUpdate()
@@ -535,14 +535,14 @@ void CPlayer::Teleport()
 	if (true == m_bIsLTeleport)
 	{
 		CAMERA->LTeleport();
-		m_vecPos.x += 300.0f;
+		m_vecPos.x += 350.0f;
 		m_bIsLTeleport = false;
 	}
 
 	else if (true == m_bIsRTeleport)
 	{
 		CAMERA->RTeleport();
-		m_vecPos.x -= 300.0f;
+		m_vecPos.x -= 350.0f;
 		m_bIsRTeleport = false;
 	}
 }
@@ -554,9 +554,10 @@ int CPlayer::GetKey()
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Baby" || pOtherCollider->GetObjName() == L"Boomfly"
-		|| pOtherCollider->GetObjName() == L"Gish" || pOtherCollider->GetObjName() == L"Fly"
-		|| pOtherCollider->GetObjName() == L"MonsterMissile")
+	if (pOtherCollider->GetObjName() == L"Monster" ||
+		pOtherCollider->GetObjName() == L"BoomFly" ||
+		pOtherCollider->GetObjName() == L"Gish"	   ||
+		pOtherCollider->GetObjName() == L"MonsterMissile")
 	{
 		HurtState();
 	}

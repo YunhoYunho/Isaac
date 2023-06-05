@@ -30,8 +30,21 @@
 
 #include "CDoorControl.h"
 #include "CDoorFrame.h"
-#include "CDoorCollider.h"
 #include "CDoorTeleport.h"
+
+#pragma region MonsterSpawnPosition
+#define ROOM1P1		Vector(800, 200)
+#define ROOM1P2		Vector(800, 300)
+#define ROOM1P3		Vector(800, 400)
+#define ROOM1P4		Vector(800, 500)
+
+#define ROOM2P1		Vector(1510, 200)
+#define ROOM2P2		Vector(1510, 500)
+#define ROOM2P3		Vector(2330, 200)
+#define ROOM2P4		Vector(2330, 500)
+
+#define ROOM3P1		Vector(3500, 360)
+#pragma endregion
 
 CSceneStage01::CSceneStage01()
 {
@@ -48,33 +61,6 @@ CSceneStage01::CSceneStage01()
 CSceneStage01::~CSceneStage01()
 {
 }
-
-//void CSceneStage01::CreateMonsters(int num)
-//{
-//	if (true != m_bIsSpawnComplete)
-//	{
-//		srand((unsigned int)time(NULL));
-//		randomNumber = rand() % (m_vecMonsters.size() - 1) + 1;
-//		int random = 0;
-//
-//		vector<int> result = Util::NonDuplicatedRandom(0, 100, 5);
-//
-//		random = (num == 1) ? rand() % 4 : rand() % 4 + 4;
-//
-//		Logger::Debug(to_wstring(random));
-//
-//		for (int i = 0; i < randomNumber; i++)
-//		{
-//			Vector pos = m_vecMonsterPositions[random];
-//			pMonster = m_vecMonsters[i]->Clone();
-//			pMonster->SetPos(pos);
-//			m_vecSpawnMonsters.emplace_back(pMonster);
-//			ADDOBJECT(pMonster);
-//		}
-//
-//		m_bIsSpawnComplete = (randomNumber == m_vecSpawnMonsters.size()) ? true : false;
-//	}
-//}
 
 void CSceneStage01::CreateMonsters(int num)
 {
@@ -102,22 +88,10 @@ void CSceneStage01::CreateMonsters(int num)
 
 void CSceneStage01::CreateDoorCollider()
 {
-	m_vecDoorControlPositions.emplace_back(ROOM1COLLR);
-	m_vecDoorControlPositions.emplace_back(ROOM2COLLL);
-	m_vecDoorControlPositions.emplace_back(ROOM2COLLR);
-	m_vecDoorControlPositions.emplace_back(ROOM3COLLL);
 	m_vecDoorControlPositions.emplace_back(Vector(1280, 360));
 	m_vecDoorControlPositions.emplace_back(Vector(2560, 360));
 
-	for (int i = 0; i < 4; i++)
-	{
-		CDoorCollider* pDoorCollider = new CDoorCollider();
-		Vector pos = m_vecDoorControlPositions[i];
-		pDoorCollider->SetPos(pos);
-		AddGameObject(pDoorCollider);
-	}
-
-	for (int i = 4; i < 5; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		CDoorTeleport* pDoorTeleport = new CDoorTeleport();
 		Vector pos = m_vecDoorControlPositions[i];
@@ -175,7 +149,6 @@ void CSceneStage01::WhatRoomClear()
 void CSceneStage01::ResetVector()
 {
 	m_vecSpawnMonsters.clear();
-	//m_vecMonsterPositions.clear();
 }
 
 void CSceneStage01::MonsterPool()
@@ -247,9 +220,9 @@ void CSceneStage01::Init()
 	pItemRock->SetPos(WINSIZEX * 0.5f + 2, WINSIZEY * 0.5f + 15);
 	AddGameObject(pItemRock);
 
-	/*CBossHPBar* pBossHPBar = new CBossHPBar();
+	CBossHPBar* pBossHPBar = new CBossHPBar();
 	AddGameObject(pBossHPBar);
-	pBossHPBar->GetBossHP(pGish);*/
+	pBossHPBar->GetBossHP(pGish);
 
 	CHUD* pHUD = new CHUD();
 	AddGameObject(pHUD);

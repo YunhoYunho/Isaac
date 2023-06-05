@@ -7,11 +7,15 @@ public:
 	virtual ~CMissile();
 
 protected:
+	CAnimator* m_pAnimator;
+	CImage* m_pTearsImage;
 	Vector m_vecDir;
 	float m_fVelocity;
 	float m_fDamage;
-
 	float m_fTimer;
+
+	void Fire();
+	void DeleteMissile();
 
 private:
 	void Init() override;
@@ -20,9 +24,6 @@ private:
 	void Release() override;
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
-
-protected:
-	void Fire();
 
 public:
 	void SetDir(Vector dir);

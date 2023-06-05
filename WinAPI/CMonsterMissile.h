@@ -8,10 +8,6 @@ public:
 	virtual ~CMonsterMissile();
 
 private:
-	CAnimator* m_pAnimator;
-	CImage* m_pTearsImage;
-
-private:
 	void Init() override;
 	void Update() override;
 	void Render() override;

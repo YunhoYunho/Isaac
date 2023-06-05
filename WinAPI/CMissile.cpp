@@ -21,7 +21,6 @@ CMissile::~CMissile()
 
 void CMissile::Init()
 {
-	AddCollider(ColliderType::Circle, Vector(8, 8), Vector(0, 0));
 }
 
 void CMissile::Update()
@@ -31,10 +30,15 @@ void CMissile::Update()
 void CMissile::Fire()
 {
 	m_vecPos += m_vecDir * m_fVelocity * DT;
+}
 
-	// 화면밖으로 나갈경우 삭제
-	if (m_vecPos.x < 0 ||
-		m_vecPos.x > WINSIZEX ||
+void CMissile::DeleteMissile()
+{
+	Vector pos;
+	pos = CAMERA->GetLookAt();
+
+	if (m_vecPos.x < pos.x - 720 ||
+		m_vecPos.x > pos.x + 720 ||
 		m_vecPos.y < 0 ||
 		m_vecPos.y > WINSIZEY)
 		DELETEOBJECT(this);
@@ -54,7 +58,6 @@ void CMissile::Release()
 
 void CMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	//Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
 }
 
 void CMissile::SetDir(Vector dir)

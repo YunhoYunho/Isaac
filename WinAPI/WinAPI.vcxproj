@@ -154,10 +154,10 @@
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CDoor.h" />
-    <ClInclude Include="CDoorCollider.h" />
     <ClInclude Include="CDoorControl.h" />
     <ClInclude Include="CDoorFrame.h" />
     <ClInclude Include="CDoorTeleport.h" />
+    <ClInclude Include="CDoorTile.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CExplosion.h" />
     <ClInclude Include="CFly.h" />
@@ -243,10 +243,10 @@
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CDoor.cpp" />
-    <ClCompile Include="CDoorCollider.cpp" />
     <ClCompile Include="CDoorControl.cpp" />
     <ClCompile Include="CDoorFrame.cpp" />
     <ClCompile Include="CDoorTeleport.cpp" />
+    <ClCompile Include="CDoorTile.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CExplosion.cpp" />
     <ClCompile Include="CFly.cpp" />

@@ -13,6 +13,8 @@ public:
 	CollisionDir dir;
 	float		 offset;
 
+	void PushObject(CCollider* pOther);
+
 private:
 	void Init() override;
 	void Update() override;

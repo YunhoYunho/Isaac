@@ -58,6 +58,7 @@ enum class Layer
 	Teleport,
 	DoorControl,
 	DoorFrame,
+	DoorCollider,
 	Missile,
 	Monster,
 	MonsterMissile,
@@ -83,6 +84,7 @@ enum class TypeTile
 {
 	None,
 	Ground,
+	Door,
 	Platform,
 	Wall,
 

@@ -33,14 +33,7 @@ void CMonsterMissile::Init()
 
 void CMonsterMissile::Update()
 {
-	m_vecPos += m_vecDir * m_fVelocity * DT;
-
-	// 화면밖으로 나갈경우 삭제
-	if (m_vecPos.x < 0 ||
-		m_vecPos.x > WINSIZEX ||
-		m_vecPos.y < 0 ||
-		m_vecPos.y > WINSIZEY)
-		DELETEOBJECT(this);
+	Fire();
 }
 
 void CMonsterMissile::Render()
