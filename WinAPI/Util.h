@@ -44,4 +44,26 @@ public:
 
 		return result;
 	}
+
+	static vector<int> NonDuplicatedRandom(int min, int max, int count)
+	{
+		vector<int> result;
+		vector<int> randoms;
+
+		for (int i = min; i <= max; i++)
+		{
+			randoms.push_back(i);
+		}
+
+		for (int i = 0; i < count; i++)
+		{
+			int randomIndex = (rand() + i) % randoms.size();
+			int temp = randoms[i];
+			randoms[i] = randoms[randomIndex];
+			randoms[randomIndex] = temp;
+			result.push_back(randoms[i]);
+		}
+
+		return result;
+	}
 };

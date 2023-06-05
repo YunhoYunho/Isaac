@@ -15,6 +15,7 @@ private:
 
 public:
 	bool GetIsDebugMode();
+	void ResetKillCount();
 	
 public:
 	Vector PlayerPos;

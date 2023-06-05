@@ -25,6 +25,8 @@ void CGameManager::Update()
 	{
 		m_bIsDebugMode = !m_bIsDebugMode;
 	}
+
+	ResetKillCount();
 }
 
 void CGameManager::Release()
@@ -34,4 +36,10 @@ void CGameManager::Release()
 bool CGameManager::GetIsDebugMode()
 {
 	return m_bIsDebugMode;
+}
+
+void CGameManager::ResetKillCount()
+{
+	if (ROOM1CLEAR || ROOM2CLEAR)
+		MONSTERKILLCOUNT = 0;
 }

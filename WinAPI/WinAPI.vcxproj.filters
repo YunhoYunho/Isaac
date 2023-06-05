@@ -295,7 +295,7 @@
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CDoorTeleport.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>04. Scene\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -501,7 +501,7 @@
       <Filter>04. Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CDoorTeleport.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>04. Scene\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
