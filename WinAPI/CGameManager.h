@@ -15,6 +15,7 @@ private:
 
 public:
 	bool GetIsDebugMode();
+	void CheckKillCount();
 	void ResetKillCount();
 	
 public:
@@ -23,32 +24,34 @@ public:
 	bool m_bIsRoom1Clear;
 	bool m_bIsRoom2Clear;
 	bool m_bIsRoom3Clear;
-
-	int monsterKillCount;
+	bool m_bIsTouchTeleport;
+	bool m_bIsResetKillCount;
 
 public:
 	int PlayerHP;
 	int PlayerMaxHP;
 	int PlayerBomb;
 	int PlayerKey;
+	int m_iMonsterKillCount;
 };
 
-#define GAME		CGameManager::GetInstance()
-#define PLAYERPOS	CGameManager::GetInstance()->PlayerPos
-#define PLAYERHP	CGameManager::GetInstance()->PlayerHP
-#define PLAYERMAXHP	CGameManager::GetInstance()->PlayerMaxHP
-#define PLAYERBOMB	CGameManager::GetInstance()->PlayerBomb
-#define PLAYERKEY	CGameManager::GetInstance()->PlayerKey
-#define MONSTERKILLCOUNT	CGameManager::GetInstance()->monsterKillCount
+#define GAME				CGameManager::GetInstance()
+#define PLAYERPOS			CGameManager::GetInstance()->PlayerPos
+#define PLAYERHP			CGameManager::GetInstance()->PlayerHP
+#define PLAYERMAXHP			CGameManager::GetInstance()->PlayerMaxHP
+#define PLAYERBOMB			CGameManager::GetInstance()->PlayerBomb
+#define PLAYERKEY			CGameManager::GetInstance()->PlayerKey
+#define MONSTERKILLCOUNT	CGameManager::GetInstance()->m_iMonsterKillCount
+#define TOUCHTELEPORT		CGameManager::GetInstance()->m_bIsTouchTeleport
 
 #pragma region IsRoomClear
-#define ROOM1CLEAR	CGameManager::GetInstance()->m_bIsRoom1Clear
-#define ROOM2CLEAR	CGameManager::GetInstance()->m_bIsRoom2Clear
-#define ROOM3CLEAR	CGameManager::GetInstance()->m_bIsRoom3Clear
+#define ROOM1CLEAR			CGameManager::GetInstance()->m_bIsRoom1Clear
+#define ROOM2CLEAR			CGameManager::GetInstance()->m_bIsRoom2Clear
+#define ROOM3CLEAR			CGameManager::GetInstance()->m_bIsRoom3Clear
 #pragma endregion
 
 #pragma region WhatRoomIsIt
-#define INROOM1		(PLAYERPOS.x < 1200)
-#define INROOM2		(PLAYERPOS.x > 1400 && PLAYERPOS.x < 2500)
-#define INROOM3		(PLAYERPOS.x > 2600)
+#define INROOM1				(PLAYERPOS.x < 1200)
+#define INROOM2				(PLAYERPOS.x > 1400 && PLAYERPOS.x < 2500)
+#define INROOM3				(PLAYERPOS.x > 2600)
 #pragma endregion

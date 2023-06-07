@@ -8,7 +8,9 @@ CGameManager::CGameManager()
 	m_bIsRoom1Clear = false;
 	m_bIsRoom2Clear = false;
 	m_bIsRoom3Clear = false;
-	monsterKillCount = 0;
+	m_bIsTouchTeleport = false;
+	m_bIsResetKillCount = false;
+	m_iMonsterKillCount = 0;
 }
 
 CGameManager::~CGameManager()
@@ -26,7 +28,7 @@ void CGameManager::Update()
 		m_bIsDebugMode = !m_bIsDebugMode;
 	}
 
-	ResetKillCount();
+	CheckKillCount();
 }
 
 void CGameManager::Release()
@@ -38,8 +40,25 @@ bool CGameManager::GetIsDebugMode()
 	return m_bIsDebugMode;
 }
 
+void CGameManager::CheckKillCount()
+{
+	if ((INROOM1 && ROOM1CLEAR) || ((INROOM2 && ROOM2CLEAR)))
+	{
+		m_bIsResetKillCount = true;
+
+		ResetKillCount();
+	}
+}
+
 void CGameManager::ResetKillCount()
 {
-	if (ROOM1CLEAR || ROOM2CLEAR)
-		MONSTERKILLCOUNT = 0;
+	if (MONSTERKILLCOUNT != 0)
+	{
+		if (true == m_bIsResetKillCount)
+		{
+			MONSTERKILLCOUNT = 0;
+			Logger::Debug(L"몬스터 킬카운트 초기화");
+			m_bIsResetKillCount = false;
+		}
+	}
 }
