@@ -23,6 +23,8 @@ CBaby::~CBaby()
 
 void CBaby::Init()
 {
+	DustEffect();
+
 	m_pBabyImage = RESOURCE->LoadImg(L"Baby", L"Image\\Unit\\Mon_baby.png");
 	m_pBabyDeadImage = RESOURCE->LoadImg(L"BabyDead", L"Image\\Effect\\Effect_DEAD.png");
 

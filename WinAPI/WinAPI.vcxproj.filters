@@ -297,6 +297,9 @@
     <ClInclude Include="CDoorTile.h">
       <Filter>01. Engine\Asset\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="CEnterEffect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -502,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="CDoorTile.cpp">
       <Filter>01. Engine\Asset\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnterEffect.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

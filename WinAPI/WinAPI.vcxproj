@@ -158,6 +158,7 @@
     <ClInclude Include="CDoorFrame.h" />
     <ClInclude Include="CDoorTeleport.h" />
     <ClInclude Include="CDoorTile.h" />
+    <ClInclude Include="CEnterEffect.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CExplosion.h" />
     <ClInclude Include="CFly.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="CDoorFrame.cpp" />
     <ClCompile Include="CDoorTeleport.cpp" />
     <ClCompile Include="CDoorTile.cpp" />
+    <ClCompile Include="CEnterEffect.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CExplosion.cpp" />
     <ClCompile Include="CFly.cpp" />

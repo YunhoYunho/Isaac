@@ -30,6 +30,8 @@ CBoomfly::~CBoomfly()
 
 void CBoomfly::Init()
 {
+	DustEffect();
+
 	m_pBoomflyImage = RESOURCE->LoadImg(L"Boomfly", L"Image\\Unit\\Mon_Boomfly.png");
 
 	m_pAnimator = new CAnimator;

@@ -38,6 +38,7 @@ public:
 	Vector m_vecPlayerPos;
 
 public:
+	void DustEffect();
 	void GetDamaged(float value);
 	void BossDead();
 	void Dead();

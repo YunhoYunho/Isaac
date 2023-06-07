@@ -20,6 +20,8 @@ CFly::~CFly()
 
 void CFly::Init()
 {
+	DustEffect();
+
 	m_pFlyImage = RESOURCE->LoadImg(L"Fly", L"Image\\Unit\\Mon_Fly.png");
 
 	m_pAnimator = new CAnimator;

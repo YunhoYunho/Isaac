@@ -6,6 +6,7 @@
 
 #include "CMonsterMissile.h"
 #include "CPlayerMissile.h"
+#include "CEnterEffect.h"
 
 CMonster::CMonster()
 {
@@ -48,7 +49,7 @@ void CMonster::SetMoveDir(Vector vecMoveDir)
 
 void CMonster::Init()
 {
-	AddCollider(ColliderType::Rect, Vector(90, 90), Vector(0, 0));
+	DustEffect();
 }
 
 void CMonster::Update()
@@ -66,6 +67,13 @@ void CMonster::Render()
 
 void CMonster::Release()
 {
+}
+
+void CMonster::DustEffect()
+{
+	CEnterEffect* pEnterEffect = new CEnterEffect();
+	pEnterEffect->SetPos(m_vecPos);
+	ADDOBJECT(pEnterEffect);
 }
 
 void CMonster::GetDamaged(float value)
@@ -128,13 +136,19 @@ void CMonster::Trace()
 
 void CMonster::PingPong()
 {
-	if (m_vecPos.x >= WINSIZEX - 100)
+	int max = 0;
+	int min = 0;
+
+	max = INROOM1 ? WINSIZEX : WINSIZEX * 2;
+	min = INROOM1 ? 0 : WINSIZEX;
+
+	if (m_vecPos.x >= max - 100)
 	{
 		left = true;
 		right = false;
 	}
 
-	if (m_vecPos.x <= 100)
+	if (m_vecPos.x <= min + 100)
 	{
 		left = false;
 		right = true;

@@ -22,7 +22,6 @@
 	m_HP = 40;
 	m_MaxHP = m_HP;
 	m_fTimer = 0;
-
 }
 
 CGish::~CGish()
@@ -143,6 +142,8 @@ float CGish::GetMaxHP()
 
 void CGish::Init()
 {
+	DustEffect();
+
 	m_pGishLeftImage = RESOURCE->LoadImg(L"GishLeft", L"Image\\Unit\\Gish_Left.png");
 	m_pGishRightImage = RESOURCE->LoadImg(L"GishRight", L"Image\\Unit\\Gish_Right.png");
 
