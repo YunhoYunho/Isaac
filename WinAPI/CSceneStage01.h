@@ -1,6 +1,5 @@
 #pragma once
 #include "CScene.h"
-#include "CGameUI.h"
 
 class CPlayer;
 class CMonster;

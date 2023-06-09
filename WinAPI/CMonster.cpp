@@ -107,7 +107,6 @@ void CMonster::Dead()
 	if (fCooltime > 0.3f)
 	{
 		RemoveCollider();
-
 	}
 
 	if (fCooltime > 1.0f)

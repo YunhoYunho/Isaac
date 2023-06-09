@@ -166,6 +166,7 @@ void CGish::Init()
 
 void CGish::Update()
 {
+	DeadCount();
 	CheckDir();
 	ActionUpdate();
 	ChangeUpdate();

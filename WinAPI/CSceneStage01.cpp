@@ -101,7 +101,8 @@ void CSceneStage01::CreateBoss()
 	if (true != m_bIsSpawnComplete)
 	{
 		CGish* pGish = new CGish();
-		pGish->SetPos(ROOM3P1);
+		pMonster = pGish;
+		pMonster->SetPos(ROOM3P1);
 		m_vecSpawnMonsters.emplace_back(pGish);
 		AddGameObject(pGish);
 
