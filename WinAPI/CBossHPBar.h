@@ -18,6 +18,8 @@ public:
 	float m_fTimer;
 	void GetBossHP(CGish* value);
 
+	void RenderImage();
+
 private:
 	void Init()		override;
 	void Update()	override;

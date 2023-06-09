@@ -7,6 +7,8 @@ public:
 	CDoorTeleport();
 	virtual ~CDoorTeleport();
 
+	void AddColl();
+
 private:
 	void Init() override;
 	void Update() override;

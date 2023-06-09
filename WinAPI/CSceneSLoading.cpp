@@ -23,7 +23,7 @@ void CSceneSLoading::Enter()
 {
 	CAMERA->FadeIn(0.25f);
 
-	SOUND->Play(pLoading, 1.0f, false);
+	SOUND->Play(pSLoading, 1.0f, false);
 }
 
 void CSceneSLoading::Update()
@@ -43,7 +43,7 @@ void CSceneSLoading::Render()
 
 void CSceneSLoading::Exit()
 {
-	SOUND->Stop(pLoading);
+	SOUND->Stop(pSLoading);
 }
 
 void CSceneSLoading::Release()

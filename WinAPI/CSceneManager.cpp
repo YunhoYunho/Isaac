@@ -6,8 +6,6 @@
 #include "CSceneTileTool.h"
 #include "CSceneSLoading.h"
 #include "CSceneStage01.h"
-#include "CSceneLoading.h"
-#include "CSceneStageBoss.h"
 
 CSceneManager::CSceneManager()
 {
@@ -23,7 +21,7 @@ void CSceneManager::Init()
 	// TODO : 게임에 필요한 씬 추가
 	// 게임씬들을 자료구조에 추가
 	
-	// Title - TileTool - StageLoading - Stage01 - BossLoading - BossStage
+	// Title - TileTool - StageLoading - Stage01 - BossLoading - Stage01(BossRoom)
 
 	CScene* pSceneTitle = new CSceneTitle();
 	m_mapScene.insert(make_pair(GroupScene::Title, pSceneTitle));
@@ -36,12 +34,6 @@ void CSceneManager::Init()
 
 	CScene* pSceneStage01 = new CSceneStage01();
 	m_mapScene.insert(make_pair(GroupScene::Stage01, pSceneStage01));
-
-	CScene* pSceneLoading = new CSceneLoading();
-	m_mapScene.insert(make_pair(GroupScene::Loading, pSceneLoading));
-
-	CScene* pSceneStageBoss = new CSceneStageBoss();
-	m_mapScene.insert(make_pair(GroupScene::Stage01, pSceneStageBoss));
 
 	// 게임씬 자료구조를 순회하며 씬을 초기화
 	for (pair<GroupScene, CScene*> scene : m_mapScene)

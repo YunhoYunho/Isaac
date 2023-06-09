@@ -31,6 +31,9 @@
 #include "CDoorControl.h"
 #include "CDoorFrame.h"
 #include "CDoorTeleport.h"
+#include "CDoorBossTeleport.h"
+
+#include "CLoadingImage.h"
 
 #pragma region MonsterSpawnPosition
 #define ROOM1P1		Vector(800, 200)
@@ -51,11 +54,18 @@ CSceneStage01::CSceneStage01()
 	pPlayer = nullptr;
 	pMonster = nullptr;
 	m_fTimer = 0;
+	m_fSpawnTimer = 0;
+	m_fLoadTimer = 0;
+	m_fSoundTimer = 0;
 	randomNumber = 0;
 	killCount = 0;
+	enterCount = 0;
+	soundCount = 0;
 	m_bIsSpawnComplete = false;
 	m_bIsRoom1Clear = false;
 	m_bIsRoom2Clear = false;
+	m_bIsRoom3Clear = false;
+	m_bIsEnterBossRoom = false;
 }
 
 CSceneStage01::~CSceneStage01()
@@ -86,18 +96,37 @@ void CSceneStage01::CreateMonsters(int num)
 	}
 }
 
-void CSceneStage01::CreateDoorCollider()
+void CSceneStage01::CreateBoss()
 {
-	m_vecDoorControlPositions.emplace_back(Vector(1280, 360));
-	m_vecDoorControlPositions.emplace_back(Vector(2560, 360));
-
-	for (int i = 0; i < 2; i++)
+	if (true != m_bIsSpawnComplete)
 	{
-		CDoorTeleport* pDoorTeleport = new CDoorTeleport();
-		Vector pos = m_vecDoorControlPositions[i];
-		pDoorTeleport->SetPos(pos);
-		AddGameObject(pDoorTeleport);
+		CGish* pGish = new CGish();
+		pGish->SetPos(ROOM3P1);
+		m_vecSpawnMonsters.emplace_back(pGish);
+		AddGameObject(pGish);
+
+		CBossHPBar* pBossHPBar = new CBossHPBar();
+		AddGameObject(pBossHPBar);
+		pBossHPBar->GetBossHP(pGish);
+
+		SOUND->Play(pBossRoomSound, 0.7f, true);
+
+		m_bIsSpawnComplete = m_vecSpawnMonsters.size() == 1 ? true : false;
 	}
+}
+
+void CSceneStage01::CreateDoorTeleport()
+{
+	CDoorTeleport* pDoorTeleport = new CDoorTeleport();
+	pDoorTeleport->SetPos(Vector(1280, 360));
+	AddGameObject(pDoorTeleport);
+}
+
+void CSceneStage01::CreateDoorBossTeleport()
+{
+	CDoorBossTeleport* pDoorBossTeleport = new CDoorBossTeleport();
+	pDoorBossTeleport->SetPos(Vector(2560, 360));
+	AddGameObject(pDoorBossTeleport);
 }
 
 void CSceneStage01::SpawnRoom1()
@@ -113,6 +142,20 @@ void CSceneStage01::SpawnRoom2()
 	if (INROOM2 && (m_bIsRoom2Clear == false))
 	{
 		CreateMonsters(2);
+	}
+}
+
+void CSceneStage01::SpawnRoom3()
+{
+	if (INROOM3 && (false == m_bIsRoom3Clear))
+	{
+		m_fSpawnTimer += DT;
+
+		if (m_fSpawnTimer > 2.0f)
+		{
+			CreateBoss();
+			m_fSpawnTimer = 0;
+		}
 	}
 }
 
@@ -132,10 +175,18 @@ void CSceneStage01::CheckRoomClear()
 			if (INROOM2 && (true != m_bIsRoom2Clear))
 			{
 				m_bIsRoom2Clear = true;
+				m_bIsSpawnComplete = false;
 				Logger::Debug(L"방2 클리어? : " + to_wstring(m_bIsRoom2Clear));
 			}
 
-			ResetVector();
+			if (INROOM3 && (true != m_bIsRoom3Clear))
+			{
+				m_bIsRoom3Clear = true;
+				m_bIsSpawnComplete = false;
+				Logger::Debug(L"방3 클리어? : " + to_wstring(m_bIsRoom3Clear));
+			}
+
+			m_vecSpawnMonsters.clear();
 		}
 	}
 }
@@ -144,11 +195,37 @@ void CSceneStage01::WhatRoomClear()
 {
 	ROOM1CLEAR = m_bIsRoom1Clear;
 	ROOM2CLEAR = m_bIsRoom2Clear;
+	ROOM3CLEAR = m_bIsRoom3Clear;
 }
 
-void CSceneStage01::ResetVector()
+void CSceneStage01::StartBossLoading()
 {
-	m_vecSpawnMonsters.clear();
+	if (INROOM3 && (false == m_bIsRoom3Clear))
+	{
+		if (enterCount == 0)
+		{
+			CLoadingImage* pLoading = new CLoadingImage();
+			pLoading->SetPos(WINSIZEX * 2.5, WINSIZEY / 2);
+			ADDOBJECT(pLoading);
+
+			SOUND->Stop(pBGMSound);
+
+			enterCount++;
+		}
+	}
+}
+
+void CSceneStage01::StartBossSound()
+{
+	if (true == m_bIsRoom3Clear)
+	{
+		if (soundCount == 0)
+		{
+			SOUND->Stop(pBossRoomSound);
+			SOUND->Play(pBossClearSound, 0.7f, false);
+			soundCount++;
+		}
+	}
 }
 
 void CSceneStage01::MonsterPool()
@@ -178,11 +255,7 @@ void CSceneStage01::Init()
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);
-
-	CGish* pGish = new CGish();
-	pGish->SetPos(ROOM3P1);
-	AddGameObject(pGish);
-
+	
 #pragma region 디버깅용
 	/*CBaby* pBaby = new CBaby();
 	pBaby->SetPos(300, WINSIZEY * 0.5f);
@@ -220,10 +293,6 @@ void CSceneStage01::Init()
 	pItemRock->SetPos(WINSIZEX * 0.5f + 2, WINSIZEY * 0.5f + 15);
 	AddGameObject(pItemRock);
 
-	CBossHPBar* pBossHPBar = new CBossHPBar();
-	AddGameObject(pBossHPBar);
-	pBossHPBar->GetBossHP(pGish);
-
 	CHUD* pHUD = new CHUD();
 	AddGameObject(pHUD);
 
@@ -233,7 +302,8 @@ void CSceneStage01::Init()
 	CDoorFrame* pDoorFrame = new CDoorFrame();
 	AddGameObject(pDoorFrame);
 
-	CreateDoorCollider();
+	CreateDoorTeleport();
+	CreateDoorBossTeleport();
 	MonsterPool();
 	PositionPool();
 }
@@ -243,7 +313,9 @@ void CSceneStage01::Enter()
 	CAMERA->FadeIn(0.25f);
 	LoadTile(GETPATH + L"Tile\\Isaac_Stage01_tile");
 
-	SOUND->Play(pSound, 0.6f, false);
+	SOUND->Play(pBGMSound, 0.6f, false);
+	SOUND->Pause(pBossRoomSound);
+	SOUND->Pause(pBossClearSound);
 }
 
 void CSceneStage01::Update()
@@ -251,7 +323,10 @@ void CSceneStage01::Update()
 	WhatRoomClear();
 	SpawnRoom1();
 	SpawnRoom2();
+	SpawnRoom3();
 	CheckRoomClear();
+	StartBossLoading();
+	StartBossSound();
 
 	if (BUTTONDOWN(VK_ESCAPE))
 	{
@@ -270,19 +345,13 @@ void CSceneStage01::Update()
 		CSound* pDeadSound = RESOURCE->LoadSound(L"Died", L"Sound\\Scene\\Died.wav");
 		//SOUND->Play(pDeadSound);
 	}
-
-	/*if ()
-	{
-		CAMERA->FadeOut(0.25f);
-		DELAYCHANGESCENE(GroupScene::Loading, 0.25f);
-	}*/
 }
 
 void CSceneStage01::Render()
 {
-	Vector killCount = CAMERA->ScreenToWorldPoint(Vector(50, 20));
-	wstring frame = to_wstring(MONSTERKILLCOUNT);
-	RENDER->Text(frame, killCount.x - 50, killCount.y - 10, killCount.x + 50, killCount.y + 10, Color(255, 255, 255, 1.f), 15);
+	Vector killCount = CAMERA->ScreenToWorldPoint(Vector(50, 50));
+	wstring count = L"현재 킬 카운트 : " + to_wstring(MONSTERKILLCOUNT) + L"\n현재 벡터 저장된 적 : " + to_wstring(m_vecSpawnMonsters.size());
+	RENDER->Text(count, killCount.x - 50, killCount.y - 10, killCount.x + 50, killCount.y + 10, Color(255, 255, 255, 1.f), 15);
 }
 
 void CSceneStage01::Exit()
@@ -294,7 +363,9 @@ void CSceneStage01::Exit()
 		{
 			pGameObject->GetReserveDelete();
 			delete pGameObject;
-			SOUND->Pause(pSound);
+			SOUND->Pause(pBGMSound);
+			SOUND->Pause(pBossRoomSound);
+			SOUND->Pause(pBossClearSound);
 		}
 		m_listObj[layer].clear();
 	}

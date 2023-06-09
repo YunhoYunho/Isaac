@@ -11,9 +11,14 @@ CDoorTeleport::~CDoorTeleport()
 {
 }
 
-void CDoorTeleport::Init()
+void CDoorTeleport::AddColl()
 {
 	AddCollider(ColliderType::Rect, Vector(240, 100), Vector(0, 0));
+}
+
+void CDoorTeleport::Init()
+{
+	AddColl();
 }
 
 void CDoorTeleport::Update()

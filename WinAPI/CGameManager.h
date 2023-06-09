@@ -20,19 +20,20 @@ public:
 	
 public:
 	Vector PlayerPos;
-	bool m_bIsDebugMode;
-	bool m_bIsRoom1Clear;
-	bool m_bIsRoom2Clear;
-	bool m_bIsRoom3Clear;
-	bool m_bIsTouchTeleport;
-	bool m_bIsResetKillCount;
+	bool debugMode;
+	bool room1Clear;
+	bool room2Clear;
+	bool room3Clear;
+	bool touchTeleport;
+	bool resetKillCount;
+	bool pause;
 
 public:
 	int PlayerHP;
 	int PlayerMaxHP;
 	int PlayerBomb;
 	int PlayerKey;
-	int m_iMonsterKillCount;
+	int monsterKillCount;
 };
 
 #define GAME				CGameManager::GetInstance()
@@ -41,13 +42,13 @@ public:
 #define PLAYERMAXHP			CGameManager::GetInstance()->PlayerMaxHP
 #define PLAYERBOMB			CGameManager::GetInstance()->PlayerBomb
 #define PLAYERKEY			CGameManager::GetInstance()->PlayerKey
-#define MONSTERKILLCOUNT	CGameManager::GetInstance()->m_iMonsterKillCount
-#define TOUCHTELEPORT		CGameManager::GetInstance()->m_bIsTouchTeleport
+#define MONSTERKILLCOUNT	CGameManager::GetInstance()->monsterKillCount
+#define TOUCHTELEPORT		CGameManager::GetInstance()->touchTeleport
 
 #pragma region IsRoomClear
-#define ROOM1CLEAR			CGameManager::GetInstance()->m_bIsRoom1Clear
-#define ROOM2CLEAR			CGameManager::GetInstance()->m_bIsRoom2Clear
-#define ROOM3CLEAR			CGameManager::GetInstance()->m_bIsRoom3Clear
+#define ROOM1CLEAR			CGameManager::GetInstance()->room1Clear
+#define ROOM2CLEAR			CGameManager::GetInstance()->room2Clear
+#define ROOM3CLEAR			CGameManager::GetInstance()->room3Clear
 #pragma endregion
 
 #pragma region WhatRoomIsIt

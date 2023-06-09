@@ -51,7 +51,6 @@ enum class Layer
 	Default,
 	Tile,
 	Ending,
-	Loading,
 	Title,
 	GroundTile,
 	Obstacle,
@@ -70,10 +69,10 @@ enum class Layer
 	PlayerMissile,
 	Bomb,
 	Explosion,
-
 	PlayerHP,
 	HUD,
 	Ui,
+	Loading,
 	Size,
 };
 

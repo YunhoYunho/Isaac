@@ -20,6 +20,18 @@ void CBossHPBar::GetBossHP(CGish* value)
 	pGish = value;
 }
 
+void CBossHPBar::RenderImage()
+{
+	RENDER->Image(m_pHPBarFrame, 2962, 634, 3364, 720);
+
+	float hpWidth = (3364 - 2962 - 52 - 52) * pGish->GetHP() / pGish->GetMaxHP();
+
+	if (pGish->GetHP() >= 0)
+	{
+		RENDER->FrameImage(m_pHPBarGauge, 2962, 634, 2962 + hpWidth + 52, 720, 0, 0, hpWidth + 52, 86);
+	}
+}
+
 void CBossHPBar::Init()
 {
 	m_pHPBarFrame = RESOURCE->LoadImg(L"BarFrame", L"Image\\Map\\Frame.png");
@@ -32,14 +44,7 @@ void CBossHPBar::Update()
 
 void CBossHPBar::Render()
 {
-	RENDER->Image(m_pHPBarFrame, 439, 634, 841, 720);
-
-	float hpWidth = (841 - 439 - 52 - 52) * pGish->GetHP() / pGish->GetMaxHP();
-
-	if (pGish->GetHP() >= 0)
-	{
-		RENDER->FrameImage(m_pHPBarGauge, 439, 634, 439 + hpWidth + 52, 720, 0, 0, hpWidth + 52, 86);
-	}
+	RenderImage();
 }
 
 void CBossHPBar::Release()

@@ -237,9 +237,6 @@
     <ClInclude Include="CLoadingImage.h">
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
-    <ClInclude Include="CSceneLoading.h">
-      <Filter>04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="CGish.h">
       <Filter>03. GameObject\Stage\Monster\Boss</Filter>
     </ClInclude>
@@ -247,9 +244,6 @@
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CSceneSLoading.h">
-      <Filter>04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="CSceneStageBoss.h">
       <Filter>04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="CBossHPBar.h">
@@ -298,6 +292,12 @@
       <Filter>01. Engine\Asset\Tile</Filter>
     </ClInclude>
     <ClInclude Include="CEnterEffect.h">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoorBossTeleport.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CPassiveItem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -449,9 +449,6 @@
     <ClCompile Include="CLoadingImage.cpp">
       <Filter>04. Scene\Image</Filter>
     </ClCompile>
-    <ClCompile Include="CSceneLoading.cpp">
-      <Filter>04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="CGish.cpp">
       <Filter>03. GameObject\Stage\Monster\Boss</Filter>
     </ClCompile>
@@ -459,9 +456,6 @@
       <Filter>04. Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CSceneSLoading.cpp">
-      <Filter>04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="CSceneStageBoss.cpp">
       <Filter>04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="CBossHPBar.cpp">
@@ -507,6 +501,12 @@
       <Filter>01. Engine\Asset\Tile</Filter>
     </ClCompile>
     <ClCompile Include="CEnterEffect.cpp">
+      <Filter>03. GameObject\Stage\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoorBossTeleport.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CPassiveItem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
