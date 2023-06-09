@@ -20,6 +20,7 @@
 #include "CChest.h"
 #include "CNormalChest.h" 
 #include "CGoldenChest.h"
+#include "CPassiveItem.h"
 
 CPlayer::CPlayer()
 {
@@ -380,8 +381,6 @@ void CPlayer::AnimatorUpdate()
 
 void CPlayer::CreateMissile()
 {
-	//Logger::Debug(L"미사일 생성");
-
 	if (m_fTimer == 0)
 	{
 		NormalShot();
@@ -394,7 +393,7 @@ void CPlayer::CreateMissile()
 
 	m_fTimer += DT;
 
-	if (m_fTimer > 0.25f)
+	if (m_fTimer > m_fShotSpeed)
 	{
 		m_fTimer = 0;
 	}
@@ -505,29 +504,16 @@ void CPlayer::TripleShot()
 	ADDOBJECT(pMissile3);
 }
 
-Vector CPlayer::GetLookDir()
+void CPlayer::GetItem(CGameObject* pOtherCollider)
 {
-	return m_vecLookDir;
-}
+	m_vecPos = Vector(PLAYERPOS.x, PLAYERPOS.y - 30);
 
-void CPlayer::SetLookDir(Vector vecLookDir)
-{
-	m_vecLookDir = vecLookDir;
-}
+	m_fTimer += DT;
 
-void CPlayer::SetMoveDir(Vector vecMoveDir)
-{
-	m_vecMoveDir = vecMoveDir;
-}
-
-int CPlayer::GetHP()
-{
-	return m_HP;
-}
-
-int CPlayer::GetMaxHP()
-{
-	return m_MaxHP;
+	if (m_fTimer > 0.7f)
+	{
+		DELETEOBJECT(pOtherCollider);
+	}
 }
 
 void CPlayer::Teleport()
@@ -547,11 +533,6 @@ void CPlayer::Teleport()
 	}
 }
 
-int CPlayer::GetKey()
-{
-	return m_iKey;
-}
-
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Monster" ||
@@ -562,33 +543,30 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		HurtState();
 	}
 
-	if (pOtherCollider->GetObjName() == L"TripleShot")
+	// 패시브 아이템
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::PassiveItem)
 	{
-		m_playerState = PlayerState::GetItem;
-		m_bIsTripleShot = true;
-
-		SOUND->Play(pGetItem, 1.0f, false);
-
-		m_fTimer += DT;
-		 
-		if (m_fTimer > 1.0f)
+		CPassiveItem* pPassiveItem = dynamic_cast<CPassiveItem*>(pOtherCollider->GetOwner());
+		if (pPassiveItem != nullptr)
 		{
-			SOUND->Pause(pGetItem);
-			m_fTimer = 0;
+			if (m_iCount == 0)
+			{
+				m_playerState = PlayerState::GetItem;
+				SOUND->Play(pGetItem, 1.0f, false);
+				pPassiveItem->Activate(this);
+				m_iCount++;
+			}
 		}
 	}
 
-	if (pOtherCollider->GetObjName() == L"Heart")
+	// 픽업 아이템
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::PickupItem)
 	{
-		if (m_HP < m_MaxHP)
+		CPickupItem* pPickupItem = dynamic_cast<CPickupItem*>(pOtherCollider->GetOwner());
+		if (pPickupItem != nullptr)
 		{
-			m_HP++;
+			pPickupItem->Activate(this);
 		}
-	}
-
-	if (pOtherCollider->GetObjName() == L"Key")
-	{
-		m_iKey++;
 	}
 
 	if (pOtherCollider->GetObjName() == L"Bomb")

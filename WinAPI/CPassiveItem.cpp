@@ -5,7 +5,7 @@
 
 CPassiveItem::CPassiveItem()
 {
-	m_layer = Layer::Item;
+	m_layer = Layer::PassiveItem;
 }
 
 CPassiveItem::~CPassiveItem()
@@ -16,8 +16,6 @@ void CPassiveItem::GetItem()
 {
 	if (true == m_bIsGetItem)
 	{
-		m_pAnimator->Play(L"GetItem");
-
 		m_vecPos = Vector(PLAYERPOS.x, PLAYERPOS.y - 30);
 
 		m_fTimer += DT;

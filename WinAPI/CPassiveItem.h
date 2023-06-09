@@ -7,15 +7,19 @@ class CPlayer;
 
 class CPassiveItem : public CGameObject
 {
+	friend CPlayer;
 public:
 	CPassiveItem();
 	virtual ~CPassiveItem();
+
+	virtual void Activate(CPlayer* pPlayer) = 0;
 
 protected:
 	CAnimator* m_pAnimator;
 	CPlayer* pPlayer;
 
 	float m_fTimer = 0;
+	int m_iCount = 0;
 	bool m_bIsGetItem = false;
 
 	void GetItem();

@@ -70,6 +70,15 @@
     <Filter Include="03. GameObject\Stage\Monster\Boss">
       <UniqueIdentifier>{453285f8-3058-44cc-b448-ca73a40921d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Stage\Item\Passive">
+      <UniqueIdentifier>{6d10e90d-0473-4eb8-80e6-d8cc9683d85f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Stage\Item\Pickup">
+      <UniqueIdentifier>{e8301ad0-b2a3-4064-b5b3-adc6944ea570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Stage\Item\Chest">
+      <UniqueIdentifier>{6ebb14a7-f44b-4977-abe9-29b4875b52fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -228,12 +237,6 @@
     <ClInclude Include="CFly.h">
       <Filter>03. GameObject\Stage\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="CTripleShot.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="CItemRock.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClInclude>
     <ClInclude Include="CLoadingImage.h">
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
@@ -252,26 +255,8 @@
     <ClInclude Include="CBomb.h">
       <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="CPickupItem.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="CPickupHeart.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="CPickupKey.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="CGoldenChest.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="CNormalChest.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>02. Util</Filter>
-    </ClInclude>
-    <ClInclude Include="CChest.h">
-      <Filter>03. GameObject\Stage\Item</Filter>
     </ClInclude>
     <ClInclude Include="CHUD.h">
       <Filter>04. Scene\Image</Filter>
@@ -295,10 +280,49 @@
       <Filter>03. GameObject\Stage\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CDoorBossTeleport.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeat.h">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="CSadOnion.h">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="CShieldTears.h">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkeletonKey.h">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="CTenBombs.h">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="CTripleShot.h">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="CPickupHeart.h">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+    </ClInclude>
+    <ClInclude Include="CPickupItem.h">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+    </ClInclude>
+    <ClInclude Include="CPickupKey.h">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
     </ClInclude>
     <ClInclude Include="CPassiveItem.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="CChest.h">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="CGoldenChest.h">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="CItemRock.h">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="CNormalChest.h">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -440,12 +464,6 @@
     <ClCompile Include="CFly.cpp">
       <Filter>03. GameObject\Stage\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="CTripleShot.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="CItemRock.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClCompile>
     <ClCompile Include="CLoadingImage.cpp">
       <Filter>04. Scene\Image</Filter>
     </ClCompile>
@@ -463,24 +481,6 @@
     </ClCompile>
     <ClCompile Include="CBomb.cpp">
       <Filter>03. GameObject\Stage\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="CPickupItem.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="CPickupHeart.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="CPickupKey.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="CGoldenChest.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="CNormalChest.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="CChest.cpp">
-      <Filter>03. GameObject\Stage\Item</Filter>
     </ClCompile>
     <ClCompile Include="CHUD.cpp">
       <Filter>04. Scene\Image</Filter>
@@ -504,10 +504,49 @@
       <Filter>03. GameObject\Stage\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CDoorBossTeleport.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CTripleShot.cpp">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="CPickupHeart.cpp">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+    </ClCompile>
+    <ClCompile Include="CPickupItem.cpp">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+    </ClCompile>
+    <ClCompile Include="CPickupKey.cpp">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
     </ClCompile>
     <ClCompile Include="CPassiveItem.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="CChest.cpp">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoldenChest.cpp">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="CItemRock.cpp">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="CNormalChest.cpp">
+      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeat.cpp">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="CSadOnion.cpp">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="CShieldTears.cpp">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkeletonKey.cpp">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="CTenBombs.cpp">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

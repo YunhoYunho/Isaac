@@ -177,6 +177,7 @@
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CItemRock.h" />
     <ClInclude Include="CLoadingImage.h" />
+    <ClInclude Include="CMeat.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonsterMissile.h">
@@ -197,6 +198,7 @@
     <ClInclude Include="CRenderManager.h" />
     <ClInclude Include="CResource.h" />
     <ClInclude Include="CResourceManager.h" />
+    <ClInclude Include="CSadOnion.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSceneSLoading.h" />
@@ -204,9 +206,12 @@
     <ClInclude Include="CSceneTileTool.h" />
     <ClInclude Include="CSceneTitle.h" />
     <ClInclude Include="CImage.h" />
+    <ClInclude Include="CShieldTears.h" />
+    <ClInclude Include="CSkeletonKey.h" />
     <ClInclude Include="CSLoadingImage.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CSoundManager.h" />
+    <ClInclude Include="CTenBombs.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTileButton.h" />
     <ClInclude Include="CTilePanel.h" />
@@ -267,6 +272,7 @@
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CItemRock.cpp" />
     <ClCompile Include="CLoadingImage.cpp" />
+    <ClCompile Include="CMeat.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonsterMissile.cpp">
@@ -289,6 +295,7 @@
     <ClCompile Include="CRenderManager.cpp" />
     <ClCompile Include="CResource.cpp" />
     <ClCompile Include="CResourceManager.cpp" />
+    <ClCompile Include="CSadOnion.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSceneSLoading.cpp" />
@@ -296,9 +303,12 @@
     <ClCompile Include="CSceneTileTool.cpp" />
     <ClCompile Include="CSceneTitle.cpp" />
     <ClCompile Include="CImage.cpp" />
+    <ClCompile Include="CShieldTears.cpp" />
+    <ClCompile Include="CSkeletonKey.cpp" />
     <ClCompile Include="CSLoadingImage.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
+    <ClCompile Include="CTenBombs.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTileButton.cpp" />
     <ClCompile Include="CTilePanel.cpp" />

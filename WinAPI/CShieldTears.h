@@ -1,18 +1,16 @@
 #pragma once
 #include "CPassiveItem.h"
 
-class CPlayer;
-
-class CTripleShot : public CPassiveItem
+class CShieldTears : public CPassiveItem
 {
 public:
-	CTripleShot();
-	virtual ~CTripleShot();
+	CShieldTears();
+	virtual ~CShieldTears();
 
 	void Activate(CPlayer* pPlayer) override;
 
 private:
-	CImage* m_pTripleShotImage;
+	CImage* m_pShieldTearsImage;
 
 private:
 	void Init() override;

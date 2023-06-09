@@ -3,16 +3,16 @@
 
 class CPlayer;
 
-class CTripleShot : public CPassiveItem
+class CMeat : public CPassiveItem
 {
 public:
-	CTripleShot();
-	virtual ~CTripleShot();
+	CMeat();
+	virtual ~CMeat();
 
 	void Activate(CPlayer* pPlayer) override;
 
 private:
-	CImage* m_pTripleShotImage;
+	CImage* m_pMeatImage;
 
 private:
 	void Init() override;

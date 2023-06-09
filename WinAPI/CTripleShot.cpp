@@ -5,12 +5,13 @@
 
 CTripleShot::CTripleShot()
 {
-	m_layer = Layer::Item;
+	m_layer = Layer::PassiveItem;
 	m_strName = L"TripleShot";
 
 	m_pTripleShotImage = nullptr;
 
 	m_fTimer = 0;
+	m_iCount = 0;
 	m_bIsGetItem = false;
 }
 
@@ -18,13 +19,17 @@ CTripleShot::~CTripleShot()
 {
 }
 
+void CTripleShot::Activate(CPlayer* pPlayer)
+{
+	pPlayer->SetTripleShot(true);
+}
+
 void CTripleShot::Init()
 {
 	m_pTripleShotImage = RESOURCE->LoadImg(L"TripleShot,", L"Image\\Item\\TripleShot.png");
 
 	m_pAnimator = new CAnimator;
-	m_pAnimator->CreateAnimation(L"TripleShot", m_pTripleShotImage, Vector(0.0f, 0.0f), Vector(80.0f, 90.0f), Vector(80.0f, 0.0f), 0.3f, 2);
-	m_pAnimator->CreateAnimation(L"GetItem",	m_pTripleShotImage, Vector(0.0f, 0.0f), Vector(80.0f, 90.0f), Vector(80.0f, 0.0f), 0, 1, false);
+	m_pAnimator->CreateAnimation(L"TripleShot", m_pTripleShotImage, Vector(0.0f, 0.0f), Vector(80.0f, 80.0f), Vector(80.0f, 0.0f), 0, 1, false);
 
 	m_pAnimator->Play(L"TripleShot");
 

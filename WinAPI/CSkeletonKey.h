@@ -1,18 +1,16 @@
 #pragma once
 #include "CPassiveItem.h"
 
-class CPlayer;
-
-class CTripleShot : public CPassiveItem
+class CSkeletonKey : public CPassiveItem
 {
 public:
-	CTripleShot();
-	virtual ~CTripleShot();
+	CSkeletonKey();
+	virtual ~CSkeletonKey();
 
 	void Activate(CPlayer* pPlayer) override;
 
 private:
-	CImage* m_pTripleShotImage;
+	CImage* m_pSkeletonKeyImage;
 
 private:
 	void Init() override;

@@ -38,14 +38,17 @@ private:
 	wstring stateBody;
 	wstring stateHead;
 
-public:
+private:
 	int m_HP;
 	int m_MaxHP;
 	int m_iBomb;
 	int m_iKey;
+	int m_iCount = 0;
 
 	float m_fSpeed = 200.0f;
 	float m_fDamage = 20.0f;
+	float m_fShotSpeed = 0.25f;
+
 	float m_fTimer = 0;
 	float fCooltime = 0;
 	float m_fSTimer = 0;
@@ -70,16 +73,33 @@ public:
 	void TakeDamage();
 	void CheckCollider();
 
-	Vector GetLookDir();
-	void SetLookDir(Vector vecLookDir);
-	void SetMoveDir(Vector vecMoveDir);
-
-	int GetHP();
-	int GetMaxHP();
-
+	void GetItem(CGameObject* pOtherCollider);
 	void Teleport();
 
-	int GetKey();
+	Vector GetLookDir() { return m_vecLookDir; }
+	void SetLookDir(Vector vecLookDir) { m_vecLookDir = vecLookDir; }
+	void SetMoveDir(Vector vecMoveDir) { m_vecMoveDir = vecMoveDir; }
+
+	int GetHP() { return m_HP; }
+	void SetHP(int hp) { m_HP += hp; }
+
+	int GetMaxHP() { return m_MaxHP; }
+	void SetMaxHP(int maxHP) { m_MaxHP = maxHP; }
+
+	int GetBomb() { return m_iBomb; }
+	void SetBomb(int bomb) { m_iBomb = bomb; }
+
+	int GetKey() { return m_iKey; }
+	void SetKey(int key) { m_iKey += key; }
+
+	float GetShotSpeed() { return m_fShotSpeed; }
+	void SetShotSpeed(float shotSpeed) { m_fShotSpeed += shotSpeed; }
+
+	float GetDamage() { return m_fDamage; }
+	void SetDamage(float damage) { m_fDamage += damage; }
+
+	bool GetTripleShot() { return m_bIsTripleShot; }
+	void SetTripleShot(bool tripleShot) { m_bIsTripleShot = tripleShot; }
 
 private:
 	void Init() override;
