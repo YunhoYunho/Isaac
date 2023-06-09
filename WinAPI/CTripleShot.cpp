@@ -35,19 +35,7 @@ void CTripleShot::Init()
 
 void CTripleShot::Update()
 {
-	if (true == m_bIsGetItem)
-	{
-		m_pAnimator->Play(L"GetItem");
-		
-		m_vecPos = Vector(PLAYERPOS.x, PLAYERPOS.y - 30);
-
-		m_fTimer += DT;
-
-		if (m_fTimer > 0.7f)
-		{
-			DELETEOBJECT(this);
-		}
-	}
+	GetItem();
 }
 
 void CTripleShot::Render()
@@ -60,10 +48,7 @@ void CTripleShot::Release()
 
 void CTripleShot::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Player")
-	{
-		m_bIsGetItem = true;
-	}
+	CheckColl(pOtherCollider);
 }
 
 void CTripleShot::OnCollisionStay(CCollider* pOtherCollider)

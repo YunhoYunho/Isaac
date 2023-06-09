@@ -1,19 +1,25 @@
 #pragma once
-#include "CPassiveItem.h"
+#include "CGameObject.h"
 
 class CAnimator;
 class CImage;
 class CPlayer;
 
-class CTripleShot : public CPassiveItem
+class CPassiveItem : public CGameObject
 {
 public:
-	CTripleShot();
-	virtual ~CTripleShot();
+	CPassiveItem();
+	virtual ~CPassiveItem();
 
-private:
-	CImage* m_pTripleShotImage;
+protected:
+	CAnimator* m_pAnimator;
 	CPlayer* pPlayer;
+
+	float m_fTimer = 0;
+	bool m_bIsGetItem = false;
+
+	void GetItem();
+	void CheckColl(CCollider* pOtherCollider);
 
 private:
 	void Init() override;
