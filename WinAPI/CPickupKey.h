@@ -1,11 +1,15 @@
 #pragma once
 #include "CPickupItem.h"
 
+class CPlayer;
+
 class CPickupKey : public CPickupItem
 {
 public:
 	CPickupKey();
 	virtual ~CPickupKey();
+
+	void Activate(CPlayer* pPlayer) override;
 
 private:
 	CImage* m_pKeyImage;

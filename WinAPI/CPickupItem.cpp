@@ -5,10 +5,7 @@
 
 CPickupItem::CPickupItem()
 {
-	m_layer = Layer::Item;
-	m_strName = L"Item";
-
-	m_fTimer = 0;
+	m_layer = Layer::PickupItem;
 }
 
 CPickupItem::~CPickupItem()
@@ -17,10 +14,7 @@ CPickupItem::~CPickupItem()
 
 void CPickupItem::Contact()
 {
-	if (true == m_bIsContact)
-	{
-		DELETEOBJECT(this);
-	}
+	DELETEOBJECT(this);
 }
 
 void CPickupItem::Init()

@@ -6,9 +6,12 @@ class CPlayer;
 
 class CPickupItem : public CGameObject
 {
+	friend CPlayer;
 public:
 	CPickupItem();
 	virtual ~CPickupItem();
+
+	virtual void Activate(CPlayer* pPlayer) = 0;
 
 protected:
 	CAnimator* m_pAnimator;
@@ -24,7 +27,6 @@ private:
 	void Update() override;
 	void Render() override;
 	void Release() override;
-
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;

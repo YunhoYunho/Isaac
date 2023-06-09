@@ -1,9 +1,11 @@
 #include "framework.h"
 #include "CPickupKey.h"
 
+#include "CPlayer.h"
+
 CPickupKey::CPickupKey()
 {
-	m_layer = Layer::Item;
+	m_layer = Layer::PickupItem;
 	m_strName = L"Key";
 
 	m_pKeyImage = nullptr;
@@ -14,6 +16,11 @@ CPickupKey::CPickupKey()
 
 CPickupKey::~CPickupKey()
 {
+}
+
+void CPickupKey::Activate(CPlayer* pPlayer)
+{
+	pPlayer->SetKey(1);
 }
 
 void CPickupKey::Init()

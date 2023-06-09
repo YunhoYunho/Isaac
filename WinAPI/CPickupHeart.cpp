@@ -1,19 +1,33 @@
 #include "framework.h"
 #include "CPickupHeart.h"
 
+#include "CPlayer.h"
+
 CPickupHeart::CPickupHeart()
 {
-	m_layer = Layer::Item;
+	m_layer = Layer::PickupItem;
 	m_strName = L"Heart";
 
 	m_pHeartImage = nullptr;
 
 	m_fTimer = 0;
-	m_bIsContact = false;
 }
 
 CPickupHeart::~CPickupHeart()
 {
+}
+
+void CPickupHeart::Activate(CPlayer* pPlayer)
+{
+	if (PLAYERHP >= PLAYERMAXHP)
+	{
+		return;
+	}
+
+	else
+	{
+		pPlayer->SetHP(1);
+	}
 }
 
 void CPickupHeart::Init()

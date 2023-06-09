@@ -1,11 +1,15 @@
 #pragma once
 #include "CPickupItem.h"
 
+class CPlayer;
+
 class CPickupHeart : public CPickupItem
 {
 public:
 	CPickupHeart();
 	virtual ~CPickupHeart();
+
+	void Activate(CPlayer* pPlayer) override;
 
 private:
 	CImage* m_pHeartImage;
