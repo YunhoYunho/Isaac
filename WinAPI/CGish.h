@@ -17,8 +17,11 @@ private:
 	CImage* m_pGishLeftImage;
 	CImage* m_pGishRightImage;
 
-	wstring state = L"MoveLeft";
+	wstring state = L"IdleLeft";
 	MonsterState m_gishState;
+	MonsterState m_curState;
+	MonsterState m_preState;
+	void ChangeState(MonsterState state);
 
 private:
 	void ActionUpdate();
@@ -34,8 +37,29 @@ private:
 	void ShotState();
 	void DeadState();
 
+	void Jumping();
+	void Up(bool up);
+	void Down(bool down);
 	void CheckDir();
+
+	void SavePos();
+
+	bool m_bIsEle = false;
+
+	float m_fSaveTimer = 0;
+
+	float savePlayerPosX;
+	float savePlayerPosY;
+	int saveCount;
+
+	bool m_bIsTouchDown;
+
 	bool targetDir;
+	bool m_bIsShot;
+	int moveCount;
+	float m_fTraceTimer;
+	float m_fJumpTimer;
+	float m_fStopTimer = 0;
 
 public:
 	float GetHP();

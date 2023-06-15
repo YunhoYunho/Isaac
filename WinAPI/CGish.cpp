@@ -9,7 +9,9 @@
 	m_layer = Layer::Monster;
 	m_strName = L"Gish";
 
-	m_gishState = MonsterState::Move;
+	m_gishState = MonsterState::Ready;
+	m_curState = MonsterState::Ready;
+	m_preState = MonsterState::Ready;
 
 	m_pGishLeftImage = nullptr;
 	m_pGishRightImage = nullptr;
@@ -21,12 +23,83 @@
 	m_fSpeed = 50.0f;
 	m_HP = 40;
 	m_MaxHP = m_HP;
+	moveCount = 0;
 	m_fTimer = 0;
+	m_fTraceTimer = 0;
+	m_fJumpTimer = 0;
+	m_fStopTimer = 0;
+	m_bIsShot = false;
+	m_bIsTouchDown = false;
+
+	savePlayerPosX = 0;
+	savePlayerPosY = 0;
+	saveCount = 0;
 }
 
 CGish::~CGish()
 {
 }
+
+void CGish::ChangeState(MonsterState state)
+{
+	m_preState = m_curState;
+	m_curState = state;
+	m_fTimer = 0;
+}
+//
+//void CGish::ActionUpdate()
+//{
+//	if (m_HP <= 0)
+//	{
+//		m_gishState = MonsterState::Dead;
+//	}
+//	else
+//	{
+//		TargetDist();
+//		TargetPos();
+//
+//		//Logger::Debug(to_wstring(moveCount));
+//
+//		if (moveCount == 0)
+//		{
+//			m_fTimer += DT;
+//
+//			if (m_fTimer > 0.5f)
+//			{
+//				m_gishState = MonsterState::Move;
+//				Logger::Debug(L"Move상태");
+//
+//				m_fTraceTimer += DT;
+//				//Logger::Debug(to_wstring(m_fTraceTimer));
+//				if (m_fTraceTimer > 3.0f)
+//				{
+//					m_gishState = MonsterState::Ready;
+//					Logger::Debug(L"Ready상태");
+//					moveCount++;
+//					m_fTraceTimer = 0;
+//				}
+//			}
+//		}
+//
+//		if (moveCount == 1)
+//		{
+//			if ((true == m_bIsShot) || (true == m_bIsTouchDown))
+//			{
+//				m_gishState = MonsterState::Ready;
+//				moveCount = 0;
+//				m_fTimer = 0;
+//				m_bIsShot = false;
+//				m_bIsTouchDown = false;
+//			}
+//
+//			else
+//			{
+//				m_gishState = (targetDist < m_fRange* m_fRange) ? 
+//					MonsterState::Shot : MonsterState::Jump;
+//			}
+//		}
+//	}
+//}
 
 void CGish::ActionUpdate()
 {
@@ -39,21 +112,43 @@ void CGish::ActionUpdate()
 		TargetDist();
 		TargetPos();
 
-		if (targetDist > m_fRange * m_fRange)
-		{
-			m_gishState = MonsterState::Move;
-		}
+		//Logger::Debug(to_wstring(moveCount));
 
-		else
+		m_fTimer += DT;
+
+		switch (m_curState)
 		{
-			m_gishState = MonsterState::Shot;
+		case MonsterState::Ready:
+			if (m_fTimer >= 0.5f)
+			{
+				ChangeState(MonsterState::Move);
+			}
+			break;
+		case MonsterState::Move:
+			if (m_fTimer >= 3.0f)
+			{
+				(targetDist <= (m_fRange * m_fRange)) ? ChangeState(MonsterState::Shot) : ChangeState(MonsterState::Jump);
+			}
+			break;
+		case MonsterState::Shot:
+			if (true == m_bIsShot)
+			{
+				ChangeState(MonsterState::Ready);
+			}
+			break;
+		case MonsterState::Jump:
+			if (true == m_bIsTouchDown)
+			{
+				ChangeState(MonsterState::Ready);
+			}
+			break;
 		}
 	}
 }
 
 void CGish::ChangeUpdate()
 {
-	switch (m_gishState)
+	switch (m_curState)
 	{
 	case MonsterState::Ready:
 		ReadyUpdate();
@@ -64,6 +159,9 @@ void CGish::ChangeUpdate()
 	case MonsterState::Shot:
 		ShotUpdate();
 		break;
+	case MonsterState::Jump:
+		JumpUpdate();
+		break;
 	case MonsterState::Dead:
 		DeadUpdate();
 		break;
@@ -72,6 +170,10 @@ void CGish::ChangeUpdate()
 
 void CGish::ReadyUpdate()
 {
+	m_bIsShot = false;
+	m_bIsTouchDown = false;
+	m_fJumpTimer = 0;
+
 	if (GetLookDir().x == -1)
 	{
 		state = L"IdleLeft";
@@ -84,22 +186,20 @@ void CGish::ReadyUpdate()
 
 void CGish::MoveUpdate()
 {
-	//Logger::Debug(L"Gish 추격중!");
 	Trace();
 	MoveState();
 }
 
 void CGish::ShotUpdate()
 {
-	//Logger::Debug(L"Gish 공격중!");
 	CreateMissile();
 	ShotState();
+	m_bIsShot = true;
 }
 
 void CGish::JumpUpdate()
 {
-	//Logger::Debug(L"Gish 점프중!");
-
+	Jumping();
 }
 
 void CGish::DeadUpdate()
@@ -110,8 +210,6 @@ void CGish::DeadUpdate()
 
 void CGish::MoveState()
 {
-	//Logger::Debug(to_wstring(GetLookDir().x));
-
 	state = targetDir ? L"MoveRight" : L"MoveLeft";
 }
 
@@ -125,9 +223,79 @@ void CGish::DeadState()
 	state = L"Dead";
 }
 
+void CGish::Jumping()
+{	
+	m_fSaveTimer += DT;
+
+	if (m_fSaveTimer >= 1.5f)
+	{
+		Up(false);
+	}
+
+	else
+	{
+		RemoveCollider();
+		Up(true);
+	}
+
+	m_fJumpTimer += DT;
+
+	if (m_fJumpTimer >= 1.5f && m_fJumpTimer < 1.7f)
+	{
+		SavePos();
+	}
+
+	if (m_fJumpTimer >= 1.7f && m_fJumpTimer < 2.0f)
+	{
+		m_vecPos.x = savePlayerPosX;
+	}
+
+	if (m_fJumpTimer >= 2.0f)
+	{
+		if (m_vecPos.y >= savePlayerPosY)
+		{
+			Down(false);
+			state = L"JumpCrash";
+			AddCollider(ColliderType::Rect, Vector(100, 100), Vector(0, 40));
+
+			m_bIsTouchDown = true;
+			saveCount = 0;
+			m_fJumpTimer = 0;
+			m_fSaveTimer = 0;
+		}
+
+		else
+		{
+			Down(true);
+		}
+	}
+}
+
+void CGish::Up(bool up)
+{
+	if (true == up)
+	m_vecPos.y -= 500 * DT;
+}
+
+void CGish::Down(bool down)
+{
+	if (true == down)
+	m_vecPos.y += 500 * DT;
+}
+
 void CGish::CheckDir()
 {
 	targetDir = PLAYERPOS.x - m_vecPos.x > 0 ? true : false;
+}
+
+void CGish::SavePos()
+{
+	if (saveCount == 0)
+	{
+		savePlayerPosX = PLAYERPOS.x;
+		savePlayerPosY = PLAYERPOS.y;
+		saveCount++;
+	}
 }
 
 float CGish::GetHP()
@@ -149,13 +317,16 @@ void CGish::Init()
 
 	m_pAnimator = new CAnimator;
 
-	m_pAnimator->CreateAnimation(L"IdleLeft",		 m_pGishLeftImage,	Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 1);
-	m_pAnimator->CreateAnimation(L"IdleRight",		 m_pGishRightImage, Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 1);
-	m_pAnimator->CreateAnimation(L"MoveLeft",		 m_pGishLeftImage,	Vector(  0.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5);
-	m_pAnimator->CreateAnimation(L"MoveRight",		 m_pGishRightImage, Vector(  0.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5);
-	m_pAnimator->CreateAnimation(L"ShotLeft",		 m_pGishLeftImage,  Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, true);
-	m_pAnimator->CreateAnimation(L"ShotRight",		 m_pGishRightImage, Vector(  0.f,   0.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0.2f, 5, true);
-	m_pAnimator->CreateAnimation(L"Dead",			 m_pGishLeftImage,	Vector(560.f, 196.f), Vector(140.f, 196.f), Vector(140.f, 0.f), 0, 1, false);
+	m_pAnimator->CreateAnimation(L"IdleLeft",		 m_pGishLeftImage,	Vector(    0.f,   0.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0.2f, 1);
+	m_pAnimator->CreateAnimation(L"IdleRight",		 m_pGishRightImage, Vector(    0.f,   0.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0.2f, 1);
+	m_pAnimator->CreateAnimation(L"MoveLeft",		 m_pGishLeftImage,	Vector(    0.f, 196.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0.2f, 5);
+	m_pAnimator->CreateAnimation(L"MoveRight",		 m_pGishRightImage, Vector(  560.f, 196.f), Vector(140.f, 196.f), Vector(-140.f, 0.f), 0.2f, 5);
+	m_pAnimator->CreateAnimation(L"ShotLeft",		 m_pGishLeftImage,  Vector(    0.f,   0.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0.2f, 5, true);
+	m_pAnimator->CreateAnimation(L"ShotRight",		 m_pGishRightImage, Vector(  560.f,   0.f), Vector(140.f, 196.f), Vector(-140.f, 0.f), 0.2f, 5, true);
+	m_pAnimator->CreateAnimation(L"JumpUp",			 m_pGishLeftImage,	Vector(	   0.f, 196.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0.2f, 2, false);
+	m_pAnimator->CreateAnimation(L"JumpDown",		 m_pGishLeftImage,	Vector(	 140.f, 196.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0   , 1, false);
+	m_pAnimator->CreateAnimation(L"JumpCrash",		 m_pGishLeftImage,	Vector(	   0.f, 196.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0   , 1, false);
+	m_pAnimator->CreateAnimation(L"Dead",			 m_pGishLeftImage,	Vector(  560.f, 196.f), Vector(140.f, 196.f), Vector( 140.f, 0.f), 0,	 1, false);
 
 	m_pAnimator->Play(L"MoveLeft");
 
