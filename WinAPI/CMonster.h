@@ -16,6 +16,7 @@ public:
 	bool left;
 	bool right;
 
+	bool m_bIsShot;
 	bool m_bIsDead;
 
 	int deadCount = 0;
@@ -45,10 +46,10 @@ public:
 	void DeadCount();
 	void Trace();
 	void PingPong();
+	void CreateMissile();
 
 	void TargetDist();
 	void TargetPos();
-	void CreateMissile();
 	float m_fShotTimer;
 	float m_fShotSpeed;
 

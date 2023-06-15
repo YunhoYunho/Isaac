@@ -19,8 +19,6 @@ private:
 
 	wstring state = L"IdleLeft";
 	MonsterState m_gishState;
-	MonsterState m_curState;
-	MonsterState m_preState;
 	void ChangeState(MonsterState state);
 
 private:
@@ -44,22 +42,15 @@ private:
 
 	void SavePos();
 
-	bool m_bIsEle = false;
-
-	float m_fSaveTimer = 0;
+	float m_fSaveTimer;
+	float m_fJumpTimer;
 
 	float savePlayerPosX;
 	float savePlayerPosY;
 	int saveCount;
 
 	bool m_bIsTouchDown;
-
 	bool targetDir;
-	bool m_bIsShot;
-	int moveCount;
-	float m_fTraceTimer;
-	float m_fJumpTimer;
-	float m_fStopTimer = 0;
 
 public:
 	float GetHP();

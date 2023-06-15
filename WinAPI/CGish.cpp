@@ -10,8 +10,6 @@
 	m_strName = L"Gish";
 
 	m_gishState = MonsterState::Ready;
-	m_curState = MonsterState::Ready;
-	m_preState = MonsterState::Ready;
 
 	m_pGishLeftImage = nullptr;
 	m_pGishRightImage = nullptr;
@@ -19,21 +17,21 @@
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
 
-	m_fRange = 200.0f;
+	m_fRange = 300.0f;
 	m_fSpeed = 50.0f;
 	m_HP = 40;
 	m_MaxHP = m_HP;
-	moveCount = 0;
+
 	m_fTimer = 0;
-	m_fTraceTimer = 0;
+	m_fSaveTimer = 0;
 	m_fJumpTimer = 0;
-	m_fStopTimer = 0;
-	m_bIsShot = false;
-	m_bIsTouchDown = false;
 
 	savePlayerPosX = 0;
 	savePlayerPosY = 0;
 	saveCount = 0;
+
+	m_bIsShot = false;
+	m_bIsTouchDown = false;
 }
 
 CGish::~CGish()
@@ -42,64 +40,9 @@ CGish::~CGish()
 
 void CGish::ChangeState(MonsterState state)
 {
-	m_preState = m_curState;
-	m_curState = state;
+	m_gishState = state;
 	m_fTimer = 0;
 }
-//
-//void CGish::ActionUpdate()
-//{
-//	if (m_HP <= 0)
-//	{
-//		m_gishState = MonsterState::Dead;
-//	}
-//	else
-//	{
-//		TargetDist();
-//		TargetPos();
-//
-//		//Logger::Debug(to_wstring(moveCount));
-//
-//		if (moveCount == 0)
-//		{
-//			m_fTimer += DT;
-//
-//			if (m_fTimer > 0.5f)
-//			{
-//				m_gishState = MonsterState::Move;
-//				Logger::Debug(L"Move상태");
-//
-//				m_fTraceTimer += DT;
-//				//Logger::Debug(to_wstring(m_fTraceTimer));
-//				if (m_fTraceTimer > 3.0f)
-//				{
-//					m_gishState = MonsterState::Ready;
-//					Logger::Debug(L"Ready상태");
-//					moveCount++;
-//					m_fTraceTimer = 0;
-//				}
-//			}
-//		}
-//
-//		if (moveCount == 1)
-//		{
-//			if ((true == m_bIsShot) || (true == m_bIsTouchDown))
-//			{
-//				m_gishState = MonsterState::Ready;
-//				moveCount = 0;
-//				m_fTimer = 0;
-//				m_bIsShot = false;
-//				m_bIsTouchDown = false;
-//			}
-//
-//			else
-//			{
-//				m_gishState = (targetDist < m_fRange* m_fRange) ? 
-//					MonsterState::Shot : MonsterState::Jump;
-//			}
-//		}
-//	}
-//}
 
 void CGish::ActionUpdate()
 {
@@ -112,11 +55,11 @@ void CGish::ActionUpdate()
 		TargetDist();
 		TargetPos();
 
-		//Logger::Debug(to_wstring(moveCount));
+		Logger::Debug(L"타겟 거리 : " + to_wstring(targetDist));
 
 		m_fTimer += DT;
 
-		switch (m_curState)
+		switch (m_gishState)
 		{
 		case MonsterState::Ready:
 			if (m_fTimer >= 0.5f)
@@ -127,7 +70,8 @@ void CGish::ActionUpdate()
 		case MonsterState::Move:
 			if (m_fTimer >= 3.0f)
 			{
-				(targetDist <= (m_fRange * m_fRange)) ? ChangeState(MonsterState::Shot) : ChangeState(MonsterState::Jump);
+				(targetDist <= (m_fRange * m_fRange)) ?
+					ChangeState(MonsterState::Shot) : ChangeState(MonsterState::Jump);
 			}
 			break;
 		case MonsterState::Shot:
@@ -139,7 +83,7 @@ void CGish::ActionUpdate()
 		case MonsterState::Jump:
 			if (true == m_bIsTouchDown)
 			{
-				ChangeState(MonsterState::Ready);
+				ChangeState(MonsterState::Shot);
 			}
 			break;
 		}
@@ -148,7 +92,7 @@ void CGish::ActionUpdate()
 
 void CGish::ChangeUpdate()
 {
-	switch (m_curState)
+	switch (m_gishState)
 	{
 	case MonsterState::Ready:
 		ReadyUpdate();
@@ -172,7 +116,6 @@ void CGish::ReadyUpdate()
 {
 	m_bIsShot = false;
 	m_bIsTouchDown = false;
-	m_fJumpTimer = 0;
 
 	if (GetLookDir().x == -1)
 	{
@@ -194,7 +137,6 @@ void CGish::ShotUpdate()
 {
 	CreateMissile();
 	ShotState();
-	m_bIsShot = true;
 }
 
 void CGish::JumpUpdate()

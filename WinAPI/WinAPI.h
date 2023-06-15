@@ -37,8 +37,6 @@ enum class GroupScene
 
 	Loading,
 
-	StageBoss,
-
 	Size,
 };
 

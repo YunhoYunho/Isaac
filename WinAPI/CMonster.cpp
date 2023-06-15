@@ -26,6 +26,7 @@ CMonster::CMonster()
 	m_fRange = 10.0f;
 
 	m_bIsDead = false;
+	m_bIsShot = false;
 }
 
 CMonster::~CMonster()
@@ -193,6 +194,7 @@ void CMonster::CreateMissile()
 		pMissile->SetPos(m_vecPos);
 		pMissile->SetDir(m_vecPlayerPos);
 		ADDOBJECT(pMissile);
+		m_bIsShot = true;
 	}
 
 	m_fShotTimer += DT;
