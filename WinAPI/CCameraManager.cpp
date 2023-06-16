@@ -95,6 +95,20 @@ void CCameraManager::RTeleport()
 	SetTargetPos(m_vecLookAt, 0.5f);
 }
 
+void CCameraManager::UTeleport()
+{
+	m_vecLookAt -= Vector(0, 720);
+
+	SetTargetPos(m_vecLookAt, 0.5f);
+}
+
+void CCameraManager::DTeleport()
+{
+	m_vecLookAt += Vector(0, 720);
+
+	SetTargetPos(m_vecLookAt, 0.5f);
+}
+
 void CCameraManager::Init()
 {
 }

@@ -4,7 +4,7 @@
 CDoorBossTeleport::CDoorBossTeleport()
 {
 	m_layer = Layer::Teleport;
-	m_strName = L"Teleport";
+	m_strName = L"LRTeleport";
 }
 
 CDoorBossTeleport::~CDoorBossTeleport()

@@ -14,6 +14,9 @@ private:
 	CImage* m_pBLFrameImage;
 	CImage* m_pBRFrameImage;
 
+	CImage* m_pDFrameImage;
+	CImage* m_pUFrameImage;
+
 private:
 	void Init() override;
 	void Update() override;

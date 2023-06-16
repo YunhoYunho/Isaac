@@ -4,7 +4,7 @@
 CDoorTeleport::CDoorTeleport()
 {
 	m_layer = Layer::Teleport;
-	m_strName = L"Teleport";
+	m_strName = L"";
 }
 
 CDoorTeleport::~CDoorTeleport()
@@ -13,12 +13,13 @@ CDoorTeleport::~CDoorTeleport()
 
 void CDoorTeleport::AddColl()
 {
-	AddCollider(ColliderType::Rect, Vector(240, 100), Vector(0, 0));
+	AddCollider(ColliderType::Rect, Vector(240, 220), Vector(-10, -10));
 }
 
 void CDoorTeleport::Init()
 {
 	AddColl();
+	GetName();
 }
 
 void CDoorTeleport::Update()

@@ -41,6 +41,8 @@ public:
 
 	void LTeleport();
 	void RTeleport();
+	void UTeleport();
+	void DTeleport();
 
 private:
 	void Init();

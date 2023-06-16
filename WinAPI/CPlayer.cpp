@@ -51,6 +51,8 @@ CPlayer::CPlayer()
 	m_bIsTripleShot = false;
 	m_bIsLTeleport = false;
 	m_bIsRTeleport = false;
+	m_bIsUTeleport = false;
+	m_bIsDTeleport = false;
 }
 
 CPlayer::~CPlayer()
@@ -328,7 +330,8 @@ void CPlayer::Update()
 	
 	CreateBomb();
 	CheckCollider();
-	Teleport();
+	LRTeleport();
+	UDTeleport();
 
 #pragma region µð¹ö±ë¿ë
 	CreateHeart();
@@ -516,7 +519,7 @@ void CPlayer::GetItem(CGameObject* pOtherCollider)
 	}
 }
 
-void CPlayer::Teleport()
+void CPlayer::LRTeleport()
 {
 	if (true == m_bIsLTeleport)
 	{
@@ -530,6 +533,23 @@ void CPlayer::Teleport()
 		CAMERA->RTeleport();
 		m_vecPos.x -= 350.0f;
 		m_bIsRTeleport = false;
+	}
+}
+
+void CPlayer::UDTeleport()
+{
+	if (true == m_bIsUTeleport)
+	{
+		CAMERA->UTeleport();
+		m_vecPos.y -= 350.0f;
+		m_bIsUTeleport = false;
+	}
+
+	else if (true == m_bIsDTeleport)
+	{
+		CAMERA->DTeleport();
+		m_vecPos.y += 350.0f;
+		m_bIsDTeleport = false;
 	}
 }
 
@@ -582,7 +602,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		}
 	}
 
-	if (pOtherCollider->GetObjName() == L"Teleport")
+	if (pOtherCollider->GetObjName() == L"LRTeleport")
 	{
 		if (PLAYERPOS.x <= pOtherCollider->GetPos().x)
 		{
@@ -592,6 +612,19 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		else
 		{
 			m_bIsRTeleport = true;
+		}
+	}
+
+	if (pOtherCollider->GetObjName() == L"UDTeleport")
+	{
+		if (PLAYERPOS.y <= pOtherCollider->GetPos().y)
+		{
+			m_bIsDTeleport = true;
+		}
+
+		else
+		{
+			m_bIsUTeleport = true;
 		}
 	}
 }

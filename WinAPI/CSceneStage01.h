@@ -52,6 +52,7 @@ private:
 	int soundCount;
 
 	bool m_bIsSpawnComplete;
+	bool m_bIsRoom0Open;
 	bool m_bIsRoom1Clear;
 	bool m_bIsRoom2Clear;
 	bool m_bIsRoom3Clear;

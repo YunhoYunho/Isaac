@@ -13,6 +13,10 @@ CDoorControl::CDoorControl()
 	m_pBLOpenImage  = nullptr;
 	m_pBRCloseImage = nullptr;
 	m_pBROpenImage  = nullptr;
+	m_pDCloseImage = nullptr;
+	m_pDOpenImage = nullptr;
+	m_pUCloseImage = nullptr;
+	m_pUOpenImage = nullptr;
 }
 
 CDoorControl::~CDoorControl()
@@ -21,6 +25,19 @@ CDoorControl::~CDoorControl()
 
 void CDoorControl::RenderController()
 {
+#pragma region GoldenRoom
+	if (true != ROOM0OPEN)
+	{
+		RENDER->Image(m_pDCloseImage, 588, 565, 692, 635);
+		RENDER->Image(m_pUCloseImage, 588, 802, 692, 872);
+	}
+
+	else
+	{
+		RENDER->Image(m_pDOpenImage, 588, 565, 692, 635);
+		RENDER->Image(m_pUOpenImage, 588, 802, 692, 872);
+	}
+
 #pragma region Room1
 	if (true != ROOM1CLEAR)
 	{
@@ -56,6 +73,7 @@ void CDoorControl::RenderController()
 	{
 		RENDER->Image(m_pBLOpenImage, 2655, 286, 2808, 434);
 	}
+#pragma endregion
 }
 
 void CDoorControl::Init()
@@ -69,6 +87,11 @@ void CDoorControl::Init()
 	m_pBLOpenImage = RESOURCE->LoadImg(L"LBossOpen", L"Image\\Map\\L_Boss_Open.png");
 	m_pBRCloseImage = RESOURCE->LoadImg(L"RBossClose", L"Image\\Map\\R_Boss_Close.png");
 	m_pBROpenImage = RESOURCE->LoadImg(L"RBossOpen", L"Image\\Map\\R_Boss_Open.png");
+
+	m_pDCloseImage = RESOURCE->LoadImg(L"DownClose", L"Image\\Map\\RV_Door_Close.png");
+	m_pDOpenImage = RESOURCE->LoadImg(L"DownOpen", L"Image\\Map\\RV_Door_Open.png");
+	m_pUCloseImage = RESOURCE->LoadImg(L"UpClose", L"Image\\Map\\Door_Close.png");
+	m_pUOpenImage = RESOURCE->LoadImg(L"UpOpen", L"Image\\Map\\Door_Open.png");
 }
 
 void CDoorControl::Update()
@@ -77,9 +100,7 @@ void CDoorControl::Update()
 
 void CDoorControl::Render()
 {
-#pragma region Stage01
 	RenderController();
-#pragma endregion
 }
 
 void CDoorControl::Release()

@@ -5,6 +5,7 @@
 CGameManager::CGameManager()
 {
 	debugMode = false;
+	room0Open = false;
 	room1Clear = false;
 	room2Clear = false;
 	room3Clear = false;

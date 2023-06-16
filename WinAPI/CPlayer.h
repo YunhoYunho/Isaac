@@ -58,6 +58,8 @@ private:
 	bool m_bIsColliderOff;
 	bool m_bIsLTeleport;
 	bool m_bIsRTeleport;
+	bool m_bIsUTeleport;
+	bool m_bIsDTeleport;
 
 public:
 	void IdleUpdate();
@@ -74,7 +76,8 @@ public:
 	void CheckCollider();
 
 	void GetItem(CGameObject* pOtherCollider);
-	void Teleport();
+	void LRTeleport();
+	void UDTeleport();
 
 	Vector GetLookDir() { return m_vecLookDir; }
 	void SetLookDir(Vector vecLookDir) { m_vecLookDir = vecLookDir; }

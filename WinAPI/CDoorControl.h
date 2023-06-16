@@ -18,6 +18,11 @@ private:
 	CImage* m_pBRCloseImage;
 	CImage* m_pBROpenImage;
 
+	CImage* m_pDCloseImage;
+	CImage* m_pDOpenImage;
+	CImage* m_pUCloseImage;
+	CImage* m_pUOpenImage;
+
 	void RenderController();
 
 private:

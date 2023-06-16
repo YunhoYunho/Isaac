@@ -62,6 +62,7 @@ CSceneStage01::CSceneStage01()
 	enterCount = 0;
 	soundCount = 0;
 	m_bIsSpawnComplete = false;
+	m_bIsRoom0Open = false;
 	m_bIsRoom1Clear = false;
 	m_bIsRoom2Clear = false;
 	m_bIsRoom3Clear = false;
@@ -120,7 +121,13 @@ void CSceneStage01::CreateDoorTeleport()
 {
 	CDoorTeleport* pDoorTeleport = new CDoorTeleport();
 	pDoorTeleport->SetPos(Vector(1280, 360));
+	pDoorTeleport->SetName(L"LRTeleport");
 	AddGameObject(pDoorTeleport);
+
+	CDoorTeleport* pDoorTeleport2 = new CDoorTeleport();
+	pDoorTeleport2->SetPos(Vector(640, 720));
+	pDoorTeleport2->SetName(L"UDTeleport");
+	AddGameObject(pDoorTeleport2);
 }
 
 void CSceneStage01::CreateDoorBossTeleport()
@@ -168,6 +175,7 @@ void CSceneStage01::CheckRoomClear()
 		{
 			if (INROOM1 && (true != m_bIsRoom1Clear))
 			{
+				m_bIsRoom0Open = true;
 				m_bIsRoom1Clear = true;
 				m_bIsSpawnComplete = false;
 				Logger::Debug(L"방1 클리어? : " + to_wstring(m_bIsRoom1Clear));
@@ -194,6 +202,7 @@ void CSceneStage01::CheckRoomClear()
 
 void CSceneStage01::WhatRoomClear()
 {
+	ROOM0OPEN = m_bIsRoom0Open;
 	ROOM1CLEAR = m_bIsRoom1Clear;
 	ROOM2CLEAR = m_bIsRoom2Clear;
 	ROOM3CLEAR = m_bIsRoom3Clear;
@@ -258,6 +267,11 @@ void CSceneStage01::Init()
 	AddGameObject(pPlayer);
 	
 #pragma region 디버깅용
+
+	/*CGish* pGish = new CGish();
+	pGish->SetPos(300, WINSIZEY * 0.5f);
+	AddGameObject(pGish);*/
+
 	/*CBaby* pBaby = new CBaby();
 	pBaby->SetPos(300, WINSIZEY * 0.5f);
 	AddGameObject(pBaby);*/
@@ -279,7 +293,7 @@ void CSceneStage01::Init()
 	AddGameObject(pCamController);
 
 	CImageObject* pBackGround = new CImageObject;
-	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Stage01_Map.png"));
+	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Stage_Map.png"));
 	AddGameObject(pBackGround);
 
 	CPlayerHP* pPlayerHPImage = new CPlayerHP;
@@ -312,7 +326,7 @@ void CSceneStage01::Init()
 void CSceneStage01::Enter()
 {
 	CAMERA->FadeIn(0.25f);
-	LoadTile(GETPATH + L"Tile\\Isaac_Stage01_tile");
+	LoadTile(GETPATH + L"Tile\\Isaac_Stage_tile");
 
 	SOUND->Play(pBGMSound, 0.6f, false);
 	SOUND->Pause(pBossRoomSound);
@@ -350,9 +364,9 @@ void CSceneStage01::Update()
 
 void CSceneStage01::Render()
 {
-	Vector killCount = CAMERA->ScreenToWorldPoint(Vector(50, 50));
-	wstring count = L"현재 킬 카운트 : " + to_wstring(MONSTERKILLCOUNT) + L"\n현재 벡터 저장된 적 : " + to_wstring(m_vecSpawnMonsters.size());
-	RENDER->Text(count, killCount.x - 50, killCount.y - 10, killCount.x + 50, killCount.y + 10, Color(255, 255, 255, 1.f), 15);
+	/*Vector killCount = CAMERA->ScreenToWorldPoint(Vector(50, 50));
+	wstring count = L"킬 카운트 : " + to_wstring(MONSTERKILLCOUNT) + L"\n생성된 적 : " + to_wstring(m_vecSpawnMonsters.size());
+	RENDER->Text(count, killCount.x - 50, killCount.y - 10, killCount.x + 50, killCount.y + 10, Color(255, 255, 255, 1.f), 15);*/
 }
 
 void CSceneStage01::Exit()
