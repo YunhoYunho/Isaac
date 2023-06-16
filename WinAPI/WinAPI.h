@@ -56,6 +56,7 @@ enum class Layer
 	DoorControl,
 	DoorFrame,
 	DoorCollider,
+	Rock,
 	Missile,
 	Monster,
 	ItemRock,
