@@ -4,12 +4,14 @@
 CBlackRock::CBlackRock()
 {
 	m_layer = Layer::Rock;
-	m_strName = L"BlackRock";
+	m_strName = L"Rock";
 	m_pBlackRockImage = nullptr;
 	m_pBlackFragmentsImage = nullptr;
 	m_bIsBroken = false;
 	m_bIsSpecial = false;
-	m_fTimer = 0;
+	m_fTimer = 0;	
+	dir = CollisionDir::None;
+	offset = 0.25f;
 }
 
 CBlackRock::~CBlackRock()
@@ -23,8 +25,8 @@ void CBlackRock::Init()
 
 	m_pAnimator = new CAnimator;
 
-	m_pAnimator->CreateAnimation(L"NotBlackBroken", m_pBlackRockImage, Vector(0.0f, 0.0f), Vector(57.0f, 60.0f), Vector(57.0f, 0.0f), 0, 1, false);
-	m_pAnimator->CreateAnimation(L"BlackBroken", m_pBlackFragmentsImage, Vector(0.0f, 0.0f), Vector(64.0f, 64.0f), Vector(64.0f, 0.0f), 0, 1, false);
+	m_pAnimator->CreateAnimation(L"NotBroken", m_pBlackRockImage, Vector(0.0f, 0.0f), Vector(57.0f, 60.0f), Vector(57.0f, 0.0f), 0, 1, false);
+	m_pAnimator->CreateAnimation(L"Broken", m_pBlackFragmentsImage, Vector(0.0f, 0.0f), Vector(64.0f, 64.0f), Vector(64.0f, 0.0f), 0, 1, false);
 
 	m_pAnimator->Play(L"NotBroken");
 
@@ -57,6 +59,10 @@ void CBlackRock::OnCollisionEnter(CCollider* pOtherCollider)
 
 void CBlackRock::OnCollisionStay(CCollider* pOtherCollider)
 {
+	if (pOtherCollider->GetObjName() == L"Player")
+	{
+		PushObject(pOtherCollider);
+	}
 }
 
 void CBlackRock::OnCollisionExit(CCollider* pOtherCollider)

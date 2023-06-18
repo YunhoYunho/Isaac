@@ -33,69 +33,6 @@ void CDoorTile::Render()
 	CTile::Render();
 
 	ComponentRender();
-
-	switch (dir)
-	{
-	case CollisionDir::Up:
-	{
-		RENDER->Text(
-			L"Up",
-			m_vecPos.x - m_vecScale.x * 0.5f,
-			m_vecPos.y - m_vecScale.y * 0.5f,
-			m_vecPos.x + m_vecScale.x * 0.5f,
-			m_vecPos.y + m_vecScale.y * 0.5f
-		);
-	}
-	break;
-
-	case CollisionDir::Down:
-	{
-		RENDER->Text(
-			L"Down",
-			m_vecPos.x - m_vecScale.x * 0.5f,
-			m_vecPos.y - m_vecScale.y * 0.5f,
-			m_vecPos.x + m_vecScale.x * 0.5f,
-			m_vecPos.y + m_vecScale.y * 0.5f
-		);
-	}
-	break;
-
-	case CollisionDir::Left:
-	{
-		RENDER->Text(
-			L"Left",
-			m_vecPos.x - m_vecScale.x * 0.5f,
-			m_vecPos.y - m_vecScale.y * 0.5f,
-			m_vecPos.x + m_vecScale.x * 0.5f,
-			m_vecPos.y + m_vecScale.y * 0.5f
-		);
-	}
-	break;
-
-	case CollisionDir::Right:
-	{
-		RENDER->Text(
-			L"Right",
-			m_vecPos.x - m_vecScale.x * 0.5f,
-			m_vecPos.y - m_vecScale.y * 0.5f,
-			m_vecPos.x + m_vecScale.x * 0.5f,
-			m_vecPos.y + m_vecScale.y * 0.5f
-		);
-	}
-	break;
-
-	case CollisionDir::None:
-	{
-		RENDER->Text(
-			L"",
-			m_vecPos.x - m_vecScale.x * 0.5f,
-			m_vecPos.y - m_vecScale.y * 0.5f,
-			m_vecPos.x + m_vecScale.x * 0.5f,
-			m_vecPos.y + m_vecScale.y * 0.5f
-		);
-	}
-	break;
-	}
 }
 
 void CDoorTile::Release()

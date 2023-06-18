@@ -34,6 +34,8 @@
 #include "CDoorBossTeleport.h"
 
 #include "CLoadingImage.h"
+#include "CRock.h"
+#include "CBlackRock.h"
 
 #pragma region MonsterSpawnPosition
 #define ROOM1P1		Vector(800, 200)
@@ -47,6 +49,12 @@
 #define ROOM2P4		Vector(2330, 500)
 
 #define ROOM3P1		Vector(3500, 360)
+#pragma endregion
+#pragma region GridPosition
+#define ROCK1		Vector(1600, 250)
+#define ROCK2		Vector(1600, 500)
+#define ROCK3		Vector(2200, 250)
+#define ROCK4		Vector(2200, 500)
 #pragma endregion
 
 CSceneStage01::CSceneStage01()
@@ -115,6 +123,20 @@ void CSceneStage01::CreateBoss()
 
 		m_bIsSpawnComplete = m_vecSpawnMonsters.size() == 1 ? true : false;
 	}
+}
+
+void CSceneStage01::CreateRock()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		CRock* pRock = new CRock();
+		pRock->SetPos(m_vecRockPositions[i]);
+		AddGameObject(pRock);
+	}
+
+	CBlackRock* pBlackRock = new CBlackRock();
+	pBlackRock->SetPos(m_vecRockPositions[3]);
+	AddGameObject(pBlackRock);
 }
 
 void CSceneStage01::CreateDoorTeleport()
@@ -258,6 +280,11 @@ void CSceneStage01::PositionPool()
 	m_vecMonsterPositions.emplace_back(ROOM2P2);
 	m_vecMonsterPositions.emplace_back(ROOM2P3);
 	m_vecMonsterPositions.emplace_back(ROOM2P4);
+
+	m_vecRockPositions.emplace_back(ROCK1);
+	m_vecRockPositions.emplace_back(ROCK2);
+	m_vecRockPositions.emplace_back(ROCK3);
+	m_vecRockPositions.emplace_back(ROCK4);
 }
 
 void CSceneStage01::Init()
@@ -321,6 +348,7 @@ void CSceneStage01::Init()
 	CreateDoorBossTeleport();
 	MonsterPool();
 	PositionPool();
+	CreateRock();
 }
 
 void CSceneStage01::Enter()

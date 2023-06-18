@@ -2,6 +2,7 @@
 #include "CRock.h"
 #include "CPickupHeart.h"
 #include "CPickupKey.h"
+#include "CGroundTile.h"
 
 CRock::CRock()
 {
@@ -12,6 +13,8 @@ CRock::CRock()
 	m_bIsBroken = false;
 	m_bIsSpecial = false;
 	m_fTimer = 0;
+	dir = CollisionDir::None;
+	offset = 0.25f;
 }
 
 CRock::~CRock()
@@ -25,6 +28,7 @@ void CRock::Broken()
 		m_pAnimator->Play(L"Broken");
 
 		BrokenSound();
+		RemoveCollider();
 		
 		if (true == m_bIsSpecial)
 		{
@@ -130,6 +134,11 @@ void CRock::OnCollisionEnter(CCollider* pOtherCollider)
 
 void CRock::OnCollisionStay(CCollider* pOtherCollider)
 {
+
+	if (pOtherCollider->GetObjName() == L"Player")
+	{
+		PushObject(pOtherCollider);
+	}
 }
 
 void CRock::OnCollisionExit(CCollider* pOtherCollider)

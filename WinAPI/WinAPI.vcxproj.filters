@@ -324,10 +324,13 @@
     <ClInclude Include="CNormalChest.h">
       <Filter>03. GameObject\Stage\Item\Chest</Filter>
     </ClInclude>
-    <ClInclude Include="CRock.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CBlackRock.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CRock.h">
+      <Filter>04. Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -554,10 +557,13 @@
     <ClCompile Include="CTenBombs.cpp">
       <Filter>03. GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
-    <ClCompile Include="CRock.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CBlackRock.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CRock.cpp">
+      <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

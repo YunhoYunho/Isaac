@@ -1,7 +1,7 @@
 #pragma once
-#include "CGameObject.h"
+#include "CObstacle.h"
 
-class CRock : public CGameObject
+class CRock : public CObstacle
 {
 public:
 	CRock();
@@ -10,7 +10,7 @@ public:
 	CAnimator* m_pAnimator;
 	CImage* m_pRockImage;
 	CImage* m_pFragmentsImage;
-	CSound* pBrokenSound = RESOURCE->LoadSound(L"RockBroken", L"Sound\\");
+	CSound* pBrokenSound = RESOURCE->LoadSound(L"RockBroken", L"Sound\\Item\\explosion_debris.wav");
 
 	void Broken();
 	void BrokenSound();

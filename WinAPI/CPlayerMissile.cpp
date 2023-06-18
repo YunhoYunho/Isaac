@@ -67,7 +67,8 @@ void CPlayerMissile::CheckDestroyMissile()
 void CPlayerMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Wall" ||
-		pOtherCollider->GetObjName() == L"DoorCollider")
+		pOtherCollider->GetObjName() == L"DoorCollider" ||
+		pOtherCollider->GetObjName() == L"Rock")
 	{
 		m_pAnimator->Play(L"Hit");
 		m_fVelocity = 0;

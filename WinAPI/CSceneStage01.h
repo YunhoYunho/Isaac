@@ -3,7 +3,6 @@
 
 class CPlayer;
 class CMonster;
-class CDoorTeleport;
 
 class CSceneStage01 : public CScene
 {
@@ -31,6 +30,7 @@ private:
 
 	void CreateMonsters(int num);
 	void CreateBoss();
+	void CreateRock();
 
 	void SpawnRoom1();
 	void SpawnRoom2();
@@ -45,6 +45,7 @@ private:
 	vector<CMonster*> m_vecMonsters;
 	vector<CMonster*> m_vecSpawnMonsters;
 	vector<Vector> m_vecMonsterPositions;
+	vector<Vector> m_vecRockPositions;
 
 	int randomNumber;
 	int killCount;

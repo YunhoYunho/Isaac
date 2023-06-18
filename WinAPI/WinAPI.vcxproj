@@ -185,6 +185,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CNormalChest.h" />
+    <ClInclude Include="CObstacle.h" />
     <ClInclude Include="CPanel.h" />
     <ClInclude Include="CPassiveItem.h" />
     <ClInclude Include="CPathManager.h" />
@@ -282,6 +283,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CNormalChest.cpp" />
+    <ClCompile Include="CObstacle.cpp" />
     <ClCompile Include="CPanel.cpp" />
     <ClCompile Include="CPassiveItem.cpp" />
     <ClCompile Include="CPathManager.cpp" />
