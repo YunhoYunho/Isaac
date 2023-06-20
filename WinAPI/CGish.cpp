@@ -32,6 +32,7 @@
 
 	m_bIsShot = false;
 	m_bIsTouchDown = false;
+	m_bIsBoss = true;
 }
 
 CGish::~CGish()
@@ -54,8 +55,6 @@ void CGish::ActionUpdate()
 	{
 		TargetDist();
 		TargetPos();
-
-		Logger::Debug(L"Å¸°Ù °Å¸® : " + to_wstring(targetDist));
 
 		m_fTimer += DT;
 

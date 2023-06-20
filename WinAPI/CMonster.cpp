@@ -190,10 +190,19 @@ void CMonster::CreateMissile()
 	{
 		//Logger::Debug(L"利 固荤老 积己");
 
-		CMonsterMissile* pMissile = new CMonsterMissile();
-		pMissile->SetPos(m_vecPos);
-		pMissile->SetDir(m_vecPlayerPos);
-		ADDOBJECT(pMissile);
+		if (true != m_bIsBoss)
+		{
+			CMonsterMissile* pMissile = new CMonsterMissile();
+			pMissile->SetPos(m_vecPos);
+			pMissile->SetDir(m_vecPlayerPos);
+			ADDOBJECT(pMissile);
+		}
+
+		else
+		{
+			RangeMissile();
+		}
+
 		m_bIsShot = true;
 	}
 
@@ -202,6 +211,22 @@ void CMonster::CreateMissile()
 	if (m_fShotTimer > 1.0f)
 	{
 		m_fShotTimer = 0;
+	}
+}
+
+void CMonster::RangeMissile()
+{
+	float angleToTarget = Vector::DirToAngle(PLAYERPOS - m_vecPos);
+
+	for (int i = 0; i < 10; i++)
+	{
+		CMonsterMissile* pMissile = new CMonsterMissile();
+
+		pMissile->SetPos(m_vecPos);
+		float missileAngle = angleToTarget + rand() % 60 - 30;
+		Vector angleToDir = Vector::AngleToDir(missileAngle);
+		pMissile->SetDir(angleToDir);
+		ADDOBJECT(pMissile);
 	}
 }
 

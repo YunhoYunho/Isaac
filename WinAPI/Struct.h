@@ -1,4 +1,5 @@
 #pragma once
+#include <corecrt_math_defines.h>
 
 //========================================
 //##				¹éÅÍ					##
@@ -121,6 +122,38 @@ struct Vector
 			float length = Length();
 			return Vector(x / length, y / length);
 		}
+	}
+
+	static float CalculateAngle(Vector pos1, Vector pos2) 
+	{
+		Vector dirToPos1 = pos1.Normalized();
+		Vector dirToPos2 = pos2.Normalized();
+
+		float dot = Vector::Dot(dirToPos1, dirToPos2);
+
+		float theta = acos(dot);
+		float angle = theta * 180.0f / 3.141592f;
+
+		return angle;
+	}
+
+	static float Dot(Vector vec1, Vector vec2)
+	{
+		return vec1.x * vec2.x + vec1.y * vec2.y;
+	}
+
+	static Vector AngleToDir(float angle)
+	{
+		float rad = angle * 3.141592f / 180.0f;
+		return Vector(cos(rad), sin(rad));
+	}
+
+	static float DirToAngle(Vector vec)
+	{
+		if (vec.y >= 0)
+			return CalculateAngle(vec, Vector(1, 0));
+		else
+			return -1 * CalculateAngle(vec, Vector(1, 0));
 	}
 };
 

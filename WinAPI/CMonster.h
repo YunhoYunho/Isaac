@@ -18,6 +18,7 @@ public:
 
 	bool m_bIsShot;
 	bool m_bIsDead;
+	bool m_bIsBoss = false;
 
 	int deadCount = 0;
 	float m_HP;
@@ -47,9 +48,10 @@ public:
 	void Trace();
 	void PingPong();
 	void CreateMissile();
-
+	void RangeMissile();
 	void TargetDist();
 	void TargetPos();
+
 	float m_fShotTimer;
 	float m_fShotSpeed;
 
