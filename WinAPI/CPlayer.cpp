@@ -49,6 +49,7 @@ CPlayer::CPlayer()
 	m_iKey = 1;
 
 	m_bIsTripleShot = false;
+	m_bIsHitReady = true;
 	m_bIsLTeleport = false;
 	m_bIsRTeleport = false;
 	m_bIsUTeleport = false;
@@ -198,8 +199,6 @@ void CPlayer::TakeHitUpdate()
 		m_playerState = PlayerState::Idle;
 		fCooltime = 0;
 	}
-
-	//Logger::Debug(to_wstring(m_HP));
 }
 
 void CPlayer::GetItemUpdate()
@@ -300,22 +299,19 @@ void CPlayer::HurtState()
 void CPlayer::TakeDamage()
 {
 	m_HP -= 1;
-
-	RemoveCollider();
-	m_bIsColliderOff = true;
+	m_bIsHitReady = false;
 }
 
-void CPlayer::CheckCollider()
+void CPlayer::CheckHit()
 {
-	if (true == m_bIsColliderOff)
+	if (false == m_bIsHitReady)
 	{
 		fCooltime += DT;
 
 		if (fCooltime > 1.0f)
 		{
-			AddCollider(ColliderType::Rect, Vector(57, 60), Vector(0, 8));
 			fCooltime = 0;
-			m_bIsColliderOff = false;
+			m_bIsHitReady = true;
 		}
 	}
 }
@@ -329,7 +325,7 @@ void CPlayer::Update()
 	PlayerKey();
 	
 	CreateBomb();
-	CheckCollider();
+	CheckHit();
 	LRTeleport();
 	UDTeleport();
 
@@ -560,7 +556,10 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		pOtherCollider->GetObjName() == L"Gish"	   ||
 		pOtherCollider->GetObjName() == L"MonsterMissile")
 	{
-		HurtState();
+		if (true == m_bIsHitReady)
+		{
+			HurtState();
+		}
 	}
 
 	// 패시브 아이템

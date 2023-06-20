@@ -54,7 +54,7 @@ private:
 	float m_fSTimer = 0;
 
 	bool m_bIsTripleShot;
-	bool m_bIsHit;
+	bool m_bIsHitReady;
 	bool m_bIsColliderOff;
 	bool m_bIsLTeleport;
 	bool m_bIsRTeleport;
@@ -73,7 +73,7 @@ public:
 	void HurtState();
 
 	void TakeDamage();
-	void CheckCollider();
+	void CheckHit();
 
 	void GetItem(CGameObject* pOtherCollider);
 	void LRTeleport();
