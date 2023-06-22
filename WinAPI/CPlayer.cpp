@@ -63,10 +63,10 @@ CPlayer::~CPlayer()
 void CPlayer::Init()
 {
 	m_pBodyImage = RESOURCE->LoadImg(L"PlayerBody", L"Image\\Unit\\IsaacBody.png");
-															
+
 	m_pHeadImage = RESOURCE->LoadImg(L"PlayerHead", L"Image\\Unit\\IsaacHead.png");
 	m_pShotImage = RESOURCE->LoadImg(L"PlayerShot", L"Image\\Unit\\IsaacShot.png");
-												
+
 	m_pHurtImage = RESOURCE->LoadImg(L"PlayerHurt", L"Image\\Unit\\IsaacHurt.png");
 	m_pDeadImage = RESOURCE->LoadImg(L"PlayerDead", L"Image\\Unit\\IsaacDead.png");
 	m_pGetItemImage = RESOURCE->LoadImg(L"PlayerGetItem", L"Image\\Unit\\IsaacGetItem.png");
@@ -323,7 +323,7 @@ void CPlayer::Update()
 	PlayerMaxHP();
 	PlayerBomb();
 	PlayerKey();
-	
+
 	CreateBomb();
 	CheckHit();
 	LRTeleport();
@@ -340,7 +340,7 @@ void CPlayer::Update()
 		stateHead = L"Dead";
 		RemoveCollider();
 	}
-	
+
 	else
 	{
 		switch (m_playerState)
@@ -404,11 +404,15 @@ void CPlayer::CreateBomb()
 {
 	if (BUTTONDOWN('E'))
 	{
-		Logger::Debug(L"气藕 积己");
-		CBomb* pBomb = new CBomb();
-		pBomb->SetPos(m_vecPos);
-		pBomb->m_bIsPressE = true;
-		ADDOBJECT(pBomb);
+		if (GetBomb() > 0)
+		{
+			Logger::Debug(L"气藕 积己");
+			CBomb* pBomb = new CBomb();
+			pBomb->SetPos(m_vecPos);
+			pBomb->m_bIsPressE = true;
+			SetBomb(-1);
+			ADDOBJECT(pBomb);
+		}
 	}
 }
 
@@ -553,7 +557,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Monster" ||
 		pOtherCollider->GetObjName() == L"BoomFly" ||
-		pOtherCollider->GetObjName() == L"Gish"	   ||
+		pOtherCollider->GetObjName() == L"Gish" ||
 		pOtherCollider->GetObjName() == L"MonsterMissile")
 	{
 		if (true == m_bIsHitReady)
@@ -585,19 +589,6 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		if (pPickupItem != nullptr)
 		{
 			pPickupItem->Activate(this);
-		}
-	}
-
-	if (pOtherCollider->GetObjName() == L"Bomb")
-	{
-		m_iBomb++;
-	}
-
-	if (pOtherCollider->GetObjName() == L"GoldenChest")
-	{
-		if (m_iKey > 0)
-		{
-			m_iKey--;
 		}
 	}
 

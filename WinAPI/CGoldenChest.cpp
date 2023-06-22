@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CGoldenChest.h"
+#include "CPlayer.h"
 
 CGoldenChest::CGoldenChest()
 {
@@ -46,12 +47,15 @@ void CGoldenChest::Release()
 
 void CGoldenChest::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Player")
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Player)
 	{
 		if (PLAYERKEY > 0)
 		{
 			m_bIsOpen = true;
 			m_bIsGolden = true;
+
+			CPlayer* pPlayer = (CPlayer*)(pOtherCollider->GetOwner());
+			pPlayer->SetKey(-1);
 		}
 	}
 }

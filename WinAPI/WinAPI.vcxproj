@@ -189,6 +189,7 @@
     <ClInclude Include="CPanel.h" />
     <ClInclude Include="CPassiveItem.h" />
     <ClInclude Include="CPathManager.h" />
+    <ClInclude Include="CPickupBomb.h" />
     <ClInclude Include="CPickupHeart.h" />
     <ClInclude Include="CPickupItem.h" />
     <ClInclude Include="CPickupKey.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="CPanel.cpp" />
     <ClCompile Include="CPassiveItem.cpp" />
     <ClCompile Include="CPathManager.cpp" />
+    <ClCompile Include="CPickupBomb.cpp" />
     <ClCompile Include="CPickupHeart.cpp" />
     <ClCompile Include="CPickupItem.cpp" />
     <ClCompile Include="CPickupKey.cpp" />

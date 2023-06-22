@@ -6,14 +6,21 @@ CBomb::CBomb()
 {
 	m_vecScale = Vector(10, 10);
 	m_layer = Layer::Bomb;
-	m_strName = L"ÆøÅº";
+	m_strName = L"Bomb";
 	
 	m_pBombImage = nullptr;
 	m_pSparkImage = nullptr;
 
+	m_fSpeed = 500.0f;
 	m_fCooltime = 0;
+	m_fTimer = 0;
 	m_bIsTimesUP = false;
 	m_bIsPressE = false;
+	m_bIsLeft = false;
+	m_bIsRight = false;
+	m_bIsUp = false;
+	m_bIsDown = false;
+
 }
 
 CBomb::~CBomb()
@@ -64,7 +71,7 @@ void CBomb::Init()
 	AddComponent(m_pBombAnimator);
 	AddComponent(m_pSparkAnimator);
 
-	AddCollider(ColliderType::Circle, Vector(8, 8), Vector(0, 0));
+	AddCollider(ColliderType::Circle, Vector(10, 10), Vector(0, 0));
 }
 
 void CBomb::Update()
@@ -78,4 +85,33 @@ void CBomb::Render()
 
 void CBomb::Release()
 {
+}
+
+void CBomb::OnCollisionEnter(CCollider* pOtherCollider)
+{
+	if (pOtherCollider->GetObjName() == L"Player" ||
+		pOtherCollider->GetObjName() == L"PlayerMissile")
+	{
+		float x = m_vecPos.x - pOtherCollider->GetPos().x;
+		float y = m_vecPos.y - pOtherCollider->GetPos().y;
+
+		if (abs(x) > abs(y))
+		{
+			m_vecPos.x += (x > 0 ? 1.f : -1.f) * m_fSpeed * DT;
+		}
+		else
+		{
+			m_vecPos.y += (y > 0 ? 1.f : -1.f) * m_fSpeed * DT;
+		}
+	}
+}
+
+void CBomb::OnCollisionStay(CCollider* pOtherCollider)
+{
+	
+}
+
+void CBomb::OnCollisionExit(CCollider* pOtherCollider)
+{
+	
 }

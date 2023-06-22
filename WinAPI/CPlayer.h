@@ -90,7 +90,7 @@ public:
 	void SetMaxHP(int maxHP) { m_MaxHP = maxHP; }
 
 	int GetBomb() { return m_iBomb; }
-	void SetBomb(int bomb) { m_iBomb = bomb; }
+	void SetBomb(int bomb) { m_iBomb += bomb; }
 
 	int GetKey() { return m_iKey; }
 	void SetKey(int key) { m_iKey += key; }

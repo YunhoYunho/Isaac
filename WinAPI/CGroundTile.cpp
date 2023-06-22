@@ -173,8 +173,8 @@ void CGroundTile::OnCollisionEnter(CCollider* pOther)
 void CGroundTile::OnCollisionStay(CCollider* pOther)
 {
 	// 땅타일과 충돌했을 경우 처리
-	if (pOther->GetObjName() == L"Player" || pOther->GetObjName() == L"Monster"
-		|| pOther->GetObjName() == L"Gish")
+	if (pOther->GetObjName() == L"Player" || pOther->GetObjName() == L"Monster" ||
+		pOther->GetObjName() == L"Gish" || pOther->GetObjName() == L"Bomb")
 	{
 		PushObject(pOther);
 	}

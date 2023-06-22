@@ -333,6 +333,9 @@
     <ClInclude Include="CObstacle.h">
       <Filter>04. Scene\Image</Filter>
     </ClInclude>
+    <ClInclude Include="CPickupBomb.h">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -565,6 +568,9 @@
     </ClCompile>
     <ClCompile Include="CObstacle.cpp">
       <Filter>04. Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CPickupBomb.cpp">
+      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,16 +1,18 @@
 #pragma once
-#include "CChest.h"
+#include "CPickupItem.h"
 
 class CPlayer;
 
-class CGoldenChest : public CChest
+class CPickupBomb : public CPickupItem
 {
 public:
-	CGoldenChest();
-	virtual ~CGoldenChest();
+	CPickupBomb();
+	virtual ~CPickupBomb();
+
+	void Activate(CPlayer* pPlayer) override;
 
 private:
-	CImage* m_pGoldenChestImage;
+	CImage* m_pPickBombImage;
 
 private:
 	void Init() override;
@@ -22,4 +24,3 @@ private:
 	void OnCollisionStay(CCollider* pOtherCollider) override;
 	void OnCollisionExit(CCollider* pOtherCollider) override;
 };
-
