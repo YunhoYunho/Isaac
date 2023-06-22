@@ -19,17 +19,49 @@ CMissile::~CMissile()
 {
 }
 
-void CMissile::Init()
+void CMissile::Shot()
 {
-}
+	m_fMTimer += DT;
 
-void CMissile::Update()
-{
+	Fire();
+
+	if (m_fMTimer > 0.3f)
+	{
+		m_fZSpeed += m_fGravity * DT;
+		m_fHeight += m_fZSpeed * DT;
+		m_vecPos.y -= m_fZSpeed * DT;
+
+		if (m_fHeight < 0.0f)
+		{
+			Hit();
+		}
+	}
 }
 
 void CMissile::Fire()
 {
 	m_vecPos += m_vecDir * m_fVelocity * DT;
+}
+
+void CMissile::Hit()
+{
+	m_pAnimator->Play(L"Hit");
+	m_fZSpeed = 0;
+	m_fVelocity = 0;
+	m_bIsHit = true;
+}
+
+void CMissile::CheckMissile()
+{
+	if (true == m_bIsHit)
+	{
+		m_fTimer += DT;
+
+		if (m_fTimer > 0.7f)
+		{
+			DELETEOBJECT(this);
+		}
+	}
 }
 
 void CMissile::DeleteMissile()
@@ -42,6 +74,14 @@ void CMissile::DeleteMissile()
 		m_vecPos.y < 0 ||
 		m_vecPos.y > WINSIZEY)
 		DELETEOBJECT(this);
+}
+
+void CMissile::Init()
+{
+}
+
+void CMissile::Update()
+{
 }
 
 void CMissile::Render()

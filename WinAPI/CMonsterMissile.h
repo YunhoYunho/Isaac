@@ -14,8 +14,4 @@ private:
 	void Release() override;
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
-
-public:
-	void SetDir(Vector dir);
-	void SetVelocity(float velocity);
 };

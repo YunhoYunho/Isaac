@@ -44,7 +44,7 @@ CPlayer::CPlayer()
 	fCooltime = 0;
 	m_HP = 3;
 	m_MaxHP = 5;
-	m_fDamage = 2.0f;
+	m_fDamage = 3.0f;
 	m_iBomb = 1;
 	m_iKey = 1;
 
@@ -321,6 +321,8 @@ void CPlayer::Update()
 	PlayerPos();
 	PlayerHP();
 	PlayerMaxHP();
+	PlayerDamage();
+	PlayerShotSpeed();
 	PlayerBomb();
 	PlayerKey();
 
@@ -629,25 +631,35 @@ void CPlayer::OnCollisionExit(CCollider* pOtherCollider)
 
 void CPlayer::PlayerPos()
 {
-	PLAYERPOS = m_vecPos;
+	PLAYERPOS = GetPos();
 }
 
 void CPlayer::PlayerHP()
 {
-	PLAYERHP = m_HP;
+	PLAYERHP = GetHP();
 }
 
 void CPlayer::PlayerMaxHP()
 {
-	PLAYERMAXHP = m_MaxHP;
+	PLAYERMAXHP = GetMaxHP();
+}
+
+void CPlayer::PlayerDamage()
+{
+	PLAYERDAMAGE = GetDamage();
+}
+
+void CPlayer::PlayerShotSpeed()
+{
+	PLAYERSHOTSPEED = GetShotSpeed();
 }
 
 void CPlayer::PlayerBomb()
 {
-	PLAYERBOMB = m_iBomb;
+	PLAYERBOMB = GetBomb();
 }
 
 void CPlayer::PlayerKey()
 {
-	PLAYERKEY = m_iKey;
+	PLAYERKEY = GetKey();
 }

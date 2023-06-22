@@ -8,7 +8,6 @@
 	m_vecScale = Vector(100, 100);
 	m_layer = Layer::Monster;
 	m_strName = L"Gish";
-
 	m_gishState = MonsterState::Ready;
 
 	m_pGishLeftImage = nullptr;
@@ -134,6 +133,7 @@ void CGish::MoveUpdate()
 
 void CGish::ShotUpdate()
 {
+	
 	CreateMissile();
 	ShotState();
 }

@@ -6,15 +6,16 @@ CPlayerMissile::CPlayerMissile()
 {
 	m_vecScale = Vector(10, 10);
 	m_vecDir = Vector(0, 0);
-	m_fVelocity = 300;
 	m_layer = Layer::PlayerMissile;
 	m_strName = L"PlayerMissile";
-
 	m_pTearsImage = nullptr;
-
-	m_fCooltime = 0;
+	m_fVelocity = 300;
+	m_fTimer;
+	m_fMTimer = 0;
+	m_fGravity = -100.0f;
+	m_fZSpeed = 0.0f;
+	m_fHeight = 20.0f;
 	m_bIsHit = false;
-	m_fDamage = 3.0f;
 }
 
 CPlayerMissile::~CPlayerMissile()
@@ -38,8 +39,9 @@ void CPlayerMissile::Init()
 
 void CPlayerMissile::Update()
 {
-	Fire();
-	CheckDestroyMissile();
+	Shot();
+	CheckMissile();
+	DeleteMissile();
 }
 
 void CPlayerMissile::Render()
@@ -50,36 +52,21 @@ void CPlayerMissile::Release()
 {
 }
 
-void CPlayerMissile::CheckDestroyMissile()
-{
-	if (true == m_bIsHit)
-	{
-		m_fCooltime += DT;
-
-		if (m_fCooltime > 0.7f)
-		{
-			DELETEOBJECT(this);
-			//Logger::Debug(L"º®¿¡ ºÎµúÇô ´«¹° »èÁ¦");
-		}
-	}
-}
-
 void CPlayerMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Wall" ||
 		pOtherCollider->GetObjName() == L"DoorCollider" ||
-		pOtherCollider->GetObjName() == L"Rock")
+		pOtherCollider->GetObjName() == L"Rock" ||
+		pOtherCollider->GetObjName() == L"ÆøÅº")
 	{
-		m_pAnimator->Play(L"Hit");
-		m_fVelocity = 0;
-		m_bIsHit = true;
+		Hit();
 	}
 
 	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Monster)
 	{
 		CMonster* pMonster = (CMonster*)(pOtherCollider->GetOwner());
-		pMonster->GetDamaged(m_fDamage);
-
+		pMonster->GetDamaged(PLAYERDAMAGE);
+		Logger::Debug(to_wstring(PLAYERDAMAGE));
 		DELETEOBJECT(this);
 	}
 }

@@ -8,8 +8,14 @@ CMonsterMissile::CMonsterMissile()
 	m_fVelocity = 300;
 	m_layer = Layer::MonsterMissile;
 	m_strName = L"MonsterMissile";
-
 	m_pTearsImage = nullptr;
+	m_fVelocity = 300;
+	m_fTimer;
+	m_fMTimer = 0;
+	m_fGravity = -100.0f;
+	m_fZSpeed = 0.0f;
+	m_fHeight = 20.0f;
+	m_bIsHit = false;
 }
 
 CMonsterMissile::~CMonsterMissile()
@@ -23,7 +29,7 @@ void CMonsterMissile::Init()
 	m_pAnimator = new CAnimator;
 
 	m_pAnimator->CreateAnimation(L"None", m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0, 1);
-	m_pAnimator->CreateAnimation(L"Hit", m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0.1f, 14, false);
+	m_pAnimator->CreateAnimation(L"Hit", m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0.05f, 14, false);
 	m_pAnimator->Play(L"None");
 
 	AddComponent(m_pAnimator);
@@ -33,7 +39,9 @@ void CMonsterMissile::Init()
 
 void CMonsterMissile::Update()
 {
-	Fire();
+	Shot();
+	CheckMissile();
+	DeleteMissile();
 }
 
 void CMonsterMissile::Render()
@@ -46,16 +54,11 @@ void CMonsterMissile::Release()
 
 void CMonsterMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	//Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
-	DELETEOBJECT(this);
-}
-
-void CMonsterMissile::SetDir(Vector dir)
-{
-	m_vecDir = dir.Normalized();
-}
-
-void CMonsterMissile::SetVelocity(float velocity)
-{
-	m_fVelocity = velocity;
+	if (pOtherCollider->GetObjName() == L"Wall" ||
+		pOtherCollider->GetObjName() == L"DoorCollider" ||
+		pOtherCollider->GetObjName() == L"Rock" ||
+		pOtherCollider->GetObjName() == L"Player")
+	{
+		Hit();
+	}
 }

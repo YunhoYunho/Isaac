@@ -46,7 +46,7 @@ private:
 	int m_iCount = 0;
 
 	float m_fSpeed = 200.0f;
-	float m_fDamage = 20.0f;
+	float m_fDamage;
 	float m_fShotSpeed = 0.25f;
 
 	float m_fTimer = 0;
@@ -95,11 +95,11 @@ public:
 	int GetKey() { return m_iKey; }
 	void SetKey(int key) { m_iKey += key; }
 
-	float GetShotSpeed() { return m_fShotSpeed; }
-	void SetShotSpeed(float shotSpeed) { m_fShotSpeed += shotSpeed; }
-
 	float GetDamage() { return m_fDamage; }
 	void SetDamage(float damage) { m_fDamage += damage; }
+
+	float GetShotSpeed() { return m_fShotSpeed; }
+	void SetShotSpeed(float shotSpeed) { m_fShotSpeed += shotSpeed; }
 
 	bool GetTripleShot() { return m_bIsTripleShot; }
 	void SetTripleShot(bool tripleShot) { m_bIsTripleShot = tripleShot; }
@@ -128,6 +128,8 @@ private:
 	void PlayerPos();
 	void PlayerHP();
 	void PlayerMaxHP();
+	void PlayerDamage();
+	void PlayerShotSpeed();
 	void PlayerBomb();
 	void PlayerKey();
 };

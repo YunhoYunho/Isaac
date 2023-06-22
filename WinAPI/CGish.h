@@ -16,7 +16,6 @@ private:
 	CAnimator* m_pAnimator;
 	CImage* m_pGishLeftImage;
 	CImage* m_pGishRightImage;
-
 	wstring state = L"IdleLeft";
 	MonsterState m_gishState;
 	void ChangeState(MonsterState state);

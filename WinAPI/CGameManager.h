@@ -35,12 +35,16 @@ public:
 	int PlayerBomb;
 	int PlayerKey;
 	int monsterKillCount;
+	float PlayerDamage;
+	float PlayerShotSpeed;
 };
 
 #define GAME				CGameManager::GetInstance()
 #define PLAYERPOS			CGameManager::GetInstance()->PlayerPos
 #define PLAYERHP			CGameManager::GetInstance()->PlayerHP
 #define PLAYERMAXHP			CGameManager::GetInstance()->PlayerMaxHP
+#define PLAYERDAMAGE		CGameManager::GetInstance()->PlayerDamage
+#define PLAYERSHOTSPEED		CGameManager::GetInstance()->PlayerShotSpeed
 #define PLAYERBOMB			CGameManager::GetInstance()->PlayerBomb
 #define PLAYERKEY			CGameManager::GetInstance()->PlayerKey
 #define MONSTERKILLCOUNT	CGameManager::GetInstance()->monsterKillCount

@@ -20,11 +20,7 @@ CMeat::~CMeat()
 
 void CMeat::Activate(CPlayer* pPlayer)
 {
-	//// 공격력 증가
-	//float damage = pPlayer->GetShotSpeed();
-	//pPlayer->SetShotSpeed(damage + 5);
-
-	pPlayer->SetShotSpeed(5);
+	pPlayer->SetDamage(5);
 }
 
 void CMeat::Init()
