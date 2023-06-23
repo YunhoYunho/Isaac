@@ -3,6 +3,7 @@
 
 class CImage;
 class CAnimator;
+class CMissile;
 
 class CPlayer : public CGameObject
 {
@@ -14,17 +15,12 @@ private:
 	CAnimator* m_pAnimatorBody;
 	CAnimator* m_pAnimatorHead;
 
-	// 바디
 	CImage* m_pBodyImage;
-	// 헤드
 	CImage* m_pHeadImage;
 	CImage* m_pShotImage;
-	// 공통
 	CImage* m_pHurtImage;
 	CImage* m_pDeadImage;
-
 	CImage* m_pGetItemImage;
-
 	CImage* m_pAppearItemImage;
 	
 	Vector m_vecMoveDir;
@@ -53,6 +49,7 @@ private:
 	float fCooltime = 0;
 	float m_fSTimer = 0;
 
+	bool m_bIsShieldTears;
 	bool m_bIsTripleShot;
 	bool m_bIsHitReady;
 	bool m_bIsColliderOff;
@@ -71,6 +68,9 @@ public:
 	void MoveState();
 	void ShotState();
 	void HurtState();
+
+	void SelectTears();
+	void AddMissile();
 
 	void TakeDamage();
 	void CheckHit();
@@ -101,8 +101,15 @@ public:
 	float GetShotSpeed() { return m_fShotSpeed; }
 	void SetShotSpeed(float shotSpeed) { m_fShotSpeed += shotSpeed; }
 
+	bool GetShieldTears() { return m_bIsShieldTears; }
+	void SetShieldTears(bool ShieldTears) { m_bIsShieldTears = ShieldTears; }
+
 	bool GetTripleShot() { return m_bIsTripleShot; }
 	void SetTripleShot(bool tripleShot) { m_bIsTripleShot = tripleShot; }
+
+	vector<CMissile*> m_vecMissiles;
+	vector<CMissile*> m_vecTripleMissiles;
+	CMissile* pMissile;
 
 private:
 	void Init() override;

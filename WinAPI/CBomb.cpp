@@ -90,7 +90,8 @@ void CBomb::Release()
 void CBomb::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Player" ||
-		pOtherCollider->GetObjName() == L"PlayerMissile")
+		pOtherCollider->GetObjName() == L"PlayerMissile" ||
+		pOtherCollider->GetObjName() == L"ShieldMissile")
 	{
 		float x = m_vecPos.x - pOtherCollider->GetPos().x;
 		float y = m_vecPos.y - pOtherCollider->GetPos().y;

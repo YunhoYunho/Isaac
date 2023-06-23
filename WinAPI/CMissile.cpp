@@ -6,6 +6,8 @@
 #include "CEventManager.h"
 #include "CCollider.h"
 
+#include "CMonster.h"
+
 CMissile::CMissile()
 {
 	m_vecScale = Vector(10, 10);
@@ -74,6 +76,25 @@ void CMissile::DeleteMissile()
 		m_vecPos.y < 0 ||
 		m_vecPos.y > WINSIZEY)
 		DELETEOBJECT(this);
+}
+
+void CMissile::UsePlayerCollider(CCollider* pOtherCollider)
+{
+	if (pOtherCollider->GetObjName() == L"Wall" ||
+		pOtherCollider->GetObjName() == L"DoorCollider" ||
+		pOtherCollider->GetObjName() == L"Rock" ||
+		pOtherCollider->GetObjName() == L"ÆøÅº")
+	{
+		Hit();
+	}
+
+	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Monster)
+	{
+		CMonster* pMonster = (CMonster*)(pOtherCollider->GetOwner());
+		pMonster->GetDamaged(PLAYERDAMAGE);
+		Logger::Debug(to_wstring(PLAYERDAMAGE));
+		DELETEOBJECT(this);
+	}
 }
 
 void CMissile::Init()

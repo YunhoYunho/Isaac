@@ -1,13 +1,13 @@
 #pragma once
 #include "CMissile.h"
 
-class CMonsterMissile : public CMissile
+class CShieldMissile : public CMissile
 {
 public:
-	CMonsterMissile();
-	virtual ~CMonsterMissile();
+	CShieldMissile();
+	virtual ~CShieldMissile();
 
-	CMissile* Clone() { return new CMonsterMissile(*this); }
+	CMissile* Clone() { return new CShieldMissile(*this); }
 
 private:
 	void Init() override;

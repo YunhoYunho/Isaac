@@ -57,7 +57,8 @@ void CMonsterMissile::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"Wall" ||
 		pOtherCollider->GetObjName() == L"DoorCollider" ||
 		pOtherCollider->GetObjName() == L"Rock" ||
-		pOtherCollider->GetObjName() == L"Player")
+		pOtherCollider->GetObjName() == L"Player" ||
+		pOtherCollider->GetObjName() == L"ShieldMissile")
 	{
 		Hit();
 	}

@@ -13,6 +13,7 @@
 
 #include "CPlayerHP.h"
 #include "CPlayerMissile.h"
+#include "CShieldMissile.h"
 #include "CMonsterMissile.h"
 #include "CBomb.h"
 
@@ -29,7 +30,8 @@ CPlayer::CPlayer()
 	m_layer = Layer::Player;
 	m_strName = L"Player";
 	m_playerState = PlayerState::Idle;
-
+	
+	pMissile = nullptr;
 	m_pBodyImage = nullptr;
 	m_pHeadImage = nullptr;
 	m_pShotImage = nullptr;
@@ -48,6 +50,7 @@ CPlayer::CPlayer()
 	m_iBomb = 1;
 	m_iKey = 1;
 
+	m_bIsShieldTears = false;
 	m_bIsTripleShot = false;
 	m_bIsHitReady = true;
 	m_bIsLTeleport = false;
@@ -107,6 +110,8 @@ void CPlayer::Init()
 
 	AddComponent(m_pAnimatorBody);
 	AddComponent(m_pAnimatorHead);
+
+	AddMissile();
 
 	AddCollider(ColliderType::Rect, Vector(57, 60), Vector(0, 8));
 }
@@ -296,6 +301,18 @@ void CPlayer::HurtState()
 	}
 }
 
+void CPlayer::SelectTears()
+{
+}
+
+void CPlayer::AddMissile()
+{
+	m_vecMissiles.clear();
+
+	m_vecMissiles.emplace_back(new CPlayerMissile());
+	m_vecMissiles.emplace_back(new CShieldMissile());
+}
+
 void CPlayer::TakeDamage()
 {
 	m_HP -= 1;
@@ -450,7 +467,17 @@ void CPlayer::CreateChest()
 
 void CPlayer::NormalShot()
 {
-	CPlayerMissile* pMissile = new CPlayerMissile();
+	if (true != m_bIsShieldTears)
+	{
+		pMissile = m_vecMissiles[0]->Clone();
+	}
+
+	else
+	{
+		pMissile = nullptr;
+		pMissile = m_vecMissiles[1]->Clone();
+	}
+
 	pMissile->SetPos(m_vecPos);
 
 	if (BUTTONSTAY(VK_LEFT))
@@ -477,36 +504,47 @@ void CPlayer::NormalShot()
 
 void CPlayer::TripleShot()
 {
-	CPlayerMissile* pMissile2 = new CPlayerMissile();
-	pMissile2->SetPos(m_vecPos);
-	CPlayerMissile* pMissile3 = new CPlayerMissile();
-	pMissile3->SetPos(m_vecPos);
+	for (int i = 0; i < 2; i++)
+	{
+		if (true != m_bIsShieldTears)
+		{
+			pMissile = m_vecMissiles[0]->Clone();
+			m_vecTripleMissiles.emplace_back(pMissile);
+		}
+
+		else
+		{
+			pMissile = m_vecMissiles[1]->Clone();
+			m_vecTripleMissiles.emplace_back(pMissile);
+		}
+	}
 
 	if (BUTTONSTAY(VK_LEFT))
 	{
-		pMissile2->SetDir(Vector(-1, 1));
-		pMissile3->SetDir(Vector(-1, -1));
+		m_vecTripleMissiles[0]->SetDir(Vector(-1, 1));
+		m_vecTripleMissiles[1]->SetDir(Vector(-1, -1));
 	}
 
 	if (BUTTONSTAY(VK_RIGHT))
 	{
-		pMissile2->SetDir(Vector(1, 1));
-		pMissile3->SetDir(Vector(1, -1));
+		m_vecTripleMissiles[0]->SetDir(Vector(1, 1));
+		m_vecTripleMissiles[1]->SetDir(Vector(1, -1));
 	}
 
 	if (BUTTONSTAY(VK_UP))
 	{
-		pMissile2->SetDir(Vector(1, -1));
-		pMissile3->SetDir(Vector(-1, -1));
+		m_vecTripleMissiles[0]->SetDir(Vector(1, -1));
+		m_vecTripleMissiles[1]->SetDir(Vector(-1, -1));
 	}
 
 	if (BUTTONSTAY(VK_DOWN))
 	{
-		pMissile2->SetDir(Vector(1, 1));
-		pMissile3->SetDir(Vector(-1, 1));
+		m_vecTripleMissiles[0]->SetDir(Vector(1, 1));
+		m_vecTripleMissiles[1]->SetDir(Vector(-1, 1));
 	}
-	ADDOBJECT(pMissile2);
-	ADDOBJECT(pMissile3);
+
+	ADDOBJECT(m_vecTripleMissiles[0]);
+	ADDOBJECT(m_vecTripleMissiles[1]);
 }
 
 void CPlayer::GetItem(CGameObject* pOtherCollider)

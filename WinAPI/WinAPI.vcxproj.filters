@@ -336,6 +336,9 @@
     <ClInclude Include="CPickupBomb.h">
       <Filter>03. GameObject\Stage\Item\Pickup</Filter>
     </ClInclude>
+    <ClInclude Include="CShieldMissile.h">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -571,6 +574,9 @@
     </ClCompile>
     <ClCompile Include="CPickupBomb.cpp">
       <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+    </ClCompile>
+    <ClCompile Include="CShieldMissile.cpp">
+      <Filter>03. GameObject\Stage\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -211,6 +211,7 @@
     <ClInclude Include="CSceneTitle.h" />
     <ClInclude Include="CImage.h" />
     <ClInclude Include="CShieldTears.h" />
+    <ClInclude Include="CShieldMissile.h" />
     <ClInclude Include="CSkeletonKey.h" />
     <ClInclude Include="CSLoadingImage.h" />
     <ClInclude Include="CSound.h" />
@@ -312,6 +313,7 @@
     <ClCompile Include="CSceneTitle.cpp" />
     <ClCompile Include="CImage.cpp" />
     <ClCompile Include="CShieldTears.cpp" />
+    <ClCompile Include="CShieldMissile.cpp" />
     <ClCompile Include="CSkeletonKey.cpp" />
     <ClCompile Include="CSLoadingImage.cpp" />
     <ClCompile Include="CSound.cpp" />

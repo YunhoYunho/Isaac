@@ -6,6 +6,8 @@ public:
 	CMissile();
 	virtual ~CMissile();
 
+	virtual CMissile* Clone() = 0;
+
 protected:
 	CAnimator* m_pAnimator;
 	CImage* m_pTearsImage;
@@ -23,6 +25,8 @@ protected:
 	void Hit();
 	void CheckMissile();
 	void DeleteMissile();
+
+	void UsePlayerCollider(CCollider* pOtherCollider);
 
 private:
 	void Init() override;

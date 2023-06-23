@@ -6,7 +6,7 @@
 CShieldTears::CShieldTears()
 {
 	m_layer = Layer::PassiveItem;
-	m_strName = L"ShiledTears";
+	m_strName = L"ShieldTears";
 
 	m_pShieldTearsImage = nullptr;
 
@@ -20,16 +20,18 @@ CShieldTears::~CShieldTears()
 
 void CShieldTears::Activate(CPlayer* pPlayer)
 {
+	pPlayer->SetShieldTears(true);
+	pPlayer->m_vecTripleMissiles.clear();
 }
 
 void CShieldTears::Init()
 {
-	m_pShieldTearsImage = RESOURCE->LoadImg(L"ShiledTears,", L"Image\\Item\\ShiledTears.png");
+	m_pShieldTearsImage = RESOURCE->LoadImg(L"ShieldTears,", L"Image\\Item\\ShieldTears.png");
 
 	m_pAnimator = new CAnimator;
-	m_pAnimator->CreateAnimation(L"ShiledTears", m_pShieldTearsImage, Vector(0.0f, 0.0f), Vector(80.0f, 80.0f), Vector(80.0f, 0.0f), 0, 1, false);
+	m_pAnimator->CreateAnimation(L"ShieldTears", m_pShieldTearsImage, Vector(0.0f, 0.0f), Vector(80.0f, 80.0f), Vector(80.0f, 0.0f), 0, 1, false);
 
-	m_pAnimator->Play(L"ShiledTears");
+	m_pAnimator->Play(L"ShieldTears");
 
 	AddComponent(m_pAnimator);
 

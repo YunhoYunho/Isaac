@@ -29,7 +29,7 @@ void CPlayerMissile::Init()
 	m_pAnimator = new CAnimator;
 
 	m_pAnimator->CreateAnimation(L"None", m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0, 1);
-	m_pAnimator->CreateAnimation(L"Hit",  m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0.05f, 14, false);
+	m_pAnimator->CreateAnimation(L"Hit",  m_pTearsImage, Vector(64.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0.05f, 14, false);
 	m_pAnimator->Play(L"None");
 
 	AddComponent(m_pAnimator);
@@ -54,19 +54,5 @@ void CPlayerMissile::Release()
 
 void CPlayerMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Wall" ||
-		pOtherCollider->GetObjName() == L"DoorCollider" ||
-		pOtherCollider->GetObjName() == L"Rock" ||
-		pOtherCollider->GetObjName() == L"ÆøÅº")
-	{
-		Hit();
-	}
-
-	if (pOtherCollider->GetOwner()->GetLayer() == Layer::Monster)
-	{
-		CMonster* pMonster = (CMonster*)(pOtherCollider->GetOwner());
-		pMonster->GetDamaged(PLAYERDAMAGE);
-		Logger::Debug(to_wstring(PLAYERDAMAGE));
-		DELETEOBJECT(this);
-	}
+	UsePlayerCollider(pOtherCollider);
 }

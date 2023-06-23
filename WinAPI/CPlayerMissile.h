@@ -7,6 +7,8 @@ public:
 	CPlayerMissile();
 	virtual ~CPlayerMissile();
 
+	CMissile* Clone() { return new CPlayerMissile(*this); }
+
 private:
 	void Init() override;
 	void Update() override;

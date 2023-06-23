@@ -66,6 +66,7 @@ enum class Layer
 	MonsterMissile,
 	Player,
 	PlayerMissile,
+	ShieldMissile,
 	Bomb,
 	Explosion,
 	PassiveItem,
