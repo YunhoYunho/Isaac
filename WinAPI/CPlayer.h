@@ -42,7 +42,7 @@ private:
 	int m_iCount = 0;
 
 	float m_fSpeed = 200.0f;
-	float m_fDamage;
+	float m_fDamage = 3.0f;
 	float m_fShotSpeed = 0.25f;
 
 	float m_fTimer = 0;
@@ -52,7 +52,6 @@ private:
 	bool m_bIsShieldTears;
 	bool m_bIsTripleShot;
 	bool m_bIsHitReady;
-	bool m_bIsColliderOff;
 	bool m_bIsLTeleport;
 	bool m_bIsRTeleport;
 	bool m_bIsUTeleport;
@@ -69,8 +68,8 @@ public:
 	void ShotState();
 	void HurtState();
 
-	void SelectTears();
 	void AddMissile();
+	void SelectTears();
 
 	void TakeDamage();
 	void CheckHit();

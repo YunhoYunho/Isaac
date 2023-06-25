@@ -1,22 +1,9 @@
 #include "framework.h"
 #include "CPlayer.h"
 
-#include "WinAPI.h"
-#include "CInputManager.h"
-#include "CTimeManager.h"
-#include "CRenderManager.h"
-#include "CEventManager.h"
-#include "CResourceManager.h"
-#include "CCollider.h"
-#include "CImage.h"
-#include "CAnimator.h"
-
-#include "CPlayerHP.h"
 #include "CPlayerMissile.h"
 #include "CShieldMissile.h"
-#include "CMonsterMissile.h"
 #include "CBomb.h"
-
 #include "CPickupHeart.h"
 #include "CChest.h"
 #include "CNormalChest.h" 
@@ -43,10 +30,8 @@ CPlayer::CPlayer()
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
 
-	fCooltime = 0;
 	m_HP = 3;
 	m_MaxHP = 5;
-	m_fDamage = 3.0f;
 	m_iBomb = 1;
 	m_iKey = 1;
 
@@ -110,10 +95,68 @@ void CPlayer::Init()
 
 	AddComponent(m_pAnimatorBody);
 	AddComponent(m_pAnimatorHead);
-
 	AddMissile();
-
 	AddCollider(ColliderType::Rect, Vector(57, 60), Vector(0, 8));
+}
+
+void CPlayer::Update()
+{
+	PlayerPos();
+	PlayerHP();
+	PlayerMaxHP();
+	PlayerDamage();
+	PlayerShotSpeed();
+	PlayerBomb();
+	PlayerKey();
+	CreateBomb();
+	CheckHit();
+	LRTeleport();
+	UDTeleport();
+
+	CreateHeart();
+	CreateChest();
+
+	if (m_HP <= 0)
+	{
+		stateBody = L"None";
+		stateHead = L"Dead";
+		RemoveCollider();
+	}
+
+	else
+	{
+		switch (m_playerState)
+		{
+		case PlayerState::Idle:
+			IdleUpdate();
+		case PlayerState::Move:
+			MoveUpdate();
+		case PlayerState::Shot:
+			ShotUpdate();
+			break;
+		case PlayerState::TakeHit:
+			TakeHitUpdate();
+			break;
+		case PlayerState::GetItem:
+			GetItemUpdate();
+			break;
+		}
+	}
+	AnimatorUpdate();
+}
+
+void CPlayer::Render()
+{
+}
+
+void CPlayer::Release()
+{
+}
+
+void CPlayer::AnimatorUpdate()
+{
+	m_pAnimatorBody->Play(stateBody, false);
+	m_pAnimatorHead->Play(stateHead, false);
 }
 
 void CPlayer::IdleUpdate()
@@ -301,100 +344,11 @@ void CPlayer::HurtState()
 	}
 }
 
-void CPlayer::SelectTears()
-{
-}
-
 void CPlayer::AddMissile()
 {
 	m_vecMissiles.clear();
-
 	m_vecMissiles.emplace_back(new CPlayerMissile());
 	m_vecMissiles.emplace_back(new CShieldMissile());
-}
-
-void CPlayer::TakeDamage()
-{
-	m_HP -= 1;
-	m_bIsHitReady = false;
-}
-
-void CPlayer::CheckHit()
-{
-	if (false == m_bIsHitReady)
-	{
-		fCooltime += DT;
-
-		if (fCooltime > 1.0f)
-		{
-			fCooltime = 0;
-			m_bIsHitReady = true;
-		}
-	}
-}
-
-void CPlayer::Update()
-{
-	PlayerPos();
-	PlayerHP();
-	PlayerMaxHP();
-	PlayerDamage();
-	PlayerShotSpeed();
-	PlayerBomb();
-	PlayerKey();
-
-	CreateBomb();
-	CheckHit();
-	LRTeleport();
-	UDTeleport();
-
-#pragma region 디버깅용
-	CreateHeart();
-	CreateChest();
-#pragma endregion
-
-	if (m_HP <= 0)
-	{
-		stateBody = L"None";
-		stateHead = L"Dead";
-		RemoveCollider();
-	}
-
-	else
-	{
-		switch (m_playerState)
-		{
-		case PlayerState::Idle:
-			IdleUpdate();
-		case PlayerState::Move:
-			MoveUpdate();
-		case PlayerState::Shot:
-			ShotUpdate();
-			break;
-		case PlayerState::TakeHit:
-			TakeHitUpdate();
-			break;
-		case PlayerState::GetItem:
-			GetItemUpdate();
-			break;
-		}
-	}
-
-	AnimatorUpdate();
-}
-
-void CPlayer::Render()
-{
-}
-
-void CPlayer::Release()
-{
-}
-
-void CPlayer::AnimatorUpdate()
-{
-	m_pAnimatorBody->Play(stateBody, false);
-	m_pAnimatorHead->Play(stateHead, false);
 }
 
 void CPlayer::CreateMissile()
@@ -419,66 +373,17 @@ void CPlayer::CreateMissile()
 	ShotState();
 }
 
-void CPlayer::CreateBomb()
-{
-	if (BUTTONDOWN('E'))
-	{
-		if (GetBomb() > 0)
-		{
-			Logger::Debug(L"폭탄 생성");
-			CBomb* pBomb = new CBomb();
-			pBomb->SetPos(m_vecPos);
-			pBomb->m_bIsPressE = true;
-			SetBomb(-1);
-			ADDOBJECT(pBomb);
-		}
-	}
-}
 
-void CPlayer::CreateHeart()
+void CPlayer::SelectTears()
 {
-	if (BUTTONDOWN('K'))
-	{
-		Logger::Debug(L"하트 생성");
-		CPickupHeart* pPickupHeart = new CPickupHeart();
-		pPickupHeart->SetPos(Vector(800, WINSIZEY * 0.3f));
-		ADDOBJECT(pPickupHeart);
-	}
-}
-
-void CPlayer::CreateChest()
-{
-	if (BUTTONDOWN('C'))
-	{
-		Logger::Debug(L"상자 생성");
-		CNormalChest* pNormalChest = new CNormalChest();
-		pNormalChest->SetPos(Vector(700, WINSIZEY * 0.3f));
-		ADDOBJECT(pNormalChest);
-	}
-
-	if (BUTTONDOWN('V'))
-	{
-		Logger::Debug(L"황금상자 생성");
-		CGoldenChest* pGoldenChest = new CGoldenChest();
-		pGoldenChest->SetPos(Vector(600, WINSIZEY * 0.3f));
-		ADDOBJECT(pGoldenChest);
-	}
+	pMissile = true != m_bIsShieldTears ?
+		m_vecMissiles[0]->Clone() : m_vecMissiles[1]->Clone();
+	pMissile->SetPos(m_vecPos);
 }
 
 void CPlayer::NormalShot()
 {
-	if (true != m_bIsShieldTears)
-	{
-		pMissile = m_vecMissiles[0]->Clone();
-	}
-
-	else
-	{
-		pMissile = nullptr;
-		pMissile = m_vecMissiles[1]->Clone();
-	}
-
-	pMissile->SetPos(m_vecPos);
+	SelectTears();
 
 	if (BUTTONSTAY(VK_LEFT))
 	{
@@ -547,6 +452,72 @@ void CPlayer::TripleShot()
 	ADDOBJECT(m_vecTripleMissiles[1]);
 }
 
+void CPlayer::TakeDamage()
+{
+	m_HP -= 1;
+	m_bIsHitReady = false;
+}
+
+void CPlayer::CheckHit()
+{
+	if (false == m_bIsHitReady)
+	{
+		fCooltime += DT;
+
+		if (fCooltime > 1.0f)
+		{
+			fCooltime = 0;
+			m_bIsHitReady = true;
+		}
+	}
+}
+
+void CPlayer::CreateBomb()
+{
+	if (BUTTONDOWN('E'))
+	{
+		if (GetBomb() > 0)
+		{
+			Logger::Debug(L"폭탄 생성");
+			CBomb* pBomb = new CBomb();
+			pBomb->SetPos(m_vecPos);
+			pBomb->m_bIsPressE = true;
+			SetBomb(-1);
+			ADDOBJECT(pBomb);
+		}
+	}
+}
+
+void CPlayer::CreateHeart()
+{
+	if (BUTTONDOWN('K'))
+	{
+		Logger::Debug(L"하트 생성");
+		CPickupHeart* pPickupHeart = new CPickupHeart();
+		pPickupHeart->SetPos(Vector(800, WINSIZEY * 0.3f));
+		ADDOBJECT(pPickupHeart);
+	}
+}
+
+void CPlayer::CreateChest()
+{
+	if (BUTTONDOWN('C'))
+	{
+		Logger::Debug(L"상자 생성");
+		CNormalChest* pNormalChest = new CNormalChest();
+		pNormalChest->SetPos(Vector(700, WINSIZEY * 0.3f));
+		ADDOBJECT(pNormalChest);
+	}
+
+	if (BUTTONDOWN('V'))
+	{
+		Logger::Debug(L"황금상자 생성");
+		CGoldenChest* pGoldenChest = new CGoldenChest();
+		pGoldenChest->SetPos(Vector(600, WINSIZEY * 0.3f));
+		ADDOBJECT(pGoldenChest);
+	}
+}
+
 void CPlayer::GetItem(CGameObject* pOtherCollider)
 {
 	m_vecPos = Vector(PLAYERPOS.x, PLAYERPOS.y - 30);
@@ -596,7 +567,7 @@ void CPlayer::UDTeleport()
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"Monster" ||
-		pOtherCollider->GetObjName() == L"BoomFly" ||
+		pOtherCollider->GetObjName() == L"Boomfly" ||
 		pOtherCollider->GetObjName() == L"Gish" ||
 		pOtherCollider->GetObjName() == L"MonsterMissile")
 	{

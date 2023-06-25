@@ -25,7 +25,7 @@ CShieldMissile::~CShieldMissile()
 
 void CShieldMissile::Init()
 {
-	m_pTearsImage = RESOURCE->LoadImg(L"IsaacTears", L"Image\\Effect\\Isaac_Shield_Tears.png");
+	m_pTearsImage = RESOURCE->LoadImg(L"ShiedlTears", L"Image\\Effect\\Isaac_Shield_Tears.png");
 
 	m_pAnimator = new CAnimator;
 
