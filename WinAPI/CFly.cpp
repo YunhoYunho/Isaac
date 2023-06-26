@@ -78,12 +78,4 @@ void CFly::OnCollisionStay(CCollider* pOtherCollider)
 
 void CFly::OnCollisionExit(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Player")
-	{
-		Logger::Debug(L"몬스터가 Player와 충돌해제");
-	}
-	else if (pOtherCollider->GetObjName() == L"미사일")
-	{
-		Logger::Debug(L"몬스터가 미사일과 충돌해제");
-	}
 }

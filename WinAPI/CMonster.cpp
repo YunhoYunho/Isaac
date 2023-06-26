@@ -1,9 +1,6 @@
 #include "framework.h"
 #include "CMonster.h"
 
-#include "CRenderManager.h"
-#include "CCollider.h"
-
 #include "CMonsterMissile.h"
 #include "CPlayerMissile.h"
 #include "CEnterEffect.h"
@@ -188,8 +185,6 @@ void CMonster::CreateMissile()
 
 	if (m_fShotTimer == 0)
 	{
-		//Logger::Debug(L"적 미사일 생성");
-
 		if (true != m_bIsBoss)
 		{
 			CMonsterMissile* pMissile = new CMonsterMissile();
@@ -232,14 +227,6 @@ void CMonster::RangeMissile()
 
 void CMonster::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Player")
-	{
-		Logger::Debug(L"몬스터가 Player와 충돌진입");
-	}
-	else if (pOtherCollider->GetObjName() == L"미사일")
-	{
-		Logger::Debug(L"몬스터가 미사일과 충돌진입");
-	}
 }
 
 void CMonster::OnCollisionStay(CCollider* pOtherCollider)
@@ -248,12 +235,4 @@ void CMonster::OnCollisionStay(CCollider* pOtherCollider)
 
 void CMonster::OnCollisionExit(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Player")
-	{
-		Logger::Debug(L"몬스터가 Player와 충돌해제");
-	}
-	else if (pOtherCollider->GetObjName() == L"미사일")
-	{
-		Logger::Debug(L"몬스터가 미사일과 충돌해제");
-	}
 }

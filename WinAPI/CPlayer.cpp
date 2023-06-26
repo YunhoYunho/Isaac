@@ -51,10 +51,8 @@ CPlayer::~CPlayer()
 void CPlayer::Init()
 {
 	m_pBodyImage = RESOURCE->LoadImg(L"PlayerBody", L"Image\\Unit\\IsaacBody.png");
-
 	m_pHeadImage = RESOURCE->LoadImg(L"PlayerHead", L"Image\\Unit\\IsaacHead.png");
 	m_pShotImage = RESOURCE->LoadImg(L"PlayerShot", L"Image\\Unit\\IsaacShot.png");
-
 	m_pHurtImage = RESOURCE->LoadImg(L"PlayerHurt", L"Image\\Unit\\IsaacHurt.png");
 	m_pDeadImage = RESOURCE->LoadImg(L"PlayerDead", L"Image\\Unit\\IsaacDead.png");
 	m_pGetItemImage = RESOURCE->LoadImg(L"PlayerGetItem", L"Image\\Unit\\IsaacGetItem.png");
@@ -83,11 +81,8 @@ void CPlayer::Init()
 	m_pAnimatorHead->CreateAnimation(L"ShotLeft", m_pShotImage, Vector(462.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.2f, 2);
 
 	m_pAnimatorHead->CreateAnimation(L"TakeHit", m_pHurtImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.1f, 10, false);
-
 	m_pAnimatorHead->CreateAnimation(L"Dead", m_pDeadImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0.2f, 5, false);
-
 	m_pAnimatorHead->CreateAnimation(L"GetItem", m_pGetItemImage, Vector(0.f, 0.f), Vector(77.f, 77.f), Vector(77.f, 0.f), 0, 1, false);
-
 	m_pAnimatorBody->CreateAnimation(L"None", m_pDeadImage, Vector(0.f, 0.f), Vector(1.f, 1.f), Vector(1.f, 0.f), 0, 1, false);
 
 	m_pAnimatorHead->Play(L"HeadDown");
@@ -577,7 +572,6 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		}
 	}
 
-	// 패시브 아이템
 	if (pOtherCollider->GetOwner()->GetLayer() == Layer::PassiveItem)
 	{
 		CPassiveItem* pPassiveItem = dynamic_cast<CPassiveItem*>(pOtherCollider->GetOwner());
@@ -593,7 +587,6 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		}
 	}
 
-	// 픽업 아이템
 	if (pOtherCollider->GetOwner()->GetLayer() == Layer::PickupItem)
 	{
 		CPickupItem* pPickupItem = dynamic_cast<CPickupItem*>(pOtherCollider->GetOwner());

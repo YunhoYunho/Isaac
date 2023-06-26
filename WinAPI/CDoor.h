@@ -9,11 +9,9 @@ public:
 
 private:
 	CAnimator* m_pAnimator;
-	//CSound* pOpenSound = RESOURCE->LoadSound(L"DoorOpen", L"Sound\\")
+	bool m_bIsTouch;
 
 	void Open();
-
-	bool m_bIsTouch;
 
 private:
 	void Init() override;

@@ -1,14 +1,6 @@
 #include "framework.h"
 #include "CSceneStage01.h"
 
-#include "WinAPI.h"
-#include "CInputManager.h"
-#include "CTimeManager.h"
-#include "CRenderManager.h"
-#include "CEventManager.h"
-#include "CCameraManager.h"
-#include "CPathManager.h"
-
 #include "CPlayer.h"
 #include "CMonster.h"
 #include "CGish.h"
@@ -16,26 +8,23 @@
 #include "CBoomfly.h"
 #include "CFly.h"
 
-#include "CCameraController.h"
-#include "CButton.h"
-#include "CPanel.h"
-
-#include "CImageObject.h"
 #include "CPlayerHP.h"
-#include "CItemRock.h"
-
-#include "CTripleShot.h"
 #include "CBossHPBar.h"
 #include "CHUD.h"
+#include "CCameraController.h"
+#include "CImageObject.h"
+#include "CLoadingImage.h"
+
+#include "CItemRock.h"
+#include "CTripleShot.h"
+#include "CShieldTears.h"
+#include "CRock.h"
+#include "CBlackRock.h"
 
 #include "CDoorControl.h"
 #include "CDoorFrame.h"
 #include "CDoorTeleport.h"
 #include "CDoorBossTeleport.h"
-
-#include "CLoadingImage.h"
-#include "CRock.h"
-#include "CBlackRock.h"
 
 #pragma region MonsterSpawnPosition
 #define ROOM1P1		Vector(800, 200)
@@ -50,7 +39,7 @@
 
 #define ROOM3P1		Vector(3500, 360)
 #pragma endregion
-#pragma region GridPosition
+#pragma region RockPosition
 #define ROCK1		Vector(1600, 250)
 #define ROCK2		Vector(1600, 500)
 #define ROCK3		Vector(2200, 250)
@@ -327,7 +316,7 @@ void CSceneStage01::Init()
 	AddGameObject(pPlayerHPImage);
 	pPlayerHPImage->GetHP(pPlayer);
 
-	CTripleShot* pTripleShot = new CTripleShot;
+	CShieldTears* pTripleShot = new CShieldTears;
 	pTripleShot->SetPos(WINSIZEX * 0.5f, WINSIZEY * 0.5f);
 	AddGameObject(pTripleShot);
 
@@ -392,14 +381,10 @@ void CSceneStage01::Update()
 
 void CSceneStage01::Render()
 {
-	/*Vector killCount = CAMERA->ScreenToWorldPoint(Vector(50, 50));
-	wstring count = L"킬 카운트 : " + to_wstring(MONSTERKILLCOUNT) + L"\n생성된 적 : " + to_wstring(m_vecSpawnMonsters.size());
-	RENDER->Text(count, killCount.x - 50, killCount.y - 10, killCount.x + 50, killCount.y + 10, Color(255, 255, 255, 1.f), 15);*/
 }
 
 void CSceneStage01::Exit()
 {
-	// 게임오브젝트 삭제
 	for (int layer = 0; layer < (int)Layer::Size; layer++)
 	{
 		for (CGameObject* pGameObject : m_listObj[layer])
@@ -412,11 +397,7 @@ void CSceneStage01::Exit()
 		}
 		m_listObj[layer].clear();
 	}
-	// 초기화 후 다시 시작
 	Init();
-
-	/*DeleteAll();
-	Init();*/
 }
 
 void CSceneStage01::Release()

@@ -56,14 +56,12 @@ void CBaby::Update()
 
 		if (targetDist <= m_fRange * m_fRange)
 		{
-			//Logger::Debug(L"공격중!");
 			stateBaby = L"Shot";
 			CreateMissile();
 		}
 
 		else
 		{
-			//Logger::Debug(L"추격중!");
 			stateBaby = L"Move";
 			Trace();
 		}
@@ -94,12 +92,4 @@ void CBaby::OnCollisionStay(CCollider* pOtherCollider)
 
 void CBaby::OnCollisionExit(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Player")
-	{
-		Logger::Debug(L"몬스터가 Player와 충돌해제");
-	}
-	else if (pOtherCollider->GetObjName() == L"미사일")
-	{
-		Logger::Debug(L"몬스터가 미사일과 충돌해제");
-	}
 }

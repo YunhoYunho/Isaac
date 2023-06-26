@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CRock.h"
 #include "CPickupHeart.h"
+#include "CPickupBomb.h"
 #include "CPickupKey.h"
 #include "CGroundTile.h"
 
@@ -68,29 +69,27 @@ void CRock::AppearItem()
 void CRock::SelectItem(int num)
 {
 	CPickupHeart* pPickupHeart = new CPickupHeart();
+	CPickupBomb* pPickupBomb = new CPickupBomb();
 	CPickupKey* pPickupKey = new CPickupKey();
 
 	switch (num)
 	{
 	case 0:
-		Logger::Debug(L"락 하트 생성");
 		pPickupHeart->SetPos(m_vecPos);
 		ADDOBJECT(pPickupHeart);
 		break;
 
 	case 1:
-		Logger::Debug(L"락 열쇠 생성");
-		pPickupKey->SetPos(m_vecPos);
-		ADDOBJECT(pPickupKey);
+		pPickupBomb->SetPos(m_vecPos);
+		ADDOBJECT(pPickupBomb);
 		break;
 
 	case 2:
-		Logger::Debug(L"락 열쇠 생성");
 		pPickupKey->SetPos(m_vecPos);
 		ADDOBJECT(pPickupKey);
 		break;
 	}
-	
+
 	m_bIsSpecial = false;
 }
 

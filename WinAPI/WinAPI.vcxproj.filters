@@ -318,9 +318,6 @@
     <ClInclude Include="CGoldenChest.h">
       <Filter>03. GameObject\Stage\Item\Chest</Filter>
     </ClInclude>
-    <ClInclude Include="CItemRock.h">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
-    </ClInclude>
     <ClInclude Include="CNormalChest.h">
       <Filter>03. GameObject\Stage\Item\Chest</Filter>
     </ClInclude>
@@ -338,6 +335,9 @@
     </ClInclude>
     <ClInclude Include="CShieldMissile.h">
       <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="CItemRock.h">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -542,9 +542,6 @@
     <ClCompile Include="CGoldenChest.cpp">
       <Filter>03. GameObject\Stage\Item\Chest</Filter>
     </ClCompile>
-    <ClCompile Include="CItemRock.cpp">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
-    </ClCompile>
     <ClCompile Include="CNormalChest.cpp">
       <Filter>03. GameObject\Stage\Item\Chest</Filter>
     </ClCompile>
@@ -577,6 +574,9 @@
     </ClCompile>
     <ClCompile Include="CShieldMissile.cpp">
       <Filter>03. GameObject\Stage\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CItemRock.cpp">
+      <Filter>03. GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

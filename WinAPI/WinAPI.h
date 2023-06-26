@@ -23,18 +23,12 @@ extern HWND hWnd;
 //##			게임씬 그룹				##
 //========================================
 
-// Title - TileTool - StageLoading - Stage01 - Loading
-
 enum class GroupScene
 {
 	Title,
-
 	TileTool,
-
 	StageLoading,
-
 	Stage01,
-
 	Loading,
 
 	Size,
@@ -74,6 +68,7 @@ enum class Layer
 	HUD,
 	Ui,
 	Loading,
+
 	Size,
 };
 

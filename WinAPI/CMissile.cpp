@@ -1,11 +1,6 @@
 #include "framework.h"
 #include "CMissile.h"
 
-#include "CRenderManager.h"
-#include "CTimeManager.h"
-#include "CEventManager.h"
-#include "CCollider.h"
-
 #include "CMonster.h"
 
 CMissile::CMissile()

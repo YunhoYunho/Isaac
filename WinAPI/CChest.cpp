@@ -1,7 +1,9 @@
 #include "framework.h"
 #include "CChest.h"
-#include "CPickupHeart.h"
 #include "CBomb.h"
+#include "CPickupHeart.h"
+#include "CPickupBomb.h"
+#include "CPickupKey.h"
 
 CChest::CChest()
 {
@@ -59,6 +61,8 @@ void CChest::RandomItem()
 void CChest::ChoiceItem(int num)
 {
 	CPickupHeart* pPickupHeart = new CPickupHeart();
+	CPickupBomb* pPickupBomb = new CPickupBomb();
+	CPickupKey* pPickupKey = new CPickupKey();
 	CBomb* pBomb = new CBomb();
 
 	if (true == m_bIsGolden)
@@ -66,23 +70,18 @@ void CChest::ChoiceItem(int num)
 		switch (num)
 		{
 		case 0:
-			Logger::Debug(L"榜电窍飘 积己");
 			pPickupHeart->SetPos(m_vecPos);
 			ADDOBJECT(pPickupHeart);
 			break;
 
 		case 1:
-			Logger::Debug(L"榜电1锅气藕 积己");
-			pBomb->SetPos(m_vecPos);
-			pBomb->m_bIsPressE = true;
-			ADDOBJECT(pBomb);
+			pPickupBomb->SetPos(m_vecPos);
+			ADDOBJECT(pPickupBomb);
 			break;
 
 		case 2:
-			Logger::Debug(L"榜电2锅气藕 积己");
-			pBomb->SetPos(m_vecPos);
-			pBomb->m_bIsPressE = true;
-			ADDOBJECT(pBomb);
+			pPickupKey->SetPos(m_vecPos);
+			ADDOBJECT(pPickupKey);
 			break;
 		}
 	}
@@ -92,28 +91,22 @@ void CChest::ChoiceItem(int num)
 		switch (num)
 		{
 		case 0:
-			Logger::Debug(L"窍飘 积己");
 			pPickupHeart->SetPos(m_vecPos);
 			ADDOBJECT(pPickupHeart);
 			break;
 
 		case 1:
-			Logger::Debug(L"1锅气藕 积己");
-			pBomb->SetPos(m_vecPos);
-			pBomb->m_bIsPressE = true;
-			ADDOBJECT(pBomb);
+			pPickupBomb->SetPos(m_vecPos);
+			ADDOBJECT(pPickupBomb);
 			break;
 
 		case 2:
-			Logger::Debug(L"2锅气藕 积己");
 			pBomb->SetPos(m_vecPos);
 			pBomb->m_bIsPressE = true;
 			ADDOBJECT(pBomb);
 			break;
 		}
 	}
-
-	Logger::Debug(to_wstring(num));
 }
 
 void CChest::Init()
