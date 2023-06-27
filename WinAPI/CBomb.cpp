@@ -54,6 +54,21 @@ void CBomb::Boom()
 	ADDOBJECT(pExplosion);
 }
 
+void CBomb::ObjectPushed(CCollider* pOtherCollider, float num)
+{
+	float x = m_vecPos.x - pOtherCollider->GetPos().x;
+	float y = m_vecPos.y - pOtherCollider->GetPos().y;
+
+	if (abs(x) > abs(y))
+	{
+		m_vecPos.x += (x > 0 ? num : -num) * m_fSpeed * DT;
+	}
+	else
+	{
+		m_vecPos.y += (y > 0 ? num : -num) * m_fSpeed * DT;
+	}
+}
+
 void CBomb::Init()
 {
 	m_pBombImage = RESOURCE->LoadImg(L"Bomb", L"Image\\Item\\Bomb.png");
@@ -89,21 +104,15 @@ void CBomb::Release()
 
 void CBomb::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"Player" ||
-		pOtherCollider->GetObjName() == L"PlayerMissile" ||
+	if (pOtherCollider->GetObjName() == L"Player")
+	{
+		ObjectPushed(pOtherCollider, 1.0f);
+	}
+
+	if (pOtherCollider->GetObjName() == L"PlayerMissile" ||
 		pOtherCollider->GetObjName() == L"ShieldMissile")
 	{
-		float x = m_vecPos.x - pOtherCollider->GetPos().x;
-		float y = m_vecPos.y - pOtherCollider->GetPos().y;
-
-		if (abs(x) > abs(y))
-		{
-			m_vecPos.x += (x > 0 ? 1.f : -1.f) * m_fSpeed * DT;
-		}
-		else
-		{
-			m_vecPos.y += (y > 0 ? 1.f : -1.f) * m_fSpeed * DT;
-		}
+		ObjectPushed(pOtherCollider, 20.0f);
 	}
 }
 

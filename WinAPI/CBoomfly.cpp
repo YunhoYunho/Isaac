@@ -12,7 +12,7 @@ CBoomfly::CBoomfly()
 
 	m_pBoomflyImage = nullptr;
 
-	m_fSpeed = 100.0f;
+	m_fSpeed = 120.0f;
 	m_HP = 7;
 	m_fTimer = 0;
 	m_bIsExplosion = false;

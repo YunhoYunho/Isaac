@@ -28,7 +28,7 @@ void CMissile::Shot()
 		m_fHeight += m_fZSpeed * DT;
 		m_vecPos.y -= m_fZSpeed * DT;
 
-		if (m_fHeight < 0.0f)
+		if (m_fHeight < 0)
 		{
 			Hit();
 		}
@@ -68,8 +68,8 @@ void CMissile::DeleteMissile()
 
 	if (m_vecPos.x < pos.x - 720 ||
 		m_vecPos.x > pos.x + 720 ||
-		m_vecPos.y < 0 ||
-		m_vecPos.y > WINSIZEY)
+		m_vecPos.y < pos.y - 720 ||
+		m_vecPos.y > pos.y + 720)
 		DELETEOBJECT(this);
 }
 
@@ -78,7 +78,7 @@ void CMissile::UsePlayerCollider(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"Wall" ||
 		pOtherCollider->GetObjName() == L"DoorCollider" ||
 		pOtherCollider->GetObjName() == L"Rock" ||
-		pOtherCollider->GetObjName() == L"ÆøÅº")
+		pOtherCollider->GetObjName() == L"Bomb")
 	{
 		Hit();
 	}

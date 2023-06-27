@@ -17,7 +17,7 @@
 	m_vecLookDir = Vector(0, -1);
 
 	m_fRange = 300.0f;
-	m_fSpeed = 50.0f;
+	m_fSpeed = 100.0f;
 	m_HP = 40;
 	m_MaxHP = m_HP;
 
@@ -133,7 +133,6 @@ void CGish::MoveUpdate()
 
 void CGish::ShotUpdate()
 {
-	
 	CreateMissile();
 	ShotState();
 }
@@ -215,13 +214,13 @@ void CGish::Jumping()
 void CGish::Up(bool up)
 {
 	if (true == up)
-	m_vecPos.y -= 500 * DT;
+	m_vecPos.y -= 1000 * DT;
 }
 
 void CGish::Down(bool down)
 {
 	if (true == down)
-	m_vecPos.y += 500 * DT;
+	m_vecPos.y += 1000 * DT;
 }
 
 void CGish::CheckDir()

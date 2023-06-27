@@ -11,8 +11,8 @@ CBaby::CBaby()
 	m_pBabyImage = nullptr;
 	m_pBabyDeadImage = nullptr;
 
-	m_fRange = 500.0f;
-	m_fSpeed = 30.0f;
+	m_fRange = 300.0f;
+	m_fSpeed = 70.0f;
 	m_HP = 10;
 	m_fTimer = 0;
 }

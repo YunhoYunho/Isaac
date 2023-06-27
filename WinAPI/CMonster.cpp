@@ -135,9 +135,17 @@ void CMonster::PingPong()
 {
 	int max = 0;
 	int min = 0;
+	int Ymax = 0;
 
 	max = INROOM1 ? WINSIZEX : WINSIZEX * 2;
 	min = INROOM1 ? 0 : WINSIZEX;
+
+	if (INROOM4) 
+	{
+		max = WINSIZEX * 2;
+		min = WINSIZEY * 2;
+		Ymax = WINSIZEY;
+	}
 
 	if (m_vecPos.x >= max - 100)
 	{
@@ -151,13 +159,13 @@ void CMonster::PingPong()
 		right = true;
 	}
 
-	if (m_vecPos.y >= WINSIZEY - 100)
+	if (m_vecPos.y >= Ymax + WINSIZEY - 100)
 	{
 		up = true;
 		down = false;
 	}
 
-	if (m_vecPos.y <= 100)
+	if (m_vecPos.y <= Ymax + 100)
 	{
 		up = false;
 		down = true;
@@ -216,8 +224,9 @@ void CMonster::RangeMissile()
 	for (int i = 0; i < 10; i++)
 	{
 		CMonsterMissile* pMissile = new CMonsterMissile();
-
 		pMissile->SetPos(m_vecPos);
+		float randomVelocity = rand() % 200 + 100;
+		pMissile->SetVelocity(randomVelocity);
 		float missileAngle = angleToTarget + rand() % 60 - 30;
 		Vector angleToDir = Vector::AngleToDir(missileAngle);
 		pMissile->SetDir(angleToDir);

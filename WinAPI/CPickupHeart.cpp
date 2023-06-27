@@ -32,7 +32,7 @@ void CPickupHeart::Activate(CPlayer* pPlayer)
 
 void CPickupHeart::Init()
 {
-	m_pHeartImage = RESOURCE->LoadImg(L"Heart", L"Image\\Item\\Item_Heart.png");
+	m_pHeartImage = RESOURCE->LoadImg(L"PickupHeart", L"Image\\Item\\Item_Heart.png");
 	
 	m_pAnimator = new CAnimator;
 

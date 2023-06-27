@@ -3,6 +3,7 @@
 
 class CPlayer;
 class CMonster;
+class CPassiveItem;
 
 class CSceneStage01 : public CScene
 {
@@ -13,6 +14,7 @@ public:
 private:
 	CPlayer* pPlayer;
 	CMonster* pMonster;
+	CPassiveItem* pPassiveItem;
 	CSound* pBGMSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
 	CSound* pBossRoomSound = RESOURCE->LoadSound(L"BossRoom", L"Sound\\Scene\\BossRoom.ogg");
 	CSound* pBossClearSound = RESOURCE->LoadSound(L"BossClear", L"Sound\\Scene\\BossRoomOutro.ogg");
@@ -24,27 +26,28 @@ private:
 
 	void MonsterPool();
 	void PositionPool();
+	void ItemPool();
 
 	void CreateDoorTeleport();
 	void CreateDoorBossTeleport();
-
+	void CreateRock();
+	void CreateItem();
 	void CreateMonsters(int num);
 	void CreateBoss();
-	void CreateRock();
-
 	void SpawnRoom();
+	void StartBossLoading();
+	void StartBossSound();
 
 	void CheckRoomClear();
 	void WhatRoomClear();
 
-	void StartBossLoading();
-	void StartBossSound();
-
+	vector<CPassiveItem*> m_vecItems;
 	vector<CMonster*> m_vecMonsters;
 	vector<CMonster*> m_vecSpawnMonsters;
 	vector<Vector> m_vecMonsterPositions;
 	vector<Vector> m_vecRockPositions;
 	vector<Vector> m_vecTeleportPositions;
+	vector<Vector> m_vecItemPositions;
 
 	int randomNumber;
 	int killCount;

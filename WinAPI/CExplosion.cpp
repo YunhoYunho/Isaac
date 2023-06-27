@@ -21,7 +21,7 @@ void CExplosion::Boom()
 {
 	m_fCooltime += DT;
 
-	if (m_fCooltime > 1.0f)
+	if (m_fCooltime > 0.7f)
 	{
 		m_pAnimator->Stop();
 		m_fCooltime = 0;
@@ -54,7 +54,7 @@ void CExplosion::Init()
 
 	AddComponent(m_pAnimator);
 
-	AddCollider(ColliderType::Rect, Vector(60, 60), Vector(0, 0));
+	AddCollider(ColliderType::Rect, Vector(90, 90), Vector(0, 0));
 
 	BoomSound();
 }

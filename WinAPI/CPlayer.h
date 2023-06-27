@@ -43,7 +43,7 @@ private:
 
 	float m_fSpeed = 200.0f;
 	float m_fDamage = 3.0f;
-	float m_fShotSpeed = 0.25f;
+	float m_fShotSpeed = 0.5f;
 
 	float m_fTimer = 0;
 	float fCooltime = 0;

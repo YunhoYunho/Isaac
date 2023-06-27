@@ -142,6 +142,9 @@ void CPlayer::Update()
 
 void CPlayer::Render()
 {
+	Vector pos = CAMERA->ScreenToWorldPoint(Vector(50, 360));
+	RENDER->Text(to_wstring(m_fDamage), pos.x - 50, pos.y - 10, pos.x + 50, pos.y + 10, Color(255, 255, 255, 1.f), 15);
+	RENDER->Text(to_wstring(m_fShotSpeed), pos.x - 50, pos.y - 10, pos.x + 50, pos.y + 60, Color(255, 255, 255, 1.f), 15);
 }
 
 void CPlayer::Release()
@@ -404,47 +407,34 @@ void CPlayer::NormalShot()
 
 void CPlayer::TripleShot()
 {
-	for (int i = 0; i < 2; i++)
-	{
-		if (true != m_bIsShieldTears)
-		{
-			pMissile = m_vecMissiles[0]->Clone();
-			m_vecTripleMissiles.emplace_back(pMissile);
-		}
-
-		else
-		{
-			pMissile = m_vecMissiles[1]->Clone();
-			m_vecTripleMissiles.emplace_back(pMissile);
-		}
-	}
+	CMissile* pMissile2 = pMissile->Clone();
+	CMissile* pMissile3 = pMissile->Clone();
 
 	if (BUTTONSTAY(VK_LEFT))
 	{
-		m_vecTripleMissiles[0]->SetDir(Vector(-1, 1));
-		m_vecTripleMissiles[1]->SetDir(Vector(-1, -1));
+		pMissile2->SetDir(Vector(-1, 1));
+		pMissile3->SetDir(Vector(-1, -1));
 	}
 
 	if (BUTTONSTAY(VK_RIGHT))
 	{
-		m_vecTripleMissiles[0]->SetDir(Vector(1, 1));
-		m_vecTripleMissiles[1]->SetDir(Vector(1, -1));
+		pMissile2->SetDir(Vector(1, 1));
+		pMissile3->SetDir(Vector(1, -1));
 	}
 
 	if (BUTTONSTAY(VK_UP))
 	{
-		m_vecTripleMissiles[0]->SetDir(Vector(1, -1));
-		m_vecTripleMissiles[1]->SetDir(Vector(-1, -1));
+		pMissile2->SetDir(Vector(1, -1));
+		pMissile3->SetDir(Vector(-1, -1));
 	}
 
 	if (BUTTONSTAY(VK_DOWN))
 	{
-		m_vecTripleMissiles[0]->SetDir(Vector(1, 1));
-		m_vecTripleMissiles[1]->SetDir(Vector(-1, 1));
+		pMissile2->SetDir(Vector(1, 1));
+		pMissile3->SetDir(Vector(-1, 1));
 	}
-
-	ADDOBJECT(m_vecTripleMissiles[0]);
-	ADDOBJECT(m_vecTripleMissiles[1]);
+	ADDOBJECT(pMissile2);
+	ADDOBJECT(pMissile3);
 }
 
 void CPlayer::TakeDamage()
@@ -577,13 +567,9 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		CPassiveItem* pPassiveItem = dynamic_cast<CPassiveItem*>(pOtherCollider->GetOwner());
 		if (pPassiveItem != nullptr)
 		{
-			if (m_iCount == 0)
-			{
-				m_playerState = PlayerState::GetItem;
-				SOUND->Play(pGetItem, 1.0f, false);
-				pPassiveItem->Activate(this);
-				m_iCount++;
-			}
+			m_playerState = PlayerState::GetItem;
+			SOUND->Play(pGetItem, 1.0f, false);
+			pPassiveItem->Activate(this);
 		}
 	}
 

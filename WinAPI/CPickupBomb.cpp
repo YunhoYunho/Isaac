@@ -25,6 +25,15 @@ void CPickupBomb::Activate(CPlayer* pPlayer)
 void CPickupBomb::Init()
 {
 	m_pPickBombImage = RESOURCE->LoadImg(L"PickBomb", L"Image\\Item\\Item_Bomb.png");
+
+	m_pAnimator = new CAnimator;
+
+	m_pAnimator->CreateAnimation(L"PBomb", m_pPickBombImage, Vector(0.0f, 0.0f), Vector(50.0f, 50.0f), Vector(50.0f, 0.0f), 0, 1, false);
+
+	m_pAnimator->Play(L"PBomb");
+
+	AddComponent(m_pAnimator);
+	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 }
 
 void CPickupBomb::Update()

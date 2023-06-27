@@ -21,6 +21,7 @@ private:
 public:
 	void BombTimer();
 	void Boom();
+	void ObjectPushed(CCollider* pOtherCollider, float num);
 
 	bool m_bIsPressE;
 	bool m_bIsLeft;

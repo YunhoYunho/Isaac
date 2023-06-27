@@ -9,7 +9,7 @@ CMonsterMissile::CMonsterMissile()
 	m_layer = Layer::MonsterMissile;
 	m_strName = L"MonsterMissile";
 	m_pTearsImage = nullptr;
-	m_fVelocity = 300;
+	m_fVelocity = 300.0f;
 	m_fTimer;
 	m_fMTimer = 0;
 	m_fGravity = -100.0f;

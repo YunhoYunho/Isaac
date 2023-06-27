@@ -16,8 +16,12 @@
 #include "CLoadingImage.h"
 
 #include "CItemRock.h"
-#include "CTripleShot.h"
+#include "CMeat.h"
+#include "CSadOnion.h"
+#include "CSkeletonKey.h"
+#include "CTenBombs.h"
 #include "CShieldTears.h"
+#include "CTripleShot.h"
 #include "CRock.h"
 #include "CBlackRock.h"
 
@@ -51,18 +55,27 @@
 #define ROCKC		Vector(1960, 1030)
 #define ROCKD		Vector(1960, 1080)
 #pragma endregion
-#pragma region
+#pragma region TeleportPosition
 #define TELE1		Vector(1280,  360)
 #define TELE2		Vector(1280, 1080)
 #define TELE3		Vector( 640,  720)
 #define TELE4		Vector(1920,  720)
 #define TELEB		Vector(2560,  360)
 #pragma endregion
+#pragma region
+#define ITEM1		Vector(250, 900)
+#define ITEM2		Vector(250, 1200)
+#define ITEM3		Vector(1000, 900)
+#define ITEM4		Vector(1000, 1200)
+#define ITEM5		Vector(600, 1100)
+#define ITEM6		Vector(650, 1000)
+#pragma endregion
 
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
 	pMonster = nullptr;
+	pPassiveItem = nullptr;
 	m_fTimer = 0;
 	m_fSpawnTimer = 0;
 	m_fLoadTimer = 0;
@@ -142,6 +155,17 @@ void CSceneStage01::CreateRock()
 	CBlackRock* pBlackRock = new CBlackRock();
 	pBlackRock->SetPos(m_vecRockPositions[3]);
 	AddGameObject(pBlackRock);
+}
+
+void CSceneStage01::CreateItem()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		Vector pos = m_vecItemPositions[i];
+		pPassiveItem = m_vecItems[i];
+		pPassiveItem->SetPos(pos);
+		AddGameObject(pPassiveItem);
+	}
 }
 
 void CSceneStage01::CreateDoorTeleport()
@@ -288,6 +312,8 @@ void CSceneStage01::MonsterPool()
 
 void CSceneStage01::PositionPool()
 {
+	m_vecMonsterPositions.clear();
+
 	m_vecMonsterPositions.emplace_back(ROOM1P1);
 	m_vecMonsterPositions.emplace_back(ROOM1P2);
 	m_vecMonsterPositions.emplace_back(ROOM1P3);
@@ -316,6 +342,25 @@ void CSceneStage01::PositionPool()
 	m_vecTeleportPositions.emplace_back(TELE2);
 	m_vecTeleportPositions.emplace_back(TELE3);
 	m_vecTeleportPositions.emplace_back(TELE4);
+
+	m_vecItemPositions.emplace_back(ITEM1);
+	m_vecItemPositions.emplace_back(ITEM2);
+	m_vecItemPositions.emplace_back(ITEM3);
+	m_vecItemPositions.emplace_back(ITEM4);
+	m_vecItemPositions.emplace_back(ITEM5);
+	m_vecItemPositions.emplace_back(ITEM6);
+}
+
+void CSceneStage01::ItemPool()
+{
+	m_vecItems.clear();
+
+	m_vecItems.emplace_back(new CMeat());
+	m_vecItems.emplace_back(new CSadOnion());
+	m_vecItems.emplace_back(new CSkeletonKey());
+	m_vecItems.emplace_back(new CTenBombs());
+	m_vecItems.emplace_back(new CShieldTears());
+	m_vecItems.emplace_back(new CTripleShot());
 }
 
 void CSceneStage01::Init()
@@ -377,9 +422,11 @@ void CSceneStage01::Init()
 
 	MonsterPool();
 	PositionPool();
+	ItemPool();
 	CreateDoorTeleport();
 	CreateDoorBossTeleport();
 	CreateRock();
+	CreateItem();
 }
 
 void CSceneStage01::Enter()

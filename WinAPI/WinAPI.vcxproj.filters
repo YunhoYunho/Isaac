@@ -13,71 +13,71 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="01. Engine">
+    <Filter Include="Engine">
       <UniqueIdentifier>{a8e098d5-f24a-4ad5-a018-859f8dc84b1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Engine\Core">
+    <Filter Include="Engine\Core">
       <UniqueIdentifier>{29c74b2a-972d-412d-bc4a-2465f384b5f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Engine\Manager">
+    <Filter Include="Engine\Manager">
       <UniqueIdentifier>{9c71cd82-7843-43fd-98f8-a0e9ad498e63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Engine\Asset">
+    <Filter Include="Engine\Asset">
       <UniqueIdentifier>{a195b62d-287a-46f5-8490-be2bcbde2c3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Engine\Asset\Resource">
+    <Filter Include="Engine\Asset\Resource">
       <UniqueIdentifier>{c5cfb52a-750e-43df-b17a-8d52a11c9f90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Engine\Asset\UI">
+    <Filter Include="Engine\Asset\UI">
       <UniqueIdentifier>{c696e83c-93e9-4b47-9317-6e5ab9181467}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Engine\Asset\Tile">
+    <Filter Include="Engine\Asset\Tile">
       <UniqueIdentifier>{7d2c888e-7d12-4755-bc37-0d63eb9ab8c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Engine\Component">
+    <Filter Include="Engine\Component">
       <UniqueIdentifier>{4e06265c-1d60-449d-b7a1-f96a6027dd6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Util">
+    <Filter Include="Util">
       <UniqueIdentifier>{da4b95dc-36c6-40ee-9860-2ec5e325d45e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject">
+    <Filter Include="GameObject">
       <UniqueIdentifier>{8600dc67-d98f-47ab-b853-a45e2b565df9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Common">
+    <Filter Include="GameObject\Common">
       <UniqueIdentifier>{9e45e506-939f-4c97-8f87-6146ebb42d5f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Scene">
-      <UniqueIdentifier>{2551544d-2c0b-4899-99f9-a72abda2a9d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Stage">
+    <Filter Include="GameObject\Stage">
       <UniqueIdentifier>{f2ad0501-d505-4b88-af0d-880a4673ef5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\Monster">
+    <Filter Include="GameObject\Stage\Monster">
       <UniqueIdentifier>{048dc79a-9013-428a-bfbf-feec12f0f211}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\Player">
-      <UniqueIdentifier>{c6288b5b-a839-4f14-9426-f8712af506df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Scene\Image">
-      <UniqueIdentifier>{d56861a3-66a5-4925-af73-f11ab2a7fdcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Stage\Projectile">
-      <UniqueIdentifier>{f97dd69a-7c4e-4d7b-8427-c680ec459691}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Stage\Item">
-      <UniqueIdentifier>{9a1ec3de-8f50-49a9-9068-83dab1e309a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Stage\Monster\Boss">
+    <Filter Include="GameObject\Stage\Monster\Boss">
       <UniqueIdentifier>{453285f8-3058-44cc-b448-ca73a40921d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\Item\Passive">
+    <Filter Include="GameObject\Stage\Player">
+      <UniqueIdentifier>{c6288b5b-a839-4f14-9426-f8712af506df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Stage\Projectile">
+      <UniqueIdentifier>{f97dd69a-7c4e-4d7b-8427-c680ec459691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Stage\Item">
+      <UniqueIdentifier>{9a1ec3de-8f50-49a9-9068-83dab1e309a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Stage\Item\Passive">
       <UniqueIdentifier>{6d10e90d-0473-4eb8-80e6-d8cc9683d85f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\Item\Pickup">
+    <Filter Include="GameObject\Stage\Item\Pickup">
       <UniqueIdentifier>{e8301ad0-b2a3-4064-b5b3-adc6944ea570}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Stage\Item\Chest">
+    <Filter Include="GameObject\Stage\Item\Chest">
       <UniqueIdentifier>{6ebb14a7-f44b-4977-abe9-29b4875b52fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{2551544d-2c0b-4899-99f9-a72abda2a9d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Image">
+      <UniqueIdentifier>{d56861a3-66a5-4925-af73-f11ab2a7fdcb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -94,250 +94,250 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CCore.h">
-      <Filter>01. Engine\Core</Filter>
+      <Filter>Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="SingleTon.h">
-      <Filter>02. Util</Filter>
+      <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="CTimeManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CRenderManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CInputManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
-      <Filter>01. Engine\Asset</Filter>
+      <Filter>Engine\Asset</Filter>
     </ClInclude>
     <ClInclude Include="CSceneTitle.h">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="CSceneStage01.h">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="CSceneManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CGameObject.h">
-      <Filter>01. Engine\Asset</Filter>
+      <Filter>Engine\Asset</Filter>
     </ClInclude>
     <ClInclude Include="Struct.h">
-      <Filter>02. Util</Filter>
+      <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>02. Util</Filter>
+      <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="CEventManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CComponent.h">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClInclude>
     <ClInclude Include="CCollisionManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CCollider.h">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClInclude>
     <ClInclude Include="CPathManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CResource.h">
-      <Filter>01. Engine\Asset\Resource</Filter>
+      <Filter>Engine\Asset\Resource</Filter>
     </ClInclude>
     <ClInclude Include="CImage.h">
-      <Filter>01. Engine\Asset\Resource</Filter>
+      <Filter>Engine\Asset\Resource</Filter>
     </ClInclude>
     <ClInclude Include="CResourceManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CAnimator.h">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClInclude>
     <ClInclude Include="CAnimation.h">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClInclude>
     <ClInclude Include="CCameraManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CUI.h">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClInclude>
     <ClInclude Include="CButton.h">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClInclude>
     <ClInclude Include="CUIManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CPanel.h">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClInclude>
     <ClInclude Include="CSceneTileTool.h">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="CTile.h">
-      <Filter>01. Engine\Asset\Tile</Filter>
+      <Filter>Engine\Asset\Tile</Filter>
     </ClInclude>
     <ClInclude Include="CGroundTile.h">
-      <Filter>01. Engine\Asset\Tile</Filter>
+      <Filter>Engine\Asset\Tile</Filter>
     </ClInclude>
     <ClInclude Include="CImageObject.h">
-      <Filter>03. GameObject\Common</Filter>
+      <Filter>GameObject\Common</Filter>
     </ClInclude>
     <ClInclude Include="CCameraController.h">
-      <Filter>03. GameObject\Common</Filter>
+      <Filter>GameObject\Common</Filter>
     </ClInclude>
     <ClInclude Include="CTilePanel.h">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClInclude>
     <ClInclude Include="CTileButton.h">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClInclude>
     <ClInclude Include="CSound.h">
-      <Filter>01. Engine\Asset\Resource</Filter>
+      <Filter>Engine\Asset\Resource</Filter>
     </ClInclude>
     <ClInclude Include="CSoundManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CPlayer.h">
-      <Filter>03. GameObject\Stage\Player</Filter>
+      <Filter>GameObject\Stage\Player</Filter>
     </ClInclude>
     <ClInclude Include="CMonster.h">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CGameManager.h">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CBaby.h">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CBoomfly.h">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CTitleImage.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CMissile.h">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CMonsterMissile.h">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerMissile.h">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CExplosion.h">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerHP.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CFly.h">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CLoadingImage.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CGish.h">
-      <Filter>03. GameObject\Stage\Monster\Boss</Filter>
+      <Filter>GameObject\Stage\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="CSLoadingImage.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CSceneSLoading.h">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="CBossHPBar.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CBomb.h">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="Util.h">
-      <Filter>02. Util</Filter>
+      <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="CHUD.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CDoorFrame.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CDoorControl.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CDoor.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CDoorTeleport.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CDoorTile.h">
-      <Filter>01. Engine\Asset\Tile</Filter>
+      <Filter>Engine\Asset\Tile</Filter>
     </ClInclude>
     <ClInclude Include="CEnterEffect.h">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CDoorBossTeleport.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CMeat.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
     <ClInclude Include="CSadOnion.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
     <ClInclude Include="CShieldTears.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
     <ClInclude Include="CSkeletonKey.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
     <ClInclude Include="CTenBombs.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
     <ClInclude Include="CTripleShot.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
     <ClInclude Include="CPickupHeart.h">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClInclude>
     <ClInclude Include="CPickupItem.h">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClInclude>
     <ClInclude Include="CPickupKey.h">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClInclude>
     <ClInclude Include="CPassiveItem.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
     <ClInclude Include="CChest.h">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+      <Filter>GameObject\Stage\Item\Chest</Filter>
     </ClInclude>
     <ClInclude Include="CGoldenChest.h">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+      <Filter>GameObject\Stage\Item\Chest</Filter>
     </ClInclude>
     <ClInclude Include="CNormalChest.h">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+      <Filter>GameObject\Stage\Item\Chest</Filter>
     </ClInclude>
     <ClInclude Include="CBlackRock.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CRock.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CObstacle.h">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CPickupBomb.h">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClInclude>
     <ClInclude Include="CShieldMissile.h">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="CItemRock.h">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -345,238 +345,238 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CCore.cpp">
-      <Filter>01. Engine\Core</Filter>
+      <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="CTimeManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CRenderManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CInputManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
-      <Filter>01. Engine\Asset</Filter>
+      <Filter>Engine\Asset</Filter>
     </ClCompile>
     <ClCompile Include="CSceneTitle.cpp">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="CSceneStage01.cpp">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="CSceneManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CGameObject.cpp">
-      <Filter>01. Engine\Asset</Filter>
+      <Filter>Engine\Asset</Filter>
     </ClCompile>
     <ClCompile Include="CEventManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CComponent.cpp">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="CCollisionManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CCollider.cpp">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="CPathManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CResource.cpp">
-      <Filter>01. Engine\Asset\Resource</Filter>
+      <Filter>Engine\Asset\Resource</Filter>
     </ClCompile>
     <ClCompile Include="CImage.cpp">
-      <Filter>01. Engine\Asset\Resource</Filter>
+      <Filter>Engine\Asset\Resource</Filter>
     </ClCompile>
     <ClCompile Include="CResourceManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CAnimator.cpp">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="CAnimation.cpp">
-      <Filter>01. Engine\Component</Filter>
+      <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="CCameraManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CUI.cpp">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClCompile>
     <ClCompile Include="CButton.cpp">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClCompile>
     <ClCompile Include="CUIManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CPanel.cpp">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClCompile>
     <ClCompile Include="CSceneTileTool.cpp">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="CTile.cpp">
-      <Filter>01. Engine\Asset\Tile</Filter>
+      <Filter>Engine\Asset\Tile</Filter>
     </ClCompile>
     <ClCompile Include="CGroundTile.cpp">
-      <Filter>01. Engine\Asset\Tile</Filter>
+      <Filter>Engine\Asset\Tile</Filter>
     </ClCompile>
     <ClCompile Include="CImageObject.cpp">
-      <Filter>03. GameObject\Common</Filter>
+      <Filter>GameObject\Common</Filter>
     </ClCompile>
     <ClCompile Include="CCameraController.cpp">
-      <Filter>03. GameObject\Common</Filter>
+      <Filter>GameObject\Common</Filter>
     </ClCompile>
     <ClCompile Include="CTileButton.cpp">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClCompile>
     <ClCompile Include="CTilePanel.cpp">
-      <Filter>01. Engine\Asset\UI</Filter>
+      <Filter>Engine\Asset\UI</Filter>
     </ClCompile>
     <ClCompile Include="CSound.cpp">
-      <Filter>01. Engine\Asset\Resource</Filter>
+      <Filter>Engine\Asset\Resource</Filter>
     </ClCompile>
     <ClCompile Include="CSoundManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CPlayer.cpp">
-      <Filter>03. GameObject\Stage\Player</Filter>
+      <Filter>GameObject\Stage\Player</Filter>
     </ClCompile>
     <ClCompile Include="CMonster.cpp">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CGameManager.cpp">
-      <Filter>01. Engine\Manager</Filter>
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CBaby.cpp">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CBoomfly.cpp">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CTitleImage.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CMissile.cpp">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="CMonsterMissile.cpp">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerMissile.cpp">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="CExplosion.cpp">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerHP.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CFly.cpp">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CLoadingImage.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CGish.cpp">
-      <Filter>03. GameObject\Stage\Monster\Boss</Filter>
+      <Filter>GameObject\Stage\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="CSLoadingImage.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CSceneSLoading.cpp">
-      <Filter>04. Scene</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="CBossHPBar.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CBomb.cpp">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="CHUD.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CDoorFrame.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CDoorControl.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CDoor.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CDoorTeleport.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CDoorTile.cpp">
-      <Filter>01. Engine\Asset\Tile</Filter>
+      <Filter>Engine\Asset\Tile</Filter>
     </ClCompile>
     <ClCompile Include="CEnterEffect.cpp">
-      <Filter>03. GameObject\Stage\Monster</Filter>
+      <Filter>GameObject\Stage\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CDoorBossTeleport.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CTripleShot.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
     <ClCompile Include="CPickupHeart.cpp">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClCompile>
     <ClCompile Include="CPickupItem.cpp">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClCompile>
     <ClCompile Include="CPickupKey.cpp">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClCompile>
     <ClCompile Include="CPassiveItem.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
     <ClCompile Include="CChest.cpp">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+      <Filter>GameObject\Stage\Item\Chest</Filter>
     </ClCompile>
     <ClCompile Include="CGoldenChest.cpp">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+      <Filter>GameObject\Stage\Item\Chest</Filter>
     </ClCompile>
     <ClCompile Include="CNormalChest.cpp">
-      <Filter>03. GameObject\Stage\Item\Chest</Filter>
+      <Filter>GameObject\Stage\Item\Chest</Filter>
     </ClCompile>
     <ClCompile Include="CMeat.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
     <ClCompile Include="CSadOnion.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
     <ClCompile Include="CShieldTears.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
     <ClCompile Include="CSkeletonKey.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
     <ClCompile Include="CTenBombs.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
     <ClCompile Include="CBlackRock.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CRock.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CObstacle.cpp">
-      <Filter>04. Scene\Image</Filter>
+      <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CPickupBomb.cpp">
-      <Filter>03. GameObject\Stage\Item\Pickup</Filter>
+      <Filter>GameObject\Stage\Item\Pickup</Filter>
     </ClCompile>
     <ClCompile Include="CShieldMissile.cpp">
-      <Filter>03. GameObject\Stage\Projectile</Filter>
+      <Filter>GameObject\Stage\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="CItemRock.cpp">
-      <Filter>03. GameObject\Stage\Item\Passive</Filter>
+      <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

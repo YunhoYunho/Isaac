@@ -25,7 +25,16 @@ void CPickupKey::Activate(CPlayer* pPlayer)
 
 void CPickupKey::Init()
 {
-	m_pKeyImage = RESOURCE->LoadImg(L"Key", L"Image\\Item\\Item_Key.png");
+	m_pKeyImage = RESOURCE->LoadImg(L"PickupKey", L"Image\\Item\\Item_Key.png");
+
+	m_pAnimator = new CAnimator;
+
+	m_pAnimator->CreateAnimation(L"PKey", m_pKeyImage, Vector(0.0f, 0.0f), Vector(50.0f, 50.0f), Vector(50.0f, 0.0f), 0, 1, false);
+
+	m_pAnimator->Play(L"PKey");
+
+	AddComponent(m_pAnimator);
+	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 }
 
 void CPickupKey::Update()

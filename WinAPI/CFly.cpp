@@ -10,7 +10,7 @@ CFly::CFly()
 	
 	m_pFlyImage = nullptr;
 
-	m_fSpeed = 30.0f;
+	m_fSpeed = 100.0f;
 	m_HP = 10;
 }
 
