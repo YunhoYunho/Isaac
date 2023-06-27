@@ -9,6 +9,7 @@ CGameManager::CGameManager()
 	room1Clear = false;
 	room2Clear = false;
 	room3Clear = false;
+	room4Clear = false;
 	touchTeleport = false;
 	resetKillCount = false;
 	monsterKillCount = 0;
@@ -43,10 +44,9 @@ bool CGameManager::GetIsDebugMode()
 
 void CGameManager::CheckKillCount()
 {
-	if ((INROOM1 && ROOM1CLEAR) || ((INROOM2 && ROOM2CLEAR)))
+	if ((INROOM1 && ROOM1CLEAR) || (INROOM2 && ROOM2CLEAR) || (INROOM4 || ROOM4CLEAR))
 	{
 		resetKillCount = true;
-
 		ResetKillCount();
 	}
 }

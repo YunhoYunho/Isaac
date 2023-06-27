@@ -32,9 +32,7 @@ private:
 	void CreateBoss();
 	void CreateRock();
 
-	void SpawnRoom1();
-	void SpawnRoom2();
-	void SpawnRoom3();
+	void SpawnRoom();
 
 	void CheckRoomClear();
 	void WhatRoomClear();
@@ -46,6 +44,7 @@ private:
 	vector<CMonster*> m_vecSpawnMonsters;
 	vector<Vector> m_vecMonsterPositions;
 	vector<Vector> m_vecRockPositions;
+	vector<Vector> m_vecTeleportPositions;
 
 	int randomNumber;
 	int killCount;
@@ -57,6 +56,7 @@ private:
 	bool m_bIsRoom1Clear;
 	bool m_bIsRoom2Clear;
 	bool m_bIsRoom3Clear;
+	bool m_bIsRoom4Clear;
 	bool m_bIsEnterBossRoom;
 
 private:

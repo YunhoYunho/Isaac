@@ -10,6 +10,8 @@
 #define ROOM2K	2800, 250, 50, 50, Color(255, 255, 255, 1), 30.0f
 #define ROOM3B	5360, 160, 50, 50, Color(255, 255, 255, 1), 30.0f
 #define ROOM3K	5360, 250, 50, 50, Color(255, 255, 255, 1), 30.0f
+#define ROOM4B	2800, 1600, 50, 50, Color(255, 255, 255, 1), 30.0f
+#define ROOM4K	2800, 1690, 50, 50, Color(255, 255, 255, 1), 30.0f
 #pragma endregion
 
 CHUD::CHUD()
@@ -34,9 +36,11 @@ void CHUD::Update()
 void CHUD::Render()
 {
 	RENDER->Image(m_pHUDImage, 80, 800, 130, 900);
+	RENDER->Image(m_pHUDImage, 80, 800, 130, 900);
 	RENDER->Image(m_pHUDImage, 80, 80, 130, 180);
 	RENDER->Image(m_pHUDImage, 1360, 80, 1410, 180);
 	RENDER->Image(m_pHUDImage, 2640, 80, 2690, 180);
+	RENDER->Image(m_pHUDImage, 1360, 800, 1410, 900);
 	
 	wstring curBomb;
 	curBomb = Util::WStringFormat(L"%02d", PLAYERBOMB);	
@@ -66,6 +70,12 @@ void CHUD::Render()
 	{
 		RENDER->Text(curBomb, ROOM3B);
 		RENDER->Text(curKey, ROOM3K);
+	}
+
+	if (INROOM4)
+	{
+		RENDER->Text(curBomb, ROOM4B);
+		RENDER->Text(curKey, ROOM4K);
 	}
 }
 

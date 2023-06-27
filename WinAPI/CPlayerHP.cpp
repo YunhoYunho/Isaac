@@ -38,6 +38,7 @@ void CPlayerHP::Render()
 	RENDER->Image(m_pPlayerHPFrame, 130, 60, 310, 90);
 	RENDER->Image(m_pPlayerHPFrame, 1410, 60, 1590, 90);
 	RENDER->Image(m_pPlayerHPFrame, 2690, 60, 2870, 90);
+	RENDER->Image(m_pPlayerHPFrame, 1410, 780, 1590, 810);
 
 	float hpWidth = (310 - 130) * PLAYERHP / PLAYERMAXHP;
 
@@ -61,6 +62,11 @@ void CPlayerHP::Render()
 		if (INROOM3)
 		{
 			RENDER->FrameImage(m_pPlayerHPGauge, 2690, 60, 2690 + hpWidth, 90, 0, 0, hpWidth, 30);
+		}
+
+		if (INROOM4)
+		{
+			RENDER->FrameImage(m_pPlayerHPGauge, 1410, 780, 1410 + hpWidth, 810, 0, 0, hpWidth, 30);
 		}
 	}
 }

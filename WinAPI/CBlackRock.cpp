@@ -25,10 +25,10 @@ void CBlackRock::Init()
 
 	m_pAnimator = new CAnimator;
 
-	m_pAnimator->CreateAnimation(L"NotBroken", m_pBlackRockImage, Vector(0.0f, 0.0f), Vector(57.0f, 60.0f), Vector(57.0f, 0.0f), 0, 1, false);
+	m_pAnimator->CreateAnimation(L"BlackNotBroken", m_pBlackRockImage, Vector(0.0f, 0.0f), Vector(57.0f, 60.0f), Vector(57.0f, 0.0f), 0, 1, false);
 	m_pAnimator->CreateAnimation(L"Broken", m_pBlackFragmentsImage, Vector(0.0f, 0.0f), Vector(64.0f, 64.0f), Vector(64.0f, 0.0f), 0, 1, false);
 
-	m_pAnimator->Play(L"NotBroken");
+	m_pAnimator->Play(L"BlackNotBroken");
 
 	AddComponent(m_pAnimator);
 

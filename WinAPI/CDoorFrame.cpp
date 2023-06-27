@@ -37,11 +37,17 @@ void CDoorFrame::Render()
 	RENDER->Image(m_pNRFrameImage, 1125, 308, 1195, 412);
 	RENDER->Image(m_pNLFrameImage, 1390, 308, 1460, 412);
 
+	RENDER->Image(m_pNRFrameImage, 1125, 1028, 1195, 1132);
+	RENDER->Image(m_pNLFrameImage, 1390, 1028, 1460, 1132);
+
 	RENDER->Image(m_pBRFrameImage, 2330, 286, 2483, 434);
 	RENDER->Image(m_pBLFrameImage, 2655, 286, 2808, 434);
 
 	RENDER->Image(m_pDFrameImage, 588, 565, 692, 635);
 	RENDER->Image(m_pUFrameImage, 588, 802, 692, 872);
+	
+	RENDER->Image(m_pDFrameImage, 1866, 565, 1970, 635);
+	RENDER->Image(m_pUFrameImage, 1866, 802, 1970, 872);
 }
 
 void CDoorFrame::Release()

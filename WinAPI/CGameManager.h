@@ -25,6 +25,7 @@ public:
 	bool room1Clear;
 	bool room2Clear;
 	bool room3Clear;
+	bool room4Clear;
 	bool touchTeleport;
 	bool resetKillCount;
 	bool pause;
@@ -55,11 +56,13 @@ public:
 #define ROOM1CLEAR			CGameManager::GetInstance()->room1Clear
 #define ROOM2CLEAR			CGameManager::GetInstance()->room2Clear
 #define ROOM3CLEAR			CGameManager::GetInstance()->room3Clear
+#define ROOM4CLEAR			CGameManager::GetInstance()->room4Clear
 #pragma endregion
 
 #pragma region WhatRoomIsIt
 #define INROOM0				(PLAYERPOS.x < 1200) && (PLAYERPOS.y > 720)
 #define INROOM1				(PLAYERPOS.x < 1200) && (PLAYERPOS.y < 720)
-#define INROOM2				(PLAYERPOS.x > 1400 && PLAYERPOS.x < 2500)
+#define INROOM2				(PLAYERPOS.x > 1400) && (PLAYERPOS.x < 2500) && (PLAYERPOS.y < 720)
 #define INROOM3				(PLAYERPOS.x > 2600)
+#define INROOM4				(PLAYERPOS.x > 1400) && (PLAYERPOS.y > 720)
 #pragma endregion

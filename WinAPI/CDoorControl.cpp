@@ -25,19 +25,20 @@ CDoorControl::~CDoorControl()
 
 void CDoorControl::RenderController()
 {
-#pragma region GoldenRoom
+#pragma region Room0
 	if (true != ROOM0OPEN)
 	{
 		RENDER->Image(m_pDCloseImage, 588, 565, 692, 635);
 		RENDER->Image(m_pUCloseImage, 588, 802, 692, 872);
+		RENDER->Image(m_pNRCloseImage, 1125, 1028, 1195, 1132);
 	}
 
 	else
 	{
 		RENDER->Image(m_pDOpenImage, 588, 565, 692, 635);
 		RENDER->Image(m_pUOpenImage, 588, 802, 692, 872);
+		RENDER->Image(m_pNROpenImage, 1125, 1028, 1195, 1132);
 	}
-
 #pragma region Room1
 	if (true != ROOM1CLEAR)
 	{
@@ -55,12 +56,14 @@ void CDoorControl::RenderController()
 	{
 		RENDER->Image(m_pNLCloseImage, 1390, 308, 1460, 412);
 		RENDER->Image(m_pBRCloseImage, 2330, 286, 2483, 434);
+		RENDER->Image(m_pDCloseImage, 1866, 565, 1970, 635);
 	}
 
 	else
 	{
 		RENDER->Image(m_pNLOpenImage, 1390, 308, 1460, 412);
 		RENDER->Image(m_pBROpenImage, 2330, 286, 2483, 434);
+		RENDER->Image(m_pDOpenImage, 1866, 802, 1970, 872);
 	}
 #pragma endregion
 #pragma region BossRoom
@@ -72,6 +75,19 @@ void CDoorControl::RenderController()
 	else
 	{
 		RENDER->Image(m_pBLOpenImage, 2655, 286, 2808, 434);
+	}
+#pragma endregion
+#pragma region Room4
+	if (true != ROOM4CLEAR)
+	{
+		RENDER->Image(m_pUCloseImage, 1866, 802, 1970, 872);
+		RENDER->Image(m_pNLCloseImage, 1390, 1028, 1460, 1132);
+	}
+
+	else
+	{
+		RENDER->Image(m_pUOpenImage, 1866, 802, 1970, 872);
+		RENDER->Image(m_pNLOpenImage, 1390, 1028, 1460, 1132);
 	}
 #pragma endregion
 }

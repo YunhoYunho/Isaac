@@ -55,14 +55,8 @@ void CRock::BrokenSound()
 
 void CRock::AppearItem()
 {
-	srand((unsigned int)time(NULL));
-	int num;
-
-	for (int i = 0; i < 3; i++)
-	{
-		num = rand() % 3;
-	}
-
+	int num = rand() % 3;
+	
 	SelectItem(num);
 }
 
@@ -75,21 +69,22 @@ void CRock::SelectItem(int num)
 	switch (num)
 	{
 	case 0:
-		pPickupHeart->SetPos(m_vecPos);
-		ADDOBJECT(pPickupHeart);
+		pItem = pPickupHeart;
 		break;
 
 	case 1:
-		pPickupBomb->SetPos(m_vecPos);
-		ADDOBJECT(pPickupBomb);
+		pItem = pPickupBomb;
 		break;
 
 	case 2:
-		pPickupKey->SetPos(m_vecPos);
-		ADDOBJECT(pPickupKey);
+		pItem = pPickupKey;
 		break;
 	}
 
+	pItem->SetPos(m_vecPos);
+	ADDOBJECT(pItem);
+	int count = 0;
+	count++;
 	m_bIsSpecial = false;
 }
 

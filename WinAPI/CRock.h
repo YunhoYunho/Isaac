@@ -1,5 +1,6 @@
 #pragma once
 #include "CObstacle.h"
+#include "CPickupItem.h"
 
 class CRock : public CObstacle
 {
@@ -11,6 +12,7 @@ public:
 	CImage* m_pRockImage;
 	CImage* m_pFragmentsImage;
 	CSound* pBrokenSound = RESOURCE->LoadSound(L"RockBroken", L"Sound\\Item\\explosion_debris.wav");
+	CPickupItem* pItem;
 
 	void Broken();
 	void BrokenSound();

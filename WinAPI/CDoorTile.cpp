@@ -46,7 +46,8 @@ void CDoorTile::OnCollisionEnter(CCollider* pOther)
 
 void CDoorTile::OnCollisionStay(CCollider* pOther)
 {
-	if ((INROOM1 && (false == ROOM1CLEAR)) || (INROOM2 && (false == ROOM2CLEAR)))
+	if ((INROOM1 && (false == ROOM1CLEAR)) || (INROOM2 && (false == ROOM2CLEAR)) ||
+		(INROOM4 && (false == ROOM4CLEAR)))
 	{
 		// 땅타일과 충돌했을 경우 처리
 		if (pOther->GetObjName() == L"Player" 

@@ -72,4 +72,14 @@ void CCameraController::Mover()
 	{
 		CAMERA->SetTargetPos(Vector(3200, 360), 0.1f);
 	}
+
+	if (BUTTONDOWN(VK_F4))
+	{
+		CAMERA->SetTargetPos(Vector(640, 1080), 0.1f);
+	}
+
+	if (BUTTONDOWN(VK_F5))
+	{
+		CAMERA->SetTargetPos(Vector(1920, 1080), 0.1f);
+	}
 }

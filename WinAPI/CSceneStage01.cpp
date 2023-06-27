@@ -31,19 +31,32 @@
 #define ROOM1P2		Vector(800, 300)
 #define ROOM1P3		Vector(800, 400)
 #define ROOM1P4		Vector(800, 500)
-
 #define ROOM2P1		Vector(1510, 200)
 #define ROOM2P2		Vector(1510, 500)
 #define ROOM2P3		Vector(2330, 200)
 #define ROOM2P4		Vector(2330, 500)
-
 #define ROOM3P1		Vector(3500, 360)
+#define ROOM4P1		Vector(1510, 1000)
+#define ROOM4P2		Vector(1510, 1200)
+#define ROOM4P3		Vector(2330, 1000)
+#define ROOM4P4		Vector(2330, 1200)
 #pragma endregion
 #pragma region RockPosition
 #define ROCK1		Vector(1600, 250)
 #define ROCK2		Vector(1600, 500)
 #define ROCK3		Vector(2200, 250)
 #define ROCK4		Vector(2200, 500)
+#define ROCKA		Vector(1910, 1030)
+#define ROCKB		Vector(1910, 1080)
+#define ROCKC		Vector(1960, 1030)
+#define ROCKD		Vector(1960, 1080)
+#pragma endregion
+#pragma region
+#define TELE1		Vector(1280,  360)
+#define TELE2		Vector(1280, 1080)
+#define TELE3		Vector( 640,  720)
+#define TELE4		Vector(1920,  720)
+#define TELEB		Vector(2560,  360)
 #pragma endregion
 
 CSceneStage01::CSceneStage01()
@@ -63,6 +76,7 @@ CSceneStage01::CSceneStage01()
 	m_bIsRoom1Clear = false;
 	m_bIsRoom2Clear = false;
 	m_bIsRoom3Clear = false;
+	m_bIsRoom4Clear = false;
 	m_bIsEnterBossRoom = false;
 }
 
@@ -79,8 +93,10 @@ void CSceneStage01::CreateMonsters(int num)
 
 		vector<int> result1 = Util::NonDuplicatedRandom(0, 3, 4);
 		vector<int> result2 = Util::NonDuplicatedRandom(4, 7, 4);
+		vector<int> result3 = Util::NonDuplicatedRandom(8, 11, 4);
 		vector<int> random = (num == 1) ? result1 : result2;
-
+		if (num == 3) random = result3;
+		
 		for (int i = 0; i < randomNumber; i++)
 		{
 			Vector pos = m_vecMonsterPositions[random[i]];
@@ -116,7 +132,7 @@ void CSceneStage01::CreateBoss()
 
 void CSceneStage01::CreateRock()
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		CRock* pRock = new CRock();
 		pRock->SetPos(m_vecRockPositions[i]);
@@ -130,42 +146,42 @@ void CSceneStage01::CreateRock()
 
 void CSceneStage01::CreateDoorTeleport()
 {
-	CDoorTeleport* pDoorTeleport = new CDoorTeleport();
-	pDoorTeleport->SetPos(Vector(1280, 360));
-	pDoorTeleport->SetName(L"LRTeleport");
-	AddGameObject(pDoorTeleport);
-
-	CDoorTeleport* pDoorTeleport2 = new CDoorTeleport();
-	pDoorTeleport2->SetPos(Vector(640, 720));
-	pDoorTeleport2->SetName(L"UDTeleport");
-	AddGameObject(pDoorTeleport2);
+	for (int i = 0; i < 2; i++)
+	{
+		CDoorTeleport* pDoorTeleport = new CDoorTeleport();
+		pDoorTeleport->SetPos(m_vecTeleportPositions[i]);
+		pDoorTeleport->SetName(L"LRTeleport");
+		AddGameObject(pDoorTeleport);
+	}
+	
+	for (int i = 2; i < 4; i++)
+	{
+		CDoorTeleport* pDoorTeleport2 = new CDoorTeleport();
+		pDoorTeleport2->SetPos(m_vecTeleportPositions[i]);
+		pDoorTeleport2->SetName(L"UDTeleport");
+		AddGameObject(pDoorTeleport2);
+	}
 }
 
 void CSceneStage01::CreateDoorBossTeleport()
 {
 	CDoorBossTeleport* pDoorBossTeleport = new CDoorBossTeleport();
-	pDoorBossTeleport->SetPos(Vector(2560, 360));
+	pDoorBossTeleport->SetPos(TELEB);
 	AddGameObject(pDoorBossTeleport);
 }
 
-void CSceneStage01::SpawnRoom1()
+void CSceneStage01::SpawnRoom()
 {
 	if (INROOM1 && (m_bIsRoom1Clear == false))
 	{
 		CreateMonsters(1);
 	}
-}
 
-void CSceneStage01::SpawnRoom2()
-{
 	if (INROOM2 && (m_bIsRoom2Clear == false))
 	{
 		CreateMonsters(2);
 	}
-}
 
-void CSceneStage01::SpawnRoom3()
-{
 	if (INROOM3 && (false == m_bIsRoom3Clear))
 	{
 		m_fSpawnTimer += DT;
@@ -175,6 +191,11 @@ void CSceneStage01::SpawnRoom3()
 			CreateBoss();
 			m_fSpawnTimer = 0;
 		}
+	}
+
+	if (INROOM4 && (m_bIsRoom4Clear == false))
+	{
+		CreateMonsters(3);
 	}
 }
 
@@ -206,6 +227,13 @@ void CSceneStage01::CheckRoomClear()
 				Logger::Debug(L"规3 努府绢? : " + to_wstring(m_bIsRoom3Clear));
 			}
 
+			if (INROOM4 && (true != m_bIsRoom4Clear))
+			{
+				m_bIsRoom4Clear = true;
+				m_bIsSpawnComplete = false;
+				Logger::Debug(L"规4 努府绢? : " + to_wstring(m_bIsRoom2Clear));
+			}
+
 			m_vecSpawnMonsters.clear();
 		}
 	}
@@ -217,6 +245,7 @@ void CSceneStage01::WhatRoomClear()
 	ROOM1CLEAR = m_bIsRoom1Clear;
 	ROOM2CLEAR = m_bIsRoom2Clear;
 	ROOM3CLEAR = m_bIsRoom3Clear;
+	ROOM4CLEAR = m_bIsRoom4Clear;
 }
 
 void CSceneStage01::StartBossLoading()
@@ -230,7 +259,6 @@ void CSceneStage01::StartBossLoading()
 			ADDOBJECT(pLoading);
 
 			SOUND->Stop(pBGMSound);
-
 			enterCount++;
 		}
 	}
@@ -270,10 +298,24 @@ void CSceneStage01::PositionPool()
 	m_vecMonsterPositions.emplace_back(ROOM2P3);
 	m_vecMonsterPositions.emplace_back(ROOM2P4);
 
+	m_vecMonsterPositions.emplace_back(ROOM4P1);
+	m_vecMonsterPositions.emplace_back(ROOM4P2);
+	m_vecMonsterPositions.emplace_back(ROOM4P3);
+	m_vecMonsterPositions.emplace_back(ROOM4P4);
+
 	m_vecRockPositions.emplace_back(ROCK1);
 	m_vecRockPositions.emplace_back(ROCK2);
 	m_vecRockPositions.emplace_back(ROCK3);
 	m_vecRockPositions.emplace_back(ROCK4);
+	m_vecRockPositions.emplace_back(ROCKA);
+	m_vecRockPositions.emplace_back(ROCKB);
+	m_vecRockPositions.emplace_back(ROCKC);
+	m_vecRockPositions.emplace_back(ROCKD);
+
+	m_vecTeleportPositions.emplace_back(TELE1);
+	m_vecTeleportPositions.emplace_back(TELE2);
+	m_vecTeleportPositions.emplace_back(TELE3);
+	m_vecTeleportPositions.emplace_back(TELE4);
 }
 
 void CSceneStage01::Init()
@@ -333,10 +375,10 @@ void CSceneStage01::Init()
 	CDoorFrame* pDoorFrame = new CDoorFrame();
 	AddGameObject(pDoorFrame);
 
-	CreateDoorTeleport();
-	CreateDoorBossTeleport();
 	MonsterPool();
 	PositionPool();
+	CreateDoorTeleport();
+	CreateDoorBossTeleport();
 	CreateRock();
 }
 
@@ -353,9 +395,7 @@ void CSceneStage01::Enter()
 void CSceneStage01::Update()
 {
 	WhatRoomClear();
-	SpawnRoom1();
-	SpawnRoom2();
-	SpawnRoom3();
+	SpawnRoom();
 	CheckRoomClear();
 	StartBossLoading();
 	StartBossSound();
