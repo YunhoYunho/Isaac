@@ -42,6 +42,7 @@ void CCollisionManager::Init()
 	CheckLayer(Layer::Chest, Layer::Player);
 	CheckLayer(Layer::Rock, Layer::Player);
 	CheckLayer(Layer::Teleport, Layer::Player);
+	CheckLayer(Layer::EndingChest, Layer::Player);
 	CheckLayer(Layer::DoorCollider, Layer::Player);
 	CheckLayer(Layer::DoorCollider, Layer::Monster);
 	CheckLayer(Layer::DoorCollider, Layer::PlayerMissile);

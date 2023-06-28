@@ -14,6 +14,7 @@
 #include "CCameraController.h"
 #include "CImageObject.h"
 #include "CLoadingImage.h"
+#include "CEndingChest.h"
 
 #include "CItemRock.h"
 #include "CMeat.h"
@@ -75,7 +76,9 @@ CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
 	pMonster = nullptr;
+	pCurSound = nullptr;
 	pPassiveItem = nullptr;
+	pEndingChest = nullptr;
 	m_fTimer = 0;
 	m_fSpawnTimer = 0;
 	m_fLoadTimer = 0;
@@ -84,6 +87,7 @@ CSceneStage01::CSceneStage01()
 	killCount = 0;
 	enterCount = 0;
 	soundCount = 0;
+	chestCount = 0;
 	m_bIsSpawnComplete = false;
 	m_bIsRoom0Open = false;
 	m_bIsRoom1Clear = false;
@@ -137,9 +141,25 @@ void CSceneStage01::CreateBoss()
 		AddGameObject(pBossHPBar);
 		pBossHPBar->GetBossHP(pGish);
 
-		SOUND->Play(pBossRoomSound, 0.7f, true);
+		//SOUND->Play(pBossRoomSound, 0.7f, true);
+		PlayBGM(pBossRoomSound, 0.6f, true);
 
 		m_bIsSpawnComplete = m_vecSpawnMonsters.size() == 1 ? true : false;
+	}
+}
+
+void CSceneStage01::CreateEndingChest()
+{
+	if (true == m_bIsRoom3Clear)
+	{
+		if (chestCount == 0)
+		{
+			CEndingChest* pEChest = new CEndingChest();
+			pEndingChest = pEChest;
+			pEndingChest->SetPos(3200, 200);
+			ADDOBJECT(pEndingChest);
+			chestCount++;
+		}
 	}
 }
 
@@ -272,6 +292,11 @@ void CSceneStage01::WhatRoomClear()
 	ROOM4CLEAR = m_bIsRoom4Clear;
 }
 
+void CSceneStage01::CheckTouchChest()
+{
+	
+}
+
 void CSceneStage01::StartBossLoading()
 {
 	if (INROOM3 && (false == m_bIsRoom3Clear))
@@ -294,11 +319,21 @@ void CSceneStage01::StartBossSound()
 	{
 		if (soundCount == 0)
 		{
-			SOUND->Stop(pBossRoomSound);
-			SOUND->Play(pBossClearSound, 0.7f, false);
+			//SOUND->Stop(pBossRoomSound);
+			//SOUND->Play(pBossClearSound, 0.7f, false);
+			PlayBGM(pBossClearSound, 0.7f, false);
 			soundCount++;
 		}
 	}
+}
+
+void CSceneStage01::PlayBGM(CSound* sound, float volume, bool loop)
+{
+	if (pCurSound != nullptr)
+		SOUND->Stop(pCurSound);
+
+	SOUND->Play(sound, volume, loop);
+	pCurSound = sound;
 }
 
 void CSceneStage01::MonsterPool()
@@ -446,6 +481,7 @@ void CSceneStage01::Update()
 	CheckRoomClear();
 	StartBossLoading();
 	StartBossSound();
+	CreateEndingChest();
 
 	if (BUTTONDOWN(VK_ESCAPE))
 	{
@@ -464,6 +500,14 @@ void CSceneStage01::Update()
 		CSound* pDeadSound = RESOURCE->LoadSound(L"Died", L"Sound\\Scene\\Died.wav");
 		//SOUND->Play(pDeadSound);
 	}
+
+	if (pEndingChest != nullptr)
+	{
+		if (true == pEndingChest->GetTouch())
+		{
+			CHANGESCENE(GroupScene::Ending);
+		}
+	}
 }
 
 void CSceneStage01::Render()
@@ -478,9 +522,7 @@ void CSceneStage01::Exit()
 		{
 			pGameObject->GetReserveDelete();
 			delete pGameObject;
-			SOUND->Pause(pBGMSound);
-			SOUND->Pause(pBossRoomSound);
-			SOUND->Pause(pBossClearSound);
+			SOUND->Pause(pCurSound);
 		}
 		m_listObj[layer].clear();
 	}

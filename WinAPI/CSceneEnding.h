@@ -1,15 +1,15 @@
 #pragma once
 #include "CScene.h"
 
-class CSLoadingImage;
+class CEndingImage;
 
-class CSceneSLoading : public CScene
+class CSceneEnding : public CScene
 {
 public:
-	CSceneSLoading();
-	virtual ~CSceneSLoading();
+	CSceneEnding();
+	virtual ~CSceneEnding();
 
-	CSound* pSLoading = RESOURCE->LoadSound(L"SLoading", L"Sound\\Scene\\SLoading.ogg");
+	CSound* pEndingSound= RESOURCE->LoadSound(L"EndingSound", L"Sound\\Scene\\theCalm.ogg");
 	float fCooltime = 0;
 
 private:

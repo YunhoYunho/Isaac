@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "CSceneSLoading.h"
-
 #include "CSLoadingImage.h"
 
 CSceneSLoading::CSceneSLoading()

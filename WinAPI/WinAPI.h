@@ -30,6 +30,7 @@ enum class GroupScene
 	StageLoading,
 	Stage01,
 	Loading,
+	Ending,
 
 	Size,
 };
@@ -42,7 +43,6 @@ enum class Layer
 {
 	Default,
 	Tile,
-	Ending,
 	Title,
 	GroundTile,
 	Obstacle,
@@ -55,6 +55,7 @@ enum class Layer
 	Monster,
 	ItemRock,
 	Chest,
+	EndingChest,
 	PickupItem,
 	EnterEffect,
 	MonsterMissile,
@@ -68,6 +69,7 @@ enum class Layer
 	HUD,
 	Ui,
 	Loading,
+	Ending,
 
 	Size,
 };

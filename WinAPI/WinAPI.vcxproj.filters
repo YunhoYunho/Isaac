@@ -339,6 +339,15 @@
     <ClInclude Include="CItemRock.h">
       <Filter>GameObject\Stage\Item\Passive</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneEnding.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CEndingImage.h">
+      <Filter>Scene\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CEndingChest.h">
+      <Filter>Scene\Image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -577,6 +586,15 @@
     </ClCompile>
     <ClCompile Include="CItemRock.cpp">
       <Filter>GameObject\Stage\Item\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneEnding.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CEndingImage.cpp">
+      <Filter>Scene\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CEndingChest.cpp">
+      <Filter>Scene\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

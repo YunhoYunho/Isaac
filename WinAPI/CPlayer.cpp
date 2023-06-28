@@ -142,9 +142,6 @@ void CPlayer::Update()
 
 void CPlayer::Render()
 {
-	Vector pos = CAMERA->ScreenToWorldPoint(Vector(50, 360));
-	RENDER->Text(to_wstring(m_fDamage), pos.x - 50, pos.y - 10, pos.x + 50, pos.y + 10, Color(255, 255, 255, 1.f), 15);
-	RENDER->Text(to_wstring(m_fShotSpeed), pos.x - 50, pos.y - 10, pos.x + 50, pos.y + 60, Color(255, 255, 255, 1.f), 15);
 }
 
 void CPlayer::Release()

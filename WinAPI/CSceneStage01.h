@@ -4,6 +4,7 @@
 class CPlayer;
 class CMonster;
 class CPassiveItem;
+class CEndingChest;
 
 class CSceneStage01 : public CScene
 {
@@ -15,15 +16,18 @@ private:
 	CPlayer* pPlayer;
 	CMonster* pMonster;
 	CPassiveItem* pPassiveItem;
+	CEndingChest* pEndingChest;
 	CSound* pBGMSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
 	CSound* pBossRoomSound = RESOURCE->LoadSound(L"BossRoom", L"Sound\\Scene\\BossRoom.ogg");
 	CSound* pBossClearSound = RESOURCE->LoadSound(L"BossClear", L"Sound\\Scene\\BossRoomOutro.ogg");
+	CSound* pCurSound;
 
 	float m_fTimer;
 	float m_fSpawnTimer;
 	float m_fLoadTimer;
 	float m_fSoundTimer;
 
+	void PlayBGM(CSound* sound, float volume, bool loop);
 	void MonsterPool();
 	void PositionPool();
 	void ItemPool();
@@ -34,12 +38,14 @@ private:
 	void CreateItem();
 	void CreateMonsters(int num);
 	void CreateBoss();
+	void CreateEndingChest();
 	void SpawnRoom();
 	void StartBossLoading();
 	void StartBossSound();
 
 	void CheckRoomClear();
 	void WhatRoomClear();
+	void CheckTouchChest();
 
 	vector<CPassiveItem*> m_vecItems;
 	vector<CMonster*> m_vecMonsters;
@@ -53,6 +59,7 @@ private:
 	int killCount;
 	int enterCount;
 	int soundCount;
+	int chestCount;
 
 	bool m_bIsSpawnComplete;
 	bool m_bIsRoom0Open;
