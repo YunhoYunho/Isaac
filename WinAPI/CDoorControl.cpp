@@ -63,7 +63,7 @@ void CDoorControl::RenderController()
 	{
 		RENDER->Image(m_pNLOpenImage, 1390, 308, 1460, 412);
 		RENDER->Image(m_pBROpenImage, 2330, 286, 2483, 434);
-		RENDER->Image(m_pDOpenImage, 1866, 802, 1970, 872);
+		RENDER->Image(m_pDOpenImage, 1866, 565, 1970, 635);
 	}
 #pragma endregion
 #pragma region BossRoom

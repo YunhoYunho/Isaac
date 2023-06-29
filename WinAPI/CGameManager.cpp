@@ -44,7 +44,7 @@ bool CGameManager::GetIsDebugMode()
 
 void CGameManager::CheckKillCount()
 {
-	if ((INROOM1 && ROOM1CLEAR) || (INROOM2 && ROOM2CLEAR) || (INROOM4 || ROOM4CLEAR))
+	if ((INROOM1 && ROOM1CLEAR) || (INROOM2 && ROOM2CLEAR) || (INROOM4 && ROOM4CLEAR))
 	{
 		resetKillCount = true;
 		ResetKillCount();
@@ -58,7 +58,6 @@ void CGameManager::ResetKillCount()
 		if (true == resetKillCount)
 		{
 			MONSTERKILLCOUNT = 0;
-			Logger::Debug(L"몬스터 킬카운트 초기화");
 			resetKillCount = false;
 		}
 	}

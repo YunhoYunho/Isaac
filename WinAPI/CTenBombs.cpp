@@ -20,7 +20,7 @@ CTenBombs::~CTenBombs()
 
 void CTenBombs::Activate(CPlayer* pPlayer)
 {
-	pPlayer->SetKey(10);
+	pPlayer->SetBomb(10);
 }
 
 void CTenBombs::Init()

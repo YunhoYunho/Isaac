@@ -19,7 +19,7 @@ void CEndingChest::Init()
 
 	m_pAnimator = new CAnimator;
 
-	m_pAnimator->CreateAnimation(L"EChest", m_pEndingChestImage, Vector(0.0f, 0.0f), Vector(192.0f, 154.0f), Vector(192.0f, 0.0f), 0, 1, false);
+	m_pAnimator->CreateAnimation(L"EChest", m_pEndingChestImage, Vector(0.0f, 0.0f), Vector(100.0f, 81.0f), Vector(100.0f, 0.0f), 0, 1, false);
 
 	m_pAnimator->Play(L"EChest");
 

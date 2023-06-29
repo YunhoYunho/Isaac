@@ -28,7 +28,6 @@ public:
 	bool room4Clear;
 	bool touchTeleport;
 	bool resetKillCount;
-	bool pause;
 
 public:
 	int PlayerHP;
