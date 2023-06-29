@@ -54,6 +54,11 @@ void CMissile::CheckMissile()
 	{
 		m_fTimer += DT;
 
+		if (m_fTimer > 0.1f)
+		{
+			RemoveCollider();
+		}
+
 		if (m_fTimer > 0.7f)
 		{
 			DELETEOBJECT(this);

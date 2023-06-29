@@ -22,11 +22,6 @@ private:
 	CSound* pBossClearSound = RESOURCE->LoadSound(L"BossClear", L"Sound\\Scene\\BossRoomOutro.ogg");
 	CSound* pCurSound;
 
-	float m_fTimer;
-	float m_fSpawnTimer;
-	float m_fLoadTimer;
-	float m_fSoundTimer;
-
 	void PlayBGM(CSound* sound, float volume, bool loop);
 	void MonsterPool();
 	void PositionPool();
@@ -42,10 +37,8 @@ private:
 	void SpawnRoom();
 	void StartBossLoading();
 	void StartBossSound();
-
 	void CheckRoomClear();
 	void WhatRoomClear();
-	void CheckTouchChest();
 
 	vector<CPassiveItem*> m_vecItems;
 	vector<CMonster*> m_vecMonsters;
@@ -55,6 +48,7 @@ private:
 	vector<Vector> m_vecTeleportPositions;
 	vector<Vector> m_vecItemPositions;
 
+	float m_fSpawnTimer;
 	int randomNumber;
 	int killCount;
 	int enterCount;
@@ -67,7 +61,6 @@ private:
 	bool m_bIsRoom2Clear;
 	bool m_bIsRoom3Clear;
 	bool m_bIsRoom4Clear;
-	bool m_bIsEnterBossRoom;
 
 private:
 	void Init()		override;

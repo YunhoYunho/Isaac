@@ -534,14 +534,14 @@ void CPlayer::UDTeleport()
 	if (true == m_bIsUTeleport)
 	{
 		CAMERA->UTeleport();
-		m_vecPos.y -= 350.0f;
+		m_vecPos.y -= 280.0f;
 		m_bIsUTeleport = false;
 	}
 
 	else if (true == m_bIsDTeleport)
 	{
 		CAMERA->DTeleport();
-		m_vecPos.y += 350.0f;
+		m_vecPos.y += 280.0f;
 		m_bIsDTeleport = false;
 	}
 }

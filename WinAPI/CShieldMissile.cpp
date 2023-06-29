@@ -29,8 +29,8 @@ void CShieldMissile::Init()
 
 	m_pAnimator = new CAnimator;
 
-	m_pAnimator->CreateAnimation(L"None_Shield", m_pTearsImage, Vector(0.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0, 1);
-	m_pAnimator->CreateAnimation(L"Hit", m_pTearsImage, Vector(64.f, 0.f), Vector(64.f, 64.f), Vector(64.f, 0.f), 0.05f, 14, false);
+	m_pAnimator->CreateAnimation(L"None_Shield", m_pTearsImage, Vector(0.f, 0.f), Vector(80.f, 80.f), Vector(80.f, 0.f), 0, 1);
+	m_pAnimator->CreateAnimation(L"Hit", m_pTearsImage, Vector(80.f, 0.f), Vector(80.f, 80.f), Vector(80.f, 0.f), 0.05f, 14, false);
 	m_pAnimator->Play(L"None_Shield");
 
 	AddComponent(m_pAnimator);

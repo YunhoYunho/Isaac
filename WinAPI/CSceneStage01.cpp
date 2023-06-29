@@ -68,8 +68,8 @@
 #define ITEM2		Vector(250, 1200)
 #define ITEM3		Vector(1000, 900)
 #define ITEM4		Vector(1000, 1200)
-#define ITEM5		Vector(600, 1100)
-#define ITEM6		Vector(650, 1000)
+#define ITEM5		Vector(590, 1050)
+#define ITEM6		Vector(680, 1050)
 #pragma endregion
 
 CSceneStage01::CSceneStage01()
@@ -79,10 +79,7 @@ CSceneStage01::CSceneStage01()
 	pCurSound = nullptr;
 	pPassiveItem = nullptr;
 	pEndingChest = nullptr;
-	m_fTimer = 0;
 	m_fSpawnTimer = 0;
-	m_fLoadTimer = 0;
-	m_fSoundTimer = 0;
 	randomNumber = 0;
 	killCount = 0;
 	enterCount = 0;
@@ -94,11 +91,133 @@ CSceneStage01::CSceneStage01()
 	m_bIsRoom2Clear = false;
 	m_bIsRoom3Clear = false;
 	m_bIsRoom4Clear = false;
-	m_bIsEnterBossRoom = false;
 }
 
 CSceneStage01::~CSceneStage01()
 {
+}
+
+void CSceneStage01::PlayBGM(CSound* sound, float volume, bool loop)
+{
+	if (pCurSound != nullptr)
+		SOUND->Stop(pCurSound);
+
+	SOUND->Play(sound, volume, loop);
+	pCurSound = sound;
+}
+
+void CSceneStage01::MonsterPool()
+{
+	m_vecMonsters.clear();
+
+	m_vecMonsters.emplace_back(new CBaby());
+	m_vecMonsters.emplace_back(new CBoomfly());
+	m_vecMonsters.emplace_back(new CFly());
+}
+
+void CSceneStage01::PositionPool()
+{
+	m_vecMonsterPositions.clear();
+
+	m_vecMonsterPositions.emplace_back(ROOM1P1);
+	m_vecMonsterPositions.emplace_back(ROOM1P2);
+	m_vecMonsterPositions.emplace_back(ROOM1P3);
+	m_vecMonsterPositions.emplace_back(ROOM1P4);
+	m_vecMonsterPositions.emplace_back(ROOM2P1);
+	m_vecMonsterPositions.emplace_back(ROOM2P2);
+	m_vecMonsterPositions.emplace_back(ROOM2P3);
+	m_vecMonsterPositions.emplace_back(ROOM2P4);
+	m_vecMonsterPositions.emplace_back(ROOM4P1);
+	m_vecMonsterPositions.emplace_back(ROOM4P2);
+	m_vecMonsterPositions.emplace_back(ROOM4P3);
+	m_vecMonsterPositions.emplace_back(ROOM4P4);
+
+	m_vecRockPositions.emplace_back(ROCK1);
+	m_vecRockPositions.emplace_back(ROCK2);
+	m_vecRockPositions.emplace_back(ROCK3);
+	m_vecRockPositions.emplace_back(ROCK4);
+	m_vecRockPositions.emplace_back(ROCKA);
+	m_vecRockPositions.emplace_back(ROCKB);
+	m_vecRockPositions.emplace_back(ROCKC);
+	m_vecRockPositions.emplace_back(ROCKD);
+
+	m_vecTeleportPositions.emplace_back(TELE1);
+	m_vecTeleportPositions.emplace_back(TELE2);
+	m_vecTeleportPositions.emplace_back(TELE3);
+	m_vecTeleportPositions.emplace_back(TELE4);
+
+	m_vecItemPositions.emplace_back(ITEM1);
+	m_vecItemPositions.emplace_back(ITEM2);
+	m_vecItemPositions.emplace_back(ITEM3);
+	m_vecItemPositions.emplace_back(ITEM4);
+	m_vecItemPositions.emplace_back(ITEM5);
+	m_vecItemPositions.emplace_back(ITEM6);
+}
+
+void CSceneStage01::ItemPool()
+{
+	m_vecItems.clear();
+
+	m_vecItems.emplace_back(new CMeat());
+	m_vecItems.emplace_back(new CSadOnion());
+	m_vecItems.emplace_back(new CSkeletonKey());
+	m_vecItems.emplace_back(new CTenBombs());
+	m_vecItems.emplace_back(new CShieldTears());
+	m_vecItems.emplace_back(new CTripleShot());
+}
+
+void CSceneStage01::CreateDoorTeleport()
+{
+	for (int i = 0; i < 2; i++)
+	{
+		CDoorTeleport* pDoorTeleport = new CDoorTeleport();
+		pDoorTeleport->SetPos(m_vecTeleportPositions[i]);
+		pDoorTeleport->SetName(L"LRTeleport");
+		AddGameObject(pDoorTeleport);
+	}
+
+	for (int i = 2; i < 4; i++)
+	{
+		CDoorTeleport* pDoorTeleport2 = new CDoorTeleport();
+		pDoorTeleport2->SetPos(m_vecTeleportPositions[i]);
+		pDoorTeleport2->SetName(L"UDTeleport");
+		AddGameObject(pDoorTeleport2);
+	}
+}
+
+void CSceneStage01::CreateDoorBossTeleport()
+{
+	CDoorBossTeleport* pDoorBossTeleport = new CDoorBossTeleport();
+	pDoorBossTeleport->SetPos(TELEB);
+	AddGameObject(pDoorBossTeleport);
+}
+
+void CSceneStage01::CreateRock()
+{
+	for (int i = 0; i < 8; i++)
+	{
+		CRock* pRock = new CRock();
+		pRock->SetPos(m_vecRockPositions[i]);
+		AddGameObject(pRock);
+	}
+
+	CBlackRock* pBlackRock = new CBlackRock();
+	pBlackRock->SetPos(m_vecRockPositions[3]);
+	AddGameObject(pBlackRock);
+}
+
+void CSceneStage01::CreateItem()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		CItemRock* pItemRock = new CItemRock();
+		Vector pos = m_vecItemPositions[i];
+		pPassiveItem = m_vecItems[i];
+		pPassiveItem->SetPos(pos);
+		pItemRock->SetPos(pos.x, pos.y + 15.0f);
+		AddGameObject(pPassiveItem);
+		AddGameObject(pItemRock);
+	}
 }
 
 void CSceneStage01::CreateMonsters(int num)
@@ -113,7 +232,7 @@ void CSceneStage01::CreateMonsters(int num)
 		vector<int> result3 = Util::NonDuplicatedRandom(8, 11, 4);
 		vector<int> random = (num == 1) ? result1 : result2;
 		if (num == 3) random = result3;
-		
+
 		for (int i = 0; i < randomNumber; i++)
 		{
 			Vector pos = m_vecMonsterPositions[random[i]];
@@ -141,9 +260,7 @@ void CSceneStage01::CreateBoss()
 		AddGameObject(pBossHPBar);
 		pBossHPBar->GetBossHP(pGish);
 
-		//SOUND->Play(pBossRoomSound, 0.7f, true);
 		PlayBGM(pBossRoomSound, 0.6f, true);
-
 		m_bIsSpawnComplete = m_vecSpawnMonsters.size() == 1 ? true : false;
 	}
 }
@@ -163,65 +280,14 @@ void CSceneStage01::CreateEndingChest()
 	}
 }
 
-void CSceneStage01::CreateRock()
-{
-	for (int i = 0; i < 8; i++)
-	{
-		CRock* pRock = new CRock();
-		pRock->SetPos(m_vecRockPositions[i]);
-		AddGameObject(pRock);
-	}
-
-	CBlackRock* pBlackRock = new CBlackRock();
-	pBlackRock->SetPos(m_vecRockPositions[3]);
-	AddGameObject(pBlackRock);
-}
-
-void CSceneStage01::CreateItem()
-{
-	for (int i = 0; i < 6; i++)
-	{
-		Vector pos = m_vecItemPositions[i];
-		pPassiveItem = m_vecItems[i];
-		pPassiveItem->SetPos(pos);
-		AddGameObject(pPassiveItem);
-	}
-}
-
-void CSceneStage01::CreateDoorTeleport()
-{
-	for (int i = 0; i < 2; i++)
-	{
-		CDoorTeleport* pDoorTeleport = new CDoorTeleport();
-		pDoorTeleport->SetPos(m_vecTeleportPositions[i]);
-		pDoorTeleport->SetName(L"LRTeleport");
-		AddGameObject(pDoorTeleport);
-	}
-	
-	for (int i = 2; i < 4; i++)
-	{
-		CDoorTeleport* pDoorTeleport2 = new CDoorTeleport();
-		pDoorTeleport2->SetPos(m_vecTeleportPositions[i]);
-		pDoorTeleport2->SetName(L"UDTeleport");
-		AddGameObject(pDoorTeleport2);
-	}
-}
-
-void CSceneStage01::CreateDoorBossTeleport()
-{
-	CDoorBossTeleport* pDoorBossTeleport = new CDoorBossTeleport();
-	pDoorBossTeleport->SetPos(TELEB);
-	AddGameObject(pDoorBossTeleport);
-}
-
 void CSceneStage01::SpawnRoom()
 {
-	if (INROOM1 && (m_bIsRoom1Clear == false))
+	if (INROOM1 && (false == m_bIsRoom1Clear))
 	{
 		CreateMonsters(1);
 	}
 
-	if (INROOM2 && (m_bIsRoom2Clear == false))
+	if (INROOM2 && (false == m_bIsRoom2Clear))
 	{
 		CreateMonsters(2);
 	}
@@ -237,9 +303,37 @@ void CSceneStage01::SpawnRoom()
 		}
 	}
 
-	if (INROOM4 && (m_bIsRoom4Clear == false))
+	if (INROOM4 && (false == m_bIsRoom4Clear))
 	{
 		CreateMonsters(3);
+	}
+}
+
+void CSceneStage01::StartBossLoading()
+{
+	if (INROOM3 && (false == m_bIsRoom3Clear))
+	{
+		if (enterCount == 0)
+		{
+			CLoadingImage* pLoading = new CLoadingImage();
+			pLoading->SetPos(WINSIZEX * 2.5, WINSIZEY / 2);
+			ADDOBJECT(pLoading);
+
+			SOUND->Stop(pBGMSound);
+			enterCount++;
+		}
+	}
+}
+
+void CSceneStage01::StartBossSound()
+{
+	if (true == m_bIsRoom3Clear)
+	{
+		if (soundCount == 0)
+		{
+			PlayBGM(pBossClearSound, 0.7f, false);
+			soundCount++;
+		}
 	}
 }
 
@@ -292,112 +386,6 @@ void CSceneStage01::WhatRoomClear()
 	ROOM4CLEAR = m_bIsRoom4Clear;
 }
 
-void CSceneStage01::CheckTouchChest()
-{
-	
-}
-
-void CSceneStage01::StartBossLoading()
-{
-	if (INROOM3 && (false == m_bIsRoom3Clear))
-	{
-		if (enterCount == 0)
-		{
-			CLoadingImage* pLoading = new CLoadingImage();
-			pLoading->SetPos(WINSIZEX * 2.5, WINSIZEY / 2);
-			ADDOBJECT(pLoading);
-
-			SOUND->Stop(pBGMSound);
-			enterCount++;
-		}
-	}
-}
-
-void CSceneStage01::StartBossSound()
-{
-	if (true == m_bIsRoom3Clear)
-	{
-		if (soundCount == 0)
-		{
-			//SOUND->Stop(pBossRoomSound);
-			//SOUND->Play(pBossClearSound, 0.7f, false);
-			PlayBGM(pBossClearSound, 0.7f, false);
-			soundCount++;
-		}
-	}
-}
-
-void CSceneStage01::PlayBGM(CSound* sound, float volume, bool loop)
-{
-	if (pCurSound != nullptr)
-		SOUND->Stop(pCurSound);
-
-	SOUND->Play(sound, volume, loop);
-	pCurSound = sound;
-}
-
-void CSceneStage01::MonsterPool()
-{
-	m_vecMonsters.clear();
-
-	m_vecMonsters.emplace_back(new CBaby());
-	m_vecMonsters.emplace_back(new CBoomfly());
-	m_vecMonsters.emplace_back(new CFly());
-}
-
-void CSceneStage01::PositionPool()
-{
-	m_vecMonsterPositions.clear();
-
-	m_vecMonsterPositions.emplace_back(ROOM1P1);
-	m_vecMonsterPositions.emplace_back(ROOM1P2);
-	m_vecMonsterPositions.emplace_back(ROOM1P3);
-	m_vecMonsterPositions.emplace_back(ROOM1P4);
-						  
-	m_vecMonsterPositions.emplace_back(ROOM2P1);
-	m_vecMonsterPositions.emplace_back(ROOM2P2);
-	m_vecMonsterPositions.emplace_back(ROOM2P3);
-	m_vecMonsterPositions.emplace_back(ROOM2P4);
-
-	m_vecMonsterPositions.emplace_back(ROOM4P1);
-	m_vecMonsterPositions.emplace_back(ROOM4P2);
-	m_vecMonsterPositions.emplace_back(ROOM4P3);
-	m_vecMonsterPositions.emplace_back(ROOM4P4);
-
-	m_vecRockPositions.emplace_back(ROCK1);
-	m_vecRockPositions.emplace_back(ROCK2);
-	m_vecRockPositions.emplace_back(ROCK3);
-	m_vecRockPositions.emplace_back(ROCK4);
-	m_vecRockPositions.emplace_back(ROCKA);
-	m_vecRockPositions.emplace_back(ROCKB);
-	m_vecRockPositions.emplace_back(ROCKC);
-	m_vecRockPositions.emplace_back(ROCKD);
-
-	m_vecTeleportPositions.emplace_back(TELE1);
-	m_vecTeleportPositions.emplace_back(TELE2);
-	m_vecTeleportPositions.emplace_back(TELE3);
-	m_vecTeleportPositions.emplace_back(TELE4);
-
-	m_vecItemPositions.emplace_back(ITEM1);
-	m_vecItemPositions.emplace_back(ITEM2);
-	m_vecItemPositions.emplace_back(ITEM3);
-	m_vecItemPositions.emplace_back(ITEM4);
-	m_vecItemPositions.emplace_back(ITEM5);
-	m_vecItemPositions.emplace_back(ITEM6);
-}
-
-void CSceneStage01::ItemPool()
-{
-	m_vecItems.clear();
-
-	m_vecItems.emplace_back(new CMeat());
-	m_vecItems.emplace_back(new CSadOnion());
-	m_vecItems.emplace_back(new CSkeletonKey());
-	m_vecItems.emplace_back(new CTenBombs());
-	m_vecItems.emplace_back(new CShieldTears());
-	m_vecItems.emplace_back(new CTripleShot());
-}
-
 void CSceneStage01::Init()
 {
 	pPlayer = new CPlayer();
@@ -405,7 +393,6 @@ void CSceneStage01::Init()
 	AddGameObject(pPlayer);
 	
 #pragma region µð¹ö±ë¿ë
-
 	/*CGish* pGish = new CGish();
 	pGish->SetPos(300, WINSIZEY * 0.5f);
 	AddGameObject(pGish);*/
@@ -437,14 +424,6 @@ void CSceneStage01::Init()
 	CPlayerHP* pPlayerHPImage = new CPlayerHP;
 	AddGameObject(pPlayerHPImage);
 	pPlayerHPImage->GetHP(pPlayer);
-
-	CShieldTears* pTripleShot = new CShieldTears;
-	pTripleShot->SetPos(WINSIZEX * 0.5f, WINSIZEY * 0.5f);
-	AddGameObject(pTripleShot);
-
-	CItemRock* pItemRock = new CItemRock;
-	pItemRock->SetPos(WINSIZEX * 0.5f + 2, WINSIZEY * 0.5f + 15);
-	AddGameObject(pItemRock);
 
 	CHUD* pHUD = new CHUD();
 	AddGameObject(pHUD);
@@ -493,12 +472,6 @@ void CSceneStage01::Update()
 	{
 		CAMERA->FadeOut(0.1f);
 		DELAYCHANGESCENE(GroupScene::Stage01, 0.15f);
-	}
-
-	if (PLAYERHP == 0)
-	{
-		CSound* pDeadSound = RESOURCE->LoadSound(L"Died", L"Sound\\Scene\\Died.wav");
-		//SOUND->Play(pDeadSound);
 	}
 
 	if (pEndingChest != nullptr)
