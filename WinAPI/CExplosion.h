@@ -13,7 +13,7 @@ public:
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pExplosionImage;
-	CSound* m_pExplosion = RESOURCE->LoadSound(L"Boom", L"Sound\\Monster\\explosions.wav");
+	CSound* m_pExplosion;
 
 public:
 	float m_fDamage;

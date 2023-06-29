@@ -10,7 +10,7 @@ public:
 	CSceneTitle();
 	virtual ~CSceneTitle();
 
-	CSound* pSound = RESOURCE->LoadSound(L"Title", L"Sound\\Scene\\titleScreenLoop.wav");
+	CSound* pSound;
 
 private:
 	void Init()		override;

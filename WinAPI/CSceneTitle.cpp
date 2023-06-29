@@ -19,6 +19,8 @@ CSceneTitle::~CSceneTitle()
 
 void CSceneTitle::Init()
 {
+	pSound = RESOURCE->LoadSound(L"Title", L"Sound\\Scene\\titleScreenLoop.wav");
+
 	CTitleImage* pTitle = new CTitleImage;
 	pTitle->SetPos(WINSIZEX / 2, WINSIZEY / 2);
 	AddGameObject(pTitle);

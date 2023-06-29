@@ -93,6 +93,8 @@ void CRock::Init()
 	m_pRockImage = RESOURCE->LoadImg(L"RockImage", L"Image\\Item\\Rock.png");
 	m_pFragmentsImage = RESOURCE->LoadImg(L"Fragments", L"Image\\Item\\Fragments.png");
 
+	pBrokenSound = RESOURCE->LoadSound(L"RockBroken", L"Sound\\Item\\explosion_debris.wav");
+
 	m_pAnimator = new CAnimator;
 
 	m_pAnimator->CreateAnimation(L"NotBroken", m_pRockImage, Vector(0.0f, 0.0f), Vector(57.0f, 61.0f), Vector(57.0f, 0.0f), 0, 1, false);

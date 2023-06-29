@@ -26,9 +26,9 @@ private:
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
 	
-	CSound* pHurt = RESOURCE->LoadSound(L"Hurt", L"Sound\\Isaac\\Hurt.wav");
-	CSound* pDead = RESOURCE->LoadSound(L"Dead", L"Sound\\Isaac\\Dies.wav");
-	CSound* pGetItem = RESOURCE->LoadSound(L"GetItem", L"Sound\\Isaac\\GetItem.wav");
+	CSound* pHurt;
+	CSound* pDead;
+	CSound* pGetItem;
 
 	PlayerState m_playerState;
 	wstring stateBody;
@@ -98,7 +98,7 @@ public:
 	void SetDamage(float damage) { m_fDamage += damage; }
 
 	float GetShotSpeed() { return m_fShotSpeed; }
-	void SetShotSpeed(float shotSpeed) { m_fShotSpeed += shotSpeed; }
+	void SetShotSpeed(float shotSpeed) { m_fShotSpeed = shotSpeed; }
 
 	bool GetShieldTears() { return m_bIsShieldTears; }
 	void SetShieldTears(bool ShieldTears) { m_bIsShieldTears = ShieldTears; }

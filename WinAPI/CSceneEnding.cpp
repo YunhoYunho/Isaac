@@ -13,6 +13,8 @@ CSceneEnding::~CSceneEnding()
 
 void CSceneEnding::Init()
 {
+	pEndingSound = RESOURCE->LoadSound(L"EndingSound", L"Sound\\Scene\\theCalm.ogg");
+
 	CEndingImage* pEndingImage= new CEndingImage;
 	pEndingImage->SetPos(WINSIZEX / 2, WINSIZEY / 2);
 	AddGameObject(pEndingImage);

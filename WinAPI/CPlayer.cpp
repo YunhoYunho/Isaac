@@ -57,6 +57,10 @@ void CPlayer::Init()
 	m_pDeadImage = RESOURCE->LoadImg(L"PlayerDead", L"Image\\Unit\\IsaacDead.png");
 	m_pGetItemImage = RESOURCE->LoadImg(L"PlayerGetItem", L"Image\\Unit\\IsaacGetItem.png");
 
+	pHurt = RESOURCE->LoadSound(L"Hurt", L"Sound\\Isaac\\Hurt.wav");
+	pDead = RESOURCE->LoadSound(L"Dead", L"Sound\\Isaac\\Dies.wav");
+	pGetItem = RESOURCE->LoadSound(L"GetItem", L"Sound\\Isaac\\GetItem.wav");
+
 	m_pAnimatorBody = new CAnimator;
 	m_pAnimatorHead = new CAnimator;
 

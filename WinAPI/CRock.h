@@ -11,7 +11,7 @@ public:
 	CAnimator* m_pAnimator;
 	CImage* m_pRockImage;
 	CImage* m_pFragmentsImage;
-	CSound* pBrokenSound = RESOURCE->LoadSound(L"RockBroken", L"Sound\\Item\\explosion_debris.wav");
+	CSound* pBrokenSound;
 	CPickupItem* pItem;
 
 	void Broken();

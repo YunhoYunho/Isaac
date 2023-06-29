@@ -388,6 +388,10 @@ void CSceneStage01::WhatRoomClear()
 
 void CSceneStage01::Init()
 {
+	pBGMSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
+	pBossRoomSound = RESOURCE->LoadSound(L"BossRoom", L"Sound\\Scene\\BossRoom.ogg");
+	pBossClearSound = RESOURCE->LoadSound(L"BossClear", L"Sound\\Scene\\BossRoomOutro.ogg");
+
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);

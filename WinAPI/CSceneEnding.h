@@ -9,7 +9,7 @@ public:
 	CSceneEnding();
 	virtual ~CSceneEnding();
 
-	CSound* pEndingSound= RESOURCE->LoadSound(L"EndingSound", L"Sound\\Scene\\theCalm.ogg");
+	CSound* pEndingSound;
 	float fCooltime = 0;
 
 private:

@@ -17,9 +17,9 @@ private:
 	CMonster* pMonster;
 	CPassiveItem* pPassiveItem;
 	CEndingChest* pEndingChest;
-	CSound* pBGMSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
-	CSound* pBossRoomSound = RESOURCE->LoadSound(L"BossRoom", L"Sound\\Scene\\BossRoom.ogg");
-	CSound* pBossClearSound = RESOURCE->LoadSound(L"BossClear", L"Sound\\Scene\\BossRoomOutro.ogg");
+	CSound* pBGMSound;
+	CSound* pBossRoomSound;
+	CSound* pBossClearSound;
 	CSound* pCurSound;
 
 	void PlayBGM(CSound* sound, float volume, bool loop);

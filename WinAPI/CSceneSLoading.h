@@ -9,7 +9,7 @@ public:
 	CSceneSLoading();
 	virtual ~CSceneSLoading();
 
-	CSound* pSLoading = RESOURCE->LoadSound(L"SLoading", L"Sound\\Scene\\SLoading.ogg");
+	CSound* pSLoading;
 	float fCooltime = 0;
 
 private:

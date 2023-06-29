@@ -13,6 +13,8 @@ CSceneSLoading::~CSceneSLoading()
 
 void CSceneSLoading::Init()
 {
+	pSLoading = RESOURCE->LoadSound(L"SLoading", L"Sound\\Scene\\SLoading.ogg");
+
 	CSLoadingImage* pLoading = new CSLoadingImage;
 	pLoading->SetPos(WINSIZEX / 2, WINSIZEY / 2);
 	AddGameObject(pLoading);
