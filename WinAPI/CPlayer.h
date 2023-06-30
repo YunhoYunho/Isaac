@@ -119,10 +119,6 @@ private:
 	void AnimatorUpdate();
 	void CreateMissile();
 	void CreateBomb();
-
-	void CreateHeart();
-	void CreateChest();
-
 	void NormalShot();
 	void TripleShot();
 

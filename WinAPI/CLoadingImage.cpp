@@ -5,6 +5,7 @@ CLoadingImage::CLoadingImage()
 {
 	m_layer = Layer::Loading;
 	m_pLoadingImage = nullptr;
+	pBossLoadingSound = nullptr;
 }
 
 CLoadingImage::~CLoadingImage()

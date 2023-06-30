@@ -18,7 +18,7 @@ protected:
 	CPlayer* pPlayer;
 
 	float m_fTimer;
-	bool m_bIsContact;
+	bool m_bIsContact = false;
 
 	void Contact();
 

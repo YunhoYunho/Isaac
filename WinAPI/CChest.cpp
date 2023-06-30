@@ -111,7 +111,6 @@ void CChest::ChoiceItem(int num)
 
 void CChest::Init()
 {
-	pOpenSound = RESOURCE->LoadSound(L"ChestOpen", L"Sound\\Item\\chest_open.wav");
 }
 
 void CChest::Update()

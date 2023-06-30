@@ -25,6 +25,11 @@
 #include "CTripleShot.h"
 #include "CRock.h"
 #include "CBlackRock.h"
+#include "CPickupHeart.h"
+#include "CPickupBomb.h"
+#include "CPickupKey.h"
+#include "CNormalChest.h"
+#include "CGoldenChest.h"
 
 #include "CDoorControl.h"
 #include "CDoorFrame.h"
@@ -76,9 +81,13 @@ CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
 	pMonster = nullptr;
+	pBGMSound = nullptr;
+	pBossRoomSound = nullptr;
+	pBossClearSound = nullptr;
 	pCurSound = nullptr;
 	pPassiveItem = nullptr;
 	pEndingChest = nullptr;
+	pCreateItem = nullptr;
 	m_fSpawnTimer = 0;
 	randomNumber = 0;
 	killCount = 0;
@@ -157,6 +166,7 @@ void CSceneStage01::PositionPool()
 void CSceneStage01::ItemPool()
 {
 	m_vecItems.clear();
+	m_vecCreateItems.clear();
 
 	m_vecItems.emplace_back(new CMeat());
 	m_vecItems.emplace_back(new CSadOnion());
@@ -164,6 +174,12 @@ void CSceneStage01::ItemPool()
 	m_vecItems.emplace_back(new CTenBombs());
 	m_vecItems.emplace_back(new CShieldTears());
 	m_vecItems.emplace_back(new CTripleShot());
+
+	m_vecCreateItems.emplace_back(new CPickupHeart());
+	m_vecCreateItems.emplace_back(new CPickupBomb());
+	m_vecCreateItems.emplace_back(new CPickupKey());
+	m_vecCreateItems.emplace_back(new CNormalChest());
+	m_vecCreateItems.emplace_back(new CGoldenChest());
 }
 
 void CSceneStage01::CreateDoorTeleport()
@@ -239,7 +255,7 @@ void CSceneStage01::CreateMonsters(int num)
 			pMonster = m_vecMonsters[i]->Clone();
 			pMonster->SetPos(pos);
 			m_vecSpawnMonsters.emplace_back(pMonster);
-			ADDOBJECT(pMonster);
+			AddGameObject(pMonster);
 		}
 
 		m_bIsSpawnComplete = (randomNumber == m_vecSpawnMonsters.size()) ? true : false;
@@ -274,7 +290,7 @@ void CSceneStage01::CreateEndingChest()
 			CEndingChest* pEChest = new CEndingChest();
 			pEndingChest = pEChest;
 			pEndingChest->SetPos(3200, 200);
-			ADDOBJECT(pEndingChest);
+			AddGameObject(pEndingChest);
 			chestCount++;
 		}
 	}
@@ -386,6 +402,49 @@ void CSceneStage01::WhatRoomClear()
 	ROOM4CLEAR = m_bIsRoom4Clear;
 }
 
+void CSceneStage01::CreateItems()
+{
+	if ((BUTTONDOWN(VK_F6)) || (BUTTONDOWN(VK_F7)) || (BUTTONDOWN(VK_F8)) ||
+		(BUTTONDOWN(VK_F9)) || (BUTTONDOWN(VK_F10)))
+	{
+		float num = 0;
+
+		if (BUTTONDOWN(VK_F6))
+		{
+			pCreateItem = m_vecCreateItems[0];
+			num = 300;
+		}
+
+		if (BUTTONDOWN(VK_F7))
+		{
+			pCreateItem = m_vecCreateItems[1];
+			num = 400;
+		}
+
+		if (BUTTONDOWN(VK_F8))
+		{
+			pCreateItem = m_vecCreateItems[2];
+			num = 500;
+		}
+
+		if (BUTTONDOWN(VK_F9))
+		{
+			pCreateItem = m_vecCreateItems[3];
+			num = 600;
+		}
+
+		if (BUTTONDOWN(VK_F10))
+		{
+			pCreateItem = m_vecCreateItems[4];
+			num = 700;
+		}
+
+		Vector pos = Vector(num, WINSIZEY * 0.3f);
+		pCreateItem->SetPos(pos);
+		ADDOBJECT(pCreateItem);
+	}
+}
+
 void CSceneStage01::Init()
 {
 	pBGMSound = RESOURCE->LoadSound(L"Basement", L"Sound\\Scene\\basementLoop.wav");
@@ -395,28 +454,6 @@ void CSceneStage01::Init()
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(200, WINSIZEY * 0.5f);
 	AddGameObject(pPlayer);
-	
-#pragma region µð¹ö±ë¿ë
-	/*CGish* pGish = new CGish();
-	pGish->SetPos(300, WINSIZEY * 0.5f);
-	AddGameObject(pGish);*/
-
-	/*CBaby* pBaby = new CBaby();
-	pBaby->SetPos(300, WINSIZEY * 0.5f);
-	AddGameObject(pBaby);*/
-
-	/*CBoomfly* pBoomfly = new CBoomfly();
-	pBoomfly->SetPos(700, WINSIZEY * 0.5f);
-	AddGameObject(pBoomfly);*/
-
-	/*CFly* pFly1 = new CFly();
-	pFly1->SetPos(800, WINSIZEY * 0.5f);
-	AddGameObject(pFly1);*/
-
-	/*CFly* pFly2 = new CFly();
-	pFly2->SetPos(800, WINSIZEY * 0.3f);
-	AddGameObject(pFly2);*/
-#pragma endregion
 
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
@@ -465,6 +502,7 @@ void CSceneStage01::Update()
 	StartBossLoading();
 	StartBossSound();
 	CreateEndingChest();
+	CreateItems();
 
 	if (BUTTONDOWN(VK_ESCAPE))
 	{

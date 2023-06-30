@@ -11,6 +11,7 @@
 
 CSceneTitle::CSceneTitle()
 {
+	pSound = nullptr;
 }
 
 CSceneTitle::~CSceneTitle()
@@ -46,7 +47,7 @@ void CSceneTitle::Update()
 		DELAYCHANGESCENE(GroupScene::StageLoading, 0.25f);
 	}
 
-	if (BUTTONDOWN(VK_F12))
+	if (BUTTONDOWN(VK_F11))
 	{
 		CHANGESCENE(GroupScene::Ending);
 	}

@@ -7,9 +7,8 @@ CPickupHeart::CPickupHeart()
 {
 	m_layer = Layer::PickupItem;
 	m_strName = L"Heart";
-
 	m_pHeartImage = nullptr;
-
+	m_bIsContact = false;
 	m_fTimer = 0;
 }
 

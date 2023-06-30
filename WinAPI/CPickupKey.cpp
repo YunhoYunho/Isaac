@@ -7,11 +7,9 @@ CPickupKey::CPickupKey()
 {
 	m_layer = Layer::PickupItem;
 	m_strName = L"Key";
-
 	m_pKeyImage = nullptr;
-
-	m_fTimer = 0;
 	m_bIsContact = false;
+	m_fTimer = 0;
 }
 
 CPickupKey::~CPickupKey()

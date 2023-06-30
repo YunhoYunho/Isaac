@@ -4,10 +4,7 @@
 #include "CPlayerMissile.h"
 #include "CShieldMissile.h"
 #include "CBomb.h"
-#include "CPickupHeart.h"
-#include "CChest.h"
-#include "CNormalChest.h" 
-#include "CGoldenChest.h"
+#include "CPickupItem.h"
 #include "CPassiveItem.h"
 
 CPlayer::CPlayer()
@@ -17,7 +14,9 @@ CPlayer::CPlayer()
 	m_layer = Layer::Player;
 	m_strName = L"Player";
 	m_playerState = PlayerState::Idle;
-	
+	pHurt = nullptr;
+	pDead = nullptr;
+	pGetItem = nullptr;
 	pMissile = nullptr;
 	m_pBodyImage = nullptr;
 	m_pHeadImage = nullptr;
@@ -111,9 +110,6 @@ void CPlayer::Update()
 	CheckHit();
 	LRTeleport();
 	UDTeleport();
-
-	CreateHeart();
-	CreateChest();
 
 	if (m_HP <= 0)
 	{
@@ -471,36 +467,6 @@ void CPlayer::CreateBomb()
 			SetBomb(-1);
 			ADDOBJECT(pBomb);
 		}
-	}
-}
-
-void CPlayer::CreateHeart()
-{
-	if (BUTTONDOWN('K'))
-	{
-		Logger::Debug(L"하트 생성");
-		CPickupHeart* pPickupHeart = new CPickupHeart();
-		pPickupHeart->SetPos(Vector(800, WINSIZEY * 0.3f));
-		ADDOBJECT(pPickupHeart);
-	}
-}
-
-void CPlayer::CreateChest()
-{
-	if (BUTTONDOWN('C'))
-	{
-		Logger::Debug(L"상자 생성");
-		CNormalChest* pNormalChest = new CNormalChest();
-		pNormalChest->SetPos(Vector(700, WINSIZEY * 0.3f));
-		ADDOBJECT(pNormalChest);
-	}
-
-	if (BUTTONDOWN('V'))
-	{
-		Logger::Debug(L"황금상자 생성");
-		CGoldenChest* pGoldenChest = new CGoldenChest();
-		pGoldenChest->SetPos(Vector(600, WINSIZEY * 0.3f));
-		ADDOBJECT(pGoldenChest);
 	}
 }
 

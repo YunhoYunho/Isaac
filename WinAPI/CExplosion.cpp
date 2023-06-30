@@ -9,6 +9,7 @@ CExplosion::CExplosion()
 	m_strName = L"Explosion";
 
 	m_pExplosionImage = nullptr;
+	m_pExplosion = nullptr;
 	m_fCooltime = 0;
 	m_fDamage = 10;
 }

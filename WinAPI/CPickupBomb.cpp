@@ -8,9 +8,8 @@ CPickupBomb::CPickupBomb()
 	m_layer = Layer::PickupItem;
 	m_strName = L"PickupBomb";
 	m_pPickBombImage = nullptr;
-
-	m_fTimer = 0;
 	m_bIsContact = false;
+	m_fTimer = 0;
 }
 
 CPickupBomb::~CPickupBomb()

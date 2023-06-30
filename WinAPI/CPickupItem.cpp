@@ -14,6 +14,7 @@ CPickupItem::~CPickupItem()
 
 void CPickupItem::Contact()
 {
+	if (true == m_bIsContact)
 	DELETEOBJECT(this);
 }
 

@@ -5,6 +5,7 @@
 CSceneEnding::CSceneEnding()
 {
 	fCooltime = 0;
+	pEndingSound = nullptr;
 }
 
 CSceneEnding::~CSceneEnding()

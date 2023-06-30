@@ -17,6 +17,7 @@ private:
 	CMonster* pMonster;
 	CPassiveItem* pPassiveItem;
 	CEndingChest* pEndingChest;
+	CGameObject* pCreateItem;
 	CSound* pBGMSound;
 	CSound* pBossRoomSound;
 	CSound* pBossClearSound;
@@ -39,6 +40,7 @@ private:
 	void StartBossSound();
 	void CheckRoomClear();
 	void WhatRoomClear();
+	void CreateItems();
 
 	vector<CPassiveItem*> m_vecItems;
 	vector<CMonster*> m_vecMonsters;
@@ -47,6 +49,7 @@ private:
 	vector<Vector> m_vecRockPositions;
 	vector<Vector> m_vecTeleportPositions;
 	vector<Vector> m_vecItemPositions;
+	vector<CGameObject*> m_vecCreateItems;
 
 	float m_fSpawnTimer;
 	int randomNumber;

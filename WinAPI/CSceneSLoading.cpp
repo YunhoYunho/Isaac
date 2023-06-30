@@ -5,6 +5,7 @@
 CSceneSLoading::CSceneSLoading()
 {
 	fCooltime = 0;
+	pSLoading = nullptr;
 }
 
 CSceneSLoading::~CSceneSLoading()
