@@ -9,7 +9,7 @@ CExplosion::CExplosion()
 	m_strName = L"Explosion";
 
 	m_pExplosionImage = nullptr;
-	m_pExplosion = nullptr;
+	m_pExplosion = RESOURCE->LoadSound(L"Boom", L"Sound\\Monster\\explosions.wav");
 	m_fCooltime = 0;
 	m_fDamage = 10;
 }
@@ -47,7 +47,6 @@ void CExplosion::BoomSound()
 void CExplosion::Init()
 {
 	m_pExplosionImage = RESOURCE->LoadImg(L"Bomb_Explosion", L"Image\\Effect\\Effect_BOOM.png");
-	m_pExplosion = RESOURCE->LoadSound(L"Boom", L"Sound\\Monster\\explosions.wav");
 
 	m_pAnimator = new CAnimator;
 	m_pAnimator->CreateAnimation(L"Explosion", m_pExplosionImage, Vector(0.f, 0.f), Vector(100.f, 100.f), Vector(100.f, 0.f), 0.1f, 12, false);

@@ -9,6 +9,7 @@ CChest::CChest()
 {
 	m_layer = Layer::Chest;
 	m_strName = L"Chest";
+	pOpenSound = RESOURCE->LoadSound(L"ChestOpen", L"Sound\\Item\\chest_open.wav");
 	m_fTimer = 0;
 	m_bIsOpen = false;
 	m_bIsGolden = false;

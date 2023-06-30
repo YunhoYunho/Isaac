@@ -9,7 +9,7 @@ public:
 
 protected:
 	CAnimator* m_pAnimator;
-	CSound* pOpenSound = RESOURCE->LoadSound(L"ChestOpen", L"Sound\\Item\\chest_open.wav");
+	CSound* pOpenSound;
 
 	void Open();
 	void OpenSound();

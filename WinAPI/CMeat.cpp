@@ -20,7 +20,7 @@ CMeat::~CMeat()
 
 void CMeat::Activate(CPlayer* pPlayer)
 {
-	pPlayer->SetDamage(5);
+	pPlayer->SetDamage(2);
 }
 
 void CMeat::Init()

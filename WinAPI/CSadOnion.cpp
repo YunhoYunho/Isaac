@@ -24,7 +24,7 @@ void CSadOnion::Activate(CPlayer* pPlayer)
 
 	if (shotSpeed > 0.1f)
 	{
-		pPlayer->SetShotSpeed(shotSpeed - 0.3f);
+		pPlayer->SetShotSpeed(shotSpeed - 0.15f);
 	}
 }
 
