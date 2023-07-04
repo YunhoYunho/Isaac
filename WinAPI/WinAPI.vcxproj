@@ -178,6 +178,7 @@
     <ClInclude Include="CHUD.h" />
     <ClInclude Include="CImageObject.h" />
     <ClInclude Include="CInputManager.h" />
+    <ClInclude Include="CItem.h" />
     <ClInclude Include="CItemRock.h" />
     <ClInclude Include="CLoadingImage.h" />
     <ClInclude Include="CMeat.h" />
@@ -281,6 +282,7 @@
     <ClCompile Include="CHUD.cpp" />
     <ClCompile Include="CImageObject.cpp" />
     <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CItemRock.cpp" />
     <ClCompile Include="CLoadingImage.cpp" />
     <ClCompile Include="CMeat.cpp" />

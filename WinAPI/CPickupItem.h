@@ -1,23 +1,13 @@
 #pragma once
-#include "CGameObject.h"
+#include "CItem.h"
 
-class CImage;
-class CPlayer;
-
-class CPickupItem : public CGameObject
+class CPickupItem : public CItem
 {
-	friend CPlayer;
 public:
 	CPickupItem();
 	virtual ~CPickupItem();
 
-	virtual void Activate(CPlayer* pPlayer) = 0;
-
 protected:
-	CAnimator* m_pAnimator;
-	CPlayer* pPlayer;
-
-	float m_fTimer;
 	bool m_bIsContact = false;
 
 	void Contact();

@@ -1,18 +1,20 @@
 #pragma once
-#include "CItem.h"
+#include "CGameObject.h"
 
-class CPassiveItem : public CItem
+class CPlayer;
+
+class CItem : public CGameObject
 {
 public:
-	CPassiveItem();
-	virtual ~CPassiveItem();
+	CItem();
+	virtual ~CItem();
+
+	virtual void Activate(CPlayer* pPlayer) = 0;
 
 protected:
-	int m_iCount = 0;
-	bool m_bIsGetItem = false;
-
-	void GetItem();
-	void CheckColl(CCollider* pOtherCollider);
+	CAnimator* m_pAnimator;
+	CPlayer* pPlayer;
+	float m_fTimer = 0;
 
 private:
 	void Init() override;
