@@ -314,7 +314,7 @@ void CPlayer::HurtState()
 
 	if (m_HP > 0)
 	{
-		SOUND->Play(pHurt, 1.0f, false);
+		SOUND->Play(pHurt, 0.5f, false);
 
 		m_fSTimer += DT;
 
@@ -327,7 +327,7 @@ void CPlayer::HurtState()
 
 	if (m_HP <= 0)
 	{
-		SOUND->Play(pDead, 1.0f, false);
+		SOUND->Play(pDead, 0.5f, false);
 
 		m_fTimer += DT;
 
@@ -535,7 +535,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		if (pPassiveItem != nullptr)
 		{
 			m_playerState = PlayerState::GetItem;
-			SOUND->Play(pGetItem, 1.0f, false);
+			SOUND->Play(pGetItem, 0.5f, false);
 			pPassiveItem->Activate(this);
 		}
 	}

@@ -31,7 +31,7 @@ void CSceneTitle::Enter()
 {
 	CAMERA->FadeIn(0.25f);
 
-	SOUND->Play(pSound, 1.0f, false);
+	SOUND->Play(pSound, 0.3f, false);
 }
 
 void CSceneTitle::Update()

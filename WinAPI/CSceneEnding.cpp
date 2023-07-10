@@ -23,7 +23,7 @@ void CSceneEnding::Init()
 
 void CSceneEnding::Enter()
 {
-	SOUND->Play(pEndingSound, 1.0f, false);
+	SOUND->Play(pEndingSound, 0.5f, false);
 }
 
 void CSceneEnding::Update()

@@ -349,7 +349,7 @@
       <Filter>Scene\Image</Filter>
     </ClInclude>
     <ClInclude Include="CItem.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>GameObject\Stage\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -600,7 +600,7 @@
       <Filter>Scene\Image</Filter>
     </ClCompile>
     <ClCompile Include="CItem.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>GameObject\Stage\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

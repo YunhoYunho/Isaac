@@ -43,7 +43,7 @@ void CRock::Broken()
 
 void CRock::BrokenSound()
 {
-	SOUND->Play(pBrokenSound, 1);
+	SOUND->Play(pBrokenSound, 0.5f);
 
 	m_fTimer += DT;
 

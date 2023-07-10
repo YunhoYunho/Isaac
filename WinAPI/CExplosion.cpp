@@ -36,7 +36,7 @@ void CExplosion::BoomSound()
 	m_fCooltime += DT;
 
 	Logger::Debug(L"Æø¹ß»ç¿îµå!");
-	SOUND->Play(m_pExplosion, 0.5f, false);
+	SOUND->Play(m_pExplosion, 0.3f, false);
 
 	if (m_fCooltime > 1.0f)
 	{

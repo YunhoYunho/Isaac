@@ -276,7 +276,7 @@ void CSceneStage01::CreateBoss()
 		AddGameObject(pBossHPBar);
 		pBossHPBar->GetBossHP(pGish);
 
-		PlayBGM(pBossRoomSound, 0.6f, true);
+		PlayBGM(pBossRoomSound, 0.3f, true);
 		m_bIsSpawnComplete = m_vecSpawnMonsters.size() == 1 ? true : false;
 	}
 }
@@ -347,7 +347,7 @@ void CSceneStage01::StartBossSound()
 	{
 		if (soundCount == 0)
 		{
-			PlayBGM(pBossClearSound, 0.7f, false);
+			PlayBGM(pBossClearSound, 0.3f, false);
 			soundCount++;
 		}
 	}
@@ -462,6 +462,10 @@ void CSceneStage01::Init()
 	pBackGround->SetImage(RESOURCE->LoadImg(L"Map", L"Image\\Map\\Stage_Map.png"));
 	AddGameObject(pBackGround);
 
+	CImageObject* pBGShader = new CImageObject;
+	pBGShader->SetImage(RESOURCE->LoadImg(L"Shader", L"Image\\Map\\Shader_Map.png"));
+	AddGameObject(pBGShader);
+
 	CPlayerHP* pPlayerHPImage = new CPlayerHP;
 	AddGameObject(pPlayerHPImage);
 	pPlayerHPImage->GetHP(pPlayer);
@@ -489,7 +493,7 @@ void CSceneStage01::Enter()
 	CAMERA->FadeIn(0.25f);
 	LoadTile(GETPATH + L"Tile\\Isaac_Stage_tile");
 
-	SOUND->Play(pBGMSound, 0.6f, false);
+	SOUND->Play(pBGMSound, 0.3f, false);
 	SOUND->Pause(pBossRoomSound);
 	SOUND->Pause(pBossClearSound);
 }

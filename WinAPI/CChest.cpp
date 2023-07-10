@@ -35,7 +35,7 @@ void CChest::Open()
 
 void CChest::OpenSound()
 {
-	SOUND->Play(pOpenSound, 1);
+	SOUND->Play(pOpenSound, 0.5f);
 
 	m_fTimer += DT;
 

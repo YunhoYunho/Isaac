@@ -25,7 +25,7 @@ void CSceneSLoading::Enter()
 {
 	CAMERA->FadeIn(0.25f);
 
-	SOUND->Play(pSLoading, 1.0f, false);
+	SOUND->Play(pSLoading, 0.3f, false);
 }
 
 void CSceneSLoading::Update()

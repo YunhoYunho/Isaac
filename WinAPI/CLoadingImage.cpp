@@ -21,7 +21,7 @@ void CLoadingImage::Init()
 	m_pAnimator->CreateAnimation(L"LoadingImage", m_pLoadingImage, Vector(0.f, 0.f), Vector(1280.f, 720.f), Vector(1280.f, 0.f), 0, 1);
 	m_pAnimator->Play(L"LoadingImage");
 	AddComponent(m_pAnimator);
-	SOUND->Play(pBossLoadingSound, 0.7f, false);
+	SOUND->Play(pBossLoadingSound, 0.3f, false);
 }
 
 void CLoadingImage::Update()

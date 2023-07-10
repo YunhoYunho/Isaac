@@ -6,6 +6,8 @@ private:
 	CCore();
 	virtual ~CCore();
 
+	void RenderFPS();
+
 public:
 	void Init();		// 게임시작시 초기화 작업
 	void Update();		// 프레임마다 게임로직 진행
