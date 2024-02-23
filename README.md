@@ -1,1 +1,1 @@
-[WinAPI 2D] 모작 프로젝트 게임
+[WinAPI 2D] The Binding of Isaac 모작 프로젝트
